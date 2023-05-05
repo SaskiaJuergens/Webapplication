@@ -2,19 +2,21 @@
 <html>
   <head>
     <title>Spielverwaltung</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <nav>
-      <a href="https://...">Link class="logo">
-        <img src="logo.png" alt="Logo">
-      </a>
       <ul>
-        <li><a href="#Suche">Suche</a></li>
-        <li><a href="SpielEinstellungen.html">Spielen</a></li>
-        <li><a href="#Kartenbearbeiten">Karten bearbeiten</a></li>
-        <li><a href="login.html">Sign in</a></li>
+        <li style="float: left">
+          <a href="https://..." Link class="logo">
+            <img src="slacklogo.png" alt="Logo" />
+          </a>
+        </li>
         <li><a href="#singout">Sign out</a></li>
+        <li><a href="login.html">Sign in</a></li>
+        <li><a href="#Kartenbearbeiten">Karten bearbeiten</a></li>
+        <li><a href="SpielEinstellungen.html">Spielen</a></li>
+        <li><a href="#Suche">Suche</a></li>
       </ul>
     </nav>
 
@@ -23,26 +25,61 @@
     <h2>Neue Spielkarte hinzufügen</h2>
     <form>
       <label for="kartenname">Kartenname:</label>
-      <input type="text" id="kartenname" name="kartenname" required><br><br>
+      <input
+        type="text"
+        id="kartenname"
+        name="kartenname"
+        required
+      /><br /><br />
 
       <label for="kartenbild">Kartenbild:</label>
-      <input type="file" id="kartenbild" name="kartenbild" accept="image/*" required><br><br>
+      <input
+        type="file"
+        id="kartenbild"
+        name="kartenbild"
+        accept="image/*"
+        required
+      /><br /><br />
 
-      <input type="submit" value="Karte hinzufügen">
+      <input type="submit" value="Karte hinzufügen" />
     </form>
 
     <h2>Spiellevel hinzufügen</h2>
     <form>
       <label for="Levelzahl">Levelzahl:</label>
-      <input type="number" id="levelzahl" name="levelzahl" min="1" max="50" required><br><br>
+      <input
+        type="number"
+        id="levelzahl"
+        name="levelzahl"
+        min="1"
+        max="50"
+        required
+      /><br /><br />
 
       <label for="spielzeit">Spielzeit (in Minuten):</label>
-      <input type="number" id="spielzeit" name="spielzeit" min="1" max="30" required><br><br>
+      <input
+        type="number"
+        id="spielzeit"
+        name="spielzeit"
+        min="1"
+        max="30"
+        required
+      /><br /><br />
 
-      <label for="anzahlkarten">Anzahl der Karten (positive gerade Zahl):</label>
-      <input type="number" id="anzahlkarten" name="anzahlkarten" min="1" max="50" required step="2"><br><br>
+      <label for="anzahlkarten"
+        >Anzahl der Karten (positive gerade Zahl):</label
+      >
+      <input
+        type="number"
+        id="anzahlkarten"
+        name="anzahlkarten"
+        min="1"
+        max="50"
+        required
+        step="2"
+      /><br /><br />
 
-      <input type="submit" value="Level hinzufügen">
+      <input type="submit" value="Level hinzufügen" />
     </form>
   </body>
 </html>
