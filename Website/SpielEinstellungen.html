@@ -14,16 +14,20 @@
         </li>
         <li><a href="#singout">Sign out</a></li>
         <li><a href="login.html">Sign in</a></li>
-        <li><a href="#Kartenbearbeiten">Karten bearbeiten</a></li>
+        <li><a href="adminSpielinhalt.html">Karten bearbeiten</a></li>
         <li><a href="SpielEinstellungen.html">Spielen</a></li>
         <li><a href="#Suche">Suche</a></li>
+        <li><a href="Impressum.html">Impressum</a></li>
       </ul>
     </nav>
 
+
+    <div class="login-background">
     <h1>Spielverwaltung</h1>
 
     <h2>Neue Spielkarte hinzufügen</h2>
-    <form>
+
+    <form class="login-form">
       <label for="kartenname">Kartenname:</label>
       <input
         type="text"
@@ -44,8 +48,11 @@
       <input type="submit" value="Karte hinzufügen" />
     </form>
 
+
+
+
     <h2>Spiellevel hinzufügen</h2>
-    <form>
+    <form class="login-form">
       <label for="Levelzahl">Levelzahl:</label>
       <input
         type="number"
@@ -66,14 +73,12 @@
         required
       /><br /><br />
 
-      <label for="anzahlkarten"
-        >Anzahl der Karten (positive gerade Zahl):</label
-      >
+      <label for="anzahlkarten">Anzahl der Karten (positive gerade Zahl):</label>
       <input
         type="number"
         id="anzahlkarten"
         name="anzahlkarten"
-        min="1"
+        min="2"
         max="50"
         required
         step="2"
@@ -81,5 +86,6 @@
 
       <input type="submit" value="Level hinzufügen" />
     </form>
+  </div>
   </body>
 </html>
