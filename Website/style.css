@@ -5,6 +5,11 @@ body {
   margin: 0;
 }
 
+/* um die Seiten responsible zu machen*/
+* {
+  box-sizing: border-box;
+}
+
 /*Navigationsleiste*/
 
 nav {
@@ -82,12 +87,46 @@ input[type="email"] {
 /* admin Spieler */
 
 table,
+td,
+th {
+  border: 3px solid rgb(225, 232, 250);
+  font-family: "Anonymous Pro", sans-serif;
+  text-align: center;
+}
+
+table {
+  margin: 40px 0 20px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
 th,
 td {
-  border: 1px solid black;
+  padding: 10px;
 }
 
 .spielkarte {
-  width: 150px;
+  width: 100px;
   height: auto;
+}
+
+.table-background {
+  position: relative;
+  background-color: rgb(225, 232, 250);
+  border-radius: 24px;
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 42px;
+  padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
+}
+
+.table-background p {
+  color: rgb(74, 104, 183);
+  font-size: 12pt;
+  font-family: "Anonymous Pro", sans-serif;
 }
