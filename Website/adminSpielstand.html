@@ -5,8 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Admin Spiele</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     <script src="main.js"></script>
   </head>
-  <body></body>
+  <body>
+    <nav>
+      <ul>
+        <li style="float: left">
+          <a href="https://..." Link class="logo">
+            <img src="slacklogo.png" alt="Logo" />
+          </a>
+        </li>
+        <li><a href="Impressum.html">Impressum</a></li>
+        <li><a href="login.html">Sign In</a></li>
+        <li>
+          <div class="dropdown">
+            <button class="dropbtn">
+              <a href="#">Karten Bearbeiten</a>
+            </button>
+            <div class="dropdown-content">
+              <a href="SpielEinstellungen.html">Spieleinstellungen</a>
+              <a href="adminSpielinhalt.html">Spielinhalt einsehen</a>
+              <a href="adminSpielstand.html">Spielstand einsehen</a>
+            </div>
+          </div>
+        </li>
+        <li><a href="login.html">Spielen</a></li>
+
+        <li>
+          <form>
+            <input type="text" placeholder="Suche" class="suche" />
+          </form>
+        </li>
+      </ul>
+    </nav>
+  </body>
 </html>

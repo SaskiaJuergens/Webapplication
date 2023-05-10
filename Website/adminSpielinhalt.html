@@ -16,12 +16,27 @@
             <img src="slacklogo.png" alt="Logo" />
           </a>
         </li>
-        <li><a href="#singout">Sign out</a></li>
-        <li><a href="login.html">Sign in</a></li>
-        <li><a href="adminSpielinhalt.html">Karten bearbeiten</a></li>
-        <li><a href="SpielEinstellungen.html">Spielen</a></li>
-        <li><a href="#Suche">Suche</a></li>
         <li><a href="Impressum.html">Impressum</a></li>
+        <li><a href="login.html">Sign In</a></li>
+        <li>
+          <div class="dropdown">
+            <button class="dropbtn">
+              <a href="#">Karten Bearbeiten</a>
+            </button>
+            <div class="dropdown-content">
+              <a href="SpielEinstellungen.html">Spieleinstellungen</a>
+              <a href="adminSpielinhalt.html">Spielinhalt einsehen</a>
+              <a href="adminSpielstand.html">Spielstand einsehen</a>
+            </div>
+          </div>
+        </li>
+        <li><a href="login.html">Spielen</a></li>
+
+        <li>
+          <form>
+            <input type="text" placeholder="Suche" class="suche" />
+          </form>
+        </li>
       </ul>
     </nav>
 

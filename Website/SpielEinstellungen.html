@@ -12,80 +12,93 @@
             <img src="slacklogo.png" alt="Logo" />
           </a>
         </li>
-        <li><a href="#singout">Sign out</a></li>
-        <li><a href="login.html">Sign in</a></li>
-        <li><a href="adminSpielinhalt.html">Karten bearbeiten</a></li>
-        <li><a href="SpielEinstellungen.html">Spielen</a></li>
-        <li><a href="#Suche">Suche</a></li>
         <li><a href="Impressum.html">Impressum</a></li>
+        <li><a href="login.html">Sign In</a></li>
+        <li>
+          <div class="dropdown">
+            <button class="dropbtn">
+              <a href="#">Karten Bearbeiten</a>
+            </button>
+            <div class="dropdown-content">
+              <a href="SpielEinstellungen.html">Spieleinstellungen</a>
+              <a href="adminSpielinhalt.html">Spielinhalt einsehen</a>
+              <a href="adminSpielstand.html">Spielstand einsehen</a>
+            </div>
+          </div>
+        </li>
+        <li><a href="login.html">Spielen</a></li>
+
+        <li>
+          <form>
+            <input type="text" placeholder="Suche" class="suche" />
+          </form>
+        </li>
       </ul>
     </nav>
 
-
     <div class="login-background">
-    <h1>Spielverwaltung</h1>
+      <h1>Spielverwaltung</h1>
 
-    <h2>Neue Spielkarte hinzufügen</h2>
+      <h2>Neue Spielkarte hinzufügen</h2>
 
-    <form class="login-form">
-      <label for="kartenname">Kartenname:</label>
-      <input
-        type="text"
-        id="kartenname"
-        name="kartenname"
-        required
-      /><br /><br />
+      <form class="login-form">
+        <label for="kartenname">Kartenname:</label>
+        <input
+          type="text"
+          id="kartenname"
+          name="kartenname"
+          required
+        /><br /><br />
 
-      <label for="kartenbild">Kartenbild:</label>
-      <input
-        type="file"
-        id="kartenbild"
-        name="kartenbild"
-        accept="image/*"
-        required
-      /><br /><br />
+        <label for="kartenbild">Kartenbild:</label>
+        <input
+          type="file"
+          id="kartenbild"
+          name="kartenbild"
+          accept="image/*"
+          required
+        /><br /><br />
 
-      <input type="submit" value="Karte hinzufügen" />
-    </form>
+        <input type="submit" value="Karte hinzufügen" />
+      </form>
 
+      <h2>Spiellevel hinzufügen</h2>
+      <form class="login-form">
+        <label for="Levelzahl">Levelzahl:</label>
+        <input
+          type="number"
+          id="levelzahl"
+          name="levelzahl"
+          min="1"
+          max="50"
+          required
+        /><br /><br />
 
+        <label for="spielzeit">Spielzeit (in Minuten):</label>
+        <input
+          type="number"
+          id="spielzeit"
+          name="spielzeit"
+          min="1"
+          max="30"
+          required
+        /><br /><br />
 
+        <label for="anzahlkarten"
+          >Anzahl der Karten (positive gerade Zahl):</label
+        >
+        <input
+          type="number"
+          id="anzahlkarten"
+          name="anzahlkarten"
+          min="2"
+          max="50"
+          required
+          step="2"
+        /><br /><br />
 
-    <h2>Spiellevel hinzufügen</h2>
-    <form class="login-form">
-      <label for="Levelzahl">Levelzahl:</label>
-      <input
-        type="number"
-        id="levelzahl"
-        name="levelzahl"
-        min="1"
-        max="50"
-        required
-      /><br /><br />
-
-      <label for="spielzeit">Spielzeit (in Minuten):</label>
-      <input
-        type="number"
-        id="spielzeit"
-        name="spielzeit"
-        min="1"
-        max="30"
-        required
-      /><br /><br />
-
-      <label for="anzahlkarten">Anzahl der Karten (positive gerade Zahl):</label>
-      <input
-        type="number"
-        id="anzahlkarten"
-        name="anzahlkarten"
-        min="2"
-        max="50"
-        required
-        step="2"
-      /><br /><br />
-
-      <input type="submit" value="Level hinzufügen" />
-    </form>
-  </div>
+        <input type="submit" value="Level hinzufügen" />
+      </form>
+    </div>
   </body>
 </html>
