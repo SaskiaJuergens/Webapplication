@@ -31,7 +31,7 @@ nav li {
   float: right;
 }
 
-a {
+nav a {
   display: block;
   color: white;
   text-align: center;
@@ -115,9 +115,9 @@ nav ul li form {
   background-color: rgb(225, 232, 250);
   border-radius: 24px;
   width: 607px;
-  height: 757px;
+  height: auto;
   margin: 0 auto;
-  margin-top: 200px;
+  margin-top: 100px;
   padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
 }
 
@@ -149,6 +149,28 @@ input[type="number"] {
   box-sizing: border-box;
   width: 100%;
   margin-bottom: 10px;
+}
+
+/*input Button*/
+input[type="submit"] {
+  background-color: rgba(74, 104, 183);
+  border-radius: 20px;
+  border: none;
+  color: white;
+  padding: 12px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border: 2px solid white;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+input[type="submit"]:hover {
+  background-color: rgba(74, 104, 183);
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* admin Spieler */
