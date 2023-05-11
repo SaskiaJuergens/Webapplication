@@ -6,6 +6,7 @@ body {
 }
 
 /* um die Seiten responsible zu machen*/
+
 * {
   box-sizing: border-box;
 }
@@ -39,7 +40,7 @@ nav a {
   text-decoration: none;
 }
 
-nav ul li form {
+ nav ul li form {
   display: block;
   color: white;
   text-align: center;
@@ -60,6 +61,7 @@ nav ul li form {
   font-size: 20px;
   color: white;
 }
+
 
 /* Navigation dropdown */
 .dropdown {
@@ -197,6 +199,7 @@ th,
 td {
   padding: 10px;
 }
+
 
 .spielkarte {
   width: 100px;
