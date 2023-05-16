@@ -1,8 +1,30 @@
+/* font Überschrift*/
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+
 /*Bedingungen Responsive Design*/
 html,
 body {
   height: 100%;
   margin: 0;
+}
+
+/* responsible Fontsize (mit rem) */
+@media (max-width: 1400px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 668px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 450px) {
+  html {
+    font-size: 9px;
+  }
 }
 
 /* um die Seiten responsible zu machen*/
@@ -40,7 +62,7 @@ nav a {
   text-decoration: none;
 }
 
- nav ul li form {
+nav ul li form {
   display: block;
   color: white;
   text-align: center;
@@ -61,7 +83,6 @@ nav a {
   font-size: 20px;
   color: white;
 }
-
 
 /* Navigation dropdown */
 .dropdown {
@@ -116,15 +137,17 @@ nav a {
   position: relative;
   background-color: rgb(225, 232, 250);
   border-radius: 24px;
-  width: 607px;
+  width: 80%;
   height: auto;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 42px;
   padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
+  max-width: 607px;
 }
 
 h1,
-h2 {
+h2,
+p {
   font-family: "Anonymous Pro", sans-serif;
   color: rgb(74, 104, 183);
 }
@@ -175,7 +198,7 @@ input[type="submit"]:hover {
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-/* admin Spieler */
+/* admin Spielteil */
 
 table,
 td,
@@ -200,13 +223,12 @@ td {
   padding: 10px;
 }
 
-
 .spielkarte {
   width: 100px;
   height: auto;
 }
 
-.table-background {
+.info-background {
   position: relative;
   background-color: rgb(225, 232, 250);
   border-radius: 24px;
@@ -217,8 +239,77 @@ td {
   padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
 }
 
-.table-background p {
+.info-background p {
   color: rgb(74, 104, 183);
   font-size: 12pt;
   font-family: "Anonymous Pro", sans-serif;
+}
+
+@media screen and (max-width: 800px) {
+  td,
+  th {
+    width: 100%;
+  }
+}
+
+/* Startseite */
+
+.start-background {
+  background-image: radial-gradient(
+      rgb(74, 104, 183, 0.7),
+      rgb(74, 104, 183, 0.9)
+    ),
+    url(museum.jpg);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+.start-background h1 {
+  margin: 0 auto;
+  color: white;
+  font-family: "Anton", sans-serif;
+  font-size: 8rem;
+  text-shadow: 2px 2px 5px black;
+  padding: 0;
+}
+
+.start-background p {
+  margin: 0 auto 20;
+  color: white;
+}
+
+.div-center {
+  position: relative;
+  margin: 0 auto;
+  padding: 10% 0;
+  text-align: center;
+  font-size: 14pt;
+}
+
+/* Startseite Buttons*/
+
+.button-start {
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 20px;
+  border: none;
+  color: white;
+  padding: 12px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border: 2px solid white;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.button-start:hover {
+  background-color: rgba(74, 104, 183);
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
