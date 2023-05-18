@@ -222,3 +222,24 @@ td {
   font-size: 12pt;
   font-family: "Anonymous Pro", sans-serif;
 }
+
+
+/*Memory Game styleing*/
+.wrapper{
+  box-sizing: border-box;
+  width: 416px;
+  padding: 40px;
+  background-color: rgb(225, 232, 250);
+  position: absolute;
+  transform: translate(-50%,-50%);
+  left: 50%;
+  top: 50%;
+  border-radius: 9.6px;
+  box-shadow: 0 14.4px 44.8px rgba(86,66,0,0.2)
+}
+
+.game-container{
+  position: relative;
+  width: 100%;
+  display: grid;
+}

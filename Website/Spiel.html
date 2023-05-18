@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0" />
+    <title>Memory Spiel</title>
+    <link rel="Stylesheet" href="style.css" />
+  </head>
+    <body>
+      <nav>
+        <ul>
+          <li style="float: left">
+            <a href="https://..." Link class="logo">
+              <img src="slacklogo.png" alt="Logo" />
+            </a>
+          </li>
+          <li><a href="Impressum.html">Impressum</a></li>
+          <li><a href="login.html">Sign In</a></li>
+          <li>
+            <div class="dropdown">
+              <button class="dropbtn">
+                <a href="#">Karten Bearbeiten</a>
+              </button>
+              <div class="dropdown-content">
+                <a href="SpielEinstellungen.html">Spieleinstellungen</a>
+                <a href="adminSpielinhalt.html">Spielinhalt einsehen</a>
+                <a href="adminSpielstand.html">Spielstand einsehen</a>
+              </div>
+            </div>
+          </li>
+          <li><a href="Spiel.html">Spielen</a></li>
+
+          <li>
+            <form>
+              <input type="text" placeholder="Suche" class="suche" />
+            </form>
+          </li>
+        </ul>
+      </nav>
+
+
+  <body>
+    <div class="wrapper">
+      <div class=".stats-container">
+        <div id="moves-count"></div>
+        <div id="time"></div>
+      </div>
+      <div class="game-container"></div>
+      <button id="stop" class="hide">Stop Game</button>
+    </div>
+    <div class="controls-container">
+        <p id="result"></p>
+        <button id="start">Starte Spiel</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
