@@ -2,18 +2,8 @@
   <head>
     <title>Registrierung</title>
     <script src="script.js"></script>
-    <script>
-      function checkPassword() {
-        var passwort = document.getElementById("passwort").value;
-        var passwort_wdh = document.getElementById("passwort_wdh").value;
+    <link rel="stylesheet" href="style.css" />
 
-        if (passwort != passwort_wdh) {
-          document.getElementById("fehlermeldung").innerHTML =
-            "Passwörter stimmen nicht überein!";
-          return false;
-        }
-      }
-    </script>
   </head>
   <body>
     <nav>
@@ -49,9 +39,8 @@
 
     <div class="login-background">
       <h1>Registrierung</h1>
-      <link rel="stylesheet" href="style.css" />
 
-      <form class="login-form" onsubmit="return checkPassword()">
+      <form class="login-form">
         <label for="vorname">Vorname:</label>
         <br /><br />
         <input type="text" id="vorname" name="vorname" required /><br /><br />
@@ -64,28 +53,20 @@
         <br /><br />
         <input type="email" id="email" name="email" required /><br /><br />
 
-        <label for="passwort">Passwort:</label>
+        <label for="password">Passwort:</label>
         <br /><br />
-        <input
-          type="password"
-          id="passwort"
-          name="passwort"
-          required
-        /><br /><br />
+        <input type="password" id="password" name="password" onblur="checkPassword()" required /><br /><br />
+        <span id="passwordHint" class="hint"></span>
 
-        <label for="passwort_wdh">Passwort-Wiederholung:</label>
+        <label for="confirmPassword">Passwort bestätigen:</label>
         <br /><br />
-        <input
-          type="password"
-          id="passwort_wdh"
-          name="passwort_wdh"
-          required
-        /><br /><br />
+        <input type="password" id="confirmPassword" name="confirmPassword" onblur="checkPasswordsMatch()" required /><br /><br />
+        <span id="confirmPasswordHint" class="hint"></span><br /><br />
 
-        <input type="submit" value="Registrieren" />
+        <input type="submit" id="submitButton" value="Registrieren" disabled>
       </form>
 
-      <div1 id="fehlermeldung"></div1>
+      <div id="fehlermeldung"></div>
     </div>
   </body>
 </html>

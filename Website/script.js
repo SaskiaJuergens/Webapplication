@@ -1,63 +1,59 @@
-//spiel.html
-const moves = document.getElementById("movesCount");
-const timeValue = document.getElementById("time");
-const starButton = document.getElementById("start");
-const stopButton = document.getElementById("stop");
-const gameContainer = document.querySelector(".game-container");
-const result = document.getElementById("result");
-const controls = document.querySelector(".controls.container");
-var cards;
-var interval;
-var firstCard = false;
-var secondCard = false;
+//passwort
+document.addEventListener("DOMContentLoaded", function() {
+  var passwordInput = document.getElementById("password");
+  var confirmPasswordInput = document.getElementById("confirmPassword");
 
-//Items array
-const items =
-[ {title:"Les demoiselles d'Avignon", image: "lesDemoisellesdAvingnon.jpg"}
-  {title:"The Starry Night", image: "The-Starry-Night.jpg"}
-  {title:"Mona Lisa", image: "Mona-Lisa.jpg"}
-];
+  passwordInput.addEventListener("blur", checkPassword);
+  confirmPasswordInput.addEventListener("blur", checkPasswordsMatch);
+});
 
-//timer
-var seconds = 0, minutes = 0;
-const timeGenerator = () => {
-  seconds += 1;
-  if(seconds >= 60) {
-    minutes +=1;
-    seconds = 0;
+function checkPassword() {
+  var password = document.getElementById("password").value;
+  var passwordHint = document.getElementById("passwordHint");
+  var submitButton = document.getElementById("submitButton");
+
+  // Überprüfung der Passwortlänge und Zeichenanforderungen
+  if (password.length < 7 || !/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/\d{5}/.test(password)) {
+    passwordHint.textContent = "Das Passwort muss mindestens 7 Zeichen lang sein, mindestens einen Groß- und einen Kleinbuchstaben sowie mindestens fünf Ziffern enthalten.";
+    submitButton.disabled = true;
+  } else {
+    passwordHint.textContent = "";
+    submitButton.disabled = false;
   }
-  var secondsValue = seconds < 10 ? `0${seconds}` : seconds;
-  var minutesValue = minutes < 10 ? `0${minutes}` : minutes;
-  timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
-};
+}
 
-//Zählung der Counts
-var movesCount = 0, winCount = 0;
-//zählen
-const movesCounter = () => {
-  moves.innerHTML = `<span>Moves:</span>${movesCount}`;
-};
+function checkPasswordsMatch() {
+  var password = document.getElementById("password").value;
+  var confirmPassword = document.getElementById("confirmPassword").value;
+  var confirmPasswordHint = document.getElementById("confirmPasswordHint");
+  var submitButton = document.getElementById("submitButton");
 
-//Random Item von der Array liste
-const generateRondom = (size = 4) => {
-  var tempArray = [...items];
-  var cardValues = [];
-  size = (size * size) / 2;
-  //Random item auswahl
-  for(var i=0; i< size;i++){
-    const randomIndex = Math.floor(Math.random() * tempArray.length);
-  cardValues.push(tempArray[randomIndex]);
-  //wenn ausgewählt entfernen vom tempArray
-  tempArray.splice(randomIndex, 1);
- }
- return cardValue;
-};
-
-const matrixGenerator = (cardValue, size = 4) => {
-  gameContainer.innerHTML = ""
-  cardValue = [...cardValue, ...cardValue];
-  cardValue.sort(() => Math.randomI()-0.5);
-  for(var i=0; i<size*size;i++){
-
+  // Überprüfung der Passwortübereinstimmung
+  if (password !== confirmPassword) {
+    confirmPasswordHint.textContent = "Die Passwörter stimmen nicht überein.";
+    submitButton.disabled = true;
+  } else {
+    confirmPasswordHint.textContent = "";
+    submitButton.disabled = false;
   }
+}
+
+
+function showPlayerPage(playerName) {
+  // Verstecke die Tabelle und zeige die Spielerseite an
+  document.getElementById("spieler-tabelle").style.display = "none";
+  document.getElementById("player-page").style.display = "block";
+
+  // Setze den Spielername auf der Spielerseite
+  document.getElementById("player-name").innerText = playerName;
+
+  // Lade die Spielerdetails asynchron (hier kannst du deine Logik einfügen)
+  // Beispiel: Hier wird einfach ein Text angezeigt
+  document.getElementById("player-details").innerText = "Hier werden die Details für " + playerName + " angezeigt.";
+}
+
+function goBackToTable() {
+  // Verstecke die Spielerseite und zeige die Tabelle wieder an
+  document.getElementById("player-page").style.display = "none";
+  document.getElementById("spieler-tabelle").style.display = "table";
 }

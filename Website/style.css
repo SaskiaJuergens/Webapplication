@@ -243,3 +243,10 @@ td {
   width: 100%;
   display: grid;
 }
+
+/*Error bzw. Warnhinweise*/
+.hint {
+  color: red;
+  display: block;
+  margin-top: 5px;
+}
