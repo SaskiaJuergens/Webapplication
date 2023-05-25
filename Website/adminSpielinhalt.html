@@ -12,7 +12,7 @@
     <nav>
       <ul>
         <li style="float: left">
-          <a href="https://..." Link class="logo">
+          <a href="StartScreen.html" Link class="logo">
             <img src="slacklogo.png" alt="Logo" />
           </a>
         </li>
@@ -44,7 +44,7 @@
     <div class="table-background">
       <h1>Registrierte Spieler*innen</h1>
       <p>Alle Spieler*innen die sich auf der Webseite registriert haben.</p>
-
+<div style="overflow-x: auto">
       <table id="spieler-tabelle" style="width: 100%">
         <tr>
           <th>Name</th>
@@ -71,6 +71,8 @@
           <td>1</td>
         </tr>
       </table>
+      </div>
+      </div>
 
       <div id="player-page">
         <h2 id="player-name"></h2>
@@ -84,9 +86,12 @@
 
     <script src="script.js"></script>
 
+    <div class="table-background">
     <h1>Spielkarten</h1>
     <p>Alle im Spiel enhaltenen Spielkarten.</p>
-    <table style="width: 100%">
+
+   <div style="overflow-x: auto">
+    <table id="spieler-tabelle" style="width: 100%">
       <tr>
         <th>Künstler*innen</th>
         <th>Bildtitel</th>
@@ -139,6 +144,8 @@
         </td>
       </tr>
     </table>
+    </div>
+    </div>
 
   </body>
 </html>

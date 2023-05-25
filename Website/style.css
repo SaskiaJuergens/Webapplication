@@ -1,3 +1,6 @@
+/* font Überschrift*/
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+
 /*Bedingungen Responsive Design*/
 html,
 body {
@@ -9,6 +12,25 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+/* responsible Fontsize (mit rem) */
+@media (max-width: 1400px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 668px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 450px) {
+  html {
+    font-size: 9px;
+  }
 }
 
 /*Navigationsleiste*/
@@ -40,7 +62,7 @@ nav a {
   text-decoration: none;
 }
 
- nav ul li form {
+nav ul li form {
   display: block;
   color: white;
   text-align: center;
@@ -61,7 +83,6 @@ nav a {
   font-size: 20px;
   color: white;
 }
-
 
 /* Navigation dropdown */
 .dropdown {
@@ -116,15 +137,17 @@ nav a {
   position: relative;
   background-color: rgb(225, 232, 250);
   border-radius: 24px;
-  width: 607px;
+  width: 80%;
   height: auto;
   margin: 0 auto;
   margin-top: 100px;
   padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
+  max-width: 607px;
 }
 
+h2,
 h1,
-h2 {
+p {
   font-family: "Anonymous Pro", sans-serif;
   color: rgb(74, 104, 183);
 }
@@ -200,7 +223,6 @@ td {
   padding: 10px;
 }
 
-
 .spielkarte {
   width: 100px;
   height: auto;
@@ -223,22 +245,21 @@ td {
   font-family: "Anonymous Pro", sans-serif;
 }
 
-
 /*Memory Game styleing*/
-.wrapper{
+.wrapper {
   box-sizing: border-box;
   width: 416px;
   padding: 40px;
   background-color: rgb(225, 232, 250);
   position: absolute;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
   border-radius: 9.6px;
-  box-shadow: 0 14.4px 44.8px rgba(86,66,0,0.2)
+  box-shadow: 0 14.4px 44.8px rgba(86, 66, 0, 0.2);
 }
 
-.game-container{
+.game-container {
   position: relative;
   width: 100%;
   display: grid;
@@ -249,4 +270,73 @@ td {
   color: red;
   display: block;
   margin-top: 5px;
+}
+
+@media screen and (max-width: 800px) {
+  td,
+  th {
+    width: 100%;
+  }
+}
+
+/* Startseite */
+
+.start-background {
+  background-image: radial-gradient(
+      rgb(74, 104, 183, 0.7),
+      rgb(74, 104, 183, 0.9)
+    ),
+    url(museum.jpg);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+.start-background h1 {
+  margin: 0 auto;
+  color: white;
+  font-family: "Anton", sans-serif;
+  font-size: 8rem;
+  text-shadow: 2px 2px 5px black;
+  padding: 0;
+}
+
+.start-background p {
+  margin: 0 auto 20;
+  color: white;
+}
+
+.div-center {
+  position: relative;
+  margin: 0 auto;
+  padding: 10% 0;
+  text-align: center;
+  font-size: 14pt;
+}
+
+/* Startseite Buttons*/
+
+.button-start {
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 20px;
+  border: none;
+  color: white;
+  padding: 12px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border: 2px solid white;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.button-start:hover {
+  background-color: rgba(74, 104, 183);
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }

@@ -3,13 +3,12 @@
     <title>Registrierung</title>
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css" />
-
   </head>
   <body>
     <nav>
       <ul>
         <li style="float: left">
-          <a href="https://..." Link class="logo">
+          <a href="StartScreen.html" Link class="logo">
             <img src="slacklogo.png" alt="Logo" />
           </a>
         </li>
@@ -55,15 +54,27 @@
 
         <label for="password">Passwort:</label>
         <br /><br />
-        <input type="password" id="password" name="password" onblur="checkPassword()" required /><br /><br />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          onblur="checkPassword()"
+          required
+        /><br /><br />
         <span id="passwordHint" class="hint"></span>
 
         <label for="confirmPassword">Passwort bestätigen:</label>
         <br /><br />
-        <input type="password" id="confirmPassword" name="confirmPassword" onblur="checkPasswordsMatch()" required /><br /><br />
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          onblur="checkPasswordsMatch()"
+          required
+        /><br /><br />
         <span id="confirmPasswordHint" class="hint"></span><br /><br />
 
-        <input type="submit" id="submitButton" value="Registrieren" disabled>
+        <input type="submit" id="submitButton" value="Registrieren" disabled />
       </form>
 
       <div id="fehlermeldung"></div>
