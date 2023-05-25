@@ -12,18 +12,22 @@ var firstCard = false;
 var secondCard = false;
 
 //Items array
-const items =
-[ {title:"Les demoiselles d'Avignon", image: "lesDemoisellesdAvingnon.jpg"}
-  {title:"The Starry Night", image: "The-Starry-Night.jpg"}
-  {title:"Mona Lisa", image: "Mona-Lisa.jpg"}
+const items = [
+  {
+    title: "Les demoiselles d'Avignon",
+    image: "../images/lesDemoisellesdAvingnon.jpg",
+  },
+  { title: "The Starry Night", image: "../images/The-Starry-Night.jpg" },
+  { title: "Mona Lisa", image: "../images/Mona-Lisa.jpg" },
 ];
 
 //timer
-var seconds = 0, minutes = 0;
+var seconds = 0,
+  minutes = 0;
 const timeGenerator = () => {
   seconds += 1;
-  if(seconds >= 60) {
-    minutes +=1;
+  if (seconds >= 60) {
+    minutes += 1;
     seconds = 0;
   }
   var secondsValue = seconds < 10 ? `0${seconds}` : seconds;
@@ -32,7 +36,8 @@ const timeGenerator = () => {
 };
 
 //Zählung der Counts
-var movesCount = 0, winCount = 0;
+var movesCount = 0,
+  winCount = 0;
 //zählen
 const movesCounter = () => {
   moves.innerHTML = `<span>Moves:</span>${movesCount}`;
@@ -44,20 +49,18 @@ const generateRondom = (size = 4) => {
   var cardValues = [];
   size = (size * size) / 2;
   //Random item auswahl
-  for(var i=0; i< size;i++){
+  for (var i = 0; i < size; i++) {
     const randomIndex = Math.floor(Math.random() * tempArray.length);
-  cardValues.push(tempArray[randomIndex]);
-  //wenn ausgewählt entfernen vom tempArray
-  tempArray.splice(randomIndex, 1);
- }
- return cardValue;
+    cardValues.push(tempArray[randomIndex]);
+    //wenn ausgewählt entfernen vom tempArray
+    tempArray.splice(randomIndex, 1);
+  }
+  return cardValue;
 };
 
 const matrixGenerator = (cardValue, size = 4) => {
-  gameContainer.innerHTML = ""
+  gameContainer.innerHTML = "";
   cardValue = [...cardValue, ...cardValue];
-  cardValue.sort(() => Math.randomI()-0.5);
-  for(var i=0; i<size*size;i++){
-
-  }
-}
+  cardValue.sort(() => Math.randomI() - 0.5);
+  for (var i = 0; i < size * size; i++) {}
+};
