@@ -321,7 +321,7 @@ td {
 /* Startseite Buttons*/
 
 .button-start {
-  background-color: rgba(255, 255, 255, 0);
+  background-color: rgba(74, 104, 183);
   border-radius: 20px;
   border: none;
   color: white;
@@ -332,6 +332,7 @@ td {
   border: 2px solid white;
   cursor: pointer;
   transition-duration: 0.4s;
+  margin-bottom: 25px;
 }
 
 .button-start:hover {

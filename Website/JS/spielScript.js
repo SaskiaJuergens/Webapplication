@@ -12,14 +12,47 @@ var firstCard = false;
 var secondCard = false;
 
 //Items array
-const items = [
+
+var items = [
   {
     title: "Les demoiselles d'Avignon",
-    image: "../images/lesDemoisellesdAvingnon.jpg",
+    src: "../images/lesDemoisellesdAvingnon.png",
   },
-  { title: "The Starry Night", image: "../images/The-Starry-Night.jpg" },
-  { title: "Mona Lisa", image: "../images/Mona-Lisa.jpg" },
+  { title: "The Starry Night", src: "../images/The-Starry-Night.png" },
+  { title: "Mona Lisa", src: "../images/Mona-Lisa.png" },
 ];
+
+//Karten zeichnen lassen
+//beim anklicken müssen hier die Bilder erscheinen aus der arraylist items
+//src wird später ausgetauscht von items mit endsprechendem Wert
+//item muss verdoppelt werden und dann randomly displayed
+
+var cardList = new Array();
+function drawCards() {
+  var ULlist = document.getElementById("cards");
+  for (var i = 0; i < items.length * 2; i++) {
+    var index = i;
+
+    var x = document.createElement("IMG");
+    x.setAttribute("src", "../images/leereKarte.png");
+    x.setAttribute("alt", items[0].title);
+    x.setAttribute("id", index);
+    cardList.push(x);
+    ULlist.appendChild(cardList[i]);
+
+    x.addEventListener(
+      "click",
+      function () {
+        //hier muss noch eine RandomListe hin
+        //counter für 2 aufgedeckte & vergleich von karten
+        this.setAttribute("src", "../images/Mona-Lisa.png");
+      },
+      false
+    );
+  }
+}
+
+drawCards();
 
 //timer
 var seconds = 0,
