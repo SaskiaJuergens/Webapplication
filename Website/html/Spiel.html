@@ -40,25 +40,26 @@
 
 
   <body>
-    <div class="wrapper">
-      <div class=".stats-container">
+    
+      <div >
         <div id="moves-count"></div>
         <div id="time"></div>
       </div>
-      <div class="game-container"></div>
+     
       
      
 
     </div>
-    <div class="controls-container">
-      <div class="login-background">
-      <p id="result"></p>
-        <button id="start" type="button" class="button-start">Starte Spiel</button>
+  
+      <div class="game-background">
+      
+        <button id="start" type="button" class="button-start" onclick="SpielStarten()">Starte Spiel</button>
         <button id="stop" type="button" class="button-start">Stop Game</button>
         <br /><br />
         <div class="cards" id="cards"></div>
+        <p id="result"></p>
     </div>
-    </div>
+    
 
     <script src="../JS/spielScript.js"></script>
   </body>

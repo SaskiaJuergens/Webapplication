@@ -32,7 +32,6 @@ function drawCards() {
   var ULlist = document.getElementById("cards");
   for (var i = 0; i < items.length * 2; i++) {
     var index = i;
-
     var x = document.createElement("IMG");
     x.setAttribute("src", "../images/leereKarte.png");
     x.setAttribute("alt", items[0].title);
@@ -40,19 +39,66 @@ function drawCards() {
     cardList.push(x);
     ULlist.appendChild(cardList[i]);
 
+    var uncoverCards = 0;
+
     x.addEventListener(
       "click",
       function () {
-        //hier muss noch eine RandomListe hin
-        //counter für 2 aufgedeckte & vergleich von karten
-        this.setAttribute("src", "../images/Mona-Lisa.png");
+        //hier wird von der Memorylist das jeweilige Element aufgerufen
+        uncoverCards += 1;
+        document.getElementById("result").innerHTML = " ";
+
+        if (uncoverCards <= 2) {
+          this.setAttribute("src", MemoryList[this.getAttribute("id")].src);
+          //karten setzen
+          if (uncoverCards == 1) firstCard = this;
+          if (uncoverCards == 2) {
+            secondCard = this;
+            // Karten checken ob gleich
+            if (firstCard.src == secondCard.src) {
+              document.getElementById("result").innerHTML = "Das ist ein Paar!";
+            }
+          }
+        } else {
+          //wenn zwei Pärchen aufgedeckt alles zurücksetzen
+          uncoverCards = 1;
+          firstCard.setAttribute("src", "../images/leereKarte.png");
+          secondCard.setAttribute("src", "../images/leereKarte.png");
+          firstCard = false;
+          secondCard = false;
+          //nähstes Paar setzen
+          this.setAttribute("src", MemoryList[this.getAttribute("id")].src);
+          //karten setzen
+          if (uncoverCards == 1) firstCard = this;
+          if (uncoverCards == 2) secondCard = this;
+        }
       },
       false
     );
   }
 }
 
-drawCards();
+//doppelte List da je 2 Kartenpaare
+var MemoryList = items.concat(items);
+
+//die MemoryList wird gemischt:
+function displayMemoryList() {
+  //random sort memoryList
+  for (i = MemoryList.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * i);
+    k = MemoryList[i];
+    MemoryList[i] = MemoryList[j];
+    MemoryList[j] = k;
+  }
+}
+
+//Funktionen werden ausgeführt
+
+//muss bei jedem Spielstart neu gemischt werden
+function SpielStarten() {
+  displayMemoryList();
+  drawCards();
+}
 
 //timer
 var seconds = 0,
@@ -77,7 +123,7 @@ const movesCounter = () => {
 };
 
 //Random Item von der Array liste
-const generateRondom = (size = 4) => {
+const generateRandom = (size = 4) => {
   var tempArray = [...items];
   var cardValues = [];
   size = (size * size) / 2;
