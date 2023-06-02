@@ -11,16 +11,7 @@ var interval;
 var firstCard = false;
 var secondCard = false;
 var cardPair = 0;
-
-//Eventhandler aus HTML
-
-window.addEventListener("load", setup);
-function setup() {
-  var elem = document.getElementById("start");
-  elem.addEventListener("click", SpielStarten);
-  var elem = document.getElementById("stop");
-  elem.addEventListener("click", SpielStop);
-}
+var cardList = new Array();
 
 //Items array
 
@@ -33,12 +24,23 @@ var items = [
   { title: "Mona Lisa", src: "../images/Mona-Lisa.png" },
 ];
 
+//doppelte List da je 2 Kartenpaare
+var MemoryList = items.concat(items);
+
+//Eventhandler für HTML
+
+window.addEventListener("load", setup);
+function setup() {
+  var elem = document.getElementById("start");
+  elem.addEventListener("click", SpielStarten);
+  var elem = document.getElementById("stop");
+  elem.addEventListener("click", SpielStop);
+}
+
 //Karten zeichnen lassen
 //beim anklicken müssen hier die Bilder erscheinen aus der arraylist items
 //src wird später ausgetauscht von items mit endsprechendem Wert
 //item muss verdoppelt werden und dann randomly displayed
-
-var cardList = new Array();
 
 function drawCards() {
   var ULlist = document.getElementById("cards");
@@ -58,7 +60,9 @@ function drawCards() {
       "click",
       function () {
         //hier wird von der Memorylist das jeweilige Element aufgerufen
-        uncoverCards += 1;
+        //Bedingung das nicht die selbe Karte angewählt wird
+        if (this.getAttribute("src") == "../images/leereKarte.png")
+          uncoverCards += 1;
         document.getElementById("result").innerHTML = " ";
 
         if (uncoverCards <= 2) {
@@ -103,9 +107,6 @@ function drawCards() {
   }
 }
 
-//doppelte List da je 2 Kartenpaare
-var MemoryList = items.concat(items);
-
 //die MemoryList wird gemischt:
 function displayMemoryList() {
   //random sort memoryList
@@ -120,6 +121,8 @@ function displayMemoryList() {
 //Funktionen werden ausgeführt
 //muss bei jedem Spielstart neu gemischt werden
 function SpielStarten() {
+  document.getElementById("result").innerHTML = " ";
+  MemoryList = items.concat(items);
   displayMemoryList();
   drawCards();
 }
@@ -134,12 +137,16 @@ function SpielStop() {
   while (elemlength.length > 0) {
     elem.removeChild(elem.firstElementChild);
   }
+  //Variablen werden zurückgesetzt
   document.getElementById("result").innerHTML = " ";
-
+  firstCard = false;
+  secondCard = false;
+  cardPair = 0;
+  cardList = new Array();
   setup();
 }
 
-//timer
+//timer noch nicht eingesetzt
 var seconds = 0,
   minutes = 0;
 const timeGenerator = () => {
@@ -151,36 +158,4 @@ const timeGenerator = () => {
   var secondsValue = seconds < 10 ? `0${seconds}` : seconds;
   var minutesValue = minutes < 10 ? `0${minutes}` : minutes;
   timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
-};
-
-//Zählung der Counts
-var movesCount = 0,
-  winCount = 0;
-//zählen
-const movesCounter = () => {
-  moves.innerHTML = `<span>Moves:</span>${movesCount}`;
-};
-
-//ab hier kann weg??
-
-//Random Item von der Array liste
-const generateRandom = (size = 4) => {
-  var tempArray = [...items];
-  var cardValues = [];
-  size = (size * size) / 2;
-  //Random item auswahl
-  for (var i = 0; i < size; i++) {
-    const randomIndex = Math.floor(Math.random() * tempArray.length);
-    cardValues.push(tempArray[randomIndex]);
-    //wenn ausgewählt entfernen vom tempArray
-    tempArray.splice(randomIndex, 1);
-  }
-  return cardValue;
-};
-
-const matrixGenerator = (cardValue, size = 4) => {
-  gameContainer.innerHTML = "";
-  cardValue = [...cardValue, ...cardValue];
-  cardValue.sort(() => Math.randomI() - 0.5);
-  for (var i = 0; i < size * size; i++) {}
 };
