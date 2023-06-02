@@ -1,6 +1,8 @@
 /* font Überschrift*/
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@300&display=swap");
+
 /*Bedingungen Responsive Design*/
 html,
 body {
@@ -23,55 +25,30 @@ body {
 
 @media (max-width: 668px) {
   html {
-    font-size: 10px;
+    font-size: 13px;
   }
 }
 
 @media (max-width: 450px) {
   html {
-    font-size: 9px;
+    font-size: 11px;
   }
 }
 
-/*Navigationsleiste*/
-nav {
-  width: 100%;
-  height: 96px;
-
+.navbar-custom {
   background: rgba(74, 104, 183);
-  font-family: "Anonymous Pro", sans-serif;
-}
-
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-nav li {
-  margin: 0 10px;
-  float: right;
-}
-
-nav a {
-  display: block;
+  font-family: "Geologica", sans-serif;
   color: white;
-  text-align: center;
-  padding: 34px 16px;
-  text-decoration: none;
 }
 
-nav ul li form {
-  display: block;
+.nav-item-custom {
+  font-family: "Geologica", sans-serif;
   color: white;
-  text-align: center;
-  padding: 23px 16px;
-  text-decoration: none;
+  margin: 0 25px;
 }
 
 .logo {
-  padding: 24px 16px;
+  padding: 14px 16px;
 }
 
 .suche {
@@ -82,54 +59,7 @@ nav ul li form {
   font-weight: 400;
   font-size: 20px;
   color: white;
-}
-
-/* Navigation dropdown */
-.dropdown {
-  float: center;
-  overflow: hidden;
-  background-color: none;
-  color: none;
-}
-
-.dropbtn {
-  display: block;
-  text-align: center;
-  padding: 2px 16px;
-  background-color: rgba(74, 104, 183);
-  border: none;
-  font-size: 16px;
-}
-
-.dropbtn:hover {
-  background-color: rgba(255, 255, 255, 0.137);
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  color: rgba(74, 104, 183, 0.9);
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  font-family: "Anonymous Pro", sans-serif;
-}
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
+  font-family: "Geologica", sans-serif;
 }
 
 /* Background */
@@ -145,16 +75,22 @@ nav ul li form {
   max-width: 607px;
 }
 
-h2,
 h1,
-p {
+h2 {
   font-family: "Anonymous Pro", sans-serif;
+  letter-spacing: 0.5px;
+  color: rgb(74, 104, 183);
+}
+
+h3,
+p {
+  font-family: "Geologica", sans-serif;
   color: rgb(74, 104, 183);
 }
 
 /* Login form */
 .login-form {
-  font-family: "Anonymous Pro", sans-serif;
+  font-family: "Geologica", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -189,6 +125,7 @@ input[type="submit"] {
   border: 2px solid white;
   cursor: pointer;
   transition-duration: 0.4s;
+  font-family: "Geologica", sans-serif;
 }
 
 input[type="submit"]:hover {
@@ -242,7 +179,8 @@ td {
 .table-background p {
   color: rgb(74, 104, 183);
   font-size: 12pt;
-  font-family: "Anonymous Pro", sans-serif;
+
+  font-family: "Geologica", sans-serif;
 }
 
 /*Memory Game styleing*/
@@ -319,9 +257,9 @@ td {
   padding: 0;
 }
 
-.start-background p {
-  margin: 0 auto 20;
+.start-background h3 {
   color: white;
+  padding: 0 0 20px 0;
 }
 
 .div-center {
@@ -339,7 +277,7 @@ td {
   border-radius: 20px;
   border: none;
   color: white;
-  padding: 12px 25px;
+  padding: 12px 18px;
   text-align: center;
   text-decoration: none;
   font-size: 16px;

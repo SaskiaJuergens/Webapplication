@@ -50,7 +50,9 @@ function drawCards() {
     x.setAttribute("src", "../images/leereKarte.png");
     x.setAttribute("alt", items[0].title);
     x.setAttribute("id", index);
-    x.className = "card";
+    x.className = "gameCard";
+    x.style.width = "30%";
+
     cardList.push(x);
     ULlist.appendChild(cardList[i]);
     var uncoverCards = 0;
@@ -133,7 +135,7 @@ function SpielStop() {
   var elem = document.getElementById("cards");
   var elemlength = document
     .getElementById("cards")
-    .getElementsByClassName("card");
+    .getElementsByClassName("gameCard");
   while (elemlength.length > 0) {
     elem.removeChild(elem.firstElementChild);
   }
