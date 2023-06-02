@@ -10,6 +10,17 @@ var cards;
 var interval;
 var firstCard = false;
 var secondCard = false;
+var cardPair = 0;
+
+//Eventhandler aus HTML
+
+window.addEventListener("load", setup);
+function setup() {
+  var elem = document.getElementById("start");
+  elem.addEventListener("click", SpielStarten);
+  var elem = document.getElementById("stop");
+  elem.addEventListener("click", SpielStop);
+}
 
 //Items array
 
@@ -28,6 +39,7 @@ var items = [
 //item muss verdoppelt werden und dann randomly displayed
 
 var cardList = new Array();
+
 function drawCards() {
   var ULlist = document.getElementById("cards");
   for (var i = 0; i < items.length * 2; i++) {
@@ -36,11 +48,12 @@ function drawCards() {
     x.setAttribute("src", "../images/leereKarte.png");
     x.setAttribute("alt", items[0].title);
     x.setAttribute("id", index);
+    x.className = "card";
     cardList.push(x);
     ULlist.appendChild(cardList[i]);
-
     var uncoverCards = 0;
 
+    //Event gekoppelt an drawCardsfunktion
     x.addEventListener(
       "click",
       function () {
@@ -56,14 +69,26 @@ function drawCards() {
             secondCard = this;
             // Karten checken ob gleich
             if (firstCard.src == secondCard.src) {
-              document.getElementById("result").innerHTML = "Das ist ein Paar!";
+              cardPair += 1;
+              document.getElementById("result").innerHTML =
+                "Du hast " + cardPair + " Kartenpaare gesammelt.";
+              firstCard.setAttribute("src", "../images/noCard.png");
+              secondCard.setAttribute("src", "../images/noCard.png");
+              firstCard.setAttribute("id", -1);
+              if (cardPair == items.length) {
+                SpielStop();
+                document.getElementById("result").innerHTML =
+                  "Du hast gewonnen!";
+              }
             }
           }
         } else {
           //wenn zwei Pärchen aufgedeckt alles zurücksetzen
           uncoverCards = 1;
-          firstCard.setAttribute("src", "../images/leereKarte.png");
-          secondCard.setAttribute("src", "../images/leereKarte.png");
+          if (firstCard.getAttribute("id") != -1) {
+            firstCard.setAttribute("src", "../images/leereKarte.png");
+            secondCard.setAttribute("src", "../images/leereKarte.png");
+          }
           firstCard = false;
           secondCard = false;
           //nähstes Paar setzen
@@ -93,11 +118,25 @@ function displayMemoryList() {
 }
 
 //Funktionen werden ausgeführt
-
 //muss bei jedem Spielstart neu gemischt werden
 function SpielStarten() {
   displayMemoryList();
   drawCards();
+}
+
+//Spiel wird abgebrochen
+//hier noch ein bug, wenn Spielstop muss man auch wieder Start drücken können
+function SpielStop() {
+  var elem = document.getElementById("cards");
+  var elemlength = document
+    .getElementById("cards")
+    .getElementsByClassName("card");
+  while (elemlength.length > 0) {
+    elem.removeChild(elem.firstElementChild);
+  }
+  document.getElementById("result").innerHTML = " ";
+
+  setup();
 }
 
 //timer
@@ -121,6 +160,8 @@ var movesCount = 0,
 const movesCounter = () => {
   moves.innerHTML = `<span>Moves:</span>${movesCount}`;
 };
+
+//ab hier kann weg??
 
 //Random Item von der Array liste
 const generateRandom = (size = 4) => {
