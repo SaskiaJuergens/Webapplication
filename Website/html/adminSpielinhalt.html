@@ -12,7 +12,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css" />
-    <script src="main.js"></script>
+    <script src="../JS/TabelleScript.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
@@ -93,48 +93,68 @@
 
     <div class="table-background">
       <h2><b>Registrierte Spieler*innen</b></h2>
-      <p>Alle Spieler*innen die sich auf der Webseite registriert haben.</p>
-<div style="overflow-x: auto">
-      <table id="spieler-tabelle" style="width: 100%">
-        <tr>
-          <th>Name</th>
-          <th>Vorname</th>
-          <th>Email</th>
-          <th>Spiellevel</th>
-        </tr>
-        <tr onclick="showPlayerPage('Habul')">
-          <td>Habul</td>
-          <td>Simon</td>
-          <td>sh@hfk.com</td>
-          <td>3</td>
-        </tr>
-        <tr onclick="showPlayerPage('Mustermann')">
-          <td>Mustermann</td>
-          <td>Lucie</td>
-          <td>lucieM@hfk.com</td>
-          <td>2</td>
-        </tr>
-        <tr onclick="showPlayerPage('Müller')">
-          <td>Müller</td>
-          <td>Maria</td>
-          <td>mm@hfk.com</td>
-          <td>1</td>
-        </tr>
-      </table>
-      </div>
+      <p>Alle Spieler*innen, die sich auf der Webseite registriert haben.</p>
+      <div style="overflow-x: auto">
+        <table id="spieler-tabelle" style="width: 100%">
+          <tr>
+            <th>Name</th>
+            <th>Vorname</th>
+            <th>Email</th>
+            <th>Spiellevel</th>
+          </tr>
+          <tr onclick="showPlayerPage('Habul')">
+            <td>Habul</td>
+            <td>Simon</td>
+            <td>sh@hfk.com</td>
+            <td>3</td>
+          </tr>
+          <tr onclick="showPlayerPage('Mustermann')">
+            <td>Mustermann</td>
+            <td>Lucie</td>
+            <td>lucieM@hfk.com</td>
+            <td>2</td>
+          </tr>
+          <tr onclick="showPlayerPage('Müller')">
+            <td>Müller</td>
+            <td>Maria</td>
+            <td>mm@hfk.com</td>
+            <td>1</td>
+          </tr>
+        </table>
       </div>
 
-      <div id="player-page">
-        <h2 id="player-name"></h2>
-        <p id="player-details">Loading player details...</p>
-
-        <button onclick="goBackToTable()">Zurück zur Tabelle</button>
+    <!-- Spielerdetails -->
+    <div id="player-page" style="display: none;">
+      <h2 id="player-name"></h2>
+      <div id="player-details">
+        <h4>Spielverläufe:</h4>
+        <div style="overflow-x: auto">
+        <table id="game-list" style="width: 100%">
+          <!-- Die Spielinformationen für den ausgewählten Spieler -->
+            <thead>
+              <tr>
+                <th onclick="sortTable(0)">Spieldatum</th>
+                <th onclick="sortTable(1)">Level</th>
+                <th>Spieldauer</th>
+                <th>Spielanzahl</th>
+                <th>Gewinner</th>
+                <th>Spielverlauf</th>
+              </tr>
+            </thead>
+            <tbody id="game-list-body">
+              <!-- Hier werden die Spielinformationen dynamisch eingefügt -->
+            </tbody>
+          </table>
+          </div>
         <br></br>
       </div>
 
+      <button id="backToTabelle" type="button" class="button-BackToTabelle" onclick="goBackToTable()">Zurück zur Tabelle</button>
+      <br></br>
     </div>
+  </div>
 
-    <script src="script.js"></script>
+
 
     <div class="table-background">
     <h2><b>Spielkarten</b></h2>
@@ -153,13 +173,11 @@
         <td>"Les demoiselles d'Avignon"</td>
 
         <td>
-          <img src="pabloPicasso.jpg" alt="spielkarte" class="spielkarte" />
+          <img src="../images/pabloPicasso.jpg" alt="spielkarte" class="spielkarte" />
         </td>
         <td>
           <img
-            src="lesDemoisellesdAvingnon.jpg"
-            alt="spielkarte"
-            class="spielkarte"
+            src="../images/lesDemoisellesdAvingnon.jpg" alt="spielkarte" class="spielkarte"
           />
         </td>
       </tr>
@@ -168,14 +186,11 @@
         <td>"The Starry Night"</td>
 
         <td>
-          <img src="Van-Gogh.jpg" alt="spielkarte" class="spielkarte" />
+          <img src="../images/Van-Gogh.jpg" alt="spielkarte" class="spielkarte" />
         </td>
         <td>
           <img
-            src="The-Starry-Night.jpg"
-            alt="spielkarte"
-            class="spielkarte"
-          />
+            src="../images/The-Starry-Night.jpg" alt="spielkarte" class="spielkarte" />
         </td>
       </tr>
       <tr>
@@ -183,33 +198,29 @@
         <td>"MONA LISA"</td>
 
         <td>
-          <img src="leonardo-da-vinci.jpg" alt="spielkarte" class="spielkarte" />
+          <img src="../images/leonardo-da-vinci.jpg" alt="spielkarte" class="spielkarte" />
         </td>
         <td>
-          <img
-            src="Mona-Lisa.jpg"
-            alt="spielkarte"
-            class="spielkarte"
-          />
+          <img src="../images/Mona-Lisa.jpg" alt="spielkarte" class="spielkarte" />
         </td>
       </tr>
     </table>
     </div>
     </div>
-<script
+     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
+      crossorigin="anonymous">
+     </script>
+     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
       integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
+      crossorigin="anonymous">
+     </script>
+     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous">
+     </script>
   </body>
 </html>

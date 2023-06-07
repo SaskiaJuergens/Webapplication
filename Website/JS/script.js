@@ -37,23 +37,3 @@ function checkPasswordsMatch() {
     submitButton.disabled = false;
   }
 }
-
-
-function showPlayerPage(playerName) {
-  // Verstecke die Tabelle und zeige die Spielerseite an
-  document.getElementById("spieler-tabelle").style.display = "none";
-  document.getElementById("player-page").style.display = "block";
-
-  // Setze den Spielername auf der Spielerseite
-  document.getElementById("player-name").innerText = playerName;
-
-  // Lade die Spielerdetails asynchron (hier kannst du deine Logik einfügen)
-  // Beispiel: Hier wird einfach ein Text angezeigt
-  document.getElementById("player-details").innerText = "Hier werden die Details für " + playerName + " angezeigt.";
-}
-
-function goBackToTable() {
-  // Verstecke die Spielerseite und zeige die Tabelle wieder an
-  document.getElementById("player-page").style.display = "none";
-  document.getElementById("spieler-tabelle").style.display = "table";
-}
