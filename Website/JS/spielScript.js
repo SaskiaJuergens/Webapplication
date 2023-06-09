@@ -68,7 +68,11 @@ function drawCards() {
         document.getElementById("result").innerHTML = " ";
 
         if (uncoverCards <= 2) {
+          this.style.transition = "transform 0.6s";
+          this.style.transform = "rotateY(180deg)";
+
           this.setAttribute("src", MemoryList[this.getAttribute("id")].src);
+
           //karten setzen
           if (uncoverCards == 1) firstCard = this;
           if (uncoverCards == 2) {
