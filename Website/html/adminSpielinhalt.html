@@ -97,35 +97,35 @@
       <div style="overflow-x: auto">
         <table id="spieler-tabelle" style="width: 100%">
           <tr>
-            <th>Name</th>
+            <th >Name</th>
             <th>Vorname</th>
             <th>Email</th>
             <th>Spiellevel</th>
           </tr>
-          <tr onclick="showPlayerPage('Habul')">
-            <td>Habul</td>
-            <td>Simon</td>
-            <td>sh@hfk.com</td>
-            <td>3</td>
+          <tr onclick="showPlayerPage('Habul')" >
+            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">Habul</td>
+            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">Simon</td>
+            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">sh@hfk.com</td>
+            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">3</td>
           </tr>
-          <tr onclick="showPlayerPage('Mustermann')">
-            <td>Mustermann</td>
-            <td>Lucie</td>
-            <td>lucieM@hfk.com</td>
-            <td>2</td>
+          <tr onclick="showPlayerPage('Mustermann')" >
+            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">Mustermann</td>
+            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">Lucie</td>
+            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">lucieM@hfk.com</td>
+            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">2</td>
           </tr>
-          <tr onclick="showPlayerPage('Müller')">
-            <td>Müller</td>
-            <td>Maria</td>
-            <td>mm@hfk.com</td>
-            <td>1</td>
+          <tr onclick="showPlayerPage('Müller')" >
+            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">Müller</td>
+            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">Maria</td>
+            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">mm@hfk.com</td>
+            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">1</td>
           </tr>
         </table>
       </div>
 
     <!-- Spielerdetails -->
-    <div id="player-page" style="display: none;">
-      <h2 id="player-name"></h2>
+    <div class="hoverEffekt" id="player-page"  style="display: none;"  >
+      <h2 id="player-name" ></h2>
       <div id="player-details">
         <h4>Spielverläufe:</h4>
         <div style="overflow-x: auto">
@@ -141,7 +141,7 @@
                 <th>Spielverlauf</th>
               </tr>
             </thead>
-            <tbody id="game-list-body">
+            <tbody id="game-list-body" >
               <!-- Hier werden die Spielinformationen dynamisch eingefügt -->
             </tbody>
           </table>
@@ -177,7 +177,7 @@
         </td>
         <td>
           <img
-            src="../images/lesDemoisellesdAvingnon.jpg" alt="spielkarte" class="spielkarte"
+            src="../images/lesDemoisellesdAvingnon.png" alt="spielkarte" class="spielkarte"
           />
         </td>
       </tr>
@@ -190,7 +190,7 @@
         </td>
         <td>
           <img
-            src="../images/The-Starry-Night.jpg" alt="spielkarte" class="spielkarte" />
+            src="../images/The-Starry-Night.png" alt="spielkarte" class="spielkarte" />
         </td>
       </tr>
       <tr>
@@ -201,7 +201,7 @@
           <img src="../images/leonardo-da-vinci.jpg" alt="spielkarte" class="spielkarte" />
         </td>
         <td>
-          <img src="../images/Mona-Lisa.jpg" alt="spielkarte" class="spielkarte" />
+          <img src="../images/Mona-Lisa.png" alt="spielkarte" class="spielkarte" />
         </td>
       </tr>
     </table>

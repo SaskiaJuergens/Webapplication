@@ -1,24 +1,96 @@
 const playerData = {
   Habul: [
-    { date: "01.06.2022", level: "6", duration: "10:00", playerCount: "1", winnerName: "Mustermann", status: "beendet" },
-    { date: "16.05.2006", level: "3", duration: "0", playerCount: "1", winnerName: "-", status: "beendet" },
-    { date: "02.04.2000", level: "1", duration: "6:00", playerCount: "1", winnerName: "-", status: "beendet" },
+    {
+      date: "01.06.2022",
+      level: "6",
+      duration: "10:00",
+      playerCount: "1",
+      winnerName: "Mustermann",
+      status: "beendet",
+    },
+    {
+      date: "16.05.2006",
+      level: "3",
+      duration: "0",
+      playerCount: "1",
+      winnerName: "-",
+      status: "beendet",
+    },
+    {
+      date: "02.04.2000",
+      level: "1",
+      duration: "6:00",
+      playerCount: "1",
+      winnerName: "-",
+      status: "beendet",
+    },
     // Weitere Spielverlaufsinformationen hier hinzufügen
   ],
   Mustermann: [
-    { date: "01.06.2052", level: "144", duration: "10:00", playerCount: "1", winnerName: "Mustermann", status: "beendet" },
-    { date: "16.05.2046", level: "33", duration: "0", playerCount: "1", winnerName: "-", status: "beendet" },
-    { date: "02.04.2030", level: "16", duration: "6:00", playerCount: "1", winnerName: "-", status: "beendet" },
+    {
+      date: "01.06.2052",
+      level: "144",
+      duration: "10:00",
+      playerCount: "1",
+      winnerName: "Mustermann",
+      status: "beendet",
+    },
+    {
+      date: "16.05.2046",
+      level: "33",
+      duration: "0",
+      playerCount: "1",
+      winnerName: "-",
+      status: "beendet",
+    },
+    {
+      date: "02.04.2030",
+      level: "16",
+      duration: "6:00",
+      playerCount: "1",
+      winnerName: "-",
+      status: "beendet",
+    },
     // Weitere Spielverlaufsinformationen hier hinzufügen
   ],
   Müller: [
-    { date: "04.06.2012", level: "2", duration: "10:00", playerCount: "1", winnerName: "Mustermann", status: "beendet" },
-    { date: "16.05.2000", level: "3", duration: "0", playerCount: "1", winnerName: "-", status: "beendet" },
-    { date: "02.04.1999", level: "1", duration: "6:00", playerCount: "1", winnerName: "-", status: "beendet" },
+    {
+      date: "04.06.2012",
+      level: "2",
+      duration: "10:00",
+      playerCount: "1",
+      winnerName: "Mustermann",
+      status: "beendet",
+    },
+    {
+      date: "16.05.2000",
+      level: "3",
+      duration: "0",
+      playerCount: "1",
+      winnerName: "-",
+      status: "beendet",
+    },
+    {
+      date: "02.04.1999",
+      level: "1",
+      duration: "6:00",
+      playerCount: "1",
+      winnerName: "-",
+      status: "beendet",
+    },
     // Weitere Spielverlaufsinformationen hier hinzufügen
   ],
 };
 
+function hoverEffect(a) {
+  a.style.color = "rgba(74, 104, 183)";
+  a.style.textDecoration = "underline";
+}
+
+function mouseOut(a) {
+  a.style.color = "black";
+  a.style.textDecoration = "none";
+}
 
 // Funktion zum Anzeigen der Spielerseite und Aktualisierung der Spielerinformationen
 function showPlayerPage(playerName) {
@@ -63,29 +135,28 @@ function createTableCell(content) {
   return cell;
 }
 
+// Funktion zum Sortieren der Tabelle nach Spieldatum oder Level
+function sortTable(columnIndex) {
+  var table = document.getElementById("game-list");
+  var tbody = table.getElementsByTagName("tbody")[0];
+  var rows = tbody.getElementsByTagName("tr");
+  var sortedRows = Array.from(rows);
 
+  sortedRows.sort(function (a, b) {
+    var aValue = a.getElementsByTagName("td")[columnIndex].textContent;
+    var bValue = b.getElementsByTagName("td")[columnIndex].textContent;
+    return aValue.localeCompare(bValue);
+  });
 
-  // Funktion zum Sortieren der Tabelle nach Spieldatum oder Level
-  function sortTable(columnIndex) {
-    var table = document.getElementById("game-list");
-    var tbody = table.getElementsByTagName("tbody")[0];
-    var rows = tbody.getElementsByTagName("tr");
-    var sortedRows = Array.from(rows);
-
-    sortedRows.sort(function (a, b) {
-      var aValue = a.getElementsByTagName("td")[columnIndex].textContent;
-      var bValue = b.getElementsByTagName("td")[columnIndex].textContent;
-      return aValue.localeCompare(bValue);
-    });
-
-    for (var i = 0; i < sortedRows.length; i++) {
-      tbody.appendChild(sortedRows[i]);
-    }
+  for (var i = 0; i < sortedRows.length; i++) {
+    tbody.appendChild(sortedRows[i]);
   }
+}
 
-  // Funktion zum Zurückkehren zur Spieler-Tabelle
-  function goBackToTable() {
-    // Zurück zur Spieler-Tabelle navigieren
-    document.getElementById("spieler-tabelle").style.display = "block";
-    document.getElementById("player-page").style.display = "none";
-  }
+// Funktion zum Zurückkehren zur Spieler-Tabelle
+function goBackToTable() {
+  // Zurück zur Spieler-Tabelle navigieren
+  document.getElementById("player-page").style.display = "none";
+  document.getElementById("spieler-tabelle").style.display = "block";
+  location.reload();
+}

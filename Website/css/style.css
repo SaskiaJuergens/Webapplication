@@ -113,7 +113,7 @@ input[type="number"] {
 }
 
 /*input Button*/
-input[type="submit"], {
+input[type="submit"] {
   background-color: rgba(74, 104, 183);
   border-radius: 20px;
   border: none;
@@ -186,7 +186,6 @@ td {
 .table-background h6 {
   margin-left: auto; /* Rechtsbündige Ausrichtung */
 }
-
 
 /*Memory Game styleing*/
 .wrapper {
@@ -277,7 +276,8 @@ td {
 
 /* Startseite Buttons*/
 
-.button-start, .button-BackToTabelle {
+.button-start,
+.button-BackToTabelle {
   background-color: rgba(74, 104, 183);
   border-radius: 20px;
   border: none;
@@ -292,9 +292,12 @@ td {
   margin-bottom: 25px;
 }
 
-.button-start:hover, .button-BackToTabelle:hover {
+.button-start:hover,
+.button-BackToTabelle:hover {
   background-color: rgba(74, 104, 183);
   color: white;
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
+
+/** on hover Link Spielinhalt **/
