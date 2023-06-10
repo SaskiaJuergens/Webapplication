@@ -1,4 +1,4 @@
-const playerData = {
+var playerData = {
   Habul: [
     {
       date: "01.06.2022",
@@ -82,6 +82,84 @@ const playerData = {
   ],
 };
 
+//Liste registrierte SpielerInnnen
+
+var items = [
+  {
+    lastName: "Habul",
+    firstName: "Simon",
+    mail: "sh@hfk.com",
+    level: "3",
+  },
+  {
+    lastName: "Mustermann",
+    firstName: "Lucie",
+    mail: "lucieM@hfk.com",
+    level: "2",
+  },
+  {
+    lastName: "Müller",
+    firstName: "Maria",
+    mail: "mm@hfk.com",
+    level: "3",
+  },
+];
+
+//Eventhandler für HTML
+
+window.addEventListener("load", setup);
+function setup() {
+  //Tabelle "registrierte SpielerInnnen" setzen
+  loadPlayers();
+}
+
+//Tabelle registrierte Spieler laden (direkt am Anfang)
+function loadPlayers() {
+  var table = document.getElementById("spieler-tabelle");
+  document.getElementById("table-background").style.display = "block";
+  document.getElementById("player-page").style.display = "none";
+  // document.getElementById("table-background").style.display = "block";
+
+  items.forEach((game) => {
+    const row = document.createElement("tr");
+    const lastName = createTableCell(game.lastName);
+    const firstName = createTableCell(game.firstName);
+    const mailCell = createTableCell(game.mail);
+    const currentLevel = createTableCell(game.level);
+
+    var x = row.appendChild(lastName);
+
+    row.appendChild(firstName);
+    row.appendChild(mailCell);
+    row.appendChild(currentLevel);
+
+    x.addEventListener(
+      "click",
+      function () {
+        showPlayerPage(game.lastName);
+      },
+      false
+    );
+    x.addEventListener(
+      "mouseenter",
+      function () {
+        hoverEffect(this);
+      },
+      false
+    );
+    x.addEventListener(
+      "mouseleave",
+      function () {
+        mouseOut(this);
+      },
+      false
+    );
+
+    table.appendChild(row);
+  });
+}
+//}
+
 function hoverEffect(a) {
   a.style.color = "rgba(74, 104, 183)";
   a.style.textDecoration = "underline";
@@ -95,7 +173,7 @@ function mouseOut(a) {
 // Funktion zum Anzeigen der Spielerseite und Aktualisierung der Spielerinformationen
 function showPlayerPage(playerName) {
   // Spielerseite anzeigen
-  document.getElementById("spieler-tabelle").style.display = "none";
+  document.getElementById("table-background").style.display = "none";
   document.getElementById("player-page").style.display = "block";
 
   // Spielername in der Überschrift anzeigen
@@ -156,7 +234,8 @@ function sortTable(columnIndex) {
 // Funktion zum Zurückkehren zur Spieler-Tabelle
 function goBackToTable() {
   // Zurück zur Spieler-Tabelle navigieren
-  document.getElementById("player-page").style.display = "none";
+
   document.getElementById("spieler-tabelle").style.display = "block";
+  document.getElementById("player-page").style.display = "none";
   location.reload();
 }

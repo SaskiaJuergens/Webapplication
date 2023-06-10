@@ -91,36 +91,26 @@
     </nav>
 
 
-    <div class="table-background">
+    <div class="table-background" >
+      <div id="table-background">
       <h2><b>Registrierte Spieler*innen</b></h2>
       <p>Alle Spieler*innen, die sich auf der Webseite registriert haben.</p>
       <div style="overflow-x: auto">
-        <table id="spieler-tabelle" style="width: 100%">
+        <table  style="width: 100%">
+          <thead>
           <tr>
             <th >Name</th>
             <th>Vorname</th>
             <th>Email</th>
             <th>Spiellevel</th>
           </tr>
-          <tr onclick="showPlayerPage('Habul')" >
-            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">Habul</td>
-            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">Simon</td>
-            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">sh@hfk.com</td>
-            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">3</td>
-          </tr>
-          <tr onclick="showPlayerPage('Mustermann')" >
-            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">Mustermann</td>
-            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">Lucie</td>
-            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">lucieM@hfk.com</td>
-            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">2</td>
-          </tr>
-          <tr onclick="showPlayerPage('Müller')" >
-            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">Müller</td>
-            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">Maria</td>
-            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">mm@hfk.com</td>
-            <td onmouseover="hoverEffect(this)" onmouseout="mouseOut(this)">1</td>
-          </tr>
+         
+           </thead>
+           <tbody id="spieler-tabelle" >
+              <!-- Hier werden die Spielinformationen dynamisch eingefügt -->
+            </tbody>
         </table>
+      </div>
       </div>
 
     <!-- Spielerdetails -->
