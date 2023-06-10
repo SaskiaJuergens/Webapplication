@@ -1,3 +1,5 @@
+var playerName; //konstante für Hover und weiterleiten auf Playerseite
+
 var playerData = {
   Habul: [
     {
@@ -127,27 +129,27 @@ function loadPlayers() {
     const mailCell = createTableCell(game.mail);
     const currentLevel = createTableCell(game.level);
 
-    var x = row.appendChild(lastName);
+    playerName = row.appendChild(lastName);
 
     row.appendChild(firstName);
     row.appendChild(mailCell);
     row.appendChild(currentLevel);
 
-    x.addEventListener(
+    playerName.addEventListener(
       "click",
       function () {
         showPlayerPage(game.lastName);
       },
       false
     );
-    x.addEventListener(
+    playerName.addEventListener(
       "mouseenter",
       function () {
         hoverEffect(this);
       },
       false
     );
-    x.addEventListener(
+    playerName.addEventListener(
       "mouseleave",
       function () {
         mouseOut(this);
@@ -158,7 +160,6 @@ function loadPlayers() {
     table.appendChild(row);
   });
 }
-//}
 
 function hoverEffect(a) {
   a.style.color = "rgba(74, 104, 183)";
