@@ -63,47 +63,48 @@ function drawCards() {
       function () {
         //hier wird von der Memorylist das jeweilige Element aufgerufen
         //Bedingung das nicht die selbe Karte angewählt wird
+        if (this.getAttribute("src") != "../images/noCard.png") {
+          if (this.getAttribute("src") == "../images/leereKarte.png")
+            uncoverCards += 1;
+          document.getElementById("result").innerHTML = " ";
 
-        if (this.getAttribute("src") == "../images/leereKarte.png")
-          uncoverCards += 1;
-        document.getElementById("result").innerHTML = " ";
+          if (uncoverCards <= 2) {
+            this.setAttribute("src", MemoryList[this.getAttribute("id")].src);
 
-        if (uncoverCards <= 2) {
-          this.setAttribute("src", MemoryList[this.getAttribute("id")].src);
-
-          //karten setzen
-          if (uncoverCards == 1) firstCard = this;
-          if (uncoverCards == 2) {
-            secondCard = this;
-            // Karten checken ob gleich
-            if (firstCard.src == secondCard.src) {
-              cardPair += 1;
-              document.getElementById("result").innerHTML =
-                "Du hast " + cardPair + " Kartenpaare gesammelt.";
-              firstCard.setAttribute("src", "../images/noCard.png");
-              secondCard.setAttribute("src", "../images/noCard.png");
-              firstCard.setAttribute("id", -1);
-              if (cardPair == items.length) {
-                SpielStop();
+            //karten setzen
+            if (uncoverCards == 1) firstCard = this;
+            if (uncoverCards == 2) {
+              secondCard = this;
+              // Karten checken ob gleich
+              if (firstCard.src == secondCard.src) {
+                cardPair += 1;
                 document.getElementById("result").innerHTML =
-                  "Du hast gewonnen!";
+                  "Du hast " + cardPair + " Kartenpaare gesammelt.";
+                firstCard.setAttribute("src", "../images/noCard.png");
+                secondCard.setAttribute("src", "../images/noCard.png");
+                firstCard.setAttribute("id", -1);
+                if (cardPair == items.length) {
+                  SpielStop();
+                  document.getElementById("result").innerHTML =
+                    "Du hast gewonnen!";
+                }
               }
             }
+          } else {
+            //wenn zwei Pärchen aufgedeckt alles zurücksetzen
+            uncoverCards = 1;
+            if (firstCard.getAttribute("id") != -1) {
+              firstCard.setAttribute("src", "../images/leereKarte.png");
+              secondCard.setAttribute("src", "../images/leereKarte.png");
+            }
+            firstCard = false;
+            secondCard = false;
+            //nähstes Paar setzen
+            this.setAttribute("src", MemoryList[this.getAttribute("id")].src);
+            //karten setzen
+            if (uncoverCards == 1) firstCard = this;
+            if (uncoverCards == 2) secondCard = this;
           }
-        } else {
-          //wenn zwei Pärchen aufgedeckt alles zurücksetzen
-          uncoverCards = 1;
-          if (firstCard.getAttribute("id") != -1) {
-            firstCard.setAttribute("src", "../images/leereKarte.png");
-            secondCard.setAttribute("src", "../images/leereKarte.png");
-          }
-          firstCard = false;
-          secondCard = false;
-          //nähstes Paar setzen
-          this.setAttribute("src", MemoryList[this.getAttribute("id")].src);
-          //karten setzen
-          if (uncoverCards == 1) firstCard = this;
-          if (uncoverCards == 2) secondCard = this;
         }
       },
       false
