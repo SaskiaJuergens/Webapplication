@@ -301,3 +301,6 @@ td {
 }
 
 /** on hover Link Spielinhalt **/
+.sortHover:hover {
+  color: red;
+}

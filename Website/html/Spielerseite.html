@@ -12,7 +12,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css" />
-    <script src="../JS/TabelleScript.js"></script>
+    <script src="../JS/SpielerDetails.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
@@ -91,26 +91,9 @@
     </nav>
 
 
-    <div class="table-background" id="table-background">
-      <h2><b>Registrierte Spieler*innen</b></h2>
-      <p>Alle Spieler*innen, die sich auf der Webseite registriert haben.</p>
-      <div style="overflow-x: auto">
-        <table  style="width: 100%">
-          <thead>
-          <tr>
-            <th >Name</th>
-            <th>Vorname</th>
-            <th>Email</th>
-            <th>Spiellevel</th>
-          </tr>
-         
-           </thead>
-           <tbody id="spieler-tabelle" >
-              <!-- Hier werden die Spielinformationen dynamisch eingefügt -->
-            </tbody>
-        </table>
-      </div>
-
+    <div class="table-background" >
+     
+      
     <!-- Spielerdetails -->
     <div class="hoverEffekt" id="player-page"  style="display: none;"  >
       <h2 id="player-name" ></h2>
@@ -120,9 +103,10 @@
         <table id="game-list" style="width: 100%">
           <!-- Die Spielinformationen für den ausgewählten Spieler -->
             <thead>
-              <tr>
-                <th onclick="sortTable(0)">Spieldatum</th>
-                <th onclick="sortTable(1)">Level</th>
+              <tr >
+    
+                <th  style="color: rgba(74, 104, 183);" onclick="sortTable(0)"><u>Spieldatum</u></th>
+                <th style="color: rgba(74, 104, 183);"  onclick="sortTable(1)"><u>Level</u></th>
                 <th>Spieldauer</th>
                 <th>Spielanzahl</th>
                 <th>Gewinner</th>
@@ -137,64 +121,14 @@
         <br></br>
       </div>
 
-      <button id="backToTabelle" type="button" class="button-BackToTabelle" onclick="goBackToTable()">Zurück zur Tabelle</button>
+      <a href="adminSpielinhalt.html" Link> <button id="backToTabelle" type="button" class="button-BackToTabelle">Zurück zur Tabelle</button>
+        </a>
+     
       <br></br>
     </div>
   </div>
 
 
-
-    <div class="table-background">
-    <h2><b>Spielkarten</b></h2>
-    <p>Alle im Spiel enhaltenen Spielkarten.</p>
-
-   <div style="overflow-x: auto">
-    <table id="spieler-tabelle" style="width: 100%">
-      <tr>
-        <th>Künstler*innen</th>
-        <th>Bildtitel</th>
-        <th>Künstler*in</th>
-        <th>Bild</th>
-      </tr>
-      <tr>
-        <td>Pablo Picasso</td>
-        <td>"Les demoiselles d'Avignon"</td>
-
-        <td>
-          <img src="../images/pabloPicasso.jpg" alt="spielkarte" class="spielkarte" />
-        </td>
-        <td>
-          <img
-            src="../images/lesDemoisellesdAvingnon.png" alt="spielkarte" class="spielkarte"
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>Vincent van Gogh</td>
-        <td>"The Starry Night"</td>
-
-        <td>
-          <img src="../images/Van-Gogh.jpg" alt="spielkarte" class="spielkarte" />
-        </td>
-        <td>
-          <img
-            src="../images/The-Starry-Night.png" alt="spielkarte" class="spielkarte" />
-        </td>
-      </tr>
-      <tr>
-        <td>Leonardo da Vinci</td>
-        <td>"MONA LISA"</td>
-
-        <td>
-          <img src="../images/leonardo-da-vinci.jpg" alt="spielkarte" class="spielkarte" />
-        </td>
-        <td>
-          <img src="../images/Mona-Lisa.png" alt="spielkarte" class="spielkarte" />
-        </td>
-      </tr>
-    </table>
-    </div>
-    </div>
      <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

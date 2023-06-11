@@ -84,87 +84,18 @@ var playerData = {
   ],
 };
 
-//Liste registrierte SpielerInnnen
-
-var items = [
-  {
-    lastName: "Habul",
-    firstName: "Simon",
-    mail: "sh@hfk.com",
-    level: "3",
-  },
-  {
-    lastName: "Mustermann",
-    firstName: "Lucie",
-    mail: "lucieM@hfk.com",
-    level: "2",
-  },
-  {
-    lastName: "Müller",
-    firstName: "Maria",
-    mail: "mm@hfk.com",
-    level: "3",
-  },
-];
-
 //Eventhandler für HTML
 
 window.addEventListener("load", setup);
 function setup() {
   //Tabelle "registrierte SpielerInnnen" setzen
-  loadPlayers();
-}
 
-//Tabelle registrierte Spieler laden (direkt am Anfang)
-function loadPlayers() {
-  var table = document.getElementById("spieler-tabelle");
-  document.getElementById("table-background").style.display = "block";
-  //document.getElementById("player-page").style.display = "none";
-  // document.getElementById("table-background").style.display = "block";
-
-  items.forEach((game) => {
-    const row = document.createElement("tr");
-    const lastName = createTableCell(
-      game.lastName.link("Spielerseite.html?elem=" + game.lastName)
-    );
-    const firstName = createTableCell(game.firstName);
-    const mailCell = createTableCell(game.mail);
-    const currentLevel = createTableCell(game.level);
-
-    playerName = row.appendChild(lastName);
-
-    row.appendChild(firstName);
-    row.appendChild(mailCell);
-    row.appendChild(currentLevel);
-
-    playerName.addEventListener(
-      "mouseenter",
-      function () {
-        hoverEffect(this);
-      },
-      false
-    );
-
-    playerName.addEventListener(
-      "mouseleave",
-      function () {
-        mouseOut(this);
-      },
-      false
-    );
-
-    table.appendChild(row);
-  });
-}
-
-function hoverEffect(a) {
-  a.style.color = "rgba(74, 104, 183)";
-  a.style.textDecoration = "underline";
-}
-
-function mouseOut(a) {
-  a.style.color = "black";
-  a.style.textDecoration = "none";
+  // hier wird die übergebene Variable aus dem Link aufgerufen
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const product = urlParams.get("elem");
+  console.log(product);
+  showPlayerPage(product);
 }
 
 // Funktion zum Anzeigen der Spielerseite und Aktualisierung der Spielerinformationen
