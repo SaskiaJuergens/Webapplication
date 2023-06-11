@@ -80,9 +80,9 @@ function drawCards() {
       function () {
         //hier wird von der Memorylist das jeweilige Element aufgerufen
         //Bedingung das nicht die selbe Karte angewählt wird
-        if (this.getAttribute("src") != "../images/noCard.png") {
-          if (this.getAttribute("src") == "../images/leereKarte.png")
-            uncoverCards += 1;
+        if (this.getAttribute("src") == "../images/leereKarte.png") {
+          //if (this.getAttribute("src") == "../images/leereKarte.png")
+          uncoverCards += 1;
           document.getElementById("result").innerHTML = " ";
 
           if (
