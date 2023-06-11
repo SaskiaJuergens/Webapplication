@@ -59,8 +59,6 @@ function drawCards() {
     //Event gekoppelt an drawCardsfunktion
     x.addEventListener(
       "click",
-      fix Kartenspiel
-6de70fc
       function () {
         //hier wird von der Memorylist das jeweilige Element aufgerufen
         //Bedingung das nicht die selbe Karte angewählt wird
