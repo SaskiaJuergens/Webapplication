@@ -59,6 +59,8 @@ function drawCards() {
     //Event gekoppelt an drawCardsfunktion
     x.addEventListener(
       "click",
+      fix Kartenspiel
+6de70fc
       function () {
         //hier wird von der Memorylist das jeweilige Element aufgerufen
         //Bedingung das nicht die selbe Karte angewählt wird
@@ -66,10 +68,8 @@ function drawCards() {
           if (this.getAttribute("src") == "../images/leereKarte.png")
             uncoverCards += 1;
           document.getElementById("result").innerHTML = " ";
-
           if (uncoverCards <= 2) {
             this.setAttribute("src", MemoryList[this.getAttribute("id")].src);
-
             //karten setzen
             if (uncoverCards == 1) firstCard = this;
             if (uncoverCards == 2) {
