@@ -12,10 +12,6 @@ var firstCard = false;
 var secondCard = false;
 var cardPair = 0;
 var cardList = new Array();
-//doppelte List da je 2 Kartenpaare
-//var MemoryList = items.concat(items);
-
-//Items array
 
 var items = [
   {
@@ -81,7 +77,6 @@ function drawCards() {
         //hier wird von der Memorylist das jeweilige Element aufgerufen
         //Bedingung das nicht die selbe Karte angewählt wird
         if (this.getAttribute("src") == "../images/leereKarte.png") {
-          //if (this.getAttribute("src") == "../images/leereKarte.png")
           uncoverCards += 1;
           document.getElementById("result").innerHTML = " ";
 
@@ -148,7 +143,8 @@ function displayMemoryList() {
 //Funktionen werden ausgeführt
 //muss bei jedem Spielstart neu gemischt werden
 function SpielStarten() {
-  document.getElementById("result").innerHTML = " ";
+  if (document.getElementById("cards").innerHTML === "")
+    document.getElementById("result").innerHTML = " ";
 
   displayMemoryList();
   drawCards();
