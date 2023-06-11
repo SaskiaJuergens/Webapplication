@@ -20,10 +20,10 @@ var items = [
   },
   { title: "The Starry Night", src: "../images/The-Starry-Night.png" },
   { title: "Mona Lisa", src: "../images/Mona-Lisa.png" },
-  { title: "Der Schrei", src: "../images/der-schrei.jpg" },
-  { title: "das Mädchen mit dem Perlohring", src: "../images/das-maedchen-mit-dem-perlohring.jpg" },
+  { title: "Der Schrei", src: "../images/der-schrei.png" },
+  { title: "das Mädchen mit dem Perlohring", src: "../images/das-maedchen-mit-dem-perlohring.png" },
   { title: "Garten in Giverny", src: "../images/Garten-in-Giverny.png" },
-  { title: "Die große Welle vor Kanagawa", src: "../images/Die-große-Welle-vor-Kanagawa.png" },
+  { title: "Der Kuss", src: "../images/Der-Kuss 1.png" },
   { title: "Turm der blauen Pferde", src: "../images/turm-der-blauen-pferde.png" }
 
   //hier die fehlenden Bilder einfügen
