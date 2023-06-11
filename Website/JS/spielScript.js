@@ -12,6 +12,8 @@ var firstCard = false;
 var secondCard = false;
 var cardPair = 0;
 var cardList = new Array();
+//doppelte List da je 2 Kartenpaare
+var MemoryList = items.concat(items);
 
 //Items array
 
@@ -22,13 +24,10 @@ var items = [
   },
   { title: "The Starry Night", src: "../images/The-Starry-Night.png" },
   { title: "Mona Lisa", src: "../images/Mona-Lisa.png" },
+  //hier die fehlenden Bilder einfügen
 ];
 
-//doppelte List da je 2 Kartenpaare
-var MemoryList = items.concat(items);
-
 //Eventhandler für HTML
-
 window.addEventListener("load", setup);
 function setup() {
   var elem = document.getElementById("start");
