@@ -89,7 +89,6 @@ var playerData = {
 window.addEventListener("load", setup);
 function setup() {
   //Tabelle "registrierte SpielerInnnen" setzen
-
   // hier wird die übergebene Variable aus dem Link aufgerufen
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -101,11 +100,13 @@ function setup() {
 // Funktion zum Anzeigen der Spielerseite und Aktualisierung der Spielerinformationen
 function showPlayerPage(playerName) {
   // Spielerseite anzeigen
-  //  document.getElementById("table-background").style.display = "none";
+
   document.getElementById("player-page").style.display = "block";
 
   // Spielername in der Überschrift anzeigen
-  document.getElementById("player-name").innerHTML = playerName;
+
+  document.getElementById("player-name").innerHTML =
+    "<b>" + playerName + "</b>";
 
   // Spielerinformationen aktualisieren
   const playerInfo = playerData[playerName];
@@ -157,13 +158,4 @@ function sortTable(columnIndex) {
   for (var i = 0; i < sortedRows.length; i++) {
     tbody.appendChild(sortedRows[i]);
   }
-}
-
-// Funktion zum Zurückkehren zur Spieler-Tabelle
-function goBackToTable() {
-  // Zurück zur Spieler-Tabelle navigieren
-
-  document.getElementById("spieler-tabelle").style.display = "block";
-  document.getElementById("player-page").style.display = "none";
-  location.reload();
 }

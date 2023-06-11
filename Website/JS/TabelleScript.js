@@ -1,89 +1,5 @@
 var playerName; //konstante für Hover und weiterleiten auf Playerseite
 
-var playerData = {
-  Habul: [
-    {
-      date: "01.06.2022",
-      level: "6",
-      duration: "10:00",
-      playerCount: "1",
-      winnerName: "Mustermann",
-      status: "beendet",
-    },
-    {
-      date: "16.05.2006",
-      level: "3",
-      duration: "0",
-      playerCount: "1",
-      winnerName: "-",
-      status: "beendet",
-    },
-    {
-      date: "02.04.2000",
-      level: "1",
-      duration: "6:00",
-      playerCount: "1",
-      winnerName: "-",
-      status: "beendet",
-    },
-    // Weitere Spielverlaufsinformationen hier hinzufügen
-  ],
-  Mustermann: [
-    {
-      date: "01.06.2052",
-      level: "144",
-      duration: "10:00",
-      playerCount: "1",
-      winnerName: "Mustermann",
-      status: "beendet",
-    },
-    {
-      date: "16.05.2046",
-      level: "33",
-      duration: "0",
-      playerCount: "1",
-      winnerName: "-",
-      status: "beendet",
-    },
-    {
-      date: "02.04.2030",
-      level: "16",
-      duration: "6:00",
-      playerCount: "1",
-      winnerName: "-",
-      status: "beendet",
-    },
-    // Weitere Spielverlaufsinformationen hier hinzufügen
-  ],
-  Müller: [
-    {
-      date: "04.06.2012",
-      level: "2",
-      duration: "10:00",
-      playerCount: "1",
-      winnerName: "Mustermann",
-      status: "beendet",
-    },
-    {
-      date: "16.05.2000",
-      level: "3",
-      duration: "0",
-      playerCount: "1",
-      winnerName: "-",
-      status: "beendet",
-    },
-    {
-      date: "02.04.1999",
-      level: "1",
-      duration: "6:00",
-      playerCount: "1",
-      winnerName: "-",
-      status: "beendet",
-    },
-    // Weitere Spielverlaufsinformationen hier hinzufügen
-  ],
-};
-
 //Liste registrierte SpielerInnnen
 
 var items = [
@@ -157,11 +73,13 @@ function loadPlayers() {
   });
 }
 
+//hover für link
 function hoverEffect(a) {
   a.style.color = "rgba(74, 104, 183)";
   a.style.textDecoration = "underline";
 }
 
+//hover für link
 function mouseOut(a) {
   a.style.color = "black";
   a.style.textDecoration = "none";
