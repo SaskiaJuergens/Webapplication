@@ -92,19 +92,20 @@
 
 
     <div class="table-background" >
-     
-      
+
+
     <!-- Spielerdetails -->
     <div class="hoverEffekt" id="player-page"  style="display: none;"  >
       <h1 id="player-name" ></h1>
       <div id="player-details">
+
         <h4>Spielverläufe:</h4>
         <div style="overflow-x: auto">
         <table id="game-list" style="width: 100%">
           <!-- Die Spielinformationen für den ausgewählten Spieler -->
             <thead>
               <tr >
-    
+
                 <th  style="color: rgba(74, 104, 183);" onclick="sortTable(0)">Spieldatum</th>
                 <th style="color: rgba(74, 104, 183);"  onclick="sortTable(1)">Level</th>
                 <th>Spieldauer</th>
@@ -114,16 +115,47 @@
               </tr>
             </thead>
             <tbody id="game-list-body" >
+
               <!-- Hier werden die Spielinformationen dynamisch eingefügt -->
             </tbody>
           </table>
-          </div>
+
+
+                <!-- Füge Säulendiagramm ein-->
+        <div>
+           <canvas id="myChart"></canvas>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+           <script>
+                const ctx = document.getElementById('myChart');
+                    new Chart(ctx, {
+                        type: 'bar',
+
+                        data: {
+                         labels: ['Gewonnen', 'Verloren', 'Abgebrochen', 'Abgelaufen'],
+                         datasets: [{
+                           label: 'Spiele',
+                           data: [2, 3, 5, 9],
+                           borderWidth: 1
+                         }]
+                        },
+                        options: {
+                         scales: {
+                           y: {
+                             beginAtZero: true
+                           }
+                         }
+                        }
+                        });
+         </script>
+    </div>
+
         <br></br>
       </div>
-
       <a href="adminSpielinhalt.html" Link> <button id="backToTabelle" type="button" class="button-BackToTabelle">Zurück zur Tabelle</button>
         </a>
-     
+
       <br></br>
     </div>
   </div>
@@ -144,5 +176,6 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous">
      </script>
+
   </body>
 </html>
