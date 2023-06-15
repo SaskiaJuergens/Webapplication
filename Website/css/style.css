@@ -174,7 +174,6 @@ td {
   margin: 0 auto;
   margin-top: 42px;
   padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
-
 }
 
 .table-background p {
@@ -213,13 +212,13 @@ td {
   position: relative;
   background-color: rgb(225, 232, 250);
   border-radius: 24px;
-  width: 80%;
+  width: 90%;
   height: auto;
 
   margin: 0 auto;
   margin-top: 100px;
   padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
-  max-width: 607px;
+  max-width: 1100px;
 }
 
 /*Error bzw. Warnhinweise*/

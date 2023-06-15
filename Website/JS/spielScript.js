@@ -21,46 +21,22 @@ var items = [
   { title: "The Starry Night", src: "../images/The-Starry-Night.png" },
   { title: "Mona Lisa", src: "../images/Mona-Lisa.png" },
   { title: "Der Schrei", src: "../images/der-schrei.png" },
-  { title: "das Mädchen mit dem Perlohring", src: "../images/das-maedchen-mit-dem-perlohring.png" },
+  {
+    title: "das Mädchen mit dem Perlohring",
+    src: "../images/das-maedchen-mit-dem-perlohring.png",
+  },
   { title: "Garten in Giverny", src: "../images/Garten-in-Giverny.png" },
   { title: "Der Kuss", src: "../images/Der-Kuss 1.png" },
-  { title: "Turm der blauen Pferde", src: "../images/turm-der-blauen-pferde.png" },
+  {
+    title: "Turm der blauen Pferde",
+    src: "../images/turm-der-blauen-pferde.png",
+  },
   //hier die fehlenden Bilder einfügen
 ];
 
-//da concat funktion nicht bei jedem Browser funktioniert
 //doppelte Liste
-var MemoryList = [
-  {
-    title: "Les demoiselles d'Avignon",
-    src: "../images/lesDemoisellesdAvingnon.png",
-  },
-  { title: "The Starry Night", src: "../images/The-Starry-Night.png" },
-  { title: "Mona Lisa", src: "../images/Mona-Lisa.png" },
-  {
-    title: "Les demoiselles d'Avignon",
-    src: "../images/lesDemoisellesdAvingnon.png",
-  },
-  { title: "The Starry Night", src: "../images/The-Starry-Night.png" },
-  { title: "Mona Lisa", src: "../images/Mona-Lisa.png" },
 
-  { title: "Der Schrei", src: "../images/der-schrei.png" },
-  { title: "Der Schrei", src: "../images/der-schrei.png" },
-
-  { title: "das Mädchen mit dem Perlohring", src: "../images/das-maedchen-mit-dem-perlohring.png" },
-  { title: "das Mädchen mit dem Perlohring", src: "../images/das-maedchen-mit-dem-perlohring.png" },
-
-  { title: "Garten in Giverny", src: "../images/Garten-in-Giverny.png" },
-  { title: "Garten in Giverny", src: "../images/Garten-in-Giverny.png" },
-
-  { title: "Der Kuss", src: "../images/Der-Kuss 1.png" },
-  { title: "Der Kuss", src: "../images/Der-Kuss 1.png" },
-
-    { title: "Turm der blauen Pferde", src: "../images/turm-der-blauen-pferde.png" },
-      { title: "Turm der blauen Pferde", src: "../images/turm-der-blauen-pferde.png" }
-
-  //hier die fehlenden Bilder einfügen
-];
+MemoryList = items.concat(items);
 
 //Eventhandler für HTML
 window.addEventListener("load", setup);
@@ -85,7 +61,7 @@ function drawCards() {
     x.setAttribute("alt", items[0].title);
     x.setAttribute("id", index);
     x.className = "gameCard";
-    x.style.width = "30%";
+    x.style.width = "15%";
 
     cardList.push(x);
     ULlist.appendChild(cardList[i]);
