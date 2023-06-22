@@ -1,6 +1,6 @@
 <?
 try {
-  $dsn = 'mysql:host=localhost;dbname=omemory;charset=utf8mb4_general_ci';
+  $dsn = 'mysql:host=localhost;dbname=omemory;charset=utf8mb4';
   $username = 'localhost';
   $password = '';
   $dbh = new \PDO($dsn, $username, $password);
