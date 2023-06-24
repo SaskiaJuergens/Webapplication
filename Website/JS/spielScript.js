@@ -61,7 +61,14 @@ function drawCards() {
     x.setAttribute("alt", items[0].title);
     x.setAttribute("id", index);
     x.className = "gameCard";
-    x.style.width = "15%";
+    x.style.width = "16%";
+
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      // If media query matches
+      x.style.width = "25%";
+    } else {
+      x.style.width = "16%";
+    }
 
     cardList.push(x);
     ULlist.appendChild(cardList[i]);

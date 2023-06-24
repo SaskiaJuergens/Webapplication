@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Einloggen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -88,29 +89,18 @@
 
     <div class="login-background">
       <h1><b>Einloggen</b></h1>
-      <br />
-      <form class="login-form">
-        <label for="benutzername">Benutzername:</label>
-        <br /><br />
-        <input
-          type="text"
-          id="benutzername"
-          name="benutzername"
-          required
-        /><br /><br />
 
-        <label for="passwort">Passwort:</label>
-        <br /><br />
-        <input
-          type="password"
-          id="passwort"
-          name="passwort"
-          required
-        /><br /><br />
+      <form class="login-form">
+        <label for="benutzername" class="eingabeLabel">Benutzername:</label>
+
+        <input type="text" id="benutzername" name="benutzername" required />
+
+        <label for="passwort" class="eingabeLabel">Passwort:</label>
+
+        <input type="password" id="passwort" name="passwort" required />
 
         <input type="submit" value="Einloggen" class="submit" />
 
-        <br /><br />
         <p>
           Noch kein Account?
           <a href="signup.html" style="text-decoration: underline; color: blue"

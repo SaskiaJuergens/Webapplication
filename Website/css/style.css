@@ -39,6 +39,7 @@ body {
   background: rgba(74, 104, 183);
   font-family: "Geologica", sans-serif;
   color: white;
+  font-size: 16px;
 }
 
 .nav-item-custom {
@@ -73,6 +74,18 @@ body {
   margin-top: 100px;
   padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
   max-width: 607px;
+}
+
+.login-background h1 {
+  margin: 0 0 25px 0;
+}
+
+.login-background .submit {
+  margin: 25px 0;
+}
+
+.login-background .eingabeLabel {
+  margin: 25px 0 8px 0;
 }
 
 h1,
@@ -228,10 +241,23 @@ td {
   margin-top: 5px;
 }
 
+/* responsiv Anpassungen */
+
 @media screen and (max-width: 800px) {
   td,
   th {
     width: 100%;
+  }
+  .navbar-custom {
+    text-align: center;
+  }
+  .login-background,
+  .table-background {
+    padding: 25px 20px;
+    width: 93%;
+    border-radius: 9px;
+    margin-top: 30px;
+    margin-bottom: 50px;
   }
 }
 
