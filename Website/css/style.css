@@ -74,6 +74,8 @@ body {
   margin-top: 100px;
   padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
   max-width: 607px;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 .login-background h1 {
@@ -187,6 +189,8 @@ td {
   margin: 0 auto;
   margin-top: 42px;
   padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 .table-background p {
@@ -206,6 +210,18 @@ td {
   height: 300px;
   object-fit: cover;
   object-position: top left;
+
+  background-image: radial-gradient(
+      rgba(10, 76, 209, 0.1),
+      rgba(98, 44, 235, 0.2)
+    ),
+    url(../images/Museum02.jpg);
+  width: 100%;
+
+  padding: 0;
+  border: none;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .wrapper {
@@ -238,6 +254,8 @@ td {
   margin: 0 auto;
   margin-top: 40px;
   padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 /*Error bzw. Warnhinweise*/
@@ -274,10 +292,10 @@ td {
 
 .start-background {
   background-image: radial-gradient(
-      rgb(74, 104, 183, 0.7),
-      rgb(74, 104, 183, 0.9)
+      rgb(74, 104, 183, 0.3),
+      rgb(74, 104, 183, 0.5)
     ),
-    url(../images/museum-246222_1920.jpg);
+    url(../images/museum.jpg);
   width: 100%;
   margin: 0 auto;
   padding: 0;
@@ -340,13 +358,19 @@ td {
   color: red;
 }
 
+/** Hinegrund fullscreen**/
+
 .colored-background {
   height: auto;
   width: 100%;
   margin: 0;
   border: 0;
   padding: 0;
-  background-color: rgba(74, 105, 183);
+  background: linear-gradient(
+    135deg,
+    rgba(10, 76, 209, 0.2) 0%,
+    rgba(98, 44, 235, 0.2) 100%
+  );
   background-position: center center;
 
   background-repeat: repeat;
