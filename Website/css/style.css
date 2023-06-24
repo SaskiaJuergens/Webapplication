@@ -368,11 +368,30 @@ td {
   padding: 0;
   background: linear-gradient(
     135deg,
-    rgba(10, 76, 209, 0.2) 0%,
-    rgba(98, 44, 235, 0.2) 100%
+    rgb(74, 104, 183, 0.3) 0%,
+    rgb(74, 104, 183, 0.5) 100%
   );
   background-position: center center;
 
   background-repeat: repeat;
   background-size: cover;
+}
+
+/**Hintergrund bild **/
+
+/* Startseite */
+
+.image-background {
+  background-image: radial-gradient(
+      rgb(74, 104, 183, 0.3),
+      rgb(74, 104, 183, 0.5)
+    ),
+    url(../images/museum.jpg);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  background-repeat: repeat;
+  background-size: cover;
+  height: auto;
 }
