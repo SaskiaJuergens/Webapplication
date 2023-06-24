@@ -258,6 +258,19 @@ td {
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
+/* Background */
+.gameIntro-background {
+  position: relative;
+
+  border-radius: 24px;
+  width: 90%;
+  height: auto;
+
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
+}
+
 /*Error bzw. Warnhinweise*/
 .hint {
   color: red;
@@ -312,6 +325,10 @@ td {
   font-size: 8rem;
   text-shadow: 2px 2px 5px black;
   padding: 0;
+}
+.gameIntro-background h1 {
+  font-family: "Anton", sans-serif;
+  font-size: 5rem;
 }
 
 .start-background h3 {
