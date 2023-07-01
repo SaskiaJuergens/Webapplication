@@ -1,24 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Datenbankergebnisse anzeigen</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        $.ajax({
-          url: "setupDB.php", // Pfad zur PHP-Datei
-          type: "GET",
-          success: function (data) {
-            $("#ergebnisse").html(data); // Füge die Datenbankergebnisse in das HTML-Element mit der ID "ergebnisse" ein
-          },
-        });
-      });
-    </script>
+    <title>Titel der Tabellen anzeigen</title>
   </head>
   <body>
-    <h1>Datenbankergebnisse</h1>
-
-    <div id="ergebnisse"></div>
-    <!-- Hier werden die Datenbankergebnisse angezeigt -->
+    <h1>Titel der Tabellen:</h1>
+    <?php include 'setupDB.php'; ?>
   </body>
 </html>
