@@ -1,35 +1,32 @@
-
 <?php
-$servername = "localhost"; // Verbindung zum Server
-$username = "root"; // Benutzername für den Datenbankzugriff (Standard: "root")
-$password = ""; // Passwort für den Datenbankzugriff (Standard: "")
-$dbname = "omemory"; // Name deiner Datenbank
+    // Verbindung zur Datenbank herstellen
+    $servername = "localhost";    // Hostname (normalerweise "localhost")
+    $username = "root";           // Benutzername für die Datenbank
+    $password = "";               // Passwort für die Datenbank
+    $database = "omemory";        // Name der Datenbank
 
-// Verbindung zur Datenbank herstellen
-$conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $database);
 
-// Überprüfen, ob die Verbindung erfolgreich hergestellt wurde
-if ($conn->connect_error) {
-    die("Verbindung fehlgeschlagen: " . $conn->connect_error);
-}
-
-
-
-// Beispielabfrage
-$sql = "SELECT spieler FROM deineTabelle";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // Daten ausgeben
-    while($row = $result->fetch_assoc()) {
-        echo "ID: " . $row["id"]. " - spielName: " . $row["spielname"]. "<br>";
+    // Überprüfen, ob die Verbindung erfolgreich war
+    if ($conn->connect_error) {
+        die("Verbindung fehlgeschlagen: " . $conn->connect_error);
     }
-} else {
-    echo "Keine Ergebnisse gefunden.";
-}
 
-// Verbindung schließen
-$conn->close();
+    // SQL-Abfrage zum Abrufen der Tabellennamen
+    $sql = "SHOW TABLES";
+    $result = $conn->query($sql);
+
+    // Tabellennamen ausgeben, wenn Abfrage erfolgreich war
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo $row['Tables_in_omemory'] . "<br>";
+        }
+    } else {
+        echo "Keine Tabellen gefunden.";
+    }
+
+    // Verbindung schließen
+    $conn->close();
 ?>
 
 
