@@ -126,34 +126,36 @@
         <input
           type="number"
           id="levelzahl"
-          name="levelzahl"
+          name="level"
           min="1"
           max="50"
           required
+        /><br /><br />
+
+         <label for="anzahlkarten"
+          >Anzahl der Karten (positive gerade Zahl):</label
+        >
+        <input
+          type="number"
+          id="anzahlkarten"
+          name="anzahl_karten"
+          min="2"
+          max="50"
+          required
+          step="2"
         /><br /><br />
 
         <label for="spielzeit">Spielzeit (in Minuten):</label>
         <input
           type="number"
           id="spielzeit"
-          name="spielzeit"
+          name="spielZeit"
           min="1"
           max="30"
           required
         /><br /><br />
 
-        <label for="anzahlkarten"
-          >Anzahl der Karten (positive gerade Zahl):</label
-        >
-        <input
-          type="number"
-          id="anzahlkarten"
-          name="anzahlkarten"
-          min="2"
-          max="50"
-          required
-          step="2"
-        /><br /><br />
+       
 
         <input type="submit" value="Level hinzufügen" />
         <br /><br />
