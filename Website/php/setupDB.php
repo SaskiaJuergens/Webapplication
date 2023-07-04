@@ -7,12 +7,17 @@
 
     $conn = new mysqli($servername, $username, $password, $database);
 
-    // Überprüfen, ob die Verbindung erfolgreich war
+    // Überprüfen der Verbindung
     if ($conn->connect_error) {
-        die("Verbindung fehlgeschlagen: " . $conn->connect_error);
+        die("keine Verbindung (Fehler): " . $conn->connect_error);
     }
 
-    // SQL-Abfrage zum Abrufen der Tabellennamen
+
+
+
+
+    //Test:
+    // SQL-Abfrage zum Abrufen der Tabellennamen (Test)
     $sql = "SHOW TABLES";
     $result = $conn->query($sql);
 
@@ -24,6 +29,9 @@
     } else {
         echo "Keine Tabellen gefunden.";
     }
+
+
+    
 
     // Verbindung schließen
     $conn->close();
