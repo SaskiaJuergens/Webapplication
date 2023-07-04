@@ -95,20 +95,29 @@
       
       <p></p>
 
-      <form class="login-form">
+      <form class="login-form"  action="http://localhost/Webapplication/Website/php/card.php" method="post">
         <label for="kartenname">Kartenname:</label>
         <input
           type="text"
-          id="kartenname"
-          name="kartenname"
+          id="name"
+          name="name"
           required
         /><br /><br />
 
         <label for="kartenbild">Kartenbild:</label>
         <input
           type="file"
-          id="kartenbild"
-          name="kartenbild"
+          id="bild"
+          name="bild"
+          accept="image/*"
+          required
+        /><br /><br />
+
+         <label for="kartenbild">Kuenstler*in:</label>
+        <input
+          type="file"
+          id="artist"
+          name="artist"
           accept="image/*"
           required
         /><br /><br />

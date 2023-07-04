@@ -1,3 +1,7 @@
+<!-- HTML code with external CSS -->
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+ <div class="login-background">
+
 <?php 
 
 include 'setupDB.php';
@@ -15,9 +19,9 @@ $show = ' ';
 // SQL-Query zum Einfügen der Werte in die Tabelle
 $sql = "INSERT INTO Level (level, anzahl_karten, spielZeit) VALUES ('$level', '$anzahl_karten', '$spielZeit')";
 if (!$conn -> query($sql)) {
-    $show = $show . '<br/>' . $sql . ': ' . $conn -> error;
+    $show = '<h2>Das Level gibt es schon. Wähle ein anderes</h2>';
 } else {
-    $show .= '<p>Das Level ' . $level . " wurde hinzugefügt<p>";
+    $show .= '<h2>Das Level ' . $level . " wurde hinzugefügt<h2>";
 }
 echo $show;
 
@@ -27,6 +31,9 @@ echo $show;
 // Verbindung zur Datenbank schließen
 $conn->close();
 
-
-
 ?>
+
+<a href="../html/SpielEinstellungen.html" Link>
+          <button type="button" class="button-start">OK          </button></a
+        >
+        <div>
