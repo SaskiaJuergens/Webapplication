@@ -57,8 +57,8 @@ $counter = instanceCounter($conn);
 $pfad1 = "../images/Der-Kuss 1.png";
 $pfad2 = "../images/Gustav-Klimt.jpg";
 
-
 insertLevel($conn, $counter, $pfad1, $pfad2, 'Gustav Klimt');
+
 
 
 
