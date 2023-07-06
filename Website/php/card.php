@@ -10,38 +10,22 @@ include 'setupDB.php';
 
 // Werte aus dem Formular abrufen
 
-$bild = $_POST['bild'];
-$artist = $_POST['artist'];
+$bild = $_FILES['bild']['tmp_name'];
+$artist = $_FILES['artist']['tmp_name'];
 $name = $_POST['name'];
 $show = ' ';
 
-//id setzen 
-//Aufruf der Datenbank
-// SQL-Abfrage ausführen, um die Anzahl der Instanzen zu erhalten
-function instanceCounter($conn){
-$sql = "SELECT COUNT(*) AS total FROM Karte";
-$result = $conn->query($sql);
 
-// Überprüfen, ob die Abfrage erfolgreich war
-if ($result->num_rows >= 0) {
-    $row = $result->fetch_assoc();
-    $instanceCount = $row["total"];
-    echo "Anzahl der Instanzen: " . $instanceCount;
-} else {
-    echo "Keine Instanzen gefunden.";
-}
-
-$instanceCount = $instanceCount +1;
- return $instanceCount;
-}
+var_dump($artist);
+var_dump($name);
+var_dump($bild);
 
 
-
-function insertLevel($conn, $id, $filePath1, $filePath2, $name) {
+function insertCard($conn, $filePath1, $filePath2, $name) {
     $show =' ';
 $blob1 = file_get_contents($filePath1);
 $blob2 = file_get_contents($filePath2);
-$sql = "INSERT INTO karte VALUES('$id', 0x".bin2hex($blob1).", 0x".bin2hex($blob2).", '$name')";
+$sql = "INSERT INTO karte (bild, artist,name) VALUES(0x".bin2hex($blob1).", 0x".bin2hex($blob2).", '$name')";
 if (!$conn -> query($sql)) {
     $show = '<h2>Das Level gibt es schon. Wähle ein anderes</h2>';
 } else {
@@ -51,15 +35,21 @@ echo $show;
 }
 
 
-// Ein Beispiel-Datensatz
+// zwei Beispiel-Datensätze
 
-$counter = instanceCounter($conn);
 $pfad1 = "../images/Der-Kuss 1.png";
 $pfad2 = "../images/Gustav-Klimt.jpg";
 
-insertLevel($conn, $counter, $pfad1, $pfad2, 'Gustav Klimt');
+insertCard($conn, $pfad1, $pfad2, 'Gustav Klimt');
+
+$pfad3 = "../images/lesDemoisellesdAvingnon.png";
+$pfad4 = "../images/pabloPicasso.jpg";
+
+insertCard($conn, $pfad1, $pfad2, 'Pablo Picasso');
 
 
+//Datensatz aus der Html Spiellevel hinzufügen
+insertCard($conn, $bild, $artist, $name);
 
 
 
