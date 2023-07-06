@@ -16,6 +16,8 @@ $show = ' ';
 
 
 
+
+
 // SQL-Query zum Einfügen der Werte in die Tabelle
 
 function insertLevel($conn, $level, $anzahl_karten, $spielZeit) {
@@ -27,6 +29,10 @@ if (!$conn -> query($sql)) {
 }
 echo $show;
 }
+
+
+
+
 
 
 

@@ -130,24 +130,38 @@ input[type="number"] {
 /*input Button*/
 input[type="submit"] {
   background-color: rgba(74, 104, 183);
+  color: white;
   border-radius: 20px;
   border: none;
-  color: white;
-  padding: 12px 25px;
+  padding: 12px 18px;
   text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  border: 2px solid white;
+  text-decoration: solid;
+  font-size: 20px;
+  font-family: "Geologica", sans-serif;
   cursor: pointer;
   transition-duration: 0.4s;
-  font-family: "Geologica", sans-serif;
+  margin: 0 6px 25px 6px;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 input[type="submit"]:hover {
-  background-color: rgba(74, 104, 183);
-  color: white;
-  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.5), 0 17px 50px 0 rgba(0, 0, 0, 0.5);
+  animation: pulse 1s infinite;
+}
+
+/*button pulsiert*/
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* admin Spieler */
@@ -186,6 +200,7 @@ td {
   border-radius: 24px;
   width: 80%;
   height: auto;
+
   margin: 0 auto;
   margin-top: 42px;
   padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
@@ -205,9 +220,24 @@ td {
 }
 
 /*Memory Game styleing*/
+.game-background1 {
+  background-image: radial-gradient(
+    rgb(74, 104, 183, 0.6),
+    rgb(74, 104, 183, 0.7)
+  );
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  min-height: 400px;
+}
+
 .heaeder-image {
   width: 100%;
-  height: 300px;
+  height: 400px;
   object-fit: cover;
   object-position: top left;
 
@@ -216,7 +246,6 @@ td {
       rgba(98, 44, 235, 0.2)
     ),
     url(../images/Museum02.jpg);
-  width: 100%;
 
   padding: 0;
   border: none;
@@ -250,7 +279,7 @@ td {
   border-radius: 24px;
   width: 90%;
   height: auto;
-
+  min-height: 400px;
   margin: 0 auto;
   margin-top: 40px;
   padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
@@ -261,16 +290,27 @@ td {
 /* Background */
 .gameIntro-background {
   position: relative;
-
   border-radius: 24px;
   width: 90%;
   height: auto;
-
   margin: 0 auto;
   margin-top: 40px;
   padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
+  background-color: none;
 }
 
+.gameIntro-background h1 {
+  margin: 30px 0;
+  font-family: "Anton", sans-serif;
+  font-size: 8rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.501);
+  padding: 0;
+}
+
+.gameIntro-background h3 {
+  color: white;
+}
 /*Error bzw. Warnhinweise*/
 .hint {
   color: red;
@@ -348,26 +388,42 @@ td {
 
 .button-start,
 .button-BackToTabelle {
-  background-color: rgba(74, 104, 183);
   border-radius: 20px;
   border: none;
-  color: white;
   padding: 12px 18px;
   text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  border: 2px solid white;
+  text-decoration: solid;
+  font-size: 20px;
+  font-family: "Geologica", sans-serif;
   cursor: pointer;
   transition-duration: 0.4s;
-  margin-bottom: 25px;
+  margin: 0 6px 25px 6px;
+}
+
+.button-color1 {
+  color: rgba(74, 104, 183);
+  background-color: white;
+}
+
+.button-color2 {
+  background-color: rgba(74, 104, 183);
+  color: white;
 }
 
 .button-start:hover,
 .button-BackToTabelle:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.5), 0 17px 50px 0 rgba(0, 0, 0, 0.5);
+  animation: pulse 1s infinite;
+}
+
+.button-color1:hover {
   background-color: rgba(74, 104, 183);
   color: white;
-  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.button-color2:hover {
+  color: rgba(74, 104, 183);
+  background-color: white;
 }
 
 /** on hover Link Spielinhalt **/
