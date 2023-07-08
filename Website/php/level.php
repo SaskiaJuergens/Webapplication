@@ -20,17 +20,24 @@ $show = ' ';
 
 // SQL-Query zum Einfügen der Werte in die Tabelle
 
-function insertLevel($conn, $level, $anzahl_karten, $spielZeit) {
-$sql = "INSERT INTO Level (level, anzahl_karten, spielZeit) VALUES ('$level','$anzahl_karten', '$spielZeit')";
+function insertLevel($conn, $anzahl_karten, $spielZeit) {
+$sql = "INSERT INTO Level ( anzahl_karten, spielZeit) VALUES ('$anzahl_karten', '$spielZeit')";
 if (!$conn -> query($sql)) {
     $show = '<h2>Das Level gibt es schon. Wähle ein anderes</h2>';
 } else {
-    $show .= '<h2>Das Level ' . $level . " wurde hinzugefügt<h2>";
+    $show = '<h2>Das Level mit der Spielzeit ' . $spielZeit . " wurde hinzugefügt<h2>";
 }
 echo $show;
 }
 
+//Daten aus dem Formular werden hinzugefügt 
+//Level klammern wir erstmal aus, da wir möchten, dass dies wie in Aufg.1 gewünscht über AUTo_INCREMENT funktioniert
+insertLevel($conn,$anzahl_karten, $spielZeit  );
 
+//Beipiele
+
+insertLevel($conn, '4', '30' );
+insertLevel($conn, '14', '10' );
 
 
 

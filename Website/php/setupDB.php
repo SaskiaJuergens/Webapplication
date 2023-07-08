@@ -39,15 +39,12 @@ if (!$conn -> query($sql1)) {
     // Name und Attribute für DB level
     //wir haben in unserem Spiel noch einen Titel und ein zweites bild vom Künstler. Diese werden hier hinzugefügt
     //
-$lname = 'level';
+$lname = 'Level';
 $lname1 = 'Level';
 $lname2 = 'anzahl_karten';
 $lname3 = 'spielZeit';
-$ltype1 = 'INT PRIMARY KEY';
-//dies ist auch nutzbar, da wir in aufgabe eins aber auch das level eingeben sollten machen wir das hier nixht
-// der User kann sich sein Level selbst aussuchen, wenn es sich nicht wedrholt (siehe level.php)
 
-//$ltype1 = 'INT(11) AUTO_INCREMENT PRIMARY KEY';
+$ltype1 = 'INT(11) AUTO_INCREMENT PRIMARY KEY';
 $ltype2 = 'INT';
 $ltype3 = 'INT';
 
