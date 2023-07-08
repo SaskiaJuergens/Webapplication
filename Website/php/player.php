@@ -6,6 +6,8 @@
 
 <?php
 
+//diese Php-seite funktioniert richtig, wenn man sie über das Formular auf singup.html aufruft
+
 include 'setupDB.php';
 
 
