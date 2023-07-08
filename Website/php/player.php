@@ -9,17 +9,18 @@ include 'setupDB.php';
 
 
 // Werte aus dem Formular abrufen
-$spieler = $_POST['spieler'];
+$id = $_POST['id'];
 $spielname = $_POST['spielname'];
 $email = $_POST['email'];
+$passwort = $_POST['passwort'];
 $level = $_POST['level'];
 $show = ' ';
 
 
 // SQL-Query zum Einfügen der Werte in die Tabelle
 
-function insertPlayer($conn, $spieler, $spielname, $email, $level) {
-$sql = "INSERT INTO spieler (spieler, spielname, email, level) VALUES ('$spieler','$spielname', '$email','$level' )";
+function insertPlayer($conn, $id, $spielname, $email, $passwort, $level) {
+$sql = "INSERT INTO spieler (id, spielname, email, passwort, level) VALUES ('$id','$spielname', '$email','$passwort','$level' )";
 if (!$conn -> query($sql)) {
     $show = '<h2>Den Spieler gibt es schon</h2>';
 } else {
