@@ -28,7 +28,7 @@ $sql = "INSERT INTO spieler (spielname, email, passwort, level) VALUES ('$spieln
 if (!$conn -> query($sql)) {
     $show = '<h2>Das Level gibt es schon. Wähle ein anderes</h2>';
 } else {
-    $show = '<h2>Das Level ' . $spielname . ' wurde hinzugefügt<h2>';
+    $show = '<h2>Der/Die Spieler*in ' . $spielname . ' wurde hinzugefügt<h2>';
 }
 echo $show;
 }
