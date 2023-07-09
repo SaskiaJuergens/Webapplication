@@ -85,7 +85,7 @@ $stype10 = 'FOREIGN KEY (gewinner) REFERENCES spieler(id)';
 $stype11 = 'FOREIGN KEY (initiator) REFERENCES spieler(id)';
 
 // Tabelle Spiel erzeugen, falls noch nicht vorhanden sind
-$sql3 = "CREATE TABLE If NOT EXISTS $sname ($sname1 $stype1, $sname2 $stype2, $sname3 $stype3, $sname4 $stype4,$sname5 $stype5,$sname6 $stype6,$sname7 $stype7, $sname8 $stype8, $stype9)";
+$sql3 = "CREATE TABLE If NOT EXISTS $sname ($sname1 $stype1, $sname2 $stype2, $sname3 $stype3, $sname4 $stype4,$sname5 $stype5,$sname6 $stype6,$sname7 $stype7, $sname8 $stype8, $stype9, $stype10,$stype11 )";
 if (!$conn -> query($sql3)) {
     die('Tabelle-Erzeugen fehlgeschlagen: ' . $conn -> error);
 }

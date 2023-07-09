@@ -197,13 +197,12 @@ td {
 .table-background {
   position: relative;
   background-color: rgb(225, 232, 250);
-  border-radius: 24px;
-  width: 80%;
+  border-radius: 10px;
+  width: 85%;
   height: auto;
-
   margin: 0 auto;
   margin-top: 42px;
-  padding: 30px 50px 20px 50px; /* oben,rechts,unten,links */
+  padding: 30px 0; /* oben,rechts,unten,links */
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
