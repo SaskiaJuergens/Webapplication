@@ -10,9 +10,6 @@ include 'setupDB.php';
 
 
 $show = ' ';
-$spiname5 = 'mitspieler';
-$spiname6 = 'gewinner';
-$spiname7 = 'initiator';
 
 // SQL-Query zum Einfügen der Werte in die Tabelle
 
