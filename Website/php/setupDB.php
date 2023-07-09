@@ -63,11 +63,13 @@ $sname1 = 'einzeln';
 $sname2 = 'Datetime';
 $sname3 = 'dauer';
 $sname4 = 'verlauf';
+//die verbindung zur den Spielern über die SpielerID
 $sname5 = 'mitspieler';
 $sname6 = 'gewinner';
 $sname7 = 'initiator';
-//wir hatten erst die Uhrzeit als Primary key, dies wollten wir für diese aufgabe einmal ändern, da man sonst beim zweiten aufruen wegen der funktion insert eine Fehlermeldung bekommt
-// zur Abhilfe dient uns jetzt eine ID mit Auto_Increment
+//wir hatten erst die Uhrzeit als Primary key, dies wollten wir für diese aufgabe einmal ändern, 
+//da man sonst beim zweiten aurufen wegen der funktion insert() eine Fehlermeldung bekommt
+//zur Abhilfe dient uns jetzt eine ID mit Auto_Increment
 $sname8 = 'id';
 
 $stype1 = 'BOOLEAN ';
@@ -78,9 +80,12 @@ $stype5 = 'INT(11)';
 $stype6 = 'INT(11)';
 $stype7 = 'INT(11)';
 $stype8 = 'INT(11) AUTO_INCREMENT PRIMARY KEY';
+$stype9 = 'FOREIGN KEY (mitspieler) REFERENCES spieler(id)';
+$stype10 = 'FOREIGN KEY (gewinner) REFERENCES spieler(id)';
+$stype11 = 'FOREIGN KEY (initiator) REFERENCES spieler(id)';
 
 // Tabelle Spiel erzeugen, falls noch nicht vorhanden sind
-$sql3 = "CREATE TABLE If NOT EXISTS $sname ($sname1 $stype1, $sname2 $stype2, $sname3 $stype3, $sname4 $stype4,$sname5 $stype5,$sname6 $stype6,$sname7 $stype7, $sname8 $stype8)";
+$sql3 = "CREATE TABLE If NOT EXISTS $sname ($sname1 $stype1, $sname2 $stype2, $sname3 $stype3, $sname4 $stype4,$sname5 $stype5,$sname6 $stype6,$sname7 $stype7, $sname8 $stype8, $stype9)";
 if (!$conn -> query($sql3)) {
     die('Tabelle-Erzeugen fehlgeschlagen: ' . $conn -> error);
 }
