@@ -57,18 +57,30 @@ if (!$conn -> query($sql2)) {
 
 
 //Name und Attribute für DB Spiel
+// verlauf mitspieler und initiator sind verlinkungen auf die tabelle spieler
 $sname = 'Spiel';
 $sname1 = 'einzeln';
 $sname2 = 'Datetime';
 $sname3 = 'dauer';
 $sname4 = 'verlauf';
+$sname5 = 'mitspieler';
+$sname6 = 'gewinner';
+$sname7 = 'initiator';
+//wir hatten erst die Uhrzeit als Primary key, dies wollten wir für diese aufgabe einmal ändern, da man sonst beim zweiten aufruen wegen der funktion insert eine Fehlermeldung bekommt
+// zur Abhilfe dient uns jetzt eine ID mit Auto_Increment
+$sname8 = 'id';
+
 $stype1 = 'BOOLEAN ';
-$stype2 = 'DATETIME PRIMARY KEY';
+$stype2 = 'DATETIME';
 $stype3 = 'INT';
 $stype4 = 'VARCHAR(20)';
+$stype5 = 'INT(11)';
+$stype6 = 'INT(11)';
+$stype7 = 'INT(11)';
+$stype8 = 'INT(11) AUTO_INCREMENT PRIMARY KEY';
 
 // Tabelle Spiel erzeugen, falls noch nicht vorhanden sind
-$sql3 = "CREATE TABLE If NOT EXISTS $sname ($sname1 $stype1, $sname2 $stype2, $sname3 $stype3, $sname4 $stype4)";
+$sql3 = "CREATE TABLE If NOT EXISTS $sname ($sname1 $stype1, $sname2 $stype2, $sname3 $stype3, $sname4 $stype4,$sname5 $stype5,$sname6 $stype6,$sname7 $stype7, $sname8 $stype8)";
 if (!$conn -> query($sql3)) {
     die('Tabelle-Erzeugen fehlgeschlagen: ' . $conn -> error);
 }
@@ -90,46 +102,11 @@ $sptype4 = 'VARCHAR(20)';
 $sptype5 = 'INT';
 
 
+
 // Tabelle Spieler erzeugen, falls noch nicht vorhanden sind
 $sql4 = "CREATE TABLE If NOT EXISTS $spname ($spname1 $sptype1, $spname2 $sptype2, $spname3 $sptype3, $spname4 $sptype4, $spname5 $sptype5)";
 if (!$conn -> query($sql4)) {
     die('Tabelle-Erzeugen fehlgeschlagen: ' . $conn -> error);
 }
-
-//Name und Attribute für DB Spielende - diese zeigt auf welche Spieler Gwewinnner/Verlierer oder Initiator eines Spiels sind
-//Sind Spieler keins der drei dann haben sie an dem Spiel nicht teilgenommen
-
-$spiname = 'spielende';
-$spiname1 = 'Datetime';
-$spiname2 = 'id';
-$spiname3 = 'mitspieler';
-$spiname4 = 'gewinner';
-$spiname5 = 'initiator';
-$spitype1 = 'DATETIME';
-$spitype2 = 'INT(11)';
-$spitype3 = 'BOOLEAN';
-$spitype4 = 'BOOLEAN';
-$spitype5 = 'BOOLEAN';
-$spitype6 = 'FOREIGN KEY (Datetime) REFERENCES Spiel(Datetime)';
-$spitype7 = 'FOREIGN KEY (id) REFERENCES spieler(id)';
-
-// Tabelle Spieler erzeugen, falls noch nicht vorhanden sind
-$sql5 = "CREATE TABLE If NOT EXISTS $spiname ($spiname1 $spitype1, $spiname2 $spitype2, $spiname3 $spitype3, $spiname4 $spitype4, $spiname5 $spitype5, $spitype6, $spitype7)";
-if (!$conn -> query($sql5)) {
-    die('Tabelle-Erzeugen fehlgeschlagen: ' . $conn -> error);
-}
-
-
-
-
-
-
-
-
-
-
-
-?>
-
 
 
