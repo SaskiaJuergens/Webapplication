@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="../css/style.css">
  <div class="login-background">
 
-<?php 
+<?php
 
 //diese Php-seite funktioniert richtig, wenn man sie über das Formular auf Spieleinstellung.html aufruft
 
@@ -11,7 +11,6 @@ include 'setupDB.php';
 
 
 // Werte aus dem Formular abrufen
-
 $bild = $_FILES['bild']['tmp_name'];
 $artist = $_FILES['artist']['tmp_name'];
 $name = $_POST['name'];
@@ -37,7 +36,7 @@ echo $show;
 }
 
 
-// zwei Beispiel-Datensätze
+/*// zwei Beispiel-Datensätze
 
 $pfad1 = "../images/Der-Kuss 1.png";
 $pfad2 = "../images/Gustav-Klimt.jpg";
@@ -47,7 +46,7 @@ insertCard($conn, $pfad1, $pfad2, 'Gustav Klimt');
 $pfad3 = "../images/lesDemoisellesdAvingnon.png";
 $pfad4 = "../images/pabloPicasso.jpg";
 
-insertCard($conn, $pfad1, $pfad2, 'Pablo Picasso');
+insertCard($conn, $pfad1, $pfad2, 'Pablo Picasso');*/
 
 
 //Datensatz aus der Html Spiellevel hinzufügen

@@ -98,11 +98,24 @@
 
       <div class="table-background">
         <h1><b>Level</b></h1>
-        <p>Alle vorhandenen Spiellevel</p>
+                <p>Alle vorhandenen Spiellevel</p>
+                <div style="overflow-x: auto">
+                    <table style="width: 100%">
+                        <tr>
+                            <th>Nummer</th>
+                            <th>Spielzeit</th>
+                            <th>Kartenanzahl</th>
+                        </tr>
+                        <?php
+                        include 'get_level_data.php';
+                        getLevelData($conn);
+                        ?>
+                    </table>
+                </div>
+                <br />
+            </div>
 
-        <div style="overflow-x: auto">
-          <table style="width: 100%">
-            <tr>
+          <!--  <tr>
               <th>Nummer</th>
               <th>Spielzeit</th>
               <th>Kartenanzahl</th>
@@ -124,55 +137,68 @@
             </tr>
           </table>
         </div>
-        <br />
+        <br />-->
 
         <h1><b>Spiel</b></h1>
         <p>Alle Spiele</p>
         <div style="overflow-x: auto">
-          <table style="width: 100%">
-            <tr>
-              <th>Datum</th>
-              <th>Level</th>
-              <th>Dauer</th>
-              <th>Spielart</th>
-              <th>Spieler</th>
-              <th>Gewinner</th>
-              <th>Verlauf</th>
-            </tr>
-            <tr>
-              <td>24.03.23</td>
-              <td>1</td>
-              <td>1:30</td>
-              <td>single</td>
-              <td>Simon</td>
-              <td>/</td>
-              <td>Abgebrochen</td>
-            </tr>
+            <table style="width: 100%">
+                <tr>
+                    <th>Datum</th>
+                    <th>Level</th>
+                    <th>Dauer</th>
+                    <th>Spielart</th>
+                    <th>Spieler</th>
+                    <th>Gewinner</th>
+                    <th>Verlauf</th>
+                </tr>
+                <?php
+                include 'get_level_data.php';
+                getLevelData($conn);
+                ?>
+        <!-->     <tr>
+           <th>Datum</th>
+           <th>Level</th>
+           <th>Dauer</th>
+           <th>Spielart</th>
+           <th>Spieler</th>
+           <th>Gewinner</th>
+           <th>Verlauf</th>
+         </tr>
+         <tr>
+           <td>24.03.23</td>
+           <td>1</td>
+           <td>1:30</td>
+           <td>single</td>
+           <td>Simon</td>
+           <td>/</td>
+           <td>Abgebrochen</td>
+         </tr>
 
-            <tr>
-              <td>26.03.23</td>
-              <td>2</td>
-              <td>6:00</td>
-              <td>single</td>
-              <td>Lucie</td>
-              <td>/</td>
-              <td>Abgelaufen</td>
-            </tr>
+         <tr>
+           <td>26.03.23</td>
+           <td>2</td>
+           <td>6:00</td>
+           <td>single</td>
+           <td>Lucie</td>
+           <td>/</td>
+           <td>Abgelaufen</td>
+         </tr>
 
-            <tr>
-              <td>29.03.23</td>
-              <td>3</td>
-              <td>8:20</td>
-              <td>Zu Zweit</td>
-              <td>Lucie, Maria</td>
-              <td>Maria</td>
-              <td>Beendet</td>
-            </tr>
-          </table>
+         <tr>
+           <td>29.03.23</td>
+           <td>3</td>
+           <td>8:20</td>
+           <td>Zu Zweit</td>
+           <td>Lucie, Maria</td>
+           <td>Maria</td>
+           <td>Beendet</td>
+         </tr>-->
+            </table>
         </div>
       </div>
-      <br />
-    </div>
+      <br/>
+ 
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

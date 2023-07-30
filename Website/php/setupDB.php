@@ -82,22 +82,23 @@ if (!$conn -> query($sql4)) {
 //Name und Attribute für DB Spiel
 // verlauf mitspieler und initiator sind verlinkungen auf die tabelle spieler
 $sname = 'Spiel';
-$sname1 = 'einzeln';
-$sname2 = 'Datetime';
+$sname1 = 'Datetime';
+$sname2 = 'level';
 $sname3 = 'dauer';
-$sname4 = 'verlauf';
+$sname4 = 'gametyp';
 //die verbindung zur den Spielern über die SpielerID
 $sname5 = 'mitspieler';
 $sname6 = 'gewinner';
-$sname7 = 'initiator';
+$sname7 = 'gameprocess';
+$sname8 = 'initiator';
 //wir hatten erst die Uhrzeit als Primary key, dies wollten wir für diese aufgabe einmal ändern, 
 //da man sonst beim zweiten aurufen wegen der funktion insert() eine Fehlermeldung bekommt
 //zur Abhilfe dient uns jetzt eine ID mit Auto_Increment
 $sname8 = 'id';
 
-$stype1 = 'BOOLEAN ';
-$stype2 = 'DATETIME';
-$stype3 = 'INT';
+$stype1 = 'DATETIME';
+$stype2 = 'INT';
+$stype2 = 'INT';
 $stype4 = 'VARCHAR(20)';
 $stype5 = 'INT(11)';
 $stype6 = 'INT(11)';
