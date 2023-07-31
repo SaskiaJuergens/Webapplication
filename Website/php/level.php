@@ -6,7 +6,7 @@
 
 // Diese Php-Seite funktioniert richtig, wenn man sie über das Formular auf Spieleinstellung.html aufruft
 include 'setupDB.php';
-include 'get_level_data.php';
+include 'get_level_data.php'; 
 
 // Funktion zum Einfügen der Werte in die Tabelle
 function insertLevel($conn, $anzahl_karten, $spielZeit) {

@@ -68,11 +68,12 @@ $sptype2 = 'VARCHAR(20)';
 $sptype3 = 'VARCHAR(20)';
 $sptype4 = 'VARCHAR(20)';
 $sptype5 = 'INT';
+$sptype6 = 'FOREIGN KEY (level) REFERENCES spieler(level)';
 
 
 
 // Tabelle Spieler erzeugen, falls noch nicht vorhanden sind
-$sql4 = "CREATE TABLE If NOT EXISTS $spname ($spname1 $sptype1, $spname2 $sptype2, $spname3 $sptype3, $spname4 $sptype4, $spname5 $sptype5)";
+$sql4 = "CREATE TABLE If NOT EXISTS $spname ($spname1 $sptype1, $spname2 $sptype2, $spname3 $sptype3, $spname4 $sptype4, $spname5 $sptype5, $sptype6)";
 if (!$conn -> query($sql4)) {
     die('Tabelle-Erzeugen fehlgeschlagen: ' . $conn -> error);
 }
