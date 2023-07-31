@@ -28,7 +28,7 @@ $show = ' ';
 function insertPlayer($conn, $spielname, $email, $passwort, $level) {
 $sql = "INSERT INTO spieler (spielname, email, passwort, level) VALUES ('$spielname', '$email','$passwort','$level' )";
 if (!$conn -> query($sql)) {
-    $show = '<h2>Das Level gibt es schon. Wähle ein anderes</h2>';
+    $show = '<h2>Der Spieler ist schon vorhanden. Wähle einen Anderen</h2>';
 } else {
     $show = '<h2>Der/Die Spieler*in ' . $spielname . ' wurde hinzugefügt<h2>';
 }
