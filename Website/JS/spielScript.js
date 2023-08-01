@@ -12,6 +12,11 @@ var firstCard = false;
 var secondCard = false;
 var cardPair = 0;
 var cardList = new Array();
+var card = 0;
+//timer noch nicht eingesetzt
+var timerId;
+var levelStartTime = 5; // 3 minutes in Sekunden
+var startTime = levelStartTime; // startzeit am spielanfang
 
 var items = [
   {
@@ -47,89 +52,80 @@ function setup() {
   elem.addEventListener("click", SpielStop);
 }
 
-//Karten zeichnen lassen
-//beim anklicken müssen hier die Bilder erscheinen aus der arraylist items
-//src wird später ausgetauscht von items mit endsprechendem Wert
-//item muss verdoppelt werden und dann randomly displayed
-
-function drawCards() {
+//leere karten werden gezeichnet
+function drawMemory() {
   var ULlist = document.getElementById("cards");
-  for (var i = 0; i < items.length * 2; i++) {
+  var ULlist = document.getElementById("cards");
+  for (var i = 0; i < MemoryList.length; i++) {
     var index = i;
-    var x = document.createElement("IMG");
-    x.setAttribute("src", "../images/leereKarte.png");
-    x.setAttribute("alt", items[0].title);
-    x.setAttribute("id", index);
-    x.className = "gameCard";
-    x.style.width = "16%";
+    card = document.createElement("IMG");
+    card.setAttribute("src", "../images/leereKarte.png");
+    card.setAttribute("alt", items[0].title);
+    card.setAttribute("id", index);
+    card.className = "gameCard";
+    card.style.width = "16%";
 
     if (window.matchMedia("(max-width: 700px)").matches) {
       // If media query matches
-      x.style.width = "25%";
+      card.style.width = "25%";
     } else {
-      x.style.width = "16%";
+      card.style.width = "16%";
     }
 
-    cardList.push(x);
+    cardList.push(card);
     ULlist.appendChild(cardList[i]);
-    var uncoverCards = 0;
+    //event karte checken
+    card.addEventListener("click", showCard);
+  }
+}
 
-    //Event gekoppelt an drawCardsfunktion
-    x.addEventListener(
-      "click",
-      function () {
-        //hier wird von der Memorylist das jeweilige Element aufgerufen
-        //Bedingung das nicht die selbe Karte angewählt wird
-        if (this.getAttribute("src") == "../images/leereKarte.png") {
-          uncoverCards += 1;
-          document.getElementById("result").innerHTML = " ";
+var uncoverCards = 0;
+//Karte umdrehen
+function showCard() {
+  console.log(this.getAttribute("id"));
 
-          if (
-            uncoverCards <= 2 &&
-            this.getAttribute("src") == "../images/leereKarte.png"
-          ) {
-            this.setAttribute("src", MemoryList[this.getAttribute("id")].src);
+  //hier wird von der Memorylist das jeweilige Element aufgerufen
+  //Bedingung das nicht die selbe Karte angewählt wird
+  if (uncoverCards <= 2)
+    this.setAttribute("src", MemoryList[this.getAttribute("id")].src);
 
-            //karten setzen
-            if (uncoverCards == 1) {
-              firstCard = this;
-            }
-            if (uncoverCards == 2) {
-              secondCard = this;
-              // Karten checken ob gleich
-              if (firstCard.src == secondCard.src) {
-                cardPair += 1;
-                document.getElementById("result").innerHTML =
-                  "Du hast " + cardPair + " Kartenpaare gesammelt.";
-                firstCard.setAttribute("src", "../images/noCard.png");
-                secondCard.setAttribute("src", "../images/noCard.png");
-                firstCard.setAttribute("id", -1);
-                if (cardPair == items.length) {
-                  SpielStop();
-                  document.getElementById("result").innerHTML =
-                    "Du hast gewonnen!";
-                }
-              }
-            }
-          } else {
-            //wenn zwei Pärchen aufgedeckt alles zurücksetzen
-            uncoverCards = 1;
-            if (firstCard.getAttribute("id") != -1) {
-              firstCard.setAttribute("src", "../images/leereKarte.png");
-              secondCard.setAttribute("src", "../images/leereKarte.png");
-            }
-            firstCard = false;
-            secondCard = false;
-            //nähstes Paar setzen
-            this.setAttribute("src", MemoryList[this.getAttribute("id")].src);
-            //karten setzen
-            if (uncoverCards == 1) firstCard = this;
-            if (uncoverCards == 2) secondCard = this;
-          }
-        }
-      },
-      false
-    );
+  uncoverCards += 1;
+  console.log("uncoveredCardsNumber" + uncoverCards);
+  if (uncoverCards == 1) {
+    console.log("firstcardSet" + uncoverCards);
+    firstCard = this;
+  }
+  if (uncoverCards == 2) {
+    secondCard = this;
+    uncoverCards += 1;
+    console.log("secondcardset" + uncoverCards);
+
+    if (firstCard.src == secondCard.src) {
+      setTimeout(pairCard, 1000);
+    } else {
+      setTimeout(returnCard, 1000);
+      console.log("secondcardsetumdrehen" + uncoverCards);
+    }
+  }
+}
+//Karte umdrehen
+function returnCard() {
+  // Code, der erst nach 3 Sekunden ausgeführt wird
+  firstCard.setAttribute("src", "../images/leereKarte.png");
+  secondCard.setAttribute("src", "../images/leereKarte.png");
+  uncoverCards = 0;
+}
+
+function pairCard() {
+  cardPair += 1;
+  document.getElementById("result").innerHTML =
+    "Du hast " + cardPair + " Kartenpaare gesammelt.";
+  firstCard.setAttribute("src", "../images/noCard.png");
+  secondCard.setAttribute("src", "../images/noCard.png");
+  uncoverCards = 0;
+  if (cardPair == items.length) {
+    SpielStop();
+    document.getElementById("gameEnd").innerHTML = "Du hast gewonnen!";
   }
 }
 
@@ -149,9 +145,10 @@ function displayMemoryList() {
 function SpielStarten() {
   if (document.getElementById("cards").innerHTML === "")
     document.getElementById("result").innerHTML = " ";
-
+  document.getElementById("gameEnd").innerHTML = "";
   displayMemoryList();
-  drawCards();
+  drawMemory();
+  startCountdown();
 }
 
 //Spiel wird abgebrochen
@@ -171,18 +168,43 @@ function SpielStop() {
   cardPair = 0;
   cardList = new Array();
   setup();
+  clearInterval(timerId);
+  document.getElementById("gameEnd").innerHTML =
+    "Du hast das Spiel gestoppt. Das Spiel gilt als verlohren!";
 }
 
-//timer noch nicht eingesetzt
-var seconds = 0,
-  minutes = 0;
-const timeGenerator = () => {
-  seconds += 1;
-  if (seconds >= 60) {
-    minutes += 1;
-    seconds = 0;
+
+function formatTime(seconds) {
+  var minutes = Math.floor(seconds / 60);
+  var remainingSeconds = seconds % 60;
+  return `${minutes.toString().padStart(2, "0")}:${remainingSeconds
+    .toString()
+    .padStart(2, "0")}`;
+}
+
+//Der Countdown wird geupdatet
+function updateCountdown() {
+  var countdownElement = document.getElementById("countdown");
+  countdownElement.textContent = formatTime(startTime);
+
+  if (startTime <= 0) {
+    clearInterval(timerId);
+    SpielStop();
+    document.getElementById("gameEnd").innerHTML =
+      "Du hast verlohren! Du hast das Spiel nicht in angegebener Zeit geschafft.";
   }
-  var secondsValue = seconds < 10 ? `0${seconds}` : seconds;
-  var minutesValue = minutes < 10 ? `0${minutes}` : minutes;
-  timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
-};
+
+  startTime--;
+}
+
+//Der Countwodn wird gestartet
+function startCountdown() {
+  startTime = levelStartTime;
+  clearInterval(timerId); /
+  updateCountdown();
+  timerId = setInterval(updateCountdown, 1000);
+}
+
+function stopCountdown() {
+  clearInterval(timerId);
+}
