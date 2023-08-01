@@ -173,7 +173,6 @@ function SpielStop() {
     "Du hast das Spiel gestoppt. Das Spiel gilt als verlohren!";
 }
 
-
 function formatTime(seconds) {
   var minutes = Math.floor(seconds / 60);
   var remainingSeconds = seconds % 60;
@@ -200,7 +199,7 @@ function updateCountdown() {
 //Der Countwodn wird gestartet
 function startCountdown() {
   startTime = levelStartTime;
-  clearInterval(timerId); /
+  clearInterval(timerId);
   updateCountdown();
   timerId = setInterval(updateCountdown, 1000);
 }
