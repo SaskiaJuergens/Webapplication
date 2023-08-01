@@ -4,7 +4,8 @@
     "\\css",
     "\\html",
     "\\JS",
-    "\\php"
+    "\\php",
+    "\\public_php"
   ],
   "SelectedNode": "\\JS\\fetchdata.js",
   "PreviewInSolutionExplorer": false

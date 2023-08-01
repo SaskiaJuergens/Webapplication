@@ -23,7 +23,7 @@ function fetchLevelData() {
 
 // Function to fetch and populate the Spiel data
 function fetchSpielData() {
-    fetch('fetch_spiel_data.php') // Replace 'fetch_spiel_data.php' with the actual PHP script to fetch Spiel data from the database
+    fetch('../get_spiel_data.php') 
     .then(response => response.json())
     .then(data => {
         const spielData = document.getElementById('spielData');
