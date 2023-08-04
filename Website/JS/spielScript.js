@@ -207,3 +207,54 @@ function startCountdown() {
 function stopCountdown() {
   clearInterval(timerId);
 }
+
+//ajax Anfrage
+
+const einzeln = 1; // Beispielwert für einzeln (1 oder 0)
+const Datetime = "2023-08-04 12:00"; // Beispielwert für Datetime
+const dauer = 60; // Beispielwert für dauer
+const verlauf = "Spielverlauf hier"; // Beispielwert für verlauf
+const mitspieler = "Spieler A, Spieler B"; // Beispielwert für mitspieler
+const gewinner = "Spieler A"; // Beispielwert für gewinner
+const initiator = "Spieler C"; // Beispielwert für initiator
+
+function AjaxAnfrage(
+  einzeln,
+  Datetime,
+  dauer,
+  verlauf,
+  mitspieler,
+  gewinner,
+  initiator
+) {
+  // AJAX-Funktion zum Hochladen des Spiels
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "http://localhost/Webapplication/Website/php/spiel.php"); // Den Pfad zur PHP-Datei entsprechend anpassen
+
+  // Setze die Content-Type Header, um die Daten im POST-Format zu senden
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  // AJAX-Antwort verarbeiten
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const response = JSON.parse(xhr.responseText);
+      document.getElementById("response").innerHTML = response.message;
+    } else {
+      document.getElementById("response").innerText =
+        "Fehler beim Hochladen des Spiels.";
+    }
+  };
+
+  // AJAX-Fehler verarbeiten
+  xhr.onerror = function () {
+    console.error("AJAX-Anfrage fehlgeschlagen!");
+  };
+
+  // Bereite die Daten als POST-Parameter vor
+  const params = `einzeln=${einzeln}&Datetime=${Datetime}&dauer=${dauer}&verlauf=${verlauf}&mitspieler=${mitspieler}&gewinner=${gewinner}&initiator=${initiator}`;
+
+  // AJAX-Anfrage senden
+  xhr.send(params);
+}
+
+AjaxAnfrage(einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator);

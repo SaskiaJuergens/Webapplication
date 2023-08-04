@@ -1,7 +1,3 @@
-<!-- HTML code with external CSS -->
-<link rel="stylesheet" type="text/css" href="../css/style.css">
- <div class="table-background">
-
 <?php
 
 include 'setupDB.php';
@@ -22,16 +18,27 @@ $show = ' ';
 
 //Fuktion zum hochladen von Werten in die Tabelle spiel
 
+//Fuktion zum hochladen von Werten in die Tabelle spiel
 function insertSpiel($conn, $einzeln, $Datetime, $dauer, $verlauf, $mitspieler, $gewinner,$initiator) {
-$sql = "INSERT INTO Spiel (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', '$Datetime','$dauer','$verlauf', $mitspieler, $gewinner,$initiator)";
-if (!$conn -> query($sql)) {
-    $show = '<h2>Das Level gibt es schon. Wähle ein anderes</h2>';
-} else {
-    $show = '<h2>Das Spiel um ' . $Datetime . ' Uhr wurde hinzugefügt<h2>';
+  $sql = "INSERT INTO Spiel (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', '$Datetime','$dauer','$verlauf', '$mitspieler', '$gewinner','$initiator')";
+  
+  $response = array();
+
+  if (!$conn->query($sql)) {
+    $response["message"] = "Das Level gibt es schon. Wähle ein anderes";
+  } else {
+    $response["message"] = "Das Spiel wurde erfolgreich hochgeladen.";
+  }
+
+  // CORS-Header setzen
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Methods: POST");
+  header("Access-Control-Allow-Headers: Content-Type");
+  header("Content-Type: application/json");
+
+  echo json_encode($response);
 }
 
-echo $show;
-}
 
 /*// Beipiele hinzufügen
 //funktioniert nur wenn vorher genau einmal player.php aufgrufen wurde -> da spieler vorhanden sein müssen
