@@ -17,264 +17,254 @@
   </head>
   <body>
 
-    <div class="colored-background">
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-      <a href="startscreen.html" Link class="logo">
-        <img src="../images/slacklogo.png" alt="Logo" />
-      </a>
+      <div class="colored-background">
+          <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+              <a href="startscreen.html" Link class="logo">
+                  <img src="../images/slacklogo.png" alt="Logo" />
+              </a>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+              <button class="navbar-toggler"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#navbarSupportedContent"
+                      aria-controls="navbarSupportedContent"
+                      aria-expanded="false"
+                      aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active nav-item-custom">
-            <a class="nav-link" href="Spiel.html"
-              >Spielen <span class="sr-only">(current)</span></a
-            >
-          </li>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                      <li class="nav-item active nav-item-custom">
+                          <a class="nav-link" href="Spiel.html">Spielen <span class="sr-only">(current)</span></a>
+                      </li>
 
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Spieleinstellungen
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="SpielEinstellungen.html"
-                >Spielverwaltung</a
-              >
-              <a class="dropdown-item" href="adminSpielinhalt.html"
-                >Spielinhalt</a
-              >
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle"
+                             href="#"
+                             id="navbarDropdown"
+                             role="button"
+                             data-toggle="dropdown"
+                             aria-haspopup="true"
+                             aria-expanded="false">
+                              Spieleinstellungen
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="SpielEinstellungen.html">Spielverwaltung</a>
+                              <a class="dropdown-item" href="adminSpielinhalt.html">Spielinhalt</a>
 
-              <a class="dropdown-item" href="adminSpielstand.html"
-                >Spielstand</a
-              >
-            </div>
-          </li>
-          <li class="nav-item active nav-item-custom">
-            <a class="nav-link" href="login.html"
-              >Login <span class="sr-only">(current)</span></a
-            >
-          </li>
-          <li class="nav-item active nav-item-custom">
-            <a class="nav-link" href="Impressum.html"
-              >Impressum <span class="sr-only">(current)</span></a
-            >
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
-      </div>
-    </nav>
+                              <a class="dropdown-item" href="adminSpielstand.html">Spielstand</a>
+                          </div>
+                      </li>
+                      <li class="nav-item active nav-item-custom">
+                          <a class="nav-link" href="login.html">Login <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item active nav-item-custom">
+                          <a class="nav-link" href="Impressum.html">Impressum <span class="sr-only">(current)</span></a>
+                      </li>
+                  </ul>
+                  <form class="form-inline my-2 my-lg-0">
+                      <input class="form-control mr-sm-2"
+                             type="search"
+                             placeholder="Search"
+                             aria-label="Search" />
+                      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+                          Search
+                      </button>
+                  </form>
+              </div>
+          </nav>
 
 
 
-    <div class="table-background" id="table-background">
-      <h2><b>Registrierte Spieler*innen</b></h2>
-      <p>Alle Spieler*innen, die sich auf der Webseite registriert haben.</p>
-      <div style="overflow-x: auto">
-        <table  style="width: 100%">
-          <thead>
-          <tr>
-            <th >Name</th>
-            <th>Vorname</th>
-            <th>Email</th>
-            <th>Spiellevel</th>
-          </tr>
+          <div class="table-background" id="table-background">
+              <h2><b>Registrierte Spieler*innen</b></h2>
+              <p>Alle Spieler*innen, die sich auf der Webseite registriert haben.</p>
+              <div style="overflow-x: auto">
+                  <table style="width: 100%">
+                      <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th>Vorname</th>
+                              <th>Email</th>
+                              <th>Spiellevel</th>
+                          </tr>
 
-           </thead>
-           <tbody id="spieler-tabelle" >
-              <!-- Hier werden die Spielinformationen dynamisch eingefügt -->
-            </tbody>
-        </table>
-      </div>
+                      </thead>
+                      <tbody id="spieler-tabelle">
+                          <!-- Hier werden die Spielinformationen dynamisch eingefügt -->
+                      </tbody>
+                  </table>
+              </div>
 
-    <!-- Spielerdetails -->
-    <div class="hoverEffekt" id="player-page"  style="display: none;"  >
-      <h2 id="player-name" ></h2>
-      <div id="player-details">
-        <h4>Spielverläufe:</h4>
-        <div style="overflow-x: auto">
-        <table id="game-list" style="width: 100%">
-          <!-- Die Spielinformationen für den ausgewählten Spieler -->
-            <thead>
-              <tr>
-                <th onclick="sortTable(0)">Spieldatum</th>
-                <th onclick="sortTable(1)">Level</th>
-                <th>Spieldauer</th>
-                <th>Spielanzahl</th>
-                <th>Gewinner</th>
-                <th>Spielverlauf</th>
-              </tr>
-            </thead>
-            <tbody id="game-list-body" >
-              <!-- Hier werden die Spielinformationen dynamisch eingefügt -->
-            </tbody>
-          </table>
+              <!-- Spielerdetails -->
+              <div class="hoverEffekt" id="player-page" style="display: none;">
+                  <h2 id="player-name"></h2>
+                  <div id="player-details">
+                      <h4>Spielverläufe:</h4>
+                      <div style="overflow-x: auto">
+                          <table id="game-list" style="width: 100%">
+
+
+
+                              <!-- Die Spielinformationen für den ausgewählten Spieler -->
+                              <thead>
+                                  <tr>
+                                      <th onclick="sortTable(0)">Spieldatum</th>
+                                      <th onclick="sortTable(1)">Level</th>
+                                      <th>Spieldauer</th>
+                                      <th>Spielanzahl</th>
+                                      <th>Gewinner</th>
+                                      <th>Spielverlauf</th>
+                                  </tr>
+                              </thead>
+                              <tbody id="game-list-body">
+                                  <!--Hier werden die Spielinformationen dynamisch eingefügt -->
+                              </tbody>
+                          </table>
+                      </div>
+                      <br><br />
+                  </div>
+
+                  <button id="backToTabelle" type="button" class="button-BackToTabelle" onclick="goBackToTable()">Zurück zur Tabelle</button>
+                  <br><br />
+              </div>
           </div>
-        <br></br>
+
+
+
+          <div class="table-background">
+              <h2><b>Spielkarten</b></h2>
+              <p>Alle im Spiel enhaltenen Spielkarten.</p>
+
+              <div style="overflow-x: auto">
+                  <table id="spieler-tabelle" style="width: 100%">
+                      <thead id=theadCard>
+                      </thead>
+                      <tr>
+                          <!--<th>Künstler*innen</th>-->
+                          <th>Bildtitel</th>
+                          <th>Künstler*in</th>
+                          <th>Bild</th>
+                      </tr>
+                      <tbody id="resultCard">
+                      </tbody>
+                  </table>
+                  <!--<tr>
+                    <td>Pablo Picasso</td>
+                    <td>"Les demoiselles d'Avignon"</td>
+
+                    <td>
+                      <img src="../images/pabloPicasso.jpg" alt="spielkarte" class="spielkarte" />
+                    </td>
+                    <td>
+                      <img
+                        src="../images/lesDemoisellesdAvingnon.png" alt="spielkarte" class="spielkarte"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Vincent van Gogh</td>
+                    <td>"The Starry Night"</td>
+
+                    <td>
+                      <img src="../images/Van-Gogh.jpg" alt="spielkarte" class="spielkarte" />
+                    </td>
+                    <td>
+                      <img
+                        src="../images/The-Starry-Night.png" alt="spielkarte" class="spielkarte" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Leonardo da Vinci</td>
+                    <td>"MONA LISA"</td>
+
+                    <td>
+                      <img src="../images/leonardo-da-vinci.jpg" alt="spielkarte" class="spielkarte" />
+                    </td>
+                    <td>
+                      <img src="../images/Mona-Lisa.png" alt="spielkarte" class="spielkarte" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Jan Vermeer</td>
+                    <td>"Das Mädchen mit dem Perlohring"</td>
+
+                    <td>
+                      <img src="../images/Jan_Vermeer.jpg" alt="spielkarte" class="spielkarte" />
+                    </td>
+                    <td>
+                      <img
+                        src="../images/das-maedchen-mit-dem-perlohring.png" alt="spielkarte" class="spielkarte" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Edvard Munch</td>
+                    <td>"Der Schrei"</td>
+
+                    <td>
+                      <img src="../images/edvard-munch.jpg" alt="spielkarte" class="spielkarte" />
+                    </td>
+                    <td>
+                      <img
+                        src="../images/der-schrei.png" alt="spielkarte" class="spielkarte" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Claude Monet</td>
+                    <td>"Garten in Giverny"</td>
+
+                    <td>
+                      <img src="../images/Claude-Monet.jpg" alt="spielkarte" class="spielkarte" />
+                    </td>
+                    <td>
+                      <img
+                        src="../images/Garten-in-Giverny.png" alt="spielkarte" class="spielkarte" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Franz Marc</td>
+                    <td>"Turm der blauen Pferde"</td>
+
+                    <td>
+                      <img src="../images/FranzMarc.jpg" alt="spielkarte" class="spielkarte" />
+                    </td>
+                    <td>
+                      <img
+                        src="../images/turm-der-blauen-pferde.png" alt="spielkarte" class="spielkarte" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Gustav Klimt</td>
+                    <td>"Der Kuss"</td>
+
+                    <td>
+                      <img src="../images/Gustav-Klimt.jpg" alt="spielkarte" class="spielkarte" />
+                    </td>
+                    <td>
+                      <img
+                        src="../images/Der-Kuss 1.png" alt="spielkarte" class="spielkarte" />
+                    </td>
+                  </tr>
+                </table>-->
+              </div>
+          </div>
+          <br />
       </div>
 
-      <button id="backToTabelle" type="button" class="button-BackToTabelle" onclick="goBackToTable()">Zurück zur Tabelle</button>
-      <br></br>
-    </div>
-  </div>
+      <script type="text/javascript" src="../js/Datenbank_Ajax.js"></script>
 
-
-
-    <div class="table-background">
-    <h2><b>Spielkarten</b></h2>
-    <p>Alle im Spiel enhaltenen Spielkarten.</p>
-
-   <div style="overflow-x: auto">
-    <table id="spieler-tabelle" style="width: 100%">
-      <tr>
-        <th>Künstler*innen</th>
-        <th>Bildtitel</th>
-        <th>Künstler*in</th>
-        <th>Bild</th>
-      </tr>
-          <tr>
-            <td>Pablo Picasso</td>
-            <td>"Les demoiselles d'Avignon"</td>
-
-            <td>
-              <img src="../images/pabloPicasso.jpg" alt="spielkarte" class="spielkarte" />
-            </td>
-            <td>
-              <img
-                src="../images/lesDemoisellesdAvingnon.png" alt="spielkarte" class="spielkarte"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Vincent van Gogh</td>
-            <td>"The Starry Night"</td>
-
-            <td>
-              <img src="../images/Van-Gogh.jpg" alt="spielkarte" class="spielkarte" />
-            </td>
-            <td>
-              <img
-                src="../images/The-Starry-Night.png" alt="spielkarte" class="spielkarte" />
-            </td>
-          </tr>
-          <tr>
-            <td>Leonardo da Vinci</td>
-            <td>"MONA LISA"</td>
-
-            <td>
-              <img src="../images/leonardo-da-vinci.jpg" alt="spielkarte" class="spielkarte" />
-            </td>
-            <td>
-              <img src="../images/Mona-Lisa.png" alt="spielkarte" class="spielkarte" />
-            </td>
-          </tr>
-          <tr>
-            <td>Jan Vermeer</td>
-            <td>"Das Mädchen mit dem Perlohring"</td>
-
-            <td>
-              <img src="../images/Jan_Vermeer.jpg" alt="spielkarte" class="spielkarte" />
-            </td>
-            <td>
-              <img
-                src="../images/das-maedchen-mit-dem-perlohring.png" alt="spielkarte" class="spielkarte" />
-            </td>
-          </tr>
-          <tr>
-            <td>Edvard Munch</td>
-            <td>"Der Schrei"</td>
-
-            <td>
-              <img src="../images/edvard-munch.jpg" alt="spielkarte" class="spielkarte" />
-            </td>
-            <td>
-              <img
-                src="../images/der-schrei.png" alt="spielkarte" class="spielkarte" />
-            </td>
-          </tr>
-          <tr>
-            <td>Claude Monet</td>
-            <td>"Garten in Giverny"</td>
-
-            <td>
-              <img src="../images/Claude-Monet.jpg" alt="spielkarte" class="spielkarte" />
-            </td>
-            <td>
-              <img
-                src="../images/Garten-in-Giverny.png" alt="spielkarte" class="spielkarte" />
-            </td>
-          </tr>
-          <tr>
-            <td>Franz Marc</td>
-            <td>"Turm der blauen Pferde"</td>
-
-            <td>
-              <img src="../images/FranzMarc.jpg" alt="spielkarte" class="spielkarte" />
-            </td>
-            <td>
-              <img
-                src="../images/turm-der-blauen-pferde.png" alt="spielkarte" class="spielkarte" />
-            </td>
-          </tr>
-          <tr>
-            <td>Gustav Klimt</td>
-            <td>"Der Kuss"</td>
-
-            <td>
-              <img src="../images/Gustav-Klimt.jpg" alt="spielkarte" class="spielkarte" />
-            </td>
-            <td>
-              <img
-                src="../images/Der-Kuss 1.png" alt="spielkarte" class="spielkarte" />
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <br/>
-</div>
-     <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous">
-     </script>
-     <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous">
-     </script>
-     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous">
-     </script>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+              integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+              crossorigin="anonymous">
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+              integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+              crossorigin="anonymous">
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+              integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+              crossorigin="anonymous">
+      </script>
   </body>
 </html>

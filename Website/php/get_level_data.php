@@ -1,5 +1,7 @@
 <?php
 
+
+
 // Datenbank-Zugangsdaten
 $host = "localhost";
 $username = "root";
