@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Admin Spielinhalte</title>
-     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css" />
+    <!-- JavaScript-Datei einbinden -->
     <script src="../JS/TabelleScript.js"></script>
-  </head>
+    <script src="../JS/Datenbank_Ajax.js"></script>
+</head>
   <body>
 
       <div class="colored-background">
@@ -75,8 +75,6 @@
               </div>
           </nav>
 
-
-
           <div class="table-background" id="table-background">
               <h2><b>Registrierte Spieler*innen</b></h2>
               <p>Alle Spieler*innen, die sich auf der Webseite registriert haben.</p>
@@ -132,127 +130,129 @@
           </div>
 
 
-
           <div class="table-background">
               <h2><b>Spielkarten</b></h2>
-              <p>Alle im Spiel enhaltenen Spielkarten.</p>
+              <p>Alle im Spiel enthaltenen Spielkarten.</p>
 
               <div style="overflow-x: auto">
                   <table id="spieler-tabelle" style="width: 100%">
-                      <thead id=theadCard>
+                      <thead id="theadCard">
+                          <tr>
+                              <!--<th>Künstler*innen</th>-->
+                              <th>Bildtitel</th>
+                              <th>Bild</th>
+                              <th>Künstler*in</th>
+                          </tr>
                       </thead>
-                      <tr>
-                          <!--<th>Künstler*innen</th>-->
-                          <th>Bildtitel</th>
-                          <th>Künstler*in</th>
-                          <th>Bild</th>
-                      </tr>
                       <tbody id="resultCard">
+                          <!-- Table rows will be added dynamically using JavaScript -->
                       </tbody>
+                      <!--<tr>
+                        <td>Pablo Picasso</td>
+                        <td>"Les demoiselles d'Avignon"</td>
+
+                        <td>
+                          <img src="../images/pabloPicasso.jpg" alt="spielkarte" class="spielkarte" />
+                        </td>
+                        <td>
+                          <img
+                            src="../images/lesDemoisellesdAvingnon.png" alt="spielkarte" class="spielkarte"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Vincent van Gogh</td>
+                        <td>"The Starry Night"</td>
+
+                        <td>
+                          <img src="../images/Van-Gogh.jpg" alt="spielkarte" class="spielkarte" />
+                        </td>
+                        <td>
+                          <img
+                            src="../images/The-Starry-Night.png" alt="spielkarte" class="spielkarte" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Leonardo da Vinci</td>
+                        <td>"MONA LISA"</td>
+
+                        <td>
+                          <img src="../images/leonardo-da-vinci.jpg" alt="spielkarte" class="spielkarte" />
+                        </td>
+                        <td>
+                          <img src="../images/Mona-Lisa.png" alt="spielkarte" class="spielkarte" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Jan Vermeer</td>
+                        <td>"Das Mädchen mit dem Perlohring"</td>
+
+                        <td>
+                          <img src="../images/Jan_Vermeer.jpg" alt="spielkarte" class="spielkarte" />
+                        </td>
+                        <td>
+                          <img
+                            src="../images/das-maedchen-mit-dem-perlohring.png" alt="spielkarte" class="spielkarte" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Edvard Munch</td>
+                        <td>"Der Schrei"</td>
+
+                        <td>
+                          <img src="../images/edvard-munch.jpg" alt="spielkarte" class="spielkarte" />
+                        </td>
+                        <td>
+                          <img
+                            src="../images/der-schrei.png" alt="spielkarte" class="spielkarte" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Claude Monet</td>
+                        <td>"Garten in Giverny"</td>
+
+                        <td>
+                          <img src="../images/Claude-Monet.jpg" alt="spielkarte" class="spielkarte" />
+                        </td>
+                        <td>
+                          <img
+                            src="../images/Garten-in-Giverny.png" alt="spielkarte" class="spielkarte" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Franz Marc</td>
+                        <td>"Turm der blauen Pferde"</td>
+
+                        <td>
+                          <img src="../images/FranzMarc.jpg" alt="spielkarte" class="spielkarte" />
+                        </td>
+                        <td>
+                          <img
+                            src="../images/turm-der-blauen-pferde.png" alt="spielkarte" class="spielkarte" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gustav Klimt</td>
+                        <td>"Der Kuss"</td>
+
+                        <td>
+                          <img src="../images/Gustav-Klimt.jpg" alt="spielkarte" class="spielkarte" />
+                        </td>
+                        <td>
+                          <img
+                            src="../images/Der-Kuss 1.png" alt="spielkarte" class="spielkarte" />
+                        </td>
+                      </tr>
+                    </table>-->
                   </table>
-                  <!--<tr>
-                    <td>Pablo Picasso</td>
-                    <td>"Les demoiselles d'Avignon"</td>
-
-                    <td>
-                      <img src="../images/pabloPicasso.jpg" alt="spielkarte" class="spielkarte" />
-                    </td>
-                    <td>
-                      <img
-                        src="../images/lesDemoisellesdAvingnon.png" alt="spielkarte" class="spielkarte"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Vincent van Gogh</td>
-                    <td>"The Starry Night"</td>
-
-                    <td>
-                      <img src="../images/Van-Gogh.jpg" alt="spielkarte" class="spielkarte" />
-                    </td>
-                    <td>
-                      <img
-                        src="../images/The-Starry-Night.png" alt="spielkarte" class="spielkarte" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Leonardo da Vinci</td>
-                    <td>"MONA LISA"</td>
-
-                    <td>
-                      <img src="../images/leonardo-da-vinci.jpg" alt="spielkarte" class="spielkarte" />
-                    </td>
-                    <td>
-                      <img src="../images/Mona-Lisa.png" alt="spielkarte" class="spielkarte" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Jan Vermeer</td>
-                    <td>"Das Mädchen mit dem Perlohring"</td>
-
-                    <td>
-                      <img src="../images/Jan_Vermeer.jpg" alt="spielkarte" class="spielkarte" />
-                    </td>
-                    <td>
-                      <img
-                        src="../images/das-maedchen-mit-dem-perlohring.png" alt="spielkarte" class="spielkarte" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Edvard Munch</td>
-                    <td>"Der Schrei"</td>
-
-                    <td>
-                      <img src="../images/edvard-munch.jpg" alt="spielkarte" class="spielkarte" />
-                    </td>
-                    <td>
-                      <img
-                        src="../images/der-schrei.png" alt="spielkarte" class="spielkarte" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Claude Monet</td>
-                    <td>"Garten in Giverny"</td>
-
-                    <td>
-                      <img src="../images/Claude-Monet.jpg" alt="spielkarte" class="spielkarte" />
-                    </td>
-                    <td>
-                      <img
-                        src="../images/Garten-in-Giverny.png" alt="spielkarte" class="spielkarte" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Franz Marc</td>
-                    <td>"Turm der blauen Pferde"</td>
-
-                    <td>
-                      <img src="../images/FranzMarc.jpg" alt="spielkarte" class="spielkarte" />
-                    </td>
-                    <td>
-                      <img
-                        src="../images/turm-der-blauen-pferde.png" alt="spielkarte" class="spielkarte" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Gustav Klimt</td>
-                    <td>"Der Kuss"</td>
-
-                    <td>
-                      <img src="../images/Gustav-Klimt.jpg" alt="spielkarte" class="spielkarte" />
-                    </td>
-                    <td>
-                      <img
-                        src="../images/Der-Kuss 1.png" alt="spielkarte" class="spielkarte" />
-                    </td>
-                  </tr>
-                </table>-->
               </div>
           </div>
           <br />
       </div>
 
-      <script type="text/javascript" src="../js/Datenbank_Ajax.js"></script>
+
+      <!-- JavaScript-Datei einbinden -->
+      <script src="../JS/Datenbank_Ajax.JS"></script>
 
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
               integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

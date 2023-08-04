@@ -2,22 +2,8 @@
 
 include 'setupDB.php';
 
-// Datenbank-Zugangsdaten
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "omemory";
 
-// Verbindung zur Datenbank herstellen
-$conn = new mysqli($host, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Verbindung zur MySQL-Datenbank fehlgeschlagen: " . $conn->connect_error);
-}
-
-$show = ' ';
-
-
-//Fuktion zum hochladen von Werten in die Tabelle spiel
+/*//Fuktion zum hochladen von Werten in die Tabelle spiel
 function insertSpiel($conn, $einzeln, $Datetime, $dauer, $verlauf, $mitspieler, $gewinner,$initiator) {
   $sql = "INSERT INTO Spiel (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', '$Datetime','$dauer','$verlauf', '$mitspieler', '$gewinner','$initiator')";
   
@@ -35,18 +21,27 @@ function insertSpiel($conn, $einzeln, $Datetime, $dauer, $verlauf, $mitspieler, 
   header("Access-Control-Allow-Headers: Content-Type");
   header("Content-Type: application/json");
 
-  echo json_encode($response);
+  echo json_encode($response);*/
 }
 
+$tname = 'spiel';
+$einzeln = $_POST['einzeln'];
+$Datetime = $_POST['Datetime'];
+$dauer = $_POST['dauer'];
+$verlauf = $_POST['verlauf'];
+$mitspieler = $_POST['mitspieler'];
+$gewinner = $_POST['gewinner'];
+$initiator = $_POST['initiator'];
 
-/*// Beipiele hinzufügen
-//funktioniert nur wenn vorher genau einmal player.php aufgrufen wurde -> da spieler vorhanden sein müssen
+// SQL query for adding data
+$sql = "INSERT INTO $tname (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', '$Datetime','$dauer','$verlauf', '$mitspieler', '$gewinner','$initiator')";
 
-insertSpiel($conn, 'true', '2024-01-32 12:32:00', 18, 'false', '2', '1', '2');
-insertSpiel($conn, 'false', '2023-04-37 12:32:01', 11, 'false', '1', '1', '2');
-insertSpiel($conn, 'true', '2023-04-31 12:32:02', 8, 'true', '3', '1', '1');
-insertSpiel($conn, 'false', '2023-04-36 12:32:03', 13, 'true', '2', '2', '1');
-insertSpiel($conn, 'true', '2023-05-32 12:32:04', 2, 'false', '1', '2', '1');*/
+if (!mysqli_query($conn, $sql)) {
+    die("Insert fehlgeschlagen: " . mysqli_error());
+} else {
+    echo "Das Spiel $Datetime wurde erfolgreich hinzugefügt!";
+}
+
 
 
 //aus spielername wird id bestimmt, um in der Tabelle Spiele suchen zu können
@@ -74,7 +69,6 @@ function searchPlayer($name) {
 //die tabelle Spiele muss durchsucht werden nach Initiator und Mitspieler
 //dafür muss aus dem Namen zunächst die ID gemacht werden
 //diese tabellen werden dann ausgegeben
-
 function getPlayerPlays($conn, $playerName) {
   //aus namen wird id bestimmt
  // SQL-Abfrage erstellen

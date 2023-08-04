@@ -9,6 +9,8 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/style.css" />
+    <!-- JavaScript-Datei einbinden -->
+    <script src="../JS/Datenbank_Ajax.js"></script>
 </head>
   <body>
        <div class="colored-background">
@@ -88,58 +90,57 @@
     </nav>
 
     <div class="login-background">
-      <h1><b>Spielverwaltung</b></h1>
-<br />
-      <h2>Neue Spielkarte hinzufügen</h2>
+        <h1><b>Spielverwaltung</b></h1>
+        <br />
+        <h2>Neue Spielkarte hinzufügen</h2>
 
-    <p></p>
+        <p></p>
 
-    <form class="login-form" action="http://localhost/Webapplication/Website/php/card.php" method="post" enctype="multipart/form-data">
-        <label for="kartenname">Kartenname:</label>
-        <input type="text" id="name" name="name" required />
-        <br /><br />
+        <form class="login-form" action="http://localhost/Webapplication/Website/php/card.php" method="post" enctype="multipart/form-data">
+            <label for="kartenname">Kartenname:</label>
+            Title:<input type="text" id="name" name="name" required />
+            <br /><br />
 
-        <label for="kartenbild">Kartenbild (max. 100KB):</label>
-        Gemälde:<input type="file" id="bild" name="bild" accept="image/*" required />
-        <br /><br />
+            <label for="kartenbild">Kartenbild (max. 100KB):</label>
+            Gemälde:<input type="file" id="bild" name="bild" accept="image/*" required />
+            <br /><br />
 
-        <label for="kartenbild">Kuenstler*in (max. 100KB):</label>
-        Künstler:<input type="file" id="artist" name="artist" accept="image/*" required />
-        <br /><br />
+            <label for="kartenbild">Kuenstler*in (max. 100KB):</label>
+            Künstler:<input type="file" id="artist" name="artist" accept="image/*" required />
+            <br /><br />
 
-        <button id="insertCard" type="submit">Einfügen</button>
-        <br /><br />
+            <button id="insertCard" type="submit">Einfügen</button>
+            <br /><br />
 
-        <p id="infoInsertCard"></p>
-    </form>
+            <p id="infoInsertCard"></p>
+        </form>
 
-    <h2>Spiellevel hinzufügen</h2>
-    <br />
+        <h2>Spiellevel hinzufügen</h2>
+        <br />
 
 
-    <form class="login-form" action="http://localhost/Webapplication/Website/php/level.php" method="post">
-        <label for="Levelzahl">Levelzahl:</label>
-        <input type="number" id="levelzahl" name="level" min="1" max="50" required />
-        <br/><br/>
+        <form class="login-form" action="http://localhost/Webapplication/Website/php/level.php" method="post">
+            <label for="Levelzahl">Levelzahl:</label>
+            <input type="number" id="levelzahl" name="level" min="1" max="50" required />
+            <br /><br />
 
-        <label for="anzahlkarten">Anzahl der Karten (positive gerade Zahl):</label>
-        <input type="number" id="anzahlkarten" name="anzahl_karten" min="2" max="50" required step="2" />
-        <br /><br />
+            <label for="anzahlkarten">Anzahl der Karten (positive gerade Zahl):</label>
+            <input type="number" id="anzahlkarten" name="anzahl_karten" min="2" max="50" required step="2" />
+            <br /><br />
 
-        <label for="spielzeit">Spielzeit (in Minuten):</label>
-        <input type="number" id="spielzeit" name="spielZeit" min="1" max="30" required />
-        <br/><br/>
+            <label for="spielzeit">Spielzeit (in Minuten):</label>
+            <input type="number" id="spielzeit" name="spielZeit" min="1" max="30" required />
+            <br /><br />
 
-        <input type="submit" value="Level hinzufügen" />
-        <br/><br/>
-    </form>
+            <button id="insertLevel" type="submit">Einfügen</button>
+            <br /><br />
 
-</div>
+            <p id="infoInsertLevel"></p>
+        </form>
+
+    </div>
     <br/><br/><br/>
     </div>
-
-      <!-- JavaScript-Datei einbinden -->
-      <script src="../js/Datenbank_Ajax.js"></script>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

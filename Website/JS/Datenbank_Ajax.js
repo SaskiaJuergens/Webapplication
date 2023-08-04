@@ -3,12 +3,11 @@ window.addEventListener("load", setup);
 
 function setup() {
     document.getElementById("insertCard").addEventListener("click", insertKarte);
-    //document.getElementById("books").addEventListener("click", showResult);
+    document.getElementById("insertLevel").addEventListener("click", showResult);
 } 
 
     // Registrierung Ajax-Events für das Hinzufügen einer Karte und sende eine Anfrage
     function insertCard() {
-        // var insertButton = document.getElementById("card");
         var bildSelect = document.getElementById("bild");
         var artistSelect = document.getElementById("artist");
         var name = document.getElementById("name").value;
@@ -18,6 +17,23 @@ function setup() {
         formData.append('name', name);
         formData.append('artist', artist);
         formData.append('bild', bild);
+
+        var ajaxRequest = new XMLHttpRequest();
+        ajaxRequest.addEventListener("load", ajaxInsertKarte); // Corrected the event listener function name
+        ajaxRequest.addEventListener("error", ajaxFehler);
+        ajaxRequest.open("POST", "card.php");
+        ajaxRequest.send(formData);
+    }
+
+    // Registrierung Ajax-Events für das Hinzufügen einer Karte und sende eine Anfrage
+    function insertLevel() {
+        var level = document.getElementById("level").value;
+        var anzahl_Karten = document.getElementById("anzahl_Karten").value;
+        var spielZeit = document.getElementById("spielZeit").value;
+        var formData = new FormData();
+        formData.append('level', level);
+        formData.append('anzahl_Karten', anzahl_Karten);
+        formData.append('spielZeit', spielZeit);
 
         var ajaxRequest = new XMLHttpRequest();
         ajaxRequest.addEventListener("load", ajaxInsertKarte); // Corrected the event listener function name
@@ -40,7 +56,11 @@ function setup() {
     // Falls die Karte erfolgreich eingefügt wurde ...
     function ajaxInsertCard(event) {
         document.getElementById("infoInsertCard").innerHTML = this.responseText;
+}    // Falls die Level erfolgreich eingefügt wurde ...
+    function ajaxInsertCard(event) {
+        document.getElementById("infoInsertLevel").innerHTML = this.responseText;
     }
+
 
     // Falls die Karten erfolgreicht aus der Datenbank geholt sind ...
     function ajaxShowCard(event) {
