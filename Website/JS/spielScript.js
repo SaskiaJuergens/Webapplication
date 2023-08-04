@@ -208,28 +208,10 @@ function stopCountdown() {
   clearInterval(timerId);
 }
 
-//ajax Anfrage
-
-const einzeln = 1; // Beispielwert für einzeln (1 oder 0)
-const Datetime = "2023-08-04 12:00"; // Beispielwert für Datetime
-const dauer = 60; // Beispielwert für dauer
-const verlauf = "Spielverlauf hier"; // Beispielwert für verlauf
-const mitspieler = "Spieler A, Spieler B"; // Beispielwert für mitspieler
-const gewinner = "Spieler A"; // Beispielwert für gewinner
-const initiator = "Spieler C"; // Beispielwert für initiator
-
-function AjaxAnfrage(
-  einzeln,
-  Datetime,
-  dauer,
-  verlauf,
-  mitspieler,
-  gewinner,
-  initiator
-) {
-  // AJAX-Funktion zum Hochladen des Spiels
+// AJAX-Funktion zum Hochladen des Spiels
+function hochladenSpiel() {
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://localhost/Webapplication/Website/php/spiel.php"); // Den Pfad zur PHP-Datei entsprechend anpassen
+  xhr.open("POST", "http://localhost/Webapplication/Website/php/spielTest.php"); // Den Pfad zur PHP-Datei entsprechend anpassen
 
   // Setze die Content-Type Header, um die Daten im POST-Format zu senden
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -248,7 +230,18 @@ function AjaxAnfrage(
   // AJAX-Fehler verarbeiten
   xhr.onerror = function () {
     console.error("AJAX-Anfrage fehlgeschlagen!");
+    document.getElementById("response").innerText =
+      "AJAX-Anfrage fehlgeschlagen!";
   };
+
+  // Annahme: Du hast die Spielinformationen in JavaScript-Variablen gespeichert
+  const einzeln = 1; // Beispielwert für einzeln (1 oder 0)
+  const Datetime = "2023-08-04 12:00"; // Beispielwert für Datetime
+  const dauer = 60; // Beispielwert für dauer
+  const verlauf = "Spielverlauf hier"; // Beispielwert für verlauf
+  const mitspieler = "Spieler A"; // Beispielwert für mitspieler
+  const gewinner = "Spieler A"; // Beispielwert für gewinner
+  const initiator = "Spieler C"; // Beispielwert für initiator
 
   // Bereite die Daten als POST-Parameter vor
   const params = `einzeln=${einzeln}&Datetime=${Datetime}&dauer=${dauer}&verlauf=${verlauf}&mitspieler=${mitspieler}&gewinner=${gewinner}&initiator=${initiator}`;
@@ -257,4 +250,5 @@ function AjaxAnfrage(
   xhr.send(params);
 }
 
-AjaxAnfrage(einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator);
+// Klick-Event für den "Start"-Button hinzufügen
+starButton.addEventListener("click", hochladenSpiel);

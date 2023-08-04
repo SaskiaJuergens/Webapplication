@@ -16,7 +16,6 @@ if ($conn->connect_error) {
 
 $show = ' ';
 
-//Fuktion zum hochladen von Werten in die Tabelle spiel
 
 //Fuktion zum hochladen von Werten in die Tabelle spiel
 function insertSpiel($conn, $einzeln, $Datetime, $dauer, $verlauf, $mitspieler, $gewinner,$initiator) {
@@ -145,13 +144,12 @@ function fetchData(){
         // Die Daten als JSON zurückgeben
         header("Content-type: application/json");
         echo json_encode($data);
-    } elseif ($action === 'fetchSpiel') {
-        // Code for fetching data for Spiel goes here
+    } elseif ($action === 'fetchSomethingElse') {
+        // Code for fetching data for something else goes here
     } else {
         die("Ungültige Aktion.");
     }
 }
-
 // Verbindung zur Datenbank schließen
 $conn->close();
 
