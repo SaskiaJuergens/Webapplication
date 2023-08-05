@@ -1,41 +1,66 @@
+<!-- HTML code with external CSS -->
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+ <div class="login-background">
+
 <?php
 
 //diese Php-seite funktioniert richtig, wenn man sie über das Formular auf Spieleinstellung.html aufruft
+
 include 'setupDB.php';
 
+
+
 // Werte aus dem Formular abrufen
-$cardTable = 'karte';   //Update consistent Wert
-$name = $_POST['name']; //Frage nach Title
-$blob1 = file_get_contents($_FILES['bild']['tmp_name']);    //frage nach Bild
-$imageSize1 = $_FILES['bild']['size'];
-$blob2 = file_get_contents($_FILES['artist']['tmp_name']);
-$imageSize2 = $_FILES['artist']['size'];
+$bild = $_FILES['bild']['tmp_name'];
+$artist = $_FILES['artist']['tmp_name'];
+$name = $_POST['name'];
+$show = ' ';
 
 
-   // der SQL-Befehl für das Hinzufügen
-    // Abfragen, ob das Bild kleiner als kib ist.
-if ($imageSize1 <= 100 * 1024 && $imageSize2 <= 100 * 1024) {
-    // Überprüfen, ob der Kartenname bereits existiert
-    $checkQuery = "SELECT * FROM $cardTable WHERE name = '$name'";
-    $result = $conn->query($checkQuery);
+var_dump($artist);
+var_dump($name);
+var_dump($bild);
 
-    if ($result->num_rows > 0) {
-        echo'<h2>Die karte existiert bereits. Wähle einen anderen Namen.</h2>';
-    } else {
-        // Der SQL-Befehl für das Hinzufügen
-        $sql = "INSERT INTO $cardTable(name, bild, artist) VALUES('$name', 0x" . bin2hex($blob1) . ", 0x" . bin2hex($blob2) . ")";
 
-        if (!$conn->query($sql)) {
-            echo '<h2>Einfügen fehlgeschlagen: ' . $conn->error . '</h2>';
-        } else {
-            echo '<h2>Die karte ' . $name . ' wurde erfolgreich hinzugefügt!</h2>';
-        }
-    }
+function insertCard($conn, $filePath1, $filePath2, $name) {
+    $show =' ';
+$blob1 = file_get_contents($filePath1);
+$blob2 = file_get_contents($filePath2);
+$sql = "INSERT INTO karte (bild, artist,name) VALUES(0x".bin2hex($blob1).", 0x".bin2hex($blob2).", '$name')";
+if (!$conn -> query($sql)) {
+    $show = '<h2>Das Level gibt es schon. Wähle ein anderes</h2>';
 } else {
-    echo'<h2>Das Bild darf maximal 100 KiB groß sein.</h2>';
+    $show .= '<h2>Das Level ' . $name . " wurde hinzugefügt<h2>";
 }
+echo $show;
+}
+
+
+/*// zwei Beispiel-Datensätze
+
+$pfad1 = "../images/Der-Kuss 1.png";
+$pfad2 = "../images/Gustav-Klimt.jpg";
+
+insertCard($conn, $pfad1, $pfad2, 'Gustav Klimt');
+
+$pfad3 = "../images/lesDemoisellesdAvingnon.png";
+$pfad4 = "../images/pabloPicasso.jpg";
+
+insertCard($conn, $pfad1, $pfad2, 'Pablo Picasso');*/
+
+
+//Datensatz aus der Html Spiellevel hinzufügen
+insertCard($conn, $bild, $artist, $name);
+
+
 
 
 // Verbindung zur Datenbank schließen
 $conn->close();
+
 ?>
+
+<a href="../html/SpielEinstellungen.html" Link>
+          <button type="button" class="button-start">OK          </button></a
+        >
+        <div>

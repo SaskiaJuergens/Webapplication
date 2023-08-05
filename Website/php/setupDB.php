@@ -14,7 +14,7 @@ header("Content-Type: application/json");
 
 
 
-    //kreiere eine Verbindung
+
     $conn = new mysqli($servername, $username, $password, $database);
 
     // Überprüfen der Verbindung

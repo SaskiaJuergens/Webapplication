@@ -8,7 +8,7 @@ var playerData = {
       duration: "10:00",
       playerCount: "1",
       winnerName: "Mustermann",
-      status: "abgebrochen",
+      status: "beendet",
     },
     {
       date: "16.05.2006",
@@ -16,7 +16,7 @@ var playerData = {
       duration: "0",
       playerCount: "1",
       winnerName: "-",
-      status: "gewonnen",
+      status: "beendet",
     },
     {
       date: "02.04.2000",
@@ -24,7 +24,7 @@ var playerData = {
       duration: "6:00",
       playerCount: "1",
       winnerName: "-",
-      status: "gewonnen",
+      status: "beendet",
     },
     {
       date: "01.06.2022",
@@ -32,7 +32,7 @@ var playerData = {
       duration: "15:00",
       playerCount: "2",
       winnerName: "Habul",
-      status: "verloren",
+      status: "beendet",
     },
     {
       date: "24.02.2023",
@@ -40,7 +40,7 @@ var playerData = {
       duration: "09:00",
       playerCount: "2",
       winnerName: "Müller",
-      status: "abgelaufen",
+      status: "beendet",
     },
     {
       date: "12.08.2022",
@@ -48,7 +48,7 @@ var playerData = {
       duration: "10:00",
       playerCount: "2",
       winnerName: "Mustermann",
-      status: "gewonnen",
+      status: "beendet",
     },
     {
       date: "01.07.2022",
@@ -56,7 +56,7 @@ var playerData = {
       duration: "16:00",
       playerCount: "1",
       winnerName: "-",
-        status: "gewonnen",
+      status: "nicht beendet",
     },
     {
       date: "30.04.2023",
@@ -64,7 +64,7 @@ var playerData = {
       duration: "02:00",
       playerCount: "1",
       winnerName: "-",
-        status: "gewonnen",
+      status: "nicht beendet",
     },
     // Weitere Spielverlaufsinformationen hier hinzufügen
   ],
