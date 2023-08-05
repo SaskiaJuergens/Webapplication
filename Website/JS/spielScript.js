@@ -211,7 +211,7 @@ function stopCountdown() {
 // AJAX-Funktion zum Hochladen des Spiels
 function hochladenSpiel() {
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "../php/spielInclude.php"); // Den Pfad zur PHP-Datei entsprechend anpassen
+  xhr.open("POST", "http://localhost/Webapplication/Website/php/spielTest.php"); // Den Pfad zur PHP-Datei entsprechend anpassen
 
   // Setze die Content-Type Header, um die Daten im POST-Format zu senden
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
