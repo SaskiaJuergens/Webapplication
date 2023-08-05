@@ -33,6 +33,7 @@ header("Content-type: application/json");
 echo json_encode($data);
 
 
+
 /*
 //Lese Daten ein aus Datenbank
  $con = mysqli_connect("localhost", "root", "");

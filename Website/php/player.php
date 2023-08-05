@@ -2,7 +2,7 @@
 
 <!-- HTML code with external CSS -->
 <link rel="stylesheet" type="text/css" href="../css/style.css">
- <div class="login-background">
+<div class="login-background">
 
 <?php
 
