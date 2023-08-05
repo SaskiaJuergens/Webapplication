@@ -2,14 +2,13 @@
 
 <!-- HTML code with external CSS -->
 <link rel="stylesheet" type="text/css" href="../css/style.css">
- <div class="login-background">
+<div class="login-background">
 
 <?php
 
 //diese Php-seite funktioniert richtig, wenn man sie über das Formular auf singup.html aufruft
 
 include 'setupDB.php';
-
 
 
 // Werte aus dem Formular abrufen
