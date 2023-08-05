@@ -218,9 +218,9 @@ function insertSpiel() {
   const Datetime = "2023-08-04 12:00"; // Beispielwert für Datetime
   const dauer = 60; // Beispielwert für dauer
   const verlauf = "Spielverlauf hier"; // Beispielwert für verlauf
-  const mitspieler = "3"; // Beispielwert für mitspieler
-  const gewinner = "4"; // Beispielwert für gewinner
-  const initiator = "3"; // Beispielwert für initiator
+  const mitspieler = "Spieler A"; // Beispielwert für mitspieler
+  const gewinner = "Spieler A"; // Beispielwert für gewinner
+  const initiator = "Spieler C"; // Beispielwert für initiator
 
   var formData = new FormData();
 
@@ -239,9 +239,9 @@ function insertSpiel() {
   ajaxRequest.send(formData);
 }
 
-// Falls das Buch erfolgreicht inzugefügt ist ...
+// Falls das Spiel erfolgreicht inzugefügt ist ...
 function ajaxInsertSpiel(event) {
-  document.getElementById("infoInsert").innerHTML = this.responseText;
+  document.getElementById("response").innerHTML = this.responseText;
 }
 
 // Falls eine Ajax-Anfrage gescheitert ist ...
