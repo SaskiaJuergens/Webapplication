@@ -18,14 +18,17 @@
 
 
     // der SQL-Befehl für das Hinzufügen
- $sql = "INSERT INTO Spiel (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', '$Datetime', '$dauer', '$verlauf', '$mitspieler', '$gewinner', '$initiator')";
+//Fuktion zum hochladen von Werten in die Tabelle spiel
 
+  $sql = "INSERT INTO Spiel (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', '$Datetime','$dauer','$verlauf', '$mitspieler', '$gewinner','$initiator')";
+  
+  $response = array();
 
-    if (!mysqli_query($conn, $sql)) {
+   if (!mysqli_query($conn, $sql)) {
         die("Insert fehlgeschlagen: " . mysqli_error());
     } else {
-        echo "Das Spiel $title wurde erfolgreich hinzugefügt!";
+        echo "Das Spiel um $Datetime Uhr wurde erfolgreich hinzugefügt!";
     }
-
-    $conn -> closs();
+// Verbindung zur Datenbank schließen
+$conn->close();
 ?> 
