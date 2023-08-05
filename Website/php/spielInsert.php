@@ -1,9 +1,5 @@
 <?php
-
-
-
-
-  // Das PHP-Programm, um ein Buch in die Tabelle book hinzuzufügen.
+// Das PHP-Programm, um ein Buch in die Tabelle Spiel hinzuzufügen.
  include 'setupDB.php';
 
   
@@ -16,8 +12,7 @@
     $initiator = $_POST['initiator'];
     
 
-
-    // der SQL-Befehl für das Hinzufügen
+// der SQL-Befehl für das Hinzufügen
 //Fuktion zum hochladen von Werten in die Tabelle spiel
 
   $sql = "INSERT INTO Spiel (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', '$Datetime','$dauer','$verlauf', '$mitspieler', '$gewinner','$initiator')";
