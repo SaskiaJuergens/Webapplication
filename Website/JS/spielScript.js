@@ -235,7 +235,7 @@ function insertSpiel() {
   var ajaxRequest = new XMLHttpRequest();
   ajaxRequest.addEventListener("load", ajaxInsertSpiel);
   ajaxRequest.addEventListener("error", ajaxFehler);
-  ajaxRequest.open("POST", "../php/spielInsert.php");
+  ajaxRequest.open("POST", "../php/spielTest.php");
   ajaxRequest.send(formData);
 }
 
