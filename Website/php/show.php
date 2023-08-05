@@ -1,5 +1,5 @@
 <?php
-// Das PHP-Programm, um die vorhandenen Karten aus der Tabelle zu laden. Die Karten werden als JSON an allscript.js zurückgesendet.
+// Das PHP-Programm, um die vorhandenen Karten aus der Tabelle zu laden. Die Karten werden als JSON an allscript.js zurï¿½ckgesendet.
 
 include 'setupDB.php';
 

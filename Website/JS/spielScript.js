@@ -54,6 +54,8 @@ function setup() {
 
 //leere karten werden gezeichnet
 function drawMemory() {
+  insertSpiel();
+  showResult();
   var ULlist = document.getElementById("cards");
   var ULlist = document.getElementById("cards");
   for (var i = 0; i < MemoryList.length; i++) {
@@ -208,47 +210,87 @@ function stopCountdown() {
   clearInterval(timerId);
 }
 
-// AJAX-Funktion zum Hochladen des Spiels
-function hochladenSpiel() {
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://localhost/Webapplication/Website/php/spielTest.php"); // Den Pfad zur PHP-Datei entsprechend anpassen
-
-  // Setze die Content-Type Header, um die Daten im POST-Format zu senden
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-  // AJAX-Antwort verarbeiten
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      const response = JSON.parse(xhr.responseText);
-      document.getElementById("response").innerHTML = response.message;
-    } else {
-      document.getElementById("response").innerText =
-        "Fehler beim Hochladen des Spiels.";
-    }
-  };
-
-  // AJAX-Fehler verarbeiten
-  xhr.onerror = function () {
-    console.error("AJAX-Anfrage fehlgeschlagen!");
-    document.getElementById("response").innerText =
-      "AJAX-Anfrage fehlgeschlagen!";
-  };
-
+// Registrierung Ajax-Events für das Hinzufügen eines Buchs
+// und send eine Anfrage
+function insertSpiel() {
+  // var insertButton = document.getElementById("insert");
   // Annahme: Du hast die Spielinformationen in JavaScript-Variablen gespeichert
   const einzeln = 1; // Beispielwert für einzeln (1 oder 0)
   const Datetime = "2023-08-04 12:00"; // Beispielwert für Datetime
   const dauer = 60; // Beispielwert für dauer
   const verlauf = "Spielverlauf hier"; // Beispielwert für verlauf
-  const mitspieler = "Spieler A"; // Beispielwert für mitspieler
-  const gewinner = "Spieler A"; // Beispielwert für gewinner
-  const initiator = "Spieler C"; // Beispielwert für initiator
+  const mitspieler = "3"; // Beispielwert für mitspieler
+  const gewinner = "4"; // Beispielwert für gewinner
+  const initiator = "3"; // Beispielwert für initiator
 
-  // Bereite die Daten als POST-Parameter vor
-  const params = `einzeln=${einzeln}&Datetime=${Datetime}&dauer=${dauer}&verlauf=${verlauf}&mitspieler=${mitspieler}&gewinner=${gewinner}&initiator=${initiator}`;
+  var formData = new FormData();
 
-  // AJAX-Anfrage senden
-  xhr.send(params);
+  formData.append("einzeln", einzeln);
+  formData.append("Datetime", Datetime);
+  formData.append("dauer", dauer);
+  formData.append("verlauf", verlauf);
+  formData.append("mitspieler", mitspieler);
+  formData.append("gewinner", gewinner);
+  formData.append("initiator", initiator);
+
+  var ajaxRequest = new XMLHttpRequest();
+  ajaxRequest.addEventListener("load", ajaxInsertSpiel);
+  ajaxRequest.addEventListener("error", ajaxFehler);
+  ajaxRequest.open("POST", "../php/spielInsert.php");
+  ajaxRequest.send(formData);
 }
 
-// Klick-Event für den "Start"-Button hinzufügen
-starButton.addEventListener("click", hochladenSpiel);
+// Falls das Spiel erfolgreicht inzugefügt ist ...
+function ajaxInsertSpiel(event) {
+  document.getElementById("response").innerHTML = this.responseText;
+}
+
+// Registrierung Ajax-Events für das Anzeigen aller cards
+// und send eine Anfrage
+function showResult() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.addEventListener("load", ajaxShowCard);
+  xmlhttp.addEventListener("error", ajaxFehler);
+
+  xmlhttp.open("GET", "../php/cardShow.php");
+  xmlhttp.send();
+}
+
+//karten anzeigen
+
+// Falls die karten erfolgreicht aus der DB geholt sind ...
+// die Karten werden angezeigt
+function ajaxShowCard(event) {
+  var myObj = JSON.parse(event.target.responseText);
+
+  // Container für die Bilder
+  var gallery = document.getElementById("gallery");
+
+  for (var i = 0; i < myObj.length; i++) {
+    var cardContainer = document.createElement("div");
+    cardContainer.className = "card-container";
+
+    var title = myObj[i]["name"];
+    var bild = myObj[i]["bild"];
+
+    // Bild erstellen
+    var img = document.createElement("img");
+    img.src = bild;
+    img.alt = title;
+    img.className = "card-image";
+    cardContainer.appendChild(img);
+
+    // Titel hinzufügen (optional)
+    var titleElement = document.createElement("p");
+    titleElement.textContent = title;
+    titleElement.className = "card-title";
+    cardContainer.appendChild(titleElement);
+
+    gallery.appendChild(cardContainer);
+  }
+}
+
+// Falls eine Ajax-Anfrage gescheitert ist ...
+function ajaxFehler(event) {
+  alert(event.target.statusText);
+}
