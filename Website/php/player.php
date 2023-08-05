@@ -38,20 +38,9 @@ echo $show;
 // Spieler meldet sich über das Formular an und die Daten werden hochgeladen
 insertPlayer($conn,  $spielname, $email, $passwort, $level);
 
-//Test Player
-
-insertPlayer($conn,  'Susanne Tester', 'susan@uni-bremen.de', 'MeinTest1234', '1');
-insertPlayer($conn,  'Hermann Münz', 'hrmü@uni-bremen.de', 'SoPasswort1', '2');
-
-
 
 // Verbindung zur Datenbank schließen
 $conn->close();
 
 ?>
-
-<a href="../html/signup.html" Link>
-          <button type="button" class="button-start">OK          </button></a
-        >
-        <div>
 

@@ -4,9 +4,8 @@
     "\\css",
     "\\html",
     "\\JS",
-    "\\php",
-    "\\public_php"
+    "\\php"
   ],
-  "SelectedNode": "\\JS\\fetchdata.js",
+  "SelectedNode": "\\JS\\SpielerDetails.js",
   "PreviewInSolutionExplorer": false
 }
