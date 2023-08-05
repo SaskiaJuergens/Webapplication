@@ -2,8 +2,8 @@
 window.addEventListener("load", setup);
 
 function setup() {
-  document.getElementById("insertCard").addEventListener("click", insertKarte);
-  document.getElementById("insertLevel").addEventListener("click", showResult);
+  //  insertCard();
+  showResult();
 }
 
 // Registrierung Ajax-Events f�r das Hinzuf�gen einer Karte und sende eine Anfrage
@@ -45,10 +45,10 @@ function insertLevel() {
 // Registrierung Ajax-Events f�r das Anzeigen aller Karte und sende eine Anfrage
 function showResult() {
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.addEventListener("load", ajaxShowBooks);
+  xmlhttp.addEventListener("load", ajaxShowCard);
   xmlhttp.addEventListener("error", ajaxFehler);
 
-  xmlhttp.open("GET", "show.php");
+  xmlhttp.open("GET", "../php/cardShow.php");
   xmlhttp.send();
 }
 
@@ -89,9 +89,10 @@ function ajaxShowCard(event) {
     img.height = 30;
     img.width = 30;
     img.src = bild;
-    td3.appendChild(img);
+    td2.appendChild(img);
     tr.appendChild(td2);
-
+    /** 
+     * 
     var td3 = document.createElement("td");
     var artist = myObj[i]["artist"];
     var img = document.createElement("IMG");
@@ -100,6 +101,7 @@ function ajaxShowCard(event) {
     img.src = artist;
     td3.appendChild(img);
     tr.appendChild(td3);
+    */
 
     tbody.appendChild(tr);
   }
