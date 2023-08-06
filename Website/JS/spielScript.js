@@ -15,8 +15,21 @@ var cardList = new Array();
 var card = 0;
 //timer noch nicht eingesetzt
 var timerId;
-var levelStartTime = 5; // 3 minutes in Sekunden
+var levelStartTime = 180; //    Sekunden
 var startTime = levelStartTime; // startzeit am spielanfang
+var MemoryList = [];
+
+//variablen für hochladen eines neuen Spiels
+var einzeln = 1; // Beispielwert für einzeln (1 oder 0)
+var Datetime = "2023-08-04 12:00"; // Beispielwert für Datetime
+var dauer = 60; // Beispielwert für dauer
+var verlauf = "Spielverlauf hier"; // Beispielwert für verlauf
+var mitspieler = "3"; // Beispielwert für mitspieler
+var gewinner = "4"; // Beispielwert für gewinner
+var initiator = "3"; // Beispielwert für initiator
+
+//spieler der Session
+var spielerId;
 
 var items = [
   {
@@ -39,9 +52,7 @@ var items = [
   //hier die fehlenden Bilder einfügen
 ];
 
-//doppelte Liste
-
-MemoryList = items.concat(items);
+items = [];
 
 //Eventhandler für HTML
 window.addEventListener("load", setup);
@@ -50,6 +61,7 @@ function setup() {
   elem.addEventListener("click", SpielStarten);
   var elem = document.getElementById("stop");
   elem.addEventListener("click", SpielStop);
+  showResult();
 }
 
 //leere karten werden gezeichnet
@@ -126,6 +138,17 @@ function pairCard() {
   if (cardPair == items.length) {
     SpielStop();
     document.getElementById("gameEnd").innerHTML = "Du hast gewonnen!";
+    //TO DO Daten einsetzen insert Spiel
+    getCurrentDateTime();
+    insertSpiel(
+      einzeln,
+      Datetime,
+      dauer,
+      verlauf,
+      mitspieler,
+      gewinner,
+      initiator
+    );
   }
 }
 
@@ -167,10 +190,24 @@ function SpielStop() {
   secondCard = false;
   cardPair = 0;
   cardList = new Array();
+  items = [];
+  MemoryList = [];
   setup();
   clearInterval(timerId);
   document.getElementById("gameEnd").innerHTML =
     "Du hast das Spiel gestoppt. Das Spiel gilt als verlohren!";
+  //TO DO Daten einsetzen insert Spiel
+  spielDauer(); // berechnet Spieldauer
+  getCurrentDateTime(); // berechnet aktuelles Datum
+  insertSpiel(
+    einzeln,
+    Datetime,
+    dauer,
+    verlauf,
+    mitspieler,
+    gewinner,
+    initiator
+  );
 }
 
 function formatTime(seconds) {
@@ -191,9 +228,31 @@ function updateCountdown() {
     SpielStop();
     document.getElementById("gameEnd").innerHTML =
       "Du hast verlohren! Du hast das Spiel nicht in angegebener Zeit geschafft.";
+    //TO DO Daten einsetzen insert Spiel
+    spielDauer(); // berechnet Spieldauer
+    getCurrentDateTime(); // berechnet aktuelles Datum
+    dauer = levelStartTime; //Startzeit in Sekunden
+    insertSpiel(
+      einzeln,
+      Datetime,
+      dauer,
+      verlauf,
+      mitspieler,
+      gewinner,
+      initiator
+    );
   }
 
   startTime--;
+}
+
+//aktuell verbliebene Zeit berechnen
+function spielDauer() {
+  console.log(document.getElementById("countdown").innerHTML);
+  var leftTime = document.getElementById("countdown").innerHTML;
+  const [hours, mins] = leftTime.split(":").map(Number);
+  var totalSeconds = hours * 3600 + mins * 60;
+  dauer = levelStartTime - totalSeconds;
 }
 
 //Der Countwodn wird gestartet
@@ -204,6 +263,122 @@ function startCountdown() {
   timerId = setInterval(updateCountdown, 1000);
 }
 
+//Countdown wird gestoppt
 function stopCountdown() {
   clearInterval(timerId);
+}
+
+//Funktion um akutlles Datum auszugeben
+function getCurrentDateTime() {
+  const now = new Date();
+
+  // Datum
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+
+  // Uhrzeit
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+
+  // Ausgabe im gewünschten Format
+  const formattedDateTime = `"${year}-${month}-${day} ${hours}:${minutes}"`;
+  Datetime = formattedDateTime;
+}
+
+// Registrierung Ajax-Events für das Hinzufügen eines Buchs
+// und send eine Anfrage
+function insertSpiel(
+  einzeln,
+  Datetime,
+  dauer,
+  verlauf,
+  mitspieler,
+  gewinner,
+  initiator
+) {
+  // var insertButton = document.getElementById("insert");
+  // Annahme: Du hast die Spielinformationen in JavaScript-Variablen gespeichert
+  var formData = new FormData();
+
+  formData.append("einzeln", einzeln);
+  formData.append("Datetime", Datetime);
+  formData.append("dauer", dauer);
+  formData.append("verlauf", verlauf);
+  formData.append("mitspieler", mitspieler);
+  formData.append("gewinner", gewinner);
+  formData.append("initiator", initiator);
+
+  var ajaxRequest = new XMLHttpRequest();
+  ajaxRequest.addEventListener("load", ajaxInsertSpiel);
+  ajaxRequest.addEventListener("error", ajaxFehler);
+  ajaxRequest.open("POST", "../php/spielInsert.php");
+  ajaxRequest.send(formData);
+}
+
+// Falls das Spiel erfolgreicht inzugefügt ist ...
+function ajaxInsertSpiel(event) {
+  document.getElementById("response").innerHTML = this.responseText;
+}
+
+// Registrierung Ajax-Events für das Anzeigen aller cards
+// und send eine Anfrage
+function showResult() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.addEventListener("load", ajaxShowCards);
+  xmlhttp.addEventListener("error", ajaxFehler);
+
+  xmlhttp.open("GET", "../php/cardShow.php");
+  xmlhttp.send();
+}
+
+//karten anzeigen
+// die Ajaxanfrage wird in eine Json-Liste umgewandelt
+function ajaxShowCards(event) {
+  var myObj = JSON.parse(event.target.responseText);
+
+  for (var i = 0; i < myObj.length; i++) {
+    var title = myObj[i]["name"];
+    var bild = myObj[i]["bild"];
+
+    // Ein Objekt mit title und src erstellen
+    var item = {
+      title: title,
+      src: bild,
+    };
+
+    // Das erstellte Objekt der Liste hinzufügen
+    items.push(item);
+    //doppelte Liste
+
+    MemoryList = items.concat(items);
+    console.log(MemoryList);
+  }
+}
+
+// Falls eine Ajax-Anfrage gescheitert ist ...
+function ajaxFehler(event) {
+  alert(event.target.statusText);
+}
+
+//die aktuelle session checken
+
+function checkSession() {
+  $.ajax({
+    url: "getSession.php",
+    type: "GET",
+    dataType: "json",
+    success: function (data) {
+      if (data.isLoggedIn) {
+        // Der Benutzer ist angemeldet, und Sie können auf die 'spielerId' zugreifen
+        spielerId = data.spielerId;
+        console.log("Benutzer ist angemeldet. Spieler-ID: " + spielerId);
+      } else {
+        console.log("Benutzer ist nicht angemeldet.");
+      }
+    },
+    error: function () {
+      console.log("Fehler beim Abrufen der Session-Daten.");
+    },
+  });
 }

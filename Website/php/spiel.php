@@ -1,46 +1,47 @@
-<!-- HTML code with external CSS -->
-<link rel="stylesheet" type="text/css" href="../css/style.css">
- <div class="table-background">
-
 <?php
 
 include 'setupDB.php';
 
-// Datenbank-Zugangsdaten
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "omemory";
 
-// Verbindung zur Datenbank herstellen
-$conn = new mysqli($host, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Verbindung zur MySQL-Datenbank fehlgeschlagen: " . $conn->connect_error);
-}
-
-$show = ' ';
-
-//Fuktion zum hochladen von Werten in die Tabelle spiel
-
+/*//Fuktion zum hochladen von Werten in die Tabelle spiel
 function insertSpiel($conn, $einzeln, $Datetime, $dauer, $verlauf, $mitspieler, $gewinner,$initiator) {
-$sql = "INSERT INTO Spiel (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', '$Datetime','$dauer','$verlauf', $mitspieler, $gewinner,$initiator)";
-if (!$conn -> query($sql)) {
-    $show = '<h2>Das Level gibt es schon. Wähle ein anderes</h2>';
+  $sql = "INSERT INTO Spiel (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', '$Datetime','$dauer','$verlauf', '$mitspieler', '$gewinner','$initiator')";
+  
+  $response = array();
+
+  if (!$conn->query($sql)) {
+    $response["message"] = "Das Level gibt es schon. Wähle ein anderes";
+  } else {
+    $response["message"] = "Das Spiel wurde erfolgreich hochgeladen.";
+  }
+
+  // CORS-Header setzen
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Methods: POST");
+  header("Access-Control-Allow-Headers: Content-Type");
+  header("Content-Type: application/json");
+
+  echo json_encode($response);*/
+}
+
+$tname = 'spiel';
+$einzeln = $_POST['einzeln'];
+$Datetime = $_POST['Datetime'];
+$dauer = $_POST['dauer'];
+$verlauf = $_POST['verlauf'];
+$mitspieler = $_POST['mitspieler'];
+$gewinner = $_POST['gewinner'];
+$initiator = $_POST['initiator'];
+
+// SQL query for adding data
+$sql = "INSERT INTO $tname (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', '$Datetime','$dauer','$verlauf', '$mitspieler', '$gewinner','$initiator')";
+
+if (!mysqli_query($conn, $sql)) {
+    die("Insert fehlgeschlagen: " . mysqli_error());
 } else {
-    $show = '<h2>Das Spiel um ' . $Datetime . ' Uhr wurde hinzugefügt<h2>';
+    echo "Das Spiel $Datetime wurde erfolgreich hinzugefügt!";
 }
 
-echo $show;
-}
-
-/*// Beipiele hinzufügen
-//funktioniert nur wenn vorher genau einmal player.php aufgrufen wurde -> da spieler vorhanden sein müssen
-
-insertSpiel($conn, 'true', '2024-01-32 12:32:00', 18, 'false', '2', '1', '2');
-insertSpiel($conn, 'false', '2023-04-37 12:32:01', 11, 'false', '1', '1', '2');
-insertSpiel($conn, 'true', '2023-04-31 12:32:02', 8, 'true', '3', '1', '1');
-insertSpiel($conn, 'false', '2023-04-36 12:32:03', 13, 'true', '2', '2', '1');
-insertSpiel($conn, 'true', '2023-05-32 12:32:04', 2, 'false', '1', '2', '1');*/
 
 
 //aus spielername wird id bestimmt, um in der Tabelle Spiele suchen zu können
@@ -68,7 +69,6 @@ function searchPlayer($name) {
 //die tabelle Spiele muss durchsucht werden nach Initiator und Mitspieler
 //dafür muss aus dem Namen zunächst die ID gemacht werden
 //diese tabellen werden dann ausgegeben
-
 function getPlayerPlays($conn, $playerName) {
   //aus namen wird id bestimmt
  // SQL-Abfrage erstellen
@@ -138,13 +138,12 @@ function fetchData(){
         // Die Daten als JSON zurückgeben
         header("Content-type: application/json");
         echo json_encode($data);
-    } elseif ($action === 'fetchSpiel') {
-        // Code for fetching data for Spiel goes here
+    } elseif ($action === 'fetchSomethingElse') {
+        // Code for fetching data for something else goes here
     } else {
         die("Ungültige Aktion.");
     }
 }
-
 // Verbindung zur Datenbank schließen
 $conn->close();
 

@@ -1,5 +1,5 @@
 //passwort
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   var passwordInput = document.getElementById("password");
   var confirmPasswordInput = document.getElementById("confirmPassword");
 
@@ -13,8 +13,14 @@ function checkPassword() {
   var submitButton = document.getElementById("submitButton");
 
   // Überprüfung der Passwortlänge und Zeichenanforderungen
-  if (password.length < 7 || !/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/\d{5}/.test(password)) {
-    passwordHint.textContent = "Das Passwort muss mindestens 7 Zeichen lang sein, mindestens einen Groß- und einen Kleinbuchstaben sowie mindestens fünf Ziffern enthalten.";
+  if (
+    password.length < 7 ||
+    !/[A-Z]/.test(password) ||
+    !/[a-z]/.test(password) ||
+    !/\d{5}/.test(password)
+  ) {
+    passwordHint.textContent =
+      "Das Passwort muss mindestens 7 Zeichen lang sein, mindestens einen Groß- und einen Kleinbuchstaben sowie mindestens fünf Ziffern enthalten.";
     submitButton.disabled = true;
   } else {
     passwordHint.textContent = "";

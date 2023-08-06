@@ -1,5 +1,4 @@
 <?php
-
 // Datenbank-Zugangsdaten
 $host = "localhost";
 $username = "root";
@@ -32,6 +31,7 @@ mysqli_close($con);
 header("Content-type: application/json");
 echo json_encode($data);
 
+<<<<<<< HEAD
 
 /*
 //Lese Daten ein aus Datenbank
@@ -57,4 +57,6 @@ echo json_encode($data);
 }
 
 //<td><a class='btn btn-danger btn-sm' href='delete'>Delete</a></td>*/
+=======
+>>>>>>> parent of 07a149b (Revert "Merge branch 'main' of https://github.com/SaskiaJuergens/Webapplication")
 ?>

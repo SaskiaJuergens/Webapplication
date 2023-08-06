@@ -1,4 +1,11 @@
 <?php
+// CORS-Header setzen
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
+
+
     // Verbindung zur Datenbank herstellen
     $servername = "localhost";    // Hostname (normalerweise "localhost")
     $username = "root";           // Benutzername für die Datenbank
@@ -7,7 +14,7 @@
 
 
 
-
+    //kreiere eine Verbindung
     $conn = new mysqli($servername, $username, $password, $database);
 
     // Überprüfen der Verbindung

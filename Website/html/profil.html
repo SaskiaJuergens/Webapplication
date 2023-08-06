@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Spielverwaltung</title>
-    <meta charset="utf-8" />
+    <title>Profil</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
@@ -11,13 +10,11 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/style.css" />
-    <!-- JavaScript-Datei einbinden -->
-    <script src="../JS/TabelleScript.js"></script>
   </head>
   <body>
-    <div class="colored-background">
+    <div class="image-background">
       <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-        <a href="startscreen.html" Link class="logo">
+        <a href="../html/startscreen.html" Link class="logo">
           <img src="../images/slacklogo.png" alt="Logo" />
         </a>
 
@@ -36,7 +33,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active nav-item-custom">
-              <a class="nav-link" href="Spiel.html"
+              <a class="nav-link" href="../html/Spiel.html"
                 >Spielen <span class="sr-only">(current)</span></a
               >
             </li>
@@ -54,25 +51,25 @@
                 Spieleinstellungen
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="SpielEinstellungen.html"
+                <a class="dropdown-item" href="../html/SpielEinstellungen.html"
                   >Spielverwaltung</a
                 >
-                <a class="dropdown-item" href="adminSpielinhalt.html"
+                <a class="dropdown-item" href="../html/adminSpielinhalt.html"
                   >Spielinhalt</a
                 >
 
-                <a class="dropdown-item" href="adminSpielstand.html"
+                <a class="dropdown-item" href="../html/adminSpielstand.html"
                   >Spielstand</a
                 >
               </div>
             </li>
             <li class="nav-item active nav-item-custom">
-              <a class="nav-link" href="login.html"
+              <a class="nav-link" href="../html/login.html"
                 >Login <span class="sr-only">(current)</span></a
               >
             </li>
             <li class="nav-item active nav-item-custom">
-              <a class="nav-link" href="Impressum.html"
+              <a class="nav-link" href="../html/Impressum.html"
                 >Impressum <span class="sr-only">(current)</span></a
               >
             </li>
@@ -92,99 +89,22 @@
       </nav>
 
       <div class="login-background">
-        <h1><b>Spielverwaltung</b></h1>
+        <h1><b>Hallo ___ Willkommen auf deinem Profil</b></h1>
+        <h3>Vorname:</h3>
+        <h3>Nachname:</h3>
+        <h3>Email:</h3>
+        <h3>Level:</h3>
         <br />
-        <h2>Neue Spielkarte hinzufügen</h2>
-
-        <p></p>
-
-        <form
-          class="login-form"
-          action="http://localhost/Webapplication/Website/php/card.php"
-          method="post"
-          enctype="multipart/form-data"
-        >
-          <label for="kartenname">Kartenname:</label>
-          Title:<input type="text" id="name" name="name" required />
-          <br /><br />
-
-          <label for="kartenbild">Kartenbild (max. 100KB):</label>
-          Gemälde:<input
-            type="file"
-            id="bild"
-            name="bild"
-            accept="image/*"
-            required
-          />
-          <br /><br />
-
-          <label for="kartenbild">Kuenstler*in (max. 100KB):</label>
-          Künstler:<input
-            type="file"
-            id="artist"
-            name="artist"
-            accept="image/*"
-            required
-          />
-          <br /><br />
-
-          <button id="insertCard" type="submit">Einfügen</button>
-          <br /><br />
-
-          <p id="infoInsertCard"></p>
-        </form>
-
-        <h2>Spiellevel hinzufügen</h2>
         <br />
-
-        <form
-          class="login-form"
-          action="http://localhost/Webapplication/Website/php/level.php"
-          method="post"
+        <a class="nav-link" href="../html/Spielerseite.html?elem=Habul">
+          <button id="profil" type="button" class="button-start button-color1">
+            Zu meinen Spielen
+          </button></a
         >
-          <label for="Levelzahl">Levelzahl:</label>
-          <input
-            type="number"
-            id="levelzahl"
-            name="level"
-            min="1"
-            max="50"
-            required
-          />
-          <br /><br />
-
-          <label for="anzahlkarten"
-            >Anzahl der Karten (positive gerade Zahl):</label
-          >
-          <input
-            type="number"
-            id="anzahlkarten"
-            name="anzahl_karten"
-            min="2"
-            max="50"
-            required
-            step="2"
-          />
-          <br /><br />
-
-          <label for="spielzeit">Spielzeit (in Minuten):</label>
-          <input
-            type="number"
-            id="spielzeit"
-            name="spielZeit"
-            min="1"
-            max="30"
-            required
-          />
-          <br /><br />
-
-          <button id="insertLevel" type="submit">Einfügen</button>
-          <br /><br />
-
-          <p id="infoInsertLevel"></p>
-        </form>
       </div>
-      <br /><br /><br />
+      <br />
+      <br />
+      <br />
     </div>
 
     <script
