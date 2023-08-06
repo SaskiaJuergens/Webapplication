@@ -59,12 +59,10 @@ $conn = mysqli_connect("localhost", "root", "", "omemory");
       echo "Login Successful";
       $_SESSION["login"] = true;
       $_SESSION["id"] = $row["id"];
-      
     }
     else{
       exit;
       echo "Wrong Password";
-      
     }
   }
   else{
@@ -72,4 +70,8 @@ $conn = mysqli_connect("localhost", "root", "", "omemory");
     exit;
   }
 }
+
+
+
+
 ?>
