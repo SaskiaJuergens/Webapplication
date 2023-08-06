@@ -75,7 +75,7 @@ $sptype2 = 'VARCHAR(20)';
 $sptype3 = 'VARCHAR(20)';
 $sptype4 = 'VARCHAR(20)';
 $sptype5 = 'INT';
-$sptype6 = 'FOREIGN KEY (level) REFERENCES spieler(level)';
+$sptype6 = 'FOREIGN KEY (level) REFERENCES Level(level)';
 
 
 

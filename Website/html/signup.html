@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 
 <html>
-
   <head>
-
     <title>Registrierung</title>
     <script src="../JS/script.js"></script>
 
@@ -16,7 +14,6 @@
     />
     <link rel="stylesheet" href="../css/style.css" />
   </head>
-
 
   <body>
     <div class="image-background">
@@ -95,15 +92,14 @@
         </div>
       </nav>
 
-
       <div class="login-background">
         <h1><b>Registrierung</b></h1>
 
         <form class="login-form">
-          <input type="hidden" id="action" value="register"/>
+          <input type="hidden" id="action" value="register" />
           <label for="vorname">Vorname:</label>
-          <br/><br/>
-          <input type="text" id="vorname"  name="vorname" required /><br /><br />
+          <br /><br />
+          <input type="text" id="vorname" name="vorname" required /><br /><br />
 
           <label for="nachname">Nachname:</label>
           <br /><br />
@@ -140,8 +136,7 @@
           /><br /><br />
           <span id="confirmPasswordHint" class="hint"></span><br /><br />
 
-          <input type="submit" value="Registrieren" onclick="submitData();">
-
+          <input type="submit" value="Registrieren" onclick="submitData();" />
         </form>
 
         <div id="fehlermeldung"></div>
@@ -150,12 +145,10 @@
       <br />
       <br />
     </div>
-    <script
-      src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
-    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-      function submitData(){
-        $(document).ready(function(){
+      function submitData() {
+        $(document).ready(function () {
           var data = {
             vorname: $("#vorname").val(),
             nachname: $("#nachname").val(),
@@ -165,19 +158,20 @@
           };
 
           $.ajax({
-            url: '../php/function.php',
-            type: 'post',
+            url: "../php/function.php",
+            type: "post",
             data: data,
-            success:function(response){
+            success: function (response) {
               alert(response);
-              if(response == "Login Successful"){
+              if (response == "Login Successful") {
                 window.location.reload();
               }
-            }
+            },
           });
         });
       }
     </script>
+
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
       integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

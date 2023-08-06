@@ -1,17 +1,17 @@
 <?php
+
+include 'setupDB.php';
+global $conn;
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "omemory");
 
 // IF
-if(isset($_POST["action"])){
-  if($_POST["action"] == "register"){
+if (isset($_POST["action"])) {
+  if ($_POST["action"] == "register") {
     register();
-  }
-  else if($_POST["action"] == "login"){
+  } else if ($_POST["action"] == "login") {
     login();
   }
 }
-
 
 // REGISTER
 function register(){
@@ -42,12 +42,14 @@ function register(){
 
 // LOGIN
 function login(){
-  global $conn;
+ 
+$conn = mysqli_connect("localhost", "root", "", "omemory");
 
   $email = $_POST["email"];
   $password = $_POST["password"];
 
   $user = mysqli_query($conn, "SELECT * FROM spieler WHERE email = '$email'");
+  
 
   if(mysqli_num_rows($user) > 0){
 
@@ -57,10 +59,12 @@ function login(){
       echo "Login Successful";
       $_SESSION["login"] = true;
       $_SESSION["id"] = $row["id"];
+      
     }
     else{
-      echo "Wrong Password";
       exit;
+      echo "Wrong Password";
+      
     }
   }
   else{

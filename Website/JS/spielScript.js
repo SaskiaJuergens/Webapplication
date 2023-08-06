@@ -321,6 +321,11 @@ function ajaxInsertSpiel(event) {
   document.getElementById("response").innerHTML = this.responseText;
 }
 
+// Falls eine Ajax-Anfrage gescheitert ist ...
+function ajaxFehler(event) {
+  alert(event.target.statusText);
+}
+
 // Registrierung Ajax-Events für das Anzeigen aller cards
 // und send eine Anfrage
 function showResult() {
@@ -354,11 +359,6 @@ function ajaxShowCards(event) {
     MemoryList = items.concat(items);
     console.log(MemoryList);
   }
-}
-
-// Falls eine Ajax-Anfrage gescheitert ist ...
-function ajaxFehler(event) {
-  alert(event.target.statusText);
 }
 
 //die aktuelle session checken
