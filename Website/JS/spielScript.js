@@ -15,7 +15,7 @@ var cardList = new Array();
 var card = 0;
 //timer noch nicht eingesetzt
 var timerId;
-var levelStartTime = 5; // 3 minutes in Sekunden
+var levelStartTime = 180; //    Sekunden
 var startTime = levelStartTime; // startzeit am spielanfang
 var MemoryList = [];
 
