@@ -17,6 +17,10 @@ var card = 0;
 var timerId;
 var levelStartTime = 5; // 3 minutes in Sekunden
 var startTime = levelStartTime; // startzeit am spielanfang
+var MemoryList = [];
+
+//variablen für hochladen eines neuen Spiels
+var currentTime;
 
 var items = [
   {
@@ -39,9 +43,7 @@ var items = [
   //hier die fehlenden Bilder einfügen
 ];
 
-//doppelte Liste
-
-MemoryList = items.concat(items);
+items = [];
 
 //Eventhandler für HTML
 window.addEventListener("load", setup);
@@ -50,12 +52,13 @@ function setup() {
   elem.addEventListener("click", SpielStarten);
   var elem = document.getElementById("stop");
   elem.addEventListener("click", SpielStop);
+  showResult();
 }
 
 //leere karten werden gezeichnet
 function drawMemory() {
   insertSpiel();
-  showResult();
+
   var ULlist = document.getElementById("cards");
   var ULlist = document.getElementById("cards");
   for (var i = 0; i < MemoryList.length; i++) {
@@ -169,6 +172,8 @@ function SpielStop() {
   secondCard = false;
   cardPair = 0;
   cardList = new Array();
+  items = [];
+  MemoryList = [];
   setup();
   clearInterval(timerId);
   document.getElementById("gameEnd").innerHTML =
@@ -249,7 +254,7 @@ function ajaxInsertSpiel(event) {
 // und send eine Anfrage
 function showResult() {
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.addEventListener("load", ajaxShowCard);
+  xmlhttp.addEventListener("load", ajaxShowCards);
   xmlhttp.addEventListener("error", ajaxFehler);
 
   xmlhttp.open("GET", "../php/cardShow.php");
@@ -257,36 +262,26 @@ function showResult() {
 }
 
 //karten anzeigen
-
-// Falls die karten erfolgreicht aus der DB geholt sind ...
-// die Karten werden angezeigt
-function ajaxShowCard(event) {
+// die Ajaxanfrage wird in eine Json-Liste umgewandelt
+function ajaxShowCards(event) {
   var myObj = JSON.parse(event.target.responseText);
 
-  // Container für die Bilder
-  var gallery = document.getElementById("gallery");
-
   for (var i = 0; i < myObj.length; i++) {
-    var cardContainer = document.createElement("div");
-    cardContainer.className = "card-container";
-
     var title = myObj[i]["name"];
     var bild = myObj[i]["bild"];
 
-    // Bild erstellen
-    var img = document.createElement("img");
-    img.src = bild;
-    img.alt = title;
-    img.className = "card-image";
-    cardContainer.appendChild(img);
+    // Ein Objekt mit title und src erstellen
+    var item = {
+      title: title,
+      src: bild,
+    };
 
-    // Titel hinzufügen (optional)
-    var titleElement = document.createElement("p");
-    titleElement.textContent = title;
-    titleElement.className = "card-title";
-    cardContainer.appendChild(titleElement);
+    // Das erstellte Objekt der Liste hinzufügen
+    items.push(item);
+    //doppelte Liste
 
-    gallery.appendChild(cardContainer);
+    MemoryList = items.concat(items);
+    console.log(MemoryList);
   }
 }
 
