@@ -20,7 +20,16 @@ var startTime = levelStartTime; // startzeit am spielanfang
 var MemoryList = [];
 
 //variablen für hochladen eines neuen Spiels
-var currentTime;
+var einzeln = 1; // Beispielwert für einzeln (1 oder 0)
+var Datetime = "2023-08-04 12:00"; // Beispielwert für Datetime
+var dauer = 60; // Beispielwert für dauer
+var verlauf = "Spielverlauf hier"; // Beispielwert für verlauf
+var mitspieler = "3"; // Beispielwert für mitspieler
+var gewinner = "4"; // Beispielwert für gewinner
+var initiator = "3"; // Beispielwert für initiator
+
+//spieler der Session
+var spielerId;
 
 var items = [
   {
@@ -57,8 +66,6 @@ function setup() {
 
 //leere karten werden gezeichnet
 function drawMemory() {
-  insertSpiel();
-
   var ULlist = document.getElementById("cards");
   var ULlist = document.getElementById("cards");
   for (var i = 0; i < MemoryList.length; i++) {
@@ -131,6 +138,17 @@ function pairCard() {
   if (cardPair == items.length) {
     SpielStop();
     document.getElementById("gameEnd").innerHTML = "Du hast gewonnen!";
+    //TO DO Daten einsetzen insert Spiel
+    getCurrentDateTime();
+    insertSpiel(
+      einzeln,
+      Datetime,
+      dauer,
+      verlauf,
+      mitspieler,
+      gewinner,
+      initiator
+    );
   }
 }
 
@@ -178,6 +196,18 @@ function SpielStop() {
   clearInterval(timerId);
   document.getElementById("gameEnd").innerHTML =
     "Du hast das Spiel gestoppt. Das Spiel gilt als verlohren!";
+  //TO DO Daten einsetzen insert Spiel
+  spielDauer(); // berechnet Spieldauer
+  getCurrentDateTime(); // berechnet aktuelles Datum
+  insertSpiel(
+    einzeln,
+    Datetime,
+    dauer,
+    verlauf,
+    mitspieler,
+    gewinner,
+    initiator
+  );
 }
 
 function formatTime(seconds) {
@@ -198,9 +228,31 @@ function updateCountdown() {
     SpielStop();
     document.getElementById("gameEnd").innerHTML =
       "Du hast verlohren! Du hast das Spiel nicht in angegebener Zeit geschafft.";
+    //TO DO Daten einsetzen insert Spiel
+    spielDauer(); // berechnet Spieldauer
+    getCurrentDateTime(); // berechnet aktuelles Datum
+    dauer = levelStartTime; //Startzeit in Sekunden
+    insertSpiel(
+      einzeln,
+      Datetime,
+      dauer,
+      verlauf,
+      mitspieler,
+      gewinner,
+      initiator
+    );
   }
 
   startTime--;
+}
+
+//aktuell verbliebene Zeit berechnen
+function spielDauer() {
+  console.log(document.getElementById("countdown").innerHTML);
+  var leftTime = document.getElementById("countdown").innerHTML;
+  const [hours, mins] = leftTime.split(":").map(Number);
+  var totalSeconds = hours * 3600 + mins * 60;
+  dauer = levelStartTime - totalSeconds;
 }
 
 //Der Countwodn wird gestartet
@@ -211,23 +263,42 @@ function startCountdown() {
   timerId = setInterval(updateCountdown, 1000);
 }
 
+//Countdown wird gestoppt
 function stopCountdown() {
   clearInterval(timerId);
 }
 
+//Funktion um akutlles Datum auszugeben
+function getCurrentDateTime() {
+  const now = new Date();
+
+  // Datum
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+
+  // Uhrzeit
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+
+  // Ausgabe im gewünschten Format
+  const formattedDateTime = `"${year}-${month}-${day} ${hours}:${minutes}"`;
+  Datetime = formattedDateTime;
+}
+
 // Registrierung Ajax-Events für das Hinzufügen eines Buchs
 // und send eine Anfrage
-function insertSpiel() {
+function insertSpiel(
+  einzeln,
+  Datetime,
+  dauer,
+  verlauf,
+  mitspieler,
+  gewinner,
+  initiator
+) {
   // var insertButton = document.getElementById("insert");
   // Annahme: Du hast die Spielinformationen in JavaScript-Variablen gespeichert
-  const einzeln = 1; // Beispielwert für einzeln (1 oder 0)
-  const Datetime = "2023-08-04 12:00"; // Beispielwert für Datetime
-  const dauer = 60; // Beispielwert für dauer
-  const verlauf = "Spielverlauf hier"; // Beispielwert für verlauf
-  const mitspieler = "3"; // Beispielwert für mitspieler
-  const gewinner = "4"; // Beispielwert für gewinner
-  const initiator = "3"; // Beispielwert für initiator
-
   var formData = new FormData();
 
   formData.append("einzeln", einzeln);
@@ -288,4 +359,26 @@ function ajaxShowCards(event) {
 // Falls eine Ajax-Anfrage gescheitert ist ...
 function ajaxFehler(event) {
   alert(event.target.statusText);
+}
+
+//die aktuelle session checken
+
+function checkSession() {
+  $.ajax({
+    url: "getSession.php",
+    type: "GET",
+    dataType: "json",
+    success: function (data) {
+      if (data.isLoggedIn) {
+        // Der Benutzer ist angemeldet, und Sie können auf die 'spielerId' zugreifen
+        spielerId = data.spielerId;
+        console.log("Benutzer ist angemeldet. Spieler-ID: " + spielerId);
+      } else {
+        console.log("Benutzer ist nicht angemeldet.");
+      }
+    },
+    error: function () {
+      console.log("Fehler beim Abrufen der Session-Daten.");
+    },
+  });
 }
