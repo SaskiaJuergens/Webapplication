@@ -10,8 +10,12 @@ if (isset($_POST["action"])) {
     register();
   } else if ($_POST["action"] == "login") {
     login();
-  
   }
+}
+
+//testen ob, session check aufruf
+if (isset($_GET["action"]) && $_GET["action"] === "check") {
+    checkSession();
 }
 
 // REGISTER
@@ -84,6 +88,22 @@ function login() {
     } else {
         echo "User Not Registered";
     }
+}
+
+
+function checkSession() {
+      session_start();
+    $response = array();
+
+    if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
+        $response["isLoggedIn"] = true;
+        $response["spielerId"] = $_SESSION["id"];
+    } else {
+        $response["isLoggedIn"] = false;
+    }
+
+    header("Content-Type: application/json");
+    echo json_encode($response);
 }
 
 

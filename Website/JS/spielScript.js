@@ -415,7 +415,9 @@ function checkSession() {
     }
   };
 
-  xmlhttp.open("GET", "../php/getSession.php", true);
+  var action = "check"; // Die Aktion, die du übergeben möchtest
+  var url = "../php/session.php?action=" + action; // Füge die Aktion zur URL hinzu
+  xmlhttp.open("GET", url, true);
   xmlhttp.setRequestHeader("Content-Type", "application/json");
   xmlhttp.send();
 }
