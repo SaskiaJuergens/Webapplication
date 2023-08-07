@@ -38,6 +38,10 @@ var spielerId;
 var items = [];
 //Spielkarten mit Paaren (doppelt so lang)
 var MemoryList = [];
+//Spierler für doppelspiel
+var spielerList = [];
+//Liste der Spieler des selben Levels
+var spielerSameLevel = [];
 
 //Eventhandler für HTML
 window.addEventListener("load", setup);
@@ -50,6 +54,8 @@ function setup() {
   elem.addEventListener("click", startDoubleGame);
   showResult();
   checkSession();
+  showSpieler();
+  showSpiel();
 }
 
 //leere karten werden gezeichnet
@@ -148,6 +154,7 @@ function pairCard() {
     getCurrentDateTime();
     initiator = spielerId;
     verlauf = "gewonnen";
+    var gewinner = spielerId;
     insertSpiel(
       einzeln,
       Datetime,
@@ -239,14 +246,6 @@ function SpielStop() {
   }
 }
 
-/**
- *
- * Abstatz für Doppelspiel
- */
-function startDoubleGame() {
-  getLevel(spielerId);
-}
-
 function formatTime(seconds) {
   var minutes = Math.floor(seconds / 60);
   var remainingSeconds = seconds % 60;
@@ -324,6 +323,55 @@ function getCurrentDateTime() {
   Datetime = formattedDateTime;
 }
 
+function spielBerechnen() {}
+
+// Spieler laden für Double Spiel
+/**
+ * Karten werden angezeigt
+ */
+function showSpiel() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.addEventListener("load", ajaxShowSpiel);
+  xmlhttp.addEventListener("error", ajaxFehler);
+
+  xmlhttp.open("GET", "../php/spielerShow.php");
+  xmlhttp.send();
+}
+
+//karten anzeigen
+// die Ajaxanfrage wird in eine Json-Liste umgewandelt
+function ajaxShowSpiel(event) {
+  var myObj = JSON.parse(event.target.responseText);
+
+  for (var i = 0; i < myObj.length; i++) {
+    var einzeln = myObj[i]["einzeln"];
+    var Datetime = myObj[i]["Datetime"];
+    var dauer = myObj[i]["dauer"];
+    var verlauf = myObj[i]["verlauf"];
+    var mitspieler = myObj[i]["mitspieler"];
+    var gewinner = myObj[i]["gewinner"];
+    var initiator = myObj[i]["initiator"];
+
+    // Ein Objekt mit title und src erstellen
+    var item = {
+      einzeln: einzeln,
+      Datetime: Datetime,
+      dauer: dauer,
+      verlauf: verlauf,
+      mitspieler: mitspieler,
+      gewinner: gewinner,
+      initiator: initiator,
+    };
+
+    // Das erstellte Objekt der Liste hinzufügen
+
+    spielList.push(item);
+  }
+  console.log(spielList);
+}
+
+var spielList = [];
+
 // Registrierung Ajax-Events für das Hinzufügen eines Buchs
 // und send eine Anfrage
 function insertSpiel(
@@ -393,11 +441,10 @@ function ajaxShowCards(event) {
 
     // Das erstellte Objekt der Liste hinzufügen
     items.push(item);
-    //doppelte Liste
 
     MemoryList = items.concat(items);
-    console.log(MemoryList);
   }
+  console.log(MemoryList);
 }
 
 //die aktuelle session checken
@@ -432,10 +479,125 @@ function checkSession() {
   xmlhttp.send();
 }
 
+// Spieler laden für Double Spiel
 /**
- * Spieler gleicher Spiellevels bekommen
+ * Karten werden angezeigt
  */
+function showSpieler() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.addEventListener("load", ajaxShowSpieler);
+  xmlhttp.addEventListener("error", ajaxFehler);
 
-function getLevel(level) {
-  console.log("funktion für Level noch nicht da ");
+  xmlhttp.open("GET", "../php/spielerShow.php");
+  xmlhttp.send();
+}
+
+//karten anzeigen
+// die Ajaxanfrage wird in eine Json-Liste umgewandelt
+function ajaxShowSpieler(event) {
+  var myObj = JSON.parse(event.target.responseText);
+
+  for (var i = 0; i < myObj.length; i++) {
+    var id = myObj[i]["id"];
+    var spielname = myObj[i]["spielname"];
+    var email = myObj[i]["email"];
+    var passwort = myObj[i]["passwort"];
+    var level = myObj[i]["level"];
+
+    // Ein Objekt mit title und src erstellen
+    var item = {
+      id: id,
+      spielname: spielname,
+      email: email,
+      passwort: passwort,
+      level: level,
+    };
+
+    // Das erstellte Objekt der Liste hinzufügen
+
+    spielerList.push(item);
+  }
+  console.log(spielerList);
+}
+
+/**
+ *
+ * Abstatz für Doppelspiel
+ */
+function startDoubleGame() {
+  SpielerAnfrage();
+}
+
+function SpielerAnfrage() {
+  var currentPlayer = getPlayerByID(spielerList, spielerId);
+  //  console.log(currentPlayer.level);
+  var currentPlayers = getPlayersByLevel(spielerList, currentPlayer.level);
+  // console.log(currentPlayers);
+  createButtonsFromPlayers(currentPlayers);
+}
+
+/**
+ * Gibt den angemeldeten Player zurück der über ID gesucht wird
+ *
+ * @param {*} data
+ * @param {*} id
+ * @returns
+ */
+function getPlayerByID(data, id) {
+  for (var i = 0; i < data.length; i++) {
+    if (data[i].id === id) {
+      return data[i];
+    }
+  }
+  return null; // Wenn keine Übereinstimmung gefunden wurde
+}
+
+/**
+ *
+ * Gibt zurück wechle Spieler das selbe Level haben
+ *
+ * @param {Liste der Spieler} data
+ * @param {Das Level, was der angemeldete Spieler hat
+ * } level
+ * @returns
+ */
+function getPlayersByLevel(data, level) {
+  var spielerSameLevel = [];
+
+  for (var i = 0; i < data.length; i++) {
+    if (data[i].level === level) {
+      spielerSameLevel.push(data[i]);
+    }
+  }
+
+  return spielerSameLevel;
+}
+
+var gegner = [];
+
+/**
+ * Buttons werden erstellt um request zu senden
+ * @param {*} players
+ */
+function createButtonsFromPlayers(players) {
+  var buttonsContainer = document.getElementById("buttonAnfrage"); // Annahme: Hier ist ein HTML-Element für die Buttons
+  console.log(players);
+  for (var i = 0; i < players.length; i++) {
+    var player = players[i];
+    var button = document.createElement("button");
+    button.textContent = player.spielname;
+    console.log("test");
+
+    // Verwende eine Hilfsfunktion, um den aktuellen Wert von 'player' in die Klosure einzuschließen
+    button.addEventListener("click", createClickListener(player));
+
+    buttonsContainer.appendChild(button);
+  }
+}
+
+function createClickListener(player) {
+  return function () {
+    console.log(player.spielname);
+    // Hier kannst du den Code hinzufügen, der bei Klick auf den Button ausgeführt werden soll
+  };
 }
