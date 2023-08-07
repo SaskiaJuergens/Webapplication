@@ -114,6 +114,14 @@ p {
   color: rgb(80, 85, 92);
 }
 
+/** Memoriekarten */
+.bildStil {
+  width: 134px;
+  height: 162px;
+  border: 8px solid white;
+  border-radius: 24px;
+}
+
 /*Input Boxen*/
 input[type="text"],
 input[type="password"],

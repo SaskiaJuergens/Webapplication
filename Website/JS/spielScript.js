@@ -24,7 +24,7 @@ var MemoryList = [];
 var einzeln = 1; // Beispielwert für einzeln (1 oder 0)
 var Datetime = "2023-08-04 12:00"; // Beispielwert für Datetime
 var dauer = 60; // Beispielwert für dauer
-var verlauf = "Spielverlauf hier"; // Beispielwert für verlauf
+var verlauf = "verlohren"; // Beispielwert für verlauf
 var mitspieler = "NULL"; // Beispielwert für mitspieler
 var gewinner = "NULL"; // Beispielwert für gewinner
 var initiator = "NULL"; // Beispielwert für initiator
@@ -73,15 +73,21 @@ function drawMemory() {
     console.log("ersterclick");
     var index = i;
     card = document.createElement("IMG");
-    card.setAttribute("src", "../images/leereKarte.png");
+    card.setAttribute("src", "../images/leerKarte.png");
     card.setAttribute("alt", items[0].title);
     card.setAttribute("id", index);
     card.className = "gameCard";
-    card.style.width = "16%";
+    card.style.width = "134px";
+    card.style.height = "162px";
+    card.style.borderRadius = "17px";
+    card.style.border = "2px solid rgba(74, 104, 183)";
+    card.style.margin = "5px";
+    card.style.boxShadow = "2px 2px 4px rgba(0, 0, 0, 0.3)";
 
     if (window.matchMedia("(max-width: 700px)").matches) {
       // If media query matches
-      card.style.width = "25%";
+      card.style.width = "67px";
+      card.style.height = "81px";
     } else {
       card.style.width = "16%";
     }
@@ -90,10 +96,12 @@ function drawMemory() {
     ULlist.appendChild(cardList[i]);
     //event karte checken
     console.log("card");
+
     card.addEventListener("click", showCard);
   }
 }
 
+//karten können noch zweimal umgedreht werden
 var uncoverCards = 0;
 //Karte umdrehen
 function showCard() {
@@ -126,8 +134,8 @@ function showCard() {
 //Karte umdrehen
 function returnCard() {
   // Code, der erst nach 3 Sekunden ausgeführt wird
-  firstCard.setAttribute("src", "../images/leereKarte.png");
-  secondCard.setAttribute("src", "../images/leereKarte.png");
+  firstCard.setAttribute("src", "../images/leerKarte.png");
+  secondCard.setAttribute("src", "../images/leerKarte.png");
   uncoverCards = 0;
 }
 
@@ -135,8 +143,8 @@ function pairCard() {
   cardPair += 1;
   document.getElementById("result").innerHTML =
     "Du hast " + cardPair + " Kartenpaare gesammelt.";
-  firstCard.setAttribute("src", "../images/noCard.png");
-  secondCard.setAttribute("src", "../images/noCard.png");
+  firstCard.setAttribute("src", "../images/keineKarte.png");
+  secondCard.setAttribute("src", "../images/keineKarte.png");
   uncoverCards = 0;
   if (cardPair == items.length) {
     SpielStop();
