@@ -46,6 +46,8 @@ function setup() {
   elem.addEventListener("click", SpielStarten);
   var elem = document.getElementById("stop");
   elem.addEventListener("click", SpielStop);
+  var elem = document.getElementById("doubleGame");
+  elem.addEventListener("click", startDoubleGame);
   showResult();
   checkSession();
 }
@@ -237,6 +239,14 @@ function SpielStop() {
   }
 }
 
+/**
+ *
+ * Abstatz für Doppelspiel
+ */
+function startDoubleGame() {
+  getLevel(spielerId);
+}
+
 function formatTime(seconds) {
   var minutes = Math.floor(seconds / 60);
   var remainingSeconds = seconds % 60;
@@ -354,8 +364,9 @@ function ajaxFehler(event) {
   alert(event.target.statusText);
 }
 
-// Registrierung Ajax-Events für das Anzeigen aller cards
-// und send eine Anfrage
+/**
+ * Karten werden angezeigt
+ */
 function showResult() {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.addEventListener("load", ajaxShowCards);
@@ -390,7 +401,6 @@ function ajaxShowCards(event) {
 }
 
 //die aktuelle session checken
-
 function checkSession() {
   var xmlhttp = new XMLHttpRequest();
 
@@ -398,7 +408,7 @@ function checkSession() {
     if (xmlhttp.readyState === 4) {
       if (xmlhttp.status === 200) {
         var data = JSON.parse(xmlhttp.responseText);
-
+        console.log(xmlhttp.responseText);
         if (data.isLoggedIn) {
           // Der Benutzer ist angemeldet, und Sie können auf die 'spielerId' zugreifen
           spielerId = data.spielerId;
@@ -420,4 +430,12 @@ function checkSession() {
   xmlhttp.open("GET", url, true);
   xmlhttp.setRequestHeader("Content-Type", "application/json");
   xmlhttp.send();
+}
+
+/**
+ * Spieler gleicher Spiellevels bekommen
+ */
+
+function getLevel(level) {
+  console.log("funktion für Level noch nicht da ");
 }
