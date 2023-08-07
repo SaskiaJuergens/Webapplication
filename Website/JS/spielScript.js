@@ -94,25 +94,33 @@ function showCard() {
 
   //hier wird von der Memorylist das jeweilige Element aufgerufen
   //Bedingung das nicht die selbe Karte angewählt wird
-  if (uncoverCards <= 2)
+  if (
+    uncoverCards <= 2 &&
+    this.getAttribute("src") != "../images/keineKarte.png"
+  ) {
     this.setAttribute("src", MemoryList[this.getAttribute("id")].src);
 
-  uncoverCards += 1;
-  console.log("uncoveredCardsNumber" + uncoverCards);
-  if (uncoverCards == 1) {
-    console.log("firstcardSet" + uncoverCards);
-    firstCard = this;
-  }
-  if (uncoverCards == 2) {
-    secondCard = this;
     uncoverCards += 1;
-    console.log("secondcardset" + uncoverCards);
+    console.log("uncoveredCardsNumber" + uncoverCards);
+    if (uncoverCards == 1) {
+      console.log("firstcardSet" + uncoverCards);
+      firstCard = this;
+    }
+    if (uncoverCards == 2) {
+      if (this != firstCard) {
+        secondCard = this;
+        uncoverCards += 1;
+        console.log("secondcardset" + uncoverCards);
 
-    if (firstCard.src == secondCard.src) {
-      setTimeout(pairCard, 1000);
-    } else {
-      setTimeout(returnCard, 1000);
-      console.log("secondcardsetumdrehen" + uncoverCards);
+        if (firstCard.src == secondCard.src) {
+          setTimeout(pairCard, 1000);
+        } else {
+          setTimeout(returnCard, 1000);
+          console.log("secondcardsetumdrehen" + uncoverCards);
+        }
+      } else {
+        uncoverCards -= 1;
+      }
     }
   }
 }
