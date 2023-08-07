@@ -22,7 +22,7 @@
    if (!mysqli_query($conn, $sql)) {
         die("Insert fehlgeschlagen: " . mysqli_error());
     } else {
-        echo "Das Spiel um $Datetime Uhr wurde erfolgreich hinzugefügt!";
+        echo "Das Spiel um $Datetime Uhr des Spielers $initiator  wurde erfolgreich hinzugefügt!";
     }
 // Verbindung zur Datenbank schließen
 $conn->close();

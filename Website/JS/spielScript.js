@@ -13,6 +13,7 @@ var secondCard = false;
 var cardPair = 0;
 var cardList = new Array();
 var card = 0;
+var inGame = false;
 //timer noch nicht eingesetzt
 var timerId;
 var levelStartTime = 180; //    Sekunden
@@ -24,9 +25,9 @@ var einzeln = 1; // Beispielwert für einzeln (1 oder 0)
 var Datetime = "2023-08-04 12:00"; // Beispielwert für Datetime
 var dauer = 60; // Beispielwert für dauer
 var verlauf = "Spielverlauf hier"; // Beispielwert für verlauf
-var mitspieler = "3"; // Beispielwert für mitspieler
-var gewinner = "4"; // Beispielwert für gewinner
-var initiator = "3"; // Beispielwert für initiator
+var mitspieler = "NULL"; // Beispielwert für mitspieler
+var gewinner = "NULL"; // Beispielwert für gewinner
+var initiator = "NULL"; // Beispielwert für initiator
 
 //spieler der Session
 var spielerId;
@@ -67,8 +68,9 @@ function setup() {
 //leere karten werden gezeichnet
 function drawMemory() {
   var ULlist = document.getElementById("cards");
-  var ULlist = document.getElementById("cards");
+
   for (var i = 0; i < MemoryList.length; i++) {
+    console.log("ersterclick");
     var index = i;
     card = document.createElement("IMG");
     card.setAttribute("src", "../images/leereKarte.png");
@@ -87,6 +89,7 @@ function drawMemory() {
     cardList.push(card);
     ULlist.appendChild(cardList[i]);
     //event karte checken
+    console.log("card");
     card.addEventListener("click", showCard);
   }
 }
@@ -140,6 +143,7 @@ function pairCard() {
     document.getElementById("gameEnd").innerHTML = "Du hast gewonnen!";
     //TO DO Daten einsetzen insert Spiel
     getCurrentDateTime();
+    initiator = spielerId;
     insertSpiel(
       einzeln,
       Datetime,
@@ -166,17 +170,25 @@ function displayMemoryList() {
 //Funktionen werden ausgeführt
 //muss bei jedem Spielstart neu gemischt werden
 function SpielStarten() {
-  if (document.getElementById("cards").innerHTML === "")
+  if (inGame == false && MemoryList.length != 0) {
+    checkSession();
+    displayMemoryList();
+    drawMemory();
+    startCountdown();
     document.getElementById("result").innerHTML = " ";
-  document.getElementById("gameEnd").innerHTML = "";
-  displayMemoryList();
-  drawMemory();
-  startCountdown();
+    document.getElementById("gameEnd").innerHTML = "";
+    document.getElementById("response").innerHTML = " ";
+    inGame = true;
+  } else {
+    document.getElementById("result").innerHTML =
+      "Warte einen Moment bis die Spielkarten aus der Datenbank";
+  }
 }
 
 //Spiel wird abgebrochen
 //hier noch ein bug, wenn Spielstop muss man auch wieder Start drücken können
 function SpielStop() {
+  inGame = false;
   var elem = document.getElementById("cards");
   var elemlength = document
     .getElementById("cards")
@@ -199,6 +211,7 @@ function SpielStop() {
   //TO DO Daten einsetzen insert Spiel
   spielDauer(); // berechnet Spieldauer
   getCurrentDateTime(); // berechnet aktuelles Datum
+  initiator = spielerId;
   insertSpiel(
     einzeln,
     Datetime,
@@ -232,6 +245,7 @@ function updateCountdown() {
     spielDauer(); // berechnet Spieldauer
     getCurrentDateTime(); // berechnet aktuelles Datum
     dauer = levelStartTime; //Startzeit in Sekunden
+    initiator = spielerId;
     insertSpiel(
       einzeln,
       Datetime,
@@ -364,21 +378,27 @@ function ajaxShowCards(event) {
 //die aktuelle session checken
 
 function checkSession() {
-  $.ajax({
-    url: "getSession.php",
-    type: "GET",
-    dataType: "json",
-    success: function (data) {
-      if (data.isLoggedIn) {
-        // Der Benutzer ist angemeldet, und Sie können auf die 'spielerId' zugreifen
-        spielerId = data.spielerId;
-        console.log("Benutzer ist angemeldet. Spieler-ID: " + spielerId);
+  var xmlhttp = new XMLHttpRequest();
+
+  xmlhttp.onreadystatechange = function () {
+    if (xmlhttp.readyState === 4) {
+      if (xmlhttp.status === 200) {
+        var data = JSON.parse(xmlhttp.responseText);
+
+        if (data.isLoggedIn) {
+          // Der Benutzer ist angemeldet, und Sie können auf die 'spielerId' zugreifen
+          spielerId = data.spielerId;
+          console.log("Benutzer ist angemeldet. Spieler-ID: " + spielerId);
+        } else {
+          console.log("Benutzer ist nicht angemeldet.");
+        }
       } else {
-        console.log("Benutzer ist nicht angemeldet.");
+        console.log("Fehler beim Abrufen der Session-Daten.");
       }
-    },
-    error: function () {
-      console.log("Fehler beim Abrufen der Session-Daten.");
-    },
-  });
+    }
+  };
+
+  xmlhttp.open("GET", "../php/getSession.php", true);
+  xmlhttp.setRequestHeader("Content-Type", "application/json");
+  xmlhttp.send();
 }
