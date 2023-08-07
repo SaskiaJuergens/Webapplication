@@ -95,8 +95,6 @@ function checkSession() {
     session_start();
     $response = array();
 
-
-
     if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
         $response["isLoggedIn"] = true;
         $response["spielerId"] = $_SESSION["id"];
