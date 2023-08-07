@@ -3,6 +3,10 @@
 //diese Php-seite funktioniert richtig, wenn man sie über das Formular auf Spieleinstellung.html aufruft
 include 'setupDB.php';
 
+//muss testen ob richtiger Auruf an dieser Stelle, dann kann man mehrere Funktionen in eins!
+uploadCard();
+
+function uploadCard(){
 // Werte aus dem Formular abrufen
 $cardTable = 'karte';   //Update consistent Wert
 $name = $_POST['name']; //Frage nach Title
@@ -34,6 +38,8 @@ if ($imageSize1 <= 100 * 1024 && $imageSize2 <= 100 * 1024) {
 } else {
     echo'<h2>Das Bild darf maximal 100 KiB groß sein.</h2>';
 }
+}
+
 
 
 

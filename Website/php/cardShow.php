@@ -5,6 +5,10 @@
 
 include "setupDB.php";
 
+cardShow();
+
+function cardShow(){
+global $conn;
 $tname = 'karte';
 $sql = "SELECT * FROM $tname";
 $result = $conn->query($sql);
@@ -18,5 +22,7 @@ while ($row = $result->fetch_assoc()) {
 
 $ps = json_encode($rows);
 echo ($ps);
+}
+
 $conn->close();
 ?> 

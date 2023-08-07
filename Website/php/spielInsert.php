@@ -2,7 +2,11 @@
 // Das PHP-Programm, um ein Buch in die Tabelle Spiel hinzuzufügen.
  include 'setupDB.php';
 
-  
+
+ insetSpiel();
+
+function insetSpiel(){
+    global $conn;
     $einzeln = $_POST['einzeln'];
     $Datetime = $_POST['Datetime'];
     $dauer = $_POST['dauer'];
@@ -24,6 +28,8 @@
     } else {
         echo "Das Spiel um $Datetime Uhr des Spielers $initiator  wurde erfolgreich hinzugefügt!";
     }
+
+}
 // Verbindung zur Datenbank schließen
 $conn->close();
 ?> 
