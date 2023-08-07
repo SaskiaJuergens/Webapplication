@@ -152,6 +152,7 @@ function pairCard() {
     //TO DO Daten einsetzen insert Spiel
     getCurrentDateTime();
     initiator = spielerId;
+    verlauf = "gewonnen";
     insertSpiel(
       einzeln,
       Datetime,
@@ -219,6 +220,7 @@ function SpielStop() {
   //TO DO Daten einsetzen insert Spiel
   spielDauer(); // berechnet Spieldauer
   getCurrentDateTime(); // berechnet aktuelles Datum
+  verlauf = "abgebrochen";
   initiator = spielerId;
   insertSpiel(
     einzeln,
