@@ -20,110 +20,147 @@
     <script src="main.js"></script>
   </head>
   <body>
-      <div class="colored-background">
-          <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-              <a href="startscreen.html" Link class="logo">
-                  <img src="../images/slacklogo.png" alt="Logo" />
+    <div class="colored-background">
+      <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <a href="startscreen.html" Link class="logo">
+          <img src="../images/slacklogo.png" alt="Logo" />
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active nav-item-custom">
+              <a class="nav-link" href="Spiel.html"
+                >Spielen <span class="sr-only">(current)</span></a
+              >
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Spieleinstellungen
               </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="SpielEinstellungen.html"
+                  >Spielverwaltung</a
+                >
+                <a class="dropdown-item" href="adminSpielinhalt.html"
+                  >Spielinhalt</a
+                >
 
-              <button class="navbar-toggler"
-                      type="button"
-                      data-toggle="collapse"
-                      data-target="#navbarSupportedContent"
-                      aria-controls="navbarSupportedContent"
-                      aria-expanded="false"
-                      aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-              </button>
-
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav mr-auto">
-                      <li class="nav-item active nav-item-custom">
-                          <a class="nav-link" href="Spiel.html">Spielen <span class="sr-only">(current)</span></a>
-                      </li>
-
-                      <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle"
-                             href="#"
-                             id="navbarDropdown"
-                             role="button"
-                             data-toggle="dropdown"
-                             aria-haspopup="true"
-                             aria-expanded="false">
-                              Spieleinstellungen
-                          </a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="SpielEinstellungen.html">Spielverwaltung</a>
-                              <a class="dropdown-item" href="adminSpielinhalt.html">Spielinhalt</a>
-
-                              <a class="dropdown-item" href="adminSpielstand.html">Spielstand</a>
-                          </div>
-                      </li>
-                      <li class="nav-item active nav-item-custom">
-                          <a class="nav-link" href="login.html">Login <span class="sr-only">(current)</span></a>
-                      </li>
-                      <li class="nav-item active nav-item-custom">
-                          <a class="nav-link" href="Impressum.html">Impressum <span class="sr-only">(current)</span></a>
-                      </li>
-                  </ul>
-                  <form class="form-inline my-2 my-lg-0">
-                      <input class="form-control mr-sm-2"
-                             type="search"
-                             placeholder="Search"
-                             aria-label="Search" />
-                      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
-                          Search
-                      </button>
-                  </form>
+                <a class="dropdown-item" href="adminSpielstand.html"
+                  >Spielstand</a
+                >
               </div>
-          </nav>
+            </li>
+            <li class="nav-item active nav-item-custom">
+              <a class="nav-link" href="login.html"
+                >Login <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item active nav-item-custom">
+              <a class="nav-link" href="Impressum.html"
+                >Impressum <span class="sr-only">(current)</span></a
+              >
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </nav>
 
+      <div class="table-background">
+        <h1><b>Level</b></h1>
+        <p>Alle vorhandenen Spiellevel</p>
+        <div style="overflow-x: auto">
+          <table id="levelTable" style="width: 100%">
+            <thead>
+              <tr>
+                <td>Level</td>
+                <td>Spielzeit</td>
+                <td>Kartenanzahl</td>
+              </tr>
+            </thead>
+            <tbody id="levelData">
+              <!-- Placeholder for dynamic data -->
+            </tbody>
+          </table>
+        </div>
+        <br />
 
-          <div class="table-background">
-              <h1><b>Level</b></h1>
-              <p>Alle vorhandenen Spiellevel</p>
-              <div style="overflow-x: auto">
-                  <table id="levelTable" style="width: 100%">
-                      <thead>
-                          <tr>
-                              <td>Level</td>
-                              <td>Spielzeit</td>
-                              <td>Kartenanzahl</td>
-                          </tr>
-                      </thead>
-                      <tbody id="levelData">
-                          <!-- Placeholder for dynamic data -->
-                      </tbody>
-                  </table>
-              </div>
-              <br />
+        <h1><b>Spiel</b></h1>
+        <p>Alle Spiele</p>
+        <div style="overflow-x: auto">
+          <table id="spielTable" style="width: 100%">
+            <thead>
+              <tr>
+                <td>Datum</td>
+                <td>Level</td>
+                <td>Dauer</td>
+                <td>Spielart</td>
+                <td>Spieler</td>
+                <td>Gewinner</td>
+                <td>Verlauf</td>
+              </tr>
+            </thead>
+            <tbody id="spielData">
+              <!-- Placeholder for dynamic data -->
+            </tbody>
+          </table>
+        </div>
+        <br />
 
-              <h1><b>Spiel</b></h1>
-              <p>Alle Spiele</p>
-              <div style="overflow-x: auto">
-                  <table id="spielTable" style="width: 100%">
-                      <thead>
-                          <tr>
-                              <td>Datum</td>
-                              <td>Level</td>
-                              <td>Dauer</td>
-                              <td>Spielart</td>
-                              <td>Spieler</td>
-                              <td>Gewinner</td>
-                              <td>Verlauf</td>
-                          </tr>
-                      </thead>
-                      <tbody id="spielData">
-                          <!-- Placeholder for dynamic data -->
-                      </tbody>
-                  </table>
-              </div>
-              <br />
-          </div>
+        <h2><b>Spielkarten</b></h2>
+        <p>Alle im Spiel enthaltenen Spielkarten.</p>
+
+        <div style="overflow-x: auto">
+          <table id="spieler-tabelle" style="width: 100%">
+            <thead id="theadCard">
+              <tr>
+                <!--<th>Künstler*innen</th>-->
+                <th>Bildtitel</th>
+                <th>Bild</th>
+                <th>Künstler*in</th>
+              </tr>
+            </thead>
+            <tbody id="resultCard">
+              <!-- Table rows will be added dynamically using JavaScript -->
+            </tbody>
+          </table>
+        </div>
       </div>
- 
- <!-- Include the JavaScript file -->
-    <script src="../JS/fetchdata.js"></script>
+    </div>
+
+    <!-- Include the JavaScript file -->
+    <script src="../JS/Datenbank_Ajax.js"></script>
+
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
