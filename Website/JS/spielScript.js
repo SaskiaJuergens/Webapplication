@@ -18,7 +18,9 @@ var inGame = false;
 var timerId;
 var levelStartTime = 180; //    Sekunden
 var startTime = levelStartTime; // startzeit am spielanfang
-var MemoryList = [];
+
+//angemeldet status
+var statusAngemeldet;
 
 //variablen für hochladen eines neuen Spiels
 var einzeln = 1; // Beispielwert für einzeln (1 oder 0)
@@ -32,28 +34,10 @@ var initiator = "NULL"; // Beispielwert für initiator
 //spieler der Session
 var spielerId;
 
-var items = [
-  {
-    title: "Les demoiselles d'Avignon",
-    src: "../images/lesDemoisellesdAvingnon.png",
-  },
-  { title: "The Starry Night", src: "../images/The-Starry-Night.png" },
-  { title: "Mona Lisa", src: "../images/Mona-Lisa.png" },
-  { title: "Der Schrei", src: "../images/der-schrei.png" },
-  {
-    title: "das Mädchen mit dem Perlohring",
-    src: "../images/das-maedchen-mit-dem-perlohring.png",
-  },
-  { title: "Garten in Giverny", src: "../images/Garten-in-Giverny.png" },
-  { title: "Der Kuss", src: "../images/Der-Kuss 1.png" },
-  {
-    title: "Turm der blauen Pferde",
-    src: "../images/turm-der-blauen-pferde.png",
-  },
-  //hier die fehlenden Bilder einfügen
-];
-
-items = [];
+//Spielkarten keine Paare
+var items = [];
+//Spielkarten mit Paaren (doppelt so lang)
+var MemoryList = [];
 
 //Eventhandler für HTML
 window.addEventListener("load", setup);
@@ -63,6 +47,7 @@ function setup() {
   var elem = document.getElementById("stop");
   elem.addEventListener("click", SpielStop);
   showResult();
+  checkSession();
 }
 
 //leere karten werden gezeichnet
@@ -179,58 +164,69 @@ function displayMemoryList() {
 //Funktionen werden ausgeführt
 //muss bei jedem Spielstart neu gemischt werden
 function SpielStarten() {
-  if (inGame == false && MemoryList.length != 0) {
-    checkSession();
-    displayMemoryList();
-    drawMemory();
-    startCountdown();
-    document.getElementById("result").innerHTML = " ";
-    document.getElementById("gameEnd").innerHTML = "";
-    document.getElementById("response").innerHTML = " ";
-    inGame = true;
+  if (statusAngemeldet == true) {
+    if (MemoryList.length != 0) {
+      if (inGame == false) {
+        displayMemoryList();
+        drawMemory();
+        startCountdown();
+        document.getElementById("result").innerHTML = " ";
+        document.getElementById("gameEnd").innerHTML = "";
+        document.getElementById("response").innerHTML = " ";
+        inGame = true;
+      }
+    } else {
+      document.getElementById("result").innerHTML =
+        "Warte einen Moment bis die Spielkarten aus der Datenbank";
+    }
   } else {
-    document.getElementById("result").innerHTML =
-      "Warte einen Moment bis die Spielkarten aus der Datenbank";
+    document.getElementById("gameEnd").innerHTML =
+      "Du musst dich erst Anmelden, damit du Spielen kannst.";
   }
 }
 
 //Spiel wird abgebrochen
 //hier noch ein bug, wenn Spielstop muss man auch wieder Start drücken können
 function SpielStop() {
-  inGame = false;
-  var elem = document.getElementById("cards");
-  var elemlength = document
-    .getElementById("cards")
-    .getElementsByClassName("gameCard");
-  while (elemlength.length > 0) {
-    elem.removeChild(elem.firstElementChild);
+  if (inGame == true) {
+    inGame = false;
+    var elem = document.getElementById("cards");
+    var elemlength = document
+      .getElementById("cards")
+      .getElementsByClassName("gameCard");
+    while (elemlength.length > 0) {
+      elem.removeChild(elem.firstElementChild);
+    }
+    //Variablen werden zurückgesetzt
+    document.getElementById("result").innerHTML = " ";
+    firstCard = false;
+    secondCard = false;
+    cardPair = 0;
+    cardList = new Array();
+    items = [];
+    MemoryList = [];
+    setup();
+    clearInterval(timerId);
+    document.getElementById("gameEnd").innerHTML =
+      "Du hast das Spiel gestoppt. Das Spiel gilt als verlohren!";
+    //TO DO Daten einsetzen insert Spiel
+    spielDauer(); // berechnet Spieldauer
+    getCurrentDateTime(); // berechnet aktuelles Datum
+    verlauf = "abgebrochen";
+    initiator = spielerId;
+    insertSpiel(
+      einzeln,
+      Datetime,
+      dauer,
+      verlauf,
+      mitspieler,
+      gewinner,
+      initiator
+    );
+  } else {
+    document.getElementById("gameEnd").innerHTML =
+      "Du musst das Spiel starten, um es zu beenden.";
   }
-  //Variablen werden zurückgesetzt
-  document.getElementById("result").innerHTML = " ";
-  firstCard = false;
-  secondCard = false;
-  cardPair = 0;
-  cardList = new Array();
-  items = [];
-  MemoryList = [];
-  setup();
-  clearInterval(timerId);
-  document.getElementById("gameEnd").innerHTML =
-    "Du hast das Spiel gestoppt. Das Spiel gilt als verlohren!";
-  //TO DO Daten einsetzen insert Spiel
-  spielDauer(); // berechnet Spieldauer
-  getCurrentDateTime(); // berechnet aktuelles Datum
-  verlauf = "abgebrochen";
-  initiator = spielerId;
-  insertSpiel(
-    einzeln,
-    Datetime,
-    dauer,
-    verlauf,
-    mitspieler,
-    gewinner,
-    initiator
-  );
 }
 
 function formatTime(seconds) {
@@ -399,8 +395,11 @@ function checkSession() {
           // Der Benutzer ist angemeldet, und Sie können auf die 'spielerId' zugreifen
           spielerId = data.spielerId;
           console.log("Benutzer ist angemeldet. Spieler-ID: " + spielerId);
+          statusAngemeldet = true;
+          console.log(statusAngemeldet);
         } else {
           console.log("Benutzer ist nicht angemeldet.");
+          statusAngemeldet = false;
         }
       } else {
         console.log("Fehler beim Abrufen der Session-Daten.");
