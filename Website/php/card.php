@@ -43,8 +43,6 @@ if ($imageSize1 <= 100 * 1024 && $imageSize2 <= 100 * 1024) {
 
 
 
-
-
 // Verbindung zur Datenbank schließen
 $conn->close();
 ?>

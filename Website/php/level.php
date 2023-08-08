@@ -25,6 +25,7 @@ levelShow();
 
 // Funktion zum Einfügen der Werte in die Tabelle
 function insertLevel($conn, $anzahl_karten, $spielZeit) {
+    global $conn;
     $sql = "INSERT INTO Level (anzahl_karten, spielZeit) VALUES ('$anzahl_karten', '$spielZeit')";
     if (!$conn->query($sql)) {
         $show = '<h2>Das Level gibt es schon. Wähle ein anderes</h2>';
