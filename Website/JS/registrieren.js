@@ -51,23 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
 
-    const email = emailInput.value;
-    const password = passwordInput.value;
-
-    console.log("E-Mail:", email);
-    console.log("Passwort:", password);
-
-    var data = {
-      spielname: $("#vorname").val() + " " + $("#nachname").val(),
-
-      email: $("#email").val(),
-      password: $("#password").val(),
-      action: "register",
-    };
-    console.log(data);
-
     insertLogin();
-    // Registrierung Ajax-Events für das Hinzufügen eines Buchs
+    // Registrierung Ajax-Events für das Hinzufügen eines Spielers
     // und send eine Anfrage
     function insertLogin() {
       // var insertButton = document.getElementById("insert");
@@ -78,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
       formData.append("nachname", $("#nachname").val());
       formData.append("email", $("#email").val());
       formData.append("password", $("#password").val());
-
+      formData.append("level", $("#level").val());
       formData.append("action", "register");
 
       var ajaxRequest = new XMLHttpRequest();

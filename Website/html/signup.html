@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>Registrierung</title>
-    <script src="../JS/signup.js"></script>
+    <script src="../JS/registrieren.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -12,7 +12,7 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
   </head>
 
   <body>
@@ -135,6 +135,15 @@
             required
           /><br /><br />
           <span id="confirmPasswordHint" class="hint"></span><br /><br />
+
+          <label for="level">Level eingeben</label>
+          <p>
+            Es gibt verschiedene Schwierigkeitstufen 1 ist leicht und um so
+            schwerer ein Level um so höher die Zahl
+          </p>
+          <br />
+          <input type="level" id="level" name="level" required /><br /><br />
+          <span id="levelHint" class="hint"></span><br /><br />
 
           <button
             type="button"

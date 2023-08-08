@@ -41,8 +41,8 @@ $spielname = $_POST['vorname'] .  ' ' . $_POST['nachname'];
 $nachname = $_POST['nachname'];
 $email = $_POST['email'];
 $passwort = $_POST['password'];
+$level = $_POST['level'];
 
-$level = 1;
 $show = '';
 
 if (isEmailRegistered($conn, $email)) {

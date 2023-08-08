@@ -126,7 +126,8 @@ p {
 input[type="text"],
 input[type="password"],
 input[type="email"],
-input[type="number"] {
+input[type="number"],
+input[type="level"] {
   border-radius: 20px;
   border: 1px solid rgb(120, 151, 232);
   background: white;
