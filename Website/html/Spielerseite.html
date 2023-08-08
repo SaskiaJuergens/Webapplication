@@ -85,28 +85,36 @@
 
     <div class="table-background">
       <!-- Spielerdetails -->
-      <div class="hoverEffekt" id="player-page" style="display: none">
+      <div class="hoverEffekt" id="player-page" >
         <h1 id="player-name"></h1>
-        <div id="player-details">
-          <h4>Spielverläufe:</h4>
-          <div style="overflow-x: auto">
-            <table id="game-table" style="width: 100%">
-              <thead>
-                <tr>
-                  <th style="color: rgba(74, 104, 183)" onclick="sortTable(0)">
-                    Date
-                  </th>
-                  <th style="color: rgba(74, 104, 183)" onclick="sortTable(1)">
-                    Level
-                  </th>
-                  <th>Duration</th>
-                  <th>Winner</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="tbody"></tbody>
-            </table>
-          </div>
+        <div id="player-details"></div>
+    
+          <h2><b>Spielverläufe:</b></h2>
+        <p>Alle im Spiele des Spielers</p>
+ <div style="overflow-x: auto">
+          <table id="spieler-tabelle" style="width: 100%">
+            <thead id="theadCard">
+              <tr>
+                <!--<th>Künstler*innen</th>-->
+                <th>einzeln</th>
+                <th>Datetime</th>
+                <th>verlauf</th>
+                 <th>mitspieler</th>
+                  <th>gewinner</th>
+                   
+                    <th>initiator</th>
+              </tr>
+            </thead>
+            <tbody id="resultCard">
+              <!-- Table rows will be added dynamically using JavaScript -->
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+    </div>
+
+   
 
           <!-- Hier wird das Säulendiagramm eingefügt -->
           <div class="chart-container">
