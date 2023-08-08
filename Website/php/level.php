@@ -37,22 +37,6 @@ function insertLevel($conn, $anzahl_karten, $spielZeit) {
 }
 
 
-//Tabelle Level wird als Json ausgegeben
-function levelShow(){
-global $conn;
-$tname = 'level';
-$sql = "SELECT * FROM $tname";
-$result = $conn->query($sql);
-$rows = array();
-
-while ($row = $result->fetch_assoc()) {
-
-    $rows[] = array('level'=>$level, 'anzahl_karten'=>$anzahl_karten, 'spielZeit'=>$spielZeit);
-} 
-
-$ps = json_encode($rows);
-echo ($ps);
-}
 
 
 // Verbindung zur Datenbank schließen
@@ -60,4 +44,4 @@ $conn->close();
 
 ?>
 
-<?php
+

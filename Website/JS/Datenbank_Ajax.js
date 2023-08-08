@@ -2,7 +2,7 @@
 window.addEventListener("load", setup);
 
 function setup() {
-  showResult();
+  // showResult();
 }
 
 // Registrierung Ajax-Events f�r das Anzeigen aller Karte und sende eine Anfrage
@@ -29,7 +29,6 @@ function ajaxShowCard(event) {
   }
   thead.appendChild(trh);
 
-
   // Tabelle-Rumpf
   var tbody = document.getElementById("resultCard");
   for (var i = 0; i < myObj.length; i++) {
@@ -47,7 +46,7 @@ function ajaxShowCard(event) {
     img.width = 30;
     img.src = bild;
     td2.appendChild(img);
-      tr.appendChild(td2);
+    tr.appendChild(td2);
 
     var td3 = document.createElement("td");
     var artist = myObj[i]["artist"];
@@ -57,7 +56,6 @@ function ajaxShowCard(event) {
     img.src = artist;
     td3.appendChild(img);
     tr.appendChild(td3);
-    
 
     tbody.appendChild(tr);
   }
