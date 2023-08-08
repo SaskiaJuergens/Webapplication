@@ -3,6 +3,7 @@
 
 include 'setupDB.php';
 
+
 // Werte aus dem Formular abrufen und die Funktion insertLevel() aufrufen (falls sie nur bei POST-Anfragen aufgerufen werden soll).
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Werte aus dem Formular abrufen
@@ -17,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 //Levels aus der DB auslesen
 if (isset($_GET["action"])) {
-levelShow();
+    levelShow();
 }
 
 
@@ -59,3 +60,4 @@ $conn->close();
 
 ?>
 
+<?php
