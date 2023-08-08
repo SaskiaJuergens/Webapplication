@@ -202,7 +202,7 @@ var playerData = {
   ],
 };
 
-//Eventhandler für HTML
+playerData = []; //Eventhandler für HTML
 
 window.addEventListener("load", setup);
 function setup() {
@@ -212,7 +212,8 @@ function setup() {
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get("elem");
   console.log(product);
-  showPlayerPage(product);
+  showSpiel();
+  // showPlayerPage(product);
 }
 
 // Funktion zum Anzeigen der Spielerseite und Aktualisierung der Spielerinformationen
@@ -229,7 +230,7 @@ function showPlayerPage(playerName) {
   // Spielerinformationen aktualisieren
   const playerInfo = playerData[playerName];
   const gameListBody = document.getElementById("game-list-body");
-  gameListBody.innerHTML = ""; // Vorherige Einträge löschen
+  //gameListBody.innerHTML = ""; // Vorherige Einträge löschen
 
   playerInfo.forEach((game) => {
     const row = document.createElement("tr");
@@ -276,4 +277,60 @@ function sortTable(columnIndex) {
   for (var i = 0; i < sortedRows.length; i++) {
     tbody.appendChild(sortedRows[i]);
   }
+}
+
+/**
+ * level werden angezeigt
+ */
+function showSpiel() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.addEventListener("load", ajaxShowSpiel);
+  xmlhttp.addEventListener("error", ajaxFehler);
+
+  xmlhttp.open("GET", "../php/spielShow.php");
+  xmlhttp.send();
+}
+
+//Level anzeigen
+// die Ajaxanfrage wird in eine Json-Liste umgewandelt
+
+function ajaxShowSpiel(event) {
+  var myObj = JSON.parse(event.target.responseText);
+
+  for (var i = 0; i < myObj.length; i++) {
+    var einzeln = myObj[i]["einzeln"];
+    var Datetime = myObj[i]["Datetime"];
+    var dauer = myObj[i]["dauer"];
+    var verlauf = myObj[i]["verlauf"];
+    var mitspieler = myObj[i]["mitspieler"];
+    var gewinner = myObj[i]["gewinner"];
+    var initiator = myObj[i]["initiator"];
+
+    // Ein Objekt mit title und src erstellen
+    var item = {
+      einzeln: einzeln,
+      Datetime: Datetime,
+      dauer: dauer,
+      verlauf: verlauf,
+      mitspieler: mitspieler,
+      gewinner: gewinner,
+      initiator: initiator,
+    };
+
+    console.log(item);
+    // Das erstellte Objekt der Liste hinzuf�gen
+    playerData.push(item);
+  }
+  console.log(playerData);
+}
+
+// Falls eine Ajax-Anfrage gescheitert ist ...
+function ajaxFehler(event) {
+  alert(event.target.statusText);
+}
+
+function displayPlayerGameData(playerID) {
+  var table = document.getElementById("game-table");
+  var tbody = table.getElementsByTagName("tbody")[0];
+  tbody.innerHTML = ""; // Clear the table body before adding rows
 }

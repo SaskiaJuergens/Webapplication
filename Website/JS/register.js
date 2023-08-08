@@ -87,7 +87,7 @@ function showLevels() {
 }
 
 /**
- * Karten werden angezeigt
+ * level werden angezeigt
  */
 function showLevels() {
   var xmlhttp = new XMLHttpRequest();

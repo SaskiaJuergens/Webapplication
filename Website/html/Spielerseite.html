@@ -17,7 +17,6 @@
       media="screen"
       href="../css/styles.css"
     />
-    <script src="../JS/SpielerDetails.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
@@ -91,25 +90,21 @@
         <div id="player-details">
           <h4>Spielverläufe:</h4>
           <div style="overflow-x: auto">
-            <table id="game-list" style="width: 100%">
-              <!-- Die Spielinformationen für den ausgewählten Spieler -->
+            <table id="game-table" style="width: 100%">
               <thead>
                 <tr>
                   <th style="color: rgba(74, 104, 183)" onclick="sortTable(0)">
-                    Spieldatum
+                    Date
                   </th>
                   <th style="color: rgba(74, 104, 183)" onclick="sortTable(1)">
                     Level
                   </th>
-                  <th>Spieldauer</th>
-                  <th>Spielanzahl</th>
-                  <th>Gewinner</th>
-                  <th>Spielverlauf</th>
+                  <th>Duration</th>
+                  <th>Winner</th>
+                  <th>Status</th>
                 </tr>
               </thead>
-              <tbody id="game-list-body">
-                <!-- Hier werden die Spielinformationen dynamisch eingefügt -->
-              </tbody>
+              <tbody id="tbody"></tbody>
             </table>
           </div>
 
@@ -152,6 +147,8 @@
     </a>
 
     <br /><br />
+
+    <script src="../JS/SpielerDetail.js"></script>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
