@@ -33,14 +33,14 @@ document.addEventListener("DOMContentLoaded", function () {
       formData.append("action", "login");
 
       var ajaxRequest = new XMLHttpRequest();
-      ajaxRequest.addEventListener("load", ajaxInsertSpiel);
+      ajaxRequest.addEventListener("load", ajaxInsertLogin);
       ajaxRequest.addEventListener("error", ajaxFehler);
       ajaxRequest.open("POST", "../php/session.php");
       ajaxRequest.send(formData);
     }
 
-    // Falls das Spiel erfolgreicht inzugefügt ist ...
-    function ajaxInsertSpiel(event) {
+    // Falls das erfolgreich angemeldet erfolgreicht inzugefügt ist ...
+    function ajaxInsertLogin(event) {
       document.getElementById("response").innerHTML = this.responseText;
     }
 

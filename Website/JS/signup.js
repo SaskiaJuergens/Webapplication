@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ajaxRequest.send(formData);
     }
 
-    // Falls das Spiel erfolgreicht inzugefügt ist ...
+    // Falls das signup erfolgreicht inzugefügt ist ...
     function ajaxInsertSpiel(event) {
       document.getElementById("response").innerHTML = this.responseText;
     }

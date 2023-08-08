@@ -81,6 +81,7 @@ function login() {
             $_SESSION["login"] = true;
             $_SESSION["id"] = $row["id"];
             echo "Login Successful";
+           
         } else {
                echo "Debug: Eingegebenes Passwort: $passwort  Gespeichertes Passwort: {$row['passwort']}";
             echo " Wrong Password";
@@ -88,6 +89,7 @@ function login() {
     } else {
         echo "User Not Registered";
     }
+   
 }
 
 
