@@ -82,7 +82,7 @@ function showLevels() {
   xmlhttp.addEventListener("load", ajaxShowLevel);
   xmlhttp.addEventListener("error", ajaxFehler);
 
-  xmlhttp.open("GET", "../php/cardShow.php");
+  xmlhttp.open("GET", "../php/level.php");
   xmlhttp.send();
 }
 
