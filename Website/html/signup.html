@@ -137,12 +137,15 @@
           <span id="confirmPasswordHint" class="hint"></span><br /><br />
 
           <label for="level">Level eingeben</label>
-          <p>
-            Es gibt verschiedene Schwierigkeitstufen 1 ist leicht und um so
-            schwerer ein Level um so höher die Zahl
-          </p>
+          <p id="levelAnleitung"></p>
           <br />
-          <input type="level" id="level" name="level" required /><br /><br />
+          <input
+            type="level"
+            id="level"
+            name="level"
+            onblur="checkLevel()"
+            required
+          /><br /><br />
           <span id="levelHint" class="hint"></span><br /><br />
 
           <button

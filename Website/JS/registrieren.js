@@ -1,3 +1,13 @@
+//Liste der Levels
+var LevelList = [];
+
+//Eventhandler für HTML
+window.addEventListener("load", setup);
+function setup() {
+  //Levels anzeigen und Bedingung stellen
+  showLevels();
+}
+
 //passwort
 document.addEventListener("DOMContentLoaded", function () {
   var passwordInput = document.getElementById("password");
@@ -7,6 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
   confirmPasswordInput.addEventListener("blur", checkPasswordsMatch);
 });
 
+/**
+ * Passwort wird auf Korrektheit geprüft
+ */
 function checkPassword() {
   var password = document.getElementById("password").value;
   var passwordHint = document.getElementById("passwordHint");
@@ -28,6 +41,9 @@ function checkPassword() {
   }
 }
 
+/**
+ * Passwort zweite Eingabe wird auf Korrektheit geprüft
+ */
 function checkPasswordsMatch() {
   var password = document.getElementById("password").value;
   var confirmPassword = document.getElementById("confirmPassword").value;
@@ -44,8 +60,64 @@ function checkPasswordsMatch() {
   }
 }
 
-function getLevels() {}
+/**
+ * Leveleingabe wird auf Korektheit geprüft
+ */
+function checkLevel() {
+  var level = document.getElementById("level").value;
+  if (level > LevelList.length) {
+    confirmPasswordHint.textContent = "Das Level gibt es nicht";
+    submitButton.disabled = true;
+  } else {
+    confirmPasswordHint.textContent = "";
+    submitButton.disabled = false;
+  }
+}
 
+/**
+ * Karten werden angezeigt
+ */
+function showLevels() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.addEventListener("load", ajaxShowLevel);
+  xmlhttp.addEventListener("error", ajaxFehler);
+
+  xmlhttp.open("GET", "../php/cardShow.php");
+  xmlhttp.send();
+}
+
+//Level anzeigen
+// die Ajaxanfrage wird in eine Json-Liste umgewandelt
+function ajaxShowLevel(event) {
+  var myObj = JSON.parse(event.target.responseText);
+
+  for (var i = 0; i < myObj.length; i++) {
+    var level = myObj[i]["level"];
+    var anzahl_karten = myObj[i]["anzahl_karten"];
+    var spielZeit = myObj[i]["spielZeit"];
+
+    // Ein Objekt mit title und src erstellen
+    var item = {
+      level: level,
+      anzahl_karten: anzahl_karten,
+      spielZeit: spielZeit,
+    };
+
+    // Das erstellte Objekt der Liste hinzufügen
+    LevelList.push(item);
+  }
+  console.log(LevelList.length);
+  var levelAnleitung = document.getElementById("levelAnleitung");
+  levelAnleitung.textContent =
+    "Suche dir ein Level zwischen 1 und " + LevelList.length + " aus.";
+}
+
+// Falls eine Ajax-Anfrage gescheitert ist ...
+function ajaxFehler(event) {
+  alert(event.target.statusText);
+}
+
+//Registrieren mit Ajax
 document.addEventListener("DOMContentLoaded", function () {
   const submitButton = document.getElementById("submitButton");
 
