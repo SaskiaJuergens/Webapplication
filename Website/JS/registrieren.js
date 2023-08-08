@@ -44,6 +44,8 @@ function checkPasswordsMatch() {
   }
 }
 
+function getLevels() {}
+
 document.addEventListener("DOMContentLoaded", function () {
   const submitButton = document.getElementById("submitButton");
 
