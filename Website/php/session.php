@@ -91,6 +91,8 @@ function login() {
 }
 
 
+
+// hier hole ich die daten des angemldeten spielers, oder finde raus, dass niemand angemeldet ist
 function checkSession() {
     session_start();
     $response = array();
@@ -98,7 +100,15 @@ function checkSession() {
     if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
         $response["isLoggedIn"] = true;
         $response["spielerId"] = $_SESSION["id"];
-      
+        
+        $spieler = getSpieler($_SESSION["id"]);
+
+        if ($spieler) {
+            $response["email"] = $spieler["email"];
+            $response["passwort"] = $spieler["passwort"];
+            $response["spielname"] = $spieler["spielname"];
+            $response["level"] = $spieler["level"];
+        }
     } else {
         $response["isLoggedIn"] = false;
     }
@@ -107,11 +117,29 @@ function checkSession() {
     echo json_encode($response);
 }
 
+// Hier werden alle Eigenschaften desangemeldetetn Spielers aus der DB geholt
+function getSpieler($spielerId) {
+   
+      global $conn;
+
+    if ($conn->connect_error) {
+        die("Verbindung fehlgeschlagen: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT email, passwort, spielname, level FROM spieler WHERE id = $spielerId";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row;
+    } else {
+        return null;
+    }
+}
+
+
 
 $conn->close();
-
-
-
 
 
 
