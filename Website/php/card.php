@@ -7,6 +7,7 @@ include 'setupDB.php';
 uploadCard();
 
 function uploadCard(){
+    global $conn;
 // Werte aus dem Formular abrufen
 $cardTable = 'karte';   //Update consistent Wert
 $name = $_POST['name']; //Frage nach Title
