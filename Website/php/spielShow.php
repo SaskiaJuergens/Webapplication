@@ -3,9 +3,9 @@
 
 include "setupDB.php";
 
-cardShow();
+spielShow();
 
-function cardShow(){
+function spielShow(){
 global $conn;
 $tname = 'Spiel';
 $sql = "SELECT * FROM $tname";

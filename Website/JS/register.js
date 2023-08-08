@@ -82,7 +82,19 @@ function showLevels() {
   xmlhttp.addEventListener("load", ajaxShowLevel);
   xmlhttp.addEventListener("error", ajaxFehler);
 
-  xmlhttp.open("GET", "../php/level.php");
+  xmlhttp.open("GET", "../php/levelShow.php");
+  xmlhttp.send();
+}
+
+/**
+ * Karten werden angezeigt
+ */
+function showLevels() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.addEventListener("load", ajaxShowLevel);
+  xmlhttp.addEventListener("error", ajaxFehler);
+
+  xmlhttp.open("GET", "../php/levelShow.php");
   xmlhttp.send();
 }
 
@@ -92,7 +104,7 @@ function ajaxShowLevel(event) {
   var myObj = JSON.parse(event.target.responseText);
 
   for (var i = 0; i < myObj.length; i++) {
-    var level = myObj[i]["level"];
+    var level = myObj[i]["Level"];
     var anzahl_karten = myObj[i]["anzahl_karten"];
     var spielZeit = myObj[i]["spielZeit"];
 
@@ -103,13 +115,13 @@ function ajaxShowLevel(event) {
       spielZeit: spielZeit,
     };
 
-    // Das erstellte Objekt der Liste hinzufügen
+    // Das erstellte Objekt der Liste hinzuf�gen
     LevelList.push(item);
   }
-  console.log(LevelList.length);
-  var levelAnleitung = document.getElementById("levelAnleitung");
-  levelAnleitung.textContent =
-    "Suche dir ein Level zwischen 1 und " + LevelList.length + " aus.";
+  console.log(LevelList);
+  var levelHint = document.getElementById("levelAnleitung");
+  levelHint.textContent =
+    "Suche dir ein Level von 1 bis " + LevelList.length + " aus.";
 }
 
 // Falls eine Ajax-Anfrage gescheitert ist ...

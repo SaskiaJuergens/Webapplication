@@ -6,9 +6,9 @@
 
 include "setupDB.php";
 
-cardShow();
+levelShow();
 
-function cardShow(){
+function levelShow(){
     global $conn;
     $tname = 'level';
     $sql = "SELECT * FROM $tname";

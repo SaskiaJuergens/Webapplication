@@ -2,7 +2,7 @@
 window.addEventListener("load", setup);
 
 function setup() {
-  // showResult();
+  showResult();
 }
 
 // Registrierung Ajax-Events f�r das Anzeigen aller Karte und sende eine Anfrage

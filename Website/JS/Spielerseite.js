@@ -56,7 +56,7 @@ var playerData = {
       duration: "16:00",
       playerCount: "1",
       winnerName: "-",
-        status: "gewonnen",
+      status: "gewonnen",
     },
     {
       date: "30.04.2023",
@@ -64,7 +64,7 @@ var playerData = {
       duration: "02:00",
       playerCount: "1",
       winnerName: "-",
-        status: "gewonnen",
+      status: "gewonnen",
     },
     // Weitere Spielverlaufsinformationen hier hinzufügen
   ],
