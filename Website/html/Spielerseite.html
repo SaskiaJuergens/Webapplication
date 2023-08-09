@@ -19,7 +19,7 @@
     />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
       <a href="startscreen.html" Link class="logo">
         <img src="../images/slacklogo.png" alt="Logo" />
       </a>
@@ -57,22 +57,47 @@
               Spieleinstellungen
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="SpielEinstellungen.html"
-                >Spielverwaltung</a
+              <a
+                id="adminSpielEinstellungen"
+                class="dropdown-item"
+                href="adminSpielEinstellungen.html"
+                >Spieleinstellung</a
               >
-              <a class="dropdown-item" href="adminSpielinhalt.html"
-                >Spielinhalt</a
+              <a
+                id="adminSpielinhalt"
+                class="dropdown-item"
+                href="adminSpielinhalt.html"
+                >Spielinhalt verwalten</a
               >
 
-              <a class="dropdown-item" href="adminSpielstand.html"
+              <a
+                id="playerSpielinhalt"
+                class="dropdown-item"
+                href="playerSpielinhalt.html"
+                
+                >Spielinhalt User</a
+              >
+
+              <a
+                id="Spielstand"
+                class="dropdown-item"
+                href="Spielstand.html"
                 >Spielstand</a
               >
             </div>
           </li>
           <li class="nav-item active nav-item-custom">
-            <a class="nav-link" href="login.html"
+            <a class="nav-link" href="login.html" id="Login"
               >Login <span class="sr-only">(current)</span></a
             >
+          </li>
+
+           <li class="nav-item active nav-item-custom">
+            <a class="nav-link" href="profil.html" id="Profil"
+              >Mein Profil <span class="sr-only">(current)</span></a
+            >
+          </li>
+       
           </li>
           <li class="nav-item active nav-item-custom">
             <a class="nav-link" href="Impressum.html"
@@ -82,7 +107,6 @@
         </ul>
       </div>
     </nav>
-
     <div class="table-background">
       <!-- Spielerdetails -->
       <div class="hoverEffekt" id="player-page" >
@@ -157,6 +181,8 @@
     <br /><br />
 
     <script src="../JS/SpielerDetail.js"></script>
+        <!-- session sichtbarkeiten check -->
+    <script src="../JS/SessionCheck.js"></script>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
