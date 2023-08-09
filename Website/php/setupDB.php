@@ -46,8 +46,8 @@ if (!$conn -> query($sql1)) {
     // Name und Attribute für DB level
     //wir haben in unserem Spiel noch einen Titel und ein zweites bild vom Künstler. Diese werden hier hinzugefügt
     //
-$lname = 'Level';
-$lname1 = 'Level';
+$lname = 'Spiellevel';
+$lname1 = 'level';
 $lname2 = 'anzahl_karten';
 $lname3 = 'spielZeit';
 

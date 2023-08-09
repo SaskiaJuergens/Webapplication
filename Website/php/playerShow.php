@@ -3,17 +3,17 @@
 
 include "setupDB.php";
 
-cardShow();
+playerShow();
 
-function cardShow(){
+function playerShow(){
 global $conn;
+
 $tname = 'spieler';
 $sql = "SELECT * FROM $tname";
 $result = $conn->query($sql);
 $rows = array();
 while ($row = $result->fetch_assoc()) {
-    
-    $rows[] = array('id'=>$row['id'], 'spielname'=>$row['spielname'], 'email'=>$row['email'],'passwort'=>$row['passwort'],'level'=>$row['level']);
+    $rows[] = array('spielname'=>$row['spielname'],'spielname'=>$row['spielname'], 'email'=>$row['email'], 'level'=>$row['level']);
 } 
 
 $ps = json_encode($rows);

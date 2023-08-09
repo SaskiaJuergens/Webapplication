@@ -17,7 +17,6 @@ function setup() {
 
 // Registrierung Ajax-Events f�r das Hinzuf�gen einer Karte und sende eine Anfrage
 function insertCard() {
-  console.log("Test");
   var bildSelect = document.getElementById("bild");
   var artistSelect = document.getElementById("artist");
   var name = document.getElementById("name").value;
@@ -38,10 +37,12 @@ function insertCard() {
 
 // Registrierung Ajax-Events für das Hinzufügen eines Levels und sende eine Anfrage
 function insertLevel() {
+    console.log("Test");
     var level = document.getElementById("level").value;
     var anzahl_karten = document.getElementById("anzahl_karten").value;
     var spielZeit = document.getElementById("spielZeit").value;
     var formData = new FormData();
+
     formData.append("level", level);
     formData.append("anzahl_karten", anzahl_karten);
     formData.append("spielZeit", spielZeit);

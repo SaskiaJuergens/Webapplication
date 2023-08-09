@@ -1,4 +1,5 @@
 <?php
+
 include 'setupDB.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -18,18 +19,19 @@ function uploadLevel(){
     $result = $conn->query($checkQuery);
 
     if ($result->num_rows > 0) {
-        echo '<h2>Das Level gibt es schon. Wähle ein anderes</h2>';
+        echo '<h2 style="color: red; font-size: 20px;">Das Spiellevel gibt es schon. Wähle ein anderes</h2>';
     } else {
         // level hinzufügen
-        $insertQuery = "INSERT INTO $levelTable(level, anzahl_karten, spielZeit) VALUES('$level', '$anzahl_karten', '$spielZeit')";
+        $sql = "INSERT INTO $levelTable(level, anzahl_karten, spielZeit) VALUES('$level', '$anzahl_karten', '$spielZeit')";
         
-        if (!$conn->query($insertQuery)) {
-            echo '<h2>Einfügen fehlgeschlagen: ' . $conn->error . '</h2>';
+        if (!$conn->query($sql)) {
+            echo '<h2 style="color: red; font-size: 20px;"> Einfügen fehlgeschlagen: ' . $conn->error . '</h2>';
         } else {
-            echo '<h2>Das Level mit der Spielzeit ' . $spielZeit . ' wurde hinzugefügt</h2>';
+            echo '<h2 style="font-size: 20px;">Das Spiellevel mit der Spielzeit ' . $spielZeit . ' wurde hinzugefügt</h2>';
         }
     }
 }
+
 
 // Verbindung zur Datenbank schließen
 $conn->close();
