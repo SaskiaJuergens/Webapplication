@@ -1,4 +1,4 @@
-// Beim Laden der Webseite wird die Funktion setup() aufgerufen
+﻿// Beim Laden der Webseite wird die Funktion setup() aufgerufen
 window.addEventListener("load", setup);
 
 var LevelList = [];
