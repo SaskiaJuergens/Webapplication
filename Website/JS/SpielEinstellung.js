@@ -36,21 +36,21 @@ function insertCard() {
   ajaxRequest.send(formData);
 }
 
-// Registrierung Ajax-Events f�r das Hinzuf�gen einer Karte und sende eine Anfrage
+// Registrierung Ajax-Events für das Hinzufügen eines Levels und sende eine Anfrage
 function insertLevel() {
-  var level = document.getElementById("level").value;
-  var anzahl_karten = document.getElementById("anzahl_karten").value;
-  var spielZeit = document.getElementById("spielZeit").value;
-  var formData = new FormData();
-  formData.append("level", level);
-  formData.append("anzahl_karten", anzahl_karten);
-  formData.append("spielZeit", spielZeit);
+    var level = document.getElementById("level").value;
+    var anzahl_karten = document.getElementById("anzahl_karten").value;
+    var spielZeit = document.getElementById("spielZeit").value;
+    var formData = new FormData();
+    formData.append("level", level);
+    formData.append("anzahl_karten", anzahl_karten);
+    formData.append("spielZeit", spielZeit);
 
-  var ajaxRequest = new XMLHttpRequest();
-  ajaxRequest.addEventListener("load", ajaxInsertKarte); // Corrected the event listener function name
-  ajaxRequest.addEventListener("error", ajaxFehler);
-  ajaxRequest.open("POST", "../php/level.php");
-  ajaxRequest.send(formData);
+    var ajaxRequest = new XMLHttpRequest();
+    ajaxRequest.addEventListener("load", ajaxInsertLevel);
+    ajaxRequest.addEventListener("error", ajaxFehler);
+    ajaxRequest.open("POST", "../php/level.php");
+    ajaxRequest.send(formData);
 }
 
 // Falls die Karte erfolgreich eingef�gt wurde ...

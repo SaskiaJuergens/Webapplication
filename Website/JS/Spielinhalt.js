@@ -68,6 +68,7 @@ function ajaxShowCard(event) {
     var tbody = document.getElementById("resultCard");
     for (var i = 0; i < myObj.length; i++) {
         var tr = document.createElement("tr");
+        tr.id = "cardRow_" + i; // Füge eine eindeutige ID für jede Zeile hinzu
 
         var td1 = document.createElement("td");
         var name = myObj[i]["name"];
@@ -92,6 +93,31 @@ function ajaxShowCard(event) {
         td3.appendChild(img);
         tr.appendChild(td3);
 
+        var td4 = document.createElement("td"); // Spalte für Löschen-Button
+        var deleteButton = document.createElement("button");
+        deleteButton.textContent = "Löschen";
+        deleteButton.addEventListener("click", function () {
+            deleteCard(tr.id);
+        });
+        td4.appendChild(deleteButton);
+        tr.appendChild(td4);
+
         tbody.appendChild(tr);
     }
+
+    // JavaScript-Code zum Löschen einer Zeile und der dazugehörigen Daten aus der Datenbank
+    function deleteCard(rowId) {
+        var confirmation = confirm("Möchtest du diese Karte wirklich löschen?");
+        if (confirmation) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.addEventListener("load", function () {
+                var row = document.getElementById(rowId);
+                row.parentNode.removeChild(row);
+            });
+            xmlhttp.addEventListener("error", ajaxFehler);
+
+            xmlhttp.open("POST", "../php/deleteCard.php", true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("id=" + rowId);
+        }
 }
