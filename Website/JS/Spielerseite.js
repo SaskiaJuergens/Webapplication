@@ -118,6 +118,7 @@ function ajaxShowSpiel(event) {
       gewinner: gewinner,
       initiator: initiator,
     };
+    console.log(item);
 
     // Tabelle-Rumpf
     var tbody = document.getElementById("resultCard");
@@ -146,11 +147,13 @@ function ajaxShowSpiel(event) {
 
       var td1 = document.createElement("td");
       var gewinner = getPlayerByID(spielerList, myObj[i]["gewinner"]);
+
       td1.appendChild(document.createTextNode(gewinner.spielname));
       tr.appendChild(td1);
 
       var td1 = document.createElement("td");
       var initiator = getPlayerByID(spielerList, myObj[i]["initiator"]);
+
       td1.appendChild(document.createTextNode(initiator.spielname));
       tr.appendChild(td1);
 
@@ -196,7 +199,7 @@ function showSpieler() {
   xmlhttp.addEventListener("load", ajaxShowSpieler);
   xmlhttp.addEventListener("error", ajaxFehler);
 
-  xmlhttp.open("GET", "../php/spielerShow.php");
+  xmlhttp.open("GET", "../php/playerShow.php");
   xmlhttp.send();
 }
 

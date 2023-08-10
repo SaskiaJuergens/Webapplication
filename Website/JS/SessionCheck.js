@@ -42,6 +42,10 @@ function checkSession() {
           ///Im folgendem werden Items der Navbar ein und ausgebelndet je nach dem wer angemeldet ist
           var login = document.getElementById("Login");
           login.style.display = "none";
+          if (spielerMail == "admin@memory.de") {
+            console.log("Der Admin ist angemeldet");
+          }
+
           if (spielerMail != "admin@memory.de") {
             console.log("admin ist nicht angemeldet"); // Der admin ist nicht angemeldet check
             //hier alles was speziell für admin raus
