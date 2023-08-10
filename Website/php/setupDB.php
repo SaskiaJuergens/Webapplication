@@ -104,7 +104,7 @@ $sname7 = 'initiator';
 $sname8 = 'id';
 
 $stype1 = 'BOOLEAN ';
-$stype2 = 'DATETIME';
+$stype2 = 'VARCHAR(20)';
 $stype3 = 'INT';
 $stype4 = 'VARCHAR(20)';
 $stype5 = 'INT(11)';

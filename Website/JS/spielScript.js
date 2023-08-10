@@ -231,6 +231,7 @@ function SpielStop() {
     getCurrentDateTime(); // berechnet aktuelles Datum
     verlauf = "abgebrochen";
     initiator = spielerId;
+
     insertSpiel(
       einzeln,
       Datetime,
@@ -319,7 +320,7 @@ function getCurrentDateTime() {
   const minutes = String(now.getMinutes()).padStart(2, "0");
 
   // Ausgabe im gewünschten Format
-  const formattedDateTime = `"${year}-${month}-${day} ${hours}:${minutes}"`;
+  const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}`;
   Datetime = formattedDateTime;
 }
 
@@ -345,7 +346,7 @@ function ajaxShowSpiel(event) {
 
   for (var i = 0; i < myObj.length; i++) {
     var einzeln = myObj[i]["einzeln"];
-    var Datetime = myObj[i]["Datetime"];
+    var Datetime = myObj[i][Datetime];
     var dauer = myObj[i]["dauer"];
     var verlauf = myObj[i]["verlauf"];
     var mitspieler = myObj[i]["mitspieler"];

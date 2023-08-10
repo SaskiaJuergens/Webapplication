@@ -21,8 +21,8 @@ function insertSpiel($conn, $einzeln, $Datetime, $dauer, $verlauf, $mitspieler, 
   header("Access-Control-Allow-Headers: Content-Type");
   header("Content-Type: application/json");
 
-  echo json_encode($response);*/
-}
+  echo json_encode($response);
+}*/
 
 $tname = 'spiel';
 $einzeln = $_POST['einzeln'];
@@ -33,8 +33,11 @@ $mitspieler = $_POST['mitspieler'];
 $gewinner = $_POST['gewinner'];
 $initiator = $_POST['initiator'];
 
+
+
+/** 
 // SQL query for adding data
-$sql = "INSERT INTO $tname (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', '$Datetime','$dauer','$verlauf', '$mitspieler', '$gewinner','$initiator')";
+$sql = "INSERT INTO $tname (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', 'Datetime','$dauer','$verlauf', '$mitspieler', '$gewinner','$initiator')";
 
 if (!mysqli_query($conn, $sql)) {
     die("Insert fehlgeschlagen: " . mysqli_error());
@@ -144,6 +147,9 @@ function fetchData(){
         die("Ungültige Aktion.");
     }
 }
+*/
+
+
 // Verbindung zur Datenbank schließen
 $conn->close();
 
