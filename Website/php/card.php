@@ -3,7 +3,7 @@
 //diese Php-seite funktioniert richtig, wenn man sie über das Formular auf Spieleinstellung.html aufruft
 include 'setupDB.php';
 
-//muss testen ob richtiger Auruf an dieser Stelle, dann kann man mehrere Funktionen in eins!
+//muss testen ob richtiger Aufruf an dieser Stelle, dann kann man mehrere Funktionen in eins!
 uploadCard();
 
 function uploadCard(){
@@ -25,20 +25,20 @@ if ($imageSize1 <= 100 * 1024 && $imageSize2 <= 100 * 1024) {
     $result = $conn->query($checkQuery);
 
     if ($result->num_rows > 0) {
-        echo'<h2>Die karte existiert bereits. Wähle einen anderen Namen.</h2>';
+        echo'<h2 style="color: red; font-size: 20px;"> Die Karte existiert bereits. Wähle einen anderen Namen.</h2>';
     } else {
         // Der SQL-Befehl für das Hinzufügen
         $sql = "INSERT INTO $cardTable(name, bild, artist) VALUES('$name', 0x" . bin2hex($blob1) . ", 0x" . bin2hex($blob2) . ")";
 
         if (!$conn->query($sql)) {
-            echo '<h2>Einfügen fehlgeschlagen: ' . $conn->error . '</h2>';
+            echo '<h2 style="color: red; font-size: 20px;"> Einfügen fehlgeschlagen: ' . $conn->error . '</h2>';
         } else {
-            echo '<h2>Die karte ' . $name . ' wurde erfolgreich hinzugefügt!</h2>';
+            echo '<h2 style="font-size: 20px;">Die Karte ' . $name . ' wurde erfolgreich hinzugefügt!</h2>';
         }
     }
 } else {
-    echo'<h2>Das Bild darf maximal 100 KiB groß sein.</h2>';
-}
+        echo'<h2 style="color: red; font-size: 20px;">Das Bild darf maximal 100 KiB groß sein.</h2>';
+    }
 }
 
 

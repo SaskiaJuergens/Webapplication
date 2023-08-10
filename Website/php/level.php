@@ -1,47 +1,41 @@
-
 <?php
 
 include 'setupDB.php';
 
-
-// Werte aus dem Formular abrufen und die Funktion insertLevel() aufrufen (falls sie nur bei POST-Anfragen aufgerufen werden soll).
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    uploadLevel();
+}
+
+function uploadLevel(){
+    global $conn;
     // Werte aus dem Formular abrufen
+    $levelTable = 'Spiellevel';
     $level = $_POST['level'];
     $anzahl_karten = $_POST['anzahl_karten'];
     $spielZeit = $_POST['spielZeit'];
 
-    // Daten aus dem Formular werden hinzugefügt
-    // Level klammern wir erstmal aus, da wir möchten, dass dies wie in Aufg.1 gewünscht über AUTO_INCREMENT funktioniert
-    insertLevel($conn, $anzahl_karten, $spielZeit);
-}
+    // überprüfen, ob das level bereits exestiert
+    $checkQuery = "SELECT * FROM $levelTable WHERE level = '$level'";
+    $result = $conn->query($checkQuery);
 
-//Levels aus der DB auslesen
-if (isset($_GET["action"])) {
-    levelShow();
-}
-
-
-
-
-// Funktion zum Einfügen der Werte in die Tabelle
-function insertLevel($conn, $anzahl_karten, $spielZeit) {
-    global $conn;
-    $sql = "INSERT INTO Level (anzahl_karten, spielZeit) VALUES ('$anzahl_karten', '$spielZeit')";
-    if (!$conn->query($sql)) {
-        $show = '<h2>Das Level gibt es schon. Wähle ein anderes</h2>';
+    if ($result->num_rows > 0) {
+        echo '<h2 style="color: red; font-size: 20px;">Das Spiellevel gibt es schon. Wähle ein anderes</h2>';
     } else {
-        $show = '<h2>Das Level mit der Spielzeit ' . $spielZeit . " wurde hinzugefügt</h2>";
+        // level hinzufügen
+        $sql = "INSERT INTO $levelTable(level, anzahl_karten, spielZeit) VALUES('$level', '$anzahl_karten', '$spielZeit')";
+        
+        if (!$conn->query($sql)) {
+            echo '<h2 style="color: red; font-size: 20px;"> Einfügen fehlgeschlagen: ' . $conn->error . '</h2>';
+        } else {
+            echo '<h2 style="font-size: 20px;">Das Spiellevel mit der Spielzeit ' . $spielZeit . ' wurde hinzugefügt</h2>';
+        }
     }
-    echo $show;
 }
-
-
 
 
 // Verbindung zur Datenbank schließen
 $conn->close();
-
 ?>
+
 
 
