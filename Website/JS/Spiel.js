@@ -181,8 +181,10 @@ function displayMemoryList() {
 //Funktionen werden ausgeführt
 //muss bei jedem Spielstart neu gemischt werden
 function SpielStarten() {
+  console.log(MemoryList.length);
   if (statusAngemeldet == true) {
     if (MemoryList.length != 0) {
+      console.log(MemoryList);
       if (inGame == false) {
         displayMemoryList();
         drawMemory();
@@ -222,7 +224,10 @@ function SpielStop() {
     cardList = new Array();
     items = [];
     MemoryList = [];
-    setup();
+    showResult();
+    checkSession();
+    showSpieler();
+    showSpiel();
     clearInterval(timerId);
     document.getElementById("gameEnd").innerHTML =
       "Du hast das Spiel gestoppt. Das Spiel gilt als verlohren!";
@@ -335,7 +340,7 @@ function showSpiel() {
   xmlhttp.addEventListener("load", ajaxShowSpiel);
   xmlhttp.addEventListener("error", ajaxFehler);
 
-  xmlhttp.open("GET", "../php/spielerShow.php");
+  xmlhttp.open("GET", "../php/playerShow.php");
   xmlhttp.send();
 }
 
@@ -489,7 +494,7 @@ function showSpieler() {
   xmlhttp.addEventListener("load", ajaxShowSpieler);
   xmlhttp.addEventListener("error", ajaxFehler);
 
-  xmlhttp.open("GET", "../php/spielerShow.php");
+  xmlhttp.open("GET", "../php/playerShow.php");
   xmlhttp.send();
 }
 
