@@ -3,6 +3,14 @@ var spielerList = [];
 
 var playerData = []; //Eventhandler für HTML
 var currentID;
+//Tabelle in HTML
+var ctx = document.getElementById("myChart").getContext("2d");
+
+//Counter für Diagramm
+
+var gewonnenCounter = 0;
+var verlohrenCounter = 0;
+var abgebrochenCounter = 0;
 
 window.addEventListener("load", setup);
 function setup() {
@@ -11,10 +19,14 @@ function setup() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get("elem");
+  currentID = product;
   console.log(product);
   showSpieler();
-  showSpiel();
 
+  setTimeout(function () {
+    showSpiel();
+  }, 500);
+  // Canvas-Element auswählen
   // showPlayerPage(product);
 }
 
@@ -108,74 +120,111 @@ function ajaxShowSpiel(event) {
     var gewinner = myObj[i]["gewinner"];
     var initiator = myObj[i]["initiator"];
 
-    // Ein Objekt mit title und src erstellen
-    var item = {
-      einzeln: einzeln,
-      Datetime: Datetime,
-      dauer: dauer,
-      verlauf: verlauf,
-      mitspieler: mitspieler,
-      gewinner: gewinner,
-      initiator: initiator,
-    };
-    console.log(item);
-
     // Tabelle-Rumpf
     var tbody = document.getElementById("resultCard");
     for (var i = 0; i < myObj.length; i++) {
-      var tr = document.createElement("tr");
+      if (
+        myObj[i]["initiator"] == currentID ||
+        myObj[i]["mitspieler"] == currentID
+      ) {
+        var tr = document.createElement("tr");
 
-      var td1 = document.createElement("td");
-      var einzeln = myObj[i]["einzeln"];
-      td1.appendChild(document.createTextNode(einzeln));
-      tr.appendChild(td1);
+        var td1 = document.createElement("td");
+        var einzeln = myObj[i]["einzeln"];
+        if (einzeln == 1) einzeln = "ja";
+        td1.appendChild(document.createTextNode(einzeln));
+        tr.appendChild(td1);
 
-      var td1 = document.createElement("td");
-      var Datetime = myObj[i]["Datetime"];
-      td1.appendChild(document.createTextNode(Datetime));
-      tr.appendChild(td1);
+        var td1 = document.createElement("td");
+        var Datetime = myObj[i]["Datetime"];
+        td1.appendChild(document.createTextNode(Datetime));
+        tr.appendChild(td1);
 
-      var td1 = document.createElement("td");
-      var verlauf = myObj[i]["verlauf"];
-      td1.appendChild(document.createTextNode(verlauf));
-      tr.appendChild(td1);
+        var td1 = document.createElement("td");
+        var dauer = myObj[i]["dauer"];
+        td1.appendChild(document.createTextNode(dauer));
+        tr.appendChild(td1);
 
-      var td1 = document.createElement("td");
-      var mitspieler = getPlayerByID(spielerList, myObj[i]["mitspieler"]);
-      td1.appendChild(document.createTextNode(initiator.mitspieler));
-      tr.appendChild(td1);
+        var td1 = document.createElement("td");
+        var verlauf = myObj[i]["verlauf"];
+        td1.appendChild(document.createTextNode(verlauf));
+        tr.appendChild(td1);
 
-      var td1 = document.createElement("td");
-      var gewinner = getPlayerByID(spielerList, myObj[i]["gewinner"]);
+        var td1 = document.createElement("td");
+        var mitspieler = getPlayerByID(spielerList, myObj[i]["mitspieler"]);
 
-      td1.appendChild(document.createTextNode(gewinner.spielname));
-      tr.appendChild(td1);
+        if (mitspieler.spielname == 0) {
+          mitspieler.spielname = "leer";
+        }
+        td1.appendChild(document.createTextNode(mitspieler.spielname));
+        tr.appendChild(td1);
 
-      var td1 = document.createElement("td");
-      var initiator = getPlayerByID(spielerList, myObj[i]["initiator"]);
+        var td2 = document.createElement("td");
+        var gewinner = getPlayerByID(spielerList, myObj[i]["gewinner"]);
 
-      td1.appendChild(document.createTextNode(initiator.spielname));
-      tr.appendChild(td1);
+        td2.appendChild(document.createTextNode(gewinner.spielname));
+        tr.appendChild(td2);
 
-      tbody.appendChild(tr);
+        //testen ob Inititiator currentID ist ist also der gerade gewünschte Spieler
+        var td1 = document.createElement("td");
+        var initiator = getPlayerByID(spielerList, myObj[i]["initiator"]);
+
+        td1.appendChild(document.createTextNode(initiator.spielname));
+        tr.appendChild(td1);
+
+        tbody.appendChild(tr);
+      }
+
+      console.log(verlauf);
+      //Vorbereitung des Diagramms Zahlen setzen
+      if (verlauf == "gewonnen") gewonnenCounter += 1;
+      if (verlauf == "verlohren") verlohrenCounter += 1;
+      if (verlauf == "abgebrochen") abgebrochenCounter += 1;
     }
-
-    console.log(item);
-    // Das erstellte Objekt der Liste hinzuf�gen
-    playerData.push(item);
   }
-  console.log(playerData);
-  var tupel = getPlayerByID(spielerList, 3);
-  console.log("tupel: " + tupel.spielname);
+
+  var labels = ["Gewonnen", "Verlohren", "abgebrochen"];
+  var data = [gewonnenCounter, verlohrenCounter, abgebrochenCounter];
+
+  // Diagramm wird erstellen
+  var myChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "Meine Spiele",
+          data: data,
+          backgroundColor: "rgba(75, 190, 190, 0.8)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            stepSize: 1, // Ganzzahlige Schrittweite
+          },
+        },
+      },
+    },
+  });
 }
 
-// Falls eine Ajax-Anfrage gescheitert ist ...
+/**
+ * Ajax schlägt fehl
+ * @param {} event
+ */
 function ajaxFehler(event) {
   alert(event.target.statusText);
 }
 
 /**
  * Gibt den angemeldeten Player zurück der über ID gesucht wird
+ *
  *
  * @param {*} data
  * @param {*} id

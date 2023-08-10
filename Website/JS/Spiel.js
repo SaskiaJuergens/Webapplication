@@ -181,10 +181,8 @@ function displayMemoryList() {
 //Funktionen werden ausgeführt
 //muss bei jedem Spielstart neu gemischt werden
 function SpielStarten() {
-  console.log(MemoryList.length);
   if (statusAngemeldet == true) {
     if (MemoryList.length != 0) {
-      console.log(MemoryList);
       if (inGame == false) {
         displayMemoryList();
         drawMemory();
@@ -234,9 +232,8 @@ function SpielStop() {
     //TO DO Daten einsetzen insert Spiel
     spielDauer(); // berechnet Spieldauer
     getCurrentDateTime(); // berechnet aktuelles Datum
-    verlauf = "abgebrochen";
+    verlauf = "verlohren";
     initiator = spielerId;
-
     insertSpiel(
       einzeln,
       Datetime,
@@ -291,10 +288,14 @@ function updateCountdown() {
 
 //aktuell verbliebene Zeit berechnen
 function spielDauer() {
-  console.log(document.getElementById("countdown").innerHTML);
+  console.log(
+    "mein Countdown" + document.getElementById("countdown").innerHTML
+  );
   var leftTime = document.getElementById("countdown").innerHTML;
-  const [hours, mins] = leftTime.split(":").map(Number);
-  var totalSeconds = hours * 3600 + mins * 60;
+  const [mins, sec] = leftTime.split(":").map(Number);
+  var totalSeconds = mins * 60 + sec;
+  console.log(totalSeconds);
+  console.log(levelStartTime);
   dauer = levelStartTime - totalSeconds;
 }
 
@@ -324,12 +325,9 @@ function getCurrentDateTime() {
   const hours = String(now.getHours()).padStart(2, "0");
   const minutes = String(now.getMinutes()).padStart(2, "0");
 
-  // Ausgabe im gewünschten Format
   const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}`;
   Datetime = formattedDateTime;
 }
-
-function spielBerechnen() {}
 
 // Spieler laden für Double Spiel
 /**
@@ -351,7 +349,7 @@ function ajaxShowSpiel(event) {
 
   for (var i = 0; i < myObj.length; i++) {
     var einzeln = myObj[i]["einzeln"];
-    var Datetime = myObj[i][Datetime];
+    var Datetime = myObj[i]["Datetime"];
     var dauer = myObj[i]["dauer"];
     var verlauf = myObj[i]["verlauf"];
     var mitspieler = myObj[i]["mitspieler"];
@@ -495,6 +493,7 @@ function showSpieler() {
   xmlhttp.addEventListener("error", ajaxFehler);
 
   xmlhttp.open("GET", "../php/playerShow.php");
+
   xmlhttp.send();
 }
 
@@ -528,10 +527,11 @@ function ajaxShowSpieler(event) {
 
 /**
  *
- * Abstatz für Doppelspiel
+ * Abstatz für Doppelspiel -----------------------------------------------------------------------------------------------
  */
 function startDoubleGame() {
   SpielerAnfrage();
+  spielerAntwort();
 }
 
 function SpielerAnfrage() {
@@ -588,22 +588,164 @@ var gegner = [];
 function createButtonsFromPlayers(players) {
   var buttonsContainer = document.getElementById("buttonAnfrage"); // Annahme: Hier ist ein HTML-Element für die Buttons
   console.log(players);
+
+  var h2Element = document.createElement("h3");
+  h2Element.textContent =
+    "Suche dir einen Mitspieler aus und schicke eine Nachricht";
+  buttonsContainer.appendChild(h2Element);
+
   for (var i = 0; i < players.length; i++) {
-    var player = players[i];
-    var button = document.createElement("button");
-    button.textContent = player.spielname;
-    console.log("test");
+    if (players[i].spielname != 0) {
+      var player = players[i];
+      var button = document.createElement("button");
+      button.classList.add("button-start");
+      button.textContent = player.spielname;
+      console.log("test");
 
-    // Verwende eine Hilfsfunktion, um den aktuellen Wert von 'player' in die Klosure einzuschließen
-    button.addEventListener("click", createClickListener(player));
+      // Verwende eine Hilfsfunktion, um den aktuellen Wert von 'player' in die Klosure einzuschließen
+      button.addEventListener("click", createClickListener(player));
 
-    buttonsContainer.appendChild(button);
+      buttonsContainer.appendChild(button);
+    }
   }
 }
 
+//Anfrage schreiben
 function createClickListener(player) {
   return function () {
     console.log(player.spielname);
-    // Hier kannst du den Code hinzufügen, der bei Klick auf den Button ausgeführt werden soll
+    mitspieler = player.id;
+
+    var anfrageDiv = document.getElementById("anfrage");
+
+    // Eingabefeld erstellen
+    var inputField = document.createElement("input");
+    inputField.type = "text";
+    inputField.id = "messageInput";
+    inputField.placeholder = "Nachricht eingeben";
+    anfrageDiv.appendChild(inputField);
+
+    // Button erstellen
+    var sendButton = document.createElement("button");
+
+    sendButton.classList.add("button-start");
+
+    sendButton.innerText = "Nachricht senden";
+    sendButton.addEventListener("click", function () {
+      var message = inputField.value;
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "../php/requestDoubleGame.php", true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            anfrageDiv.textContent = xhr.responseText;
+          } else {
+            alert("Fehler beim Senden der Nachricht.");
+          }
+        }
+      };
+      xhr.send(
+        "&mitspieler=" +
+          encodeURIComponent(mitspieler) +
+          "&message=" +
+          encodeURIComponent(message) +
+          "&sender=" +
+          encodeURIComponent(spielerId)
+      );
+    });
+
+    anfrageDiv.appendChild(sendButton);
+  };
+}
+
+function spielerAntwort() {
+  var anfrageEingehendDiv = document.getElementById("anfrageEingehend");
+
+  var h2Element = document.createElement("h3");
+  h2Element.textContent = "Eingegangene Anfragen";
+  anfrageEingehendDiv.appendChild(h2Element);
+
+  var receivedRequests = getReceivedRequestsFromDB();
+
+  for (var i = 0; i < receivedRequests.length; i++) {
+    var request = receivedRequests[i];
+    var requestno = receivedRequests[i];
+    var requestDiv = document.createElement("div");
+
+    var requestText = document.createElement("p");
+    requestText.textContent = "Anfrage von: " + request.sender;
+    requestDiv.appendChild(requestText);
+
+    var requestFrage = document.createElement("p");
+    requestFrage.textContent = request.message;
+    requestDiv.appendChild(requestFrage);
+
+    var acceptButton = document.createElement("button");
+    acceptButton.innerText = "Annehmen";
+    acceptButton.classList.add("button-color3");
+
+    acceptButton.addEventListener("click", createAcceptClickListener(request));
+
+    var declinetButton = document.createElement("button");
+    declinetButton.innerText = "nicht annehmen";
+    declinetButton.classList.add("button-color3");
+
+    declinetButton.addEventListener(
+      "click",
+      createAcceptClickListener(requestno)
+    );
+
+    requestDiv.appendChild(declinetButton);
+    anfrageEingehendDiv.appendChild(requestDiv);
+  }
+}
+
+function getReceivedRequestsFromDB() {
+  var mitspieler = spielerId;
+
+  var xhr = new XMLHttpRequest();
+  xhr.open(
+    "GET",
+    "../php/requestDoubleGame.php?mitspieler=" + mitspieler,
+    false
+  ); // Synchroner Request (nicht empfohlen in der Praxis)
+  xhr.send();
+
+  if (xhr.status === 200) {
+    var response = JSON.parse(xhr.responseText);
+    console.log(response);
+    return response.receivedRequests;
+  } else {
+    console.error("Fehler beim Abrufen der empfangenen Anfragen.");
+    return [];
+  }
+}
+
+function updateRequestInDB(requestId, newValue) {
+  // Hier die Logik einfügen, um die Anfrage in der DB zu aktualisieren
+  // Zum Beispiel durch eine AJAX-Anfrage an den Server
+}
+
+function createAcceptClickListener(request) {
+  return function () {
+    // Hier den Code einfügen, um den Spielzusage-Wert in der DB zu aktualisieren (z.B. per AJAX)
+    // und dann das angeklickte Anfrage-Div entfernen oder aktualisieren
+
+    // Beispiel: Annahme der Anfrage durch Aktualisierung des 'spielzusage' auf 1
+    updateRequestInDB(request.id, 1); // Annahme: Funktion, um die Anfrage in der DB zu aktualisieren
+    alert("Anfrage angenommen!");
+  };
+}
+
+function createAcceptClickListener(requestno) {
+  return function () {
+    // Hier den Code einfügen, um den Spielzusage-Wert in der DB zu aktualisieren (z.B. per AJAX)
+    // und dann das angeklickte Anfrage-Div entfernen oder aktualisieren
+
+    // Beispiel: Annahme der Anfrage durch Aktualisierung des 'spielzusage' auf 1
+    // Annahme: Funktion, um die Anfrage in der DB zu aktualisieren
+    alert("Anfrage nicht angenommen!");
   };
 }

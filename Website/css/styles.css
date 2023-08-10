@@ -431,6 +431,8 @@ td {
   cursor: pointer;
   transition-duration: 0.4s;
   margin: 0 6px 25px 6px;
+  background-color: rgba(74, 104, 183);
+  color: white;
 }
 
 .button-color1 {
@@ -439,6 +441,21 @@ td {
 }
 
 .button-color2 {
+  background-color: rgba(74, 104, 183);
+  color: white;
+}
+
+.button-color3 {
+  border-radius: 20px;
+  border: none;
+  padding: 12px 18px;
+  text-align: center;
+  text-decoration: solid;
+  font-size: 20px;
+  font-family: "Geologica", sans-serif;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  margin: 0 6px 25px 6px;
   background-color: rgba(74, 104, 183);
   color: white;
 }

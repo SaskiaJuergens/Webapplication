@@ -46,7 +46,7 @@ if (!$conn -> query($sql1)) {
     // Name und Attribute für DB level
     //wir haben in unserem Spiel noch einen Titel und ein zweites bild vom Künstler. Diese werden hier hinzugefügt
     //
-$lname = 'Spiellevel';
+$lname = 'Level';
 $lname1 = 'level';
 $lname2 = 'anzahl_karten';
 $lname3 = 'spielZeit';
@@ -121,6 +121,35 @@ if (!$conn -> query($sql3)) {
     die('Tabelle-Erzeugen fehlgeschlagen: ' . $conn -> error);
 }
 
+
+//Kommunikation zwischen sessions 
+$tblName = 'messages';
+$colID = 'id';
+$colSender = 'sender';
+$colmitspieler = 'mitspieler';
+$colMessage = 'message';
+$colTimestamp = 'timestamp';
+$colspielzusage = 'spielzusage';
+
+$colType1 = 'INT AUTO_INCREMENT PRIMARY KEY';
+$colType2 = 'VARCHAR(50)';
+$colType3 = 'VARCHAR(50)';
+$colType4 = 'TEXT';
+$colType5 = 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP';
+$colType6 = 'BOOLEAN ';
+
+// Tabelle Messages erzeugen, falls noch nicht vorhanden
+$sql = "CREATE TABLE IF NOT EXISTS $tblName (
+    $colID $colType1,
+    $colSender $colType2,
+    $colmitspieler $colType3,
+    $colMessage $colType4,
+    $colTimestamp $colType5,
+    $colspielzusage $colType6
+)";
+if (!$conn->query($sql)) {
+    die('Tabelle-Erzeugen fehlgeschlagen: ' . $conn->error);
+}
 
 
 

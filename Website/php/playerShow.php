@@ -13,7 +13,7 @@ $sql = "SELECT * FROM $tname";
 $result = $conn->query($sql);
 $rows = array();
 while ($row = $result->fetch_assoc()) {
-    $rows[] = array('spielname'=>$row['spielname'],'spielname'=>$row['spielname'], 'email'=>$row['email'], 'level'=>$row['level']);
+    $rows[] = array('id'=>$row['id'], 'spielname'=>$row['spielname'],'spielname'=>$row['spielname'], 'email'=>$row['email'], 'level'=>$row['level']);
 } 
 
 $ps = json_encode($rows);

@@ -115,14 +115,16 @@
     
           <h2><b>Spielverläufe:</b></h2>
         <p>Alle im Spiele des Spielers</p>
- <div style="overflow-x: auto">
+       <div style="overflow-x: auto">
           <table id="spieler-tabelle" style="width: 100%">
             <thead id="theadCard">
               <tr>
                 <!--<th>Künstler*innen</th>-->
                 <th>einzeln</th>
                 <th>Datetime</th>
+                 <th>Dauer</th>
                 <th>verlauf</th>
+               
                  <th>mitspieler</th>
                   <th>gewinner</th>
                    
@@ -134,53 +136,28 @@
             </tbody>
           </table>
         </div>
-        
-      </div>
-    </div>
-
-   
-
-          <!-- Hier wird das Säulendiagramm eingefügt -->
+        <br/> <br/>
+        <!-- Hier wird das Säulendiagramm eingefügt -->
+        <h2><b>Spielverläufe Übersicht</b></h2>
+        <p>Hier siehst du deine Spielverläufe als Diagramm</p>
           <div class="chart-container">
             <canvas id="myChart"></canvas>
           </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-          const ctx = document.getElementById("myChart");
-          new Chart(ctx, {
-            type: "bar",
-            data: {
-              labels: ["Gewonnen", "Verloren", "Abgebrochen", "Abgelaufen"],
-              datasets: [
-                {
-                  label: "Spiele",
-                  data: [2, 3, 5, 9],
-                  borderWidth: 1,
-                },
-              ],
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true,
-                },
-              },
-            },
-          });
-        </script>
-      </div>
-
-      <br /><br />
+  <br /><br />
+  
+          
+     </div>
+         
     </div>
-    <a href="adminSpielinhalt.html" class="button-BackToTabelle">
-      Zurück zur Tabelle
-    </a>
+     </div>
+     <!-- #region -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+      </div>
+<br /><br />
+  <br /><br />
 
-    <br /><br />
-
-    <script src="../JS/Spielerseite.js"></script>
+    <script src="../JS/spielerSeite.js"></script>
         <!-- session sichtbarkeiten check -->
     <script src="../JS/SessionCheck.js"></script>
 

@@ -7,13 +7,13 @@ levelShow();
 
 function levelShow(){
 global $conn;
-$tname = 'Spiellevel';
+$tname = 'Level';
 $sql = "SELECT * FROM $tname";
 $result = $conn->query($sql);
 $rows = array();
 while ($row = $result->fetch_assoc()) {
     
-    $rows[] = array('level'=>$row['level'], 'spielZeit'=>$row['spielZeit'], 'anzahl_karten'=>$row['anzahl_karten']);
+    $rows[] = array('level'=>$row['Level'], 'anzahl_karten'=>$row['anzahl_karten'], 'spielZeit'=>$row['spielZeit']);
 } 
 
 $ps = json_encode($rows);
@@ -22,3 +22,4 @@ echo ($ps);
 
 $conn->close();
 ?> 
+
