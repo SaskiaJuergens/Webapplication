@@ -34,8 +34,6 @@ $gewinner = $_POST['gewinner'];
 $initiator = $_POST['initiator'];
 
 
-
-/** 
 // SQL query for adding data
 $sql = "INSERT INTO $tname (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', 'Datetime','$dauer','$verlauf', '$mitspieler', '$gewinner','$initiator')";
 
@@ -46,6 +44,7 @@ if (!mysqli_query($conn, $sql)) {
 }
 
 
+//Kann weg?? ab hier?????????????????????????????????
 
 //aus spielername wird id bestimmt, um in der Tabelle Spiele suchen zu können
 function searchPlayer($name) {
@@ -147,7 +146,7 @@ function fetchData(){
         die("Ungültige Aktion.");
     }
 }
-*/
+
 
 
 // Verbindung zur Datenbank schließen
