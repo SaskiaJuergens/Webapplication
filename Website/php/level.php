@@ -28,7 +28,7 @@ function uploadLevel(){
         if (!$conn->query($sql)) {
             echo '<h2 style="color: red; font-size: 20px;"> Einfügen fehlgeschlagen: ' . $conn->error . '</h2>';
         } else {
-            echo '<h2 style="font-size: 20px;">Das Spiellevel mit der Spielzeit ' . $spielZeit . ' wurde hinzugefügt</h2>';
+            echo '<h2 style="color: green; font-size: 20px;">Das Spiellevel mit der Spielzeit ' . $spielZeit . ' wurde hinzugefügt</h2>';
         }
     }
 }
