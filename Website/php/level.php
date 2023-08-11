@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 function uploadLevel(){
     global $conn;
     // Werte aus dem Formular abrufen
-    $levelTable = 'Spiellevel';
+    $levelTable = 'level';
     $level = $_POST['level'];
     $anzahl_karten = $_POST['anzahl_karten'];
     $spielZeit = $_POST['spielZeit'];
@@ -20,7 +20,7 @@ function uploadLevel(){
     $result = $conn->query($checkQuery);
 
     if ($result->num_rows > 0) {
-        echo '<h2 style="color: red; font-size: 20px;">Das Spiellevel gibt es schon. Wähle ein anderes</h2>';
+        echo '<h2 style="color: red; font-size: 20px;">Das Level gibt es schon. Wähle ein anderes</h2>';
     } else {
         // level hinzufügen
         $sql = "INSERT INTO $levelTable(level, anzahl_karten, spielZeit) VALUES('$level', '$anzahl_karten', '$spielZeit')";
