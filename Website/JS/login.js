@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     console.log(data);
 
-    insertLogin();
+    if (email != 0) insertLogin();
     // Registrierung Ajax-Events für das Hinzufügen eines Buchs
     // und send eine Anfrage
     function insertLogin() {
