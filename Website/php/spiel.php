@@ -124,29 +124,6 @@ function fetchData(){
 }
 
 
-
-/*//Fuktion zum hochladen von Werten in die Tabelle spiel
-function insertSpiel($conn, $einzeln, $Datetime, $dauer, $verlauf, $mitspieler, $gewinner,$initiator) {
-  $sql = "INSERT INTO Spiel (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', '$Datetime','$dauer','$verlauf', '$mitspieler', '$gewinner','$initiator')";
-  
-  $response = array();
-
-  if (!$conn->query($sql)) {
-    $response["message"] = "Das Level gibt es schon. Wähle ein anderes";
-  } else {
-    $response["message"] = "Das Spiel wurde erfolgreich hochgeladen.";
-  }
-
-  // CORS-Header setzen
-  header("Access-Control-Allow-Origin: *");
-  header("Access-Control-Allow-Methods: POST");
-  header("Access-Control-Allow-Headers: Content-Type");
-  header("Content-Type: application/json");
-
-  echo json_encode($response);
-}*/
-
-
 // Verbindung zur Datenbank schließen
 $conn->close();
 

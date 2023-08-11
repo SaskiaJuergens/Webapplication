@@ -20,7 +20,10 @@ function setup() {
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get("elem");
   currentID = product;
-  console.log(product);
+
+    document.querySelector("#theadGame th:nth-child(8)").addEventListener("click", function () {
+        sortTable(7); // Assuming "Level" is the 8th column (0-based index)
+    });
   showSpieler();
 
   setTimeout(function () {
@@ -29,6 +32,8 @@ function setup() {
   // Canvas-Element auswählen
   // showPlayerPage(product);
 }
+
+
 
 // Funktion zum Anzeigen der Spielerseite und Aktualisierung der Spielerinformationen
 function showPlayerPage(playerName) {
@@ -77,35 +82,40 @@ function createTableCell(content) {
 
 // Funktion zum Sortieren der Tabelle nach Spieldatum oder Level
 function sortTable(columnIndex) {
-  var table = document.getElementById("game-list");
-  var tbody = table.getElementsByTagName("tbody")[0];
-  var rows = tbody.getElementsByTagName("tr");
-  var sortedRows = Array.from(rows);
+    var table = document.getElementById("spieler-tabelle");
+    var tbody = table.getElementsByTagName("tbody")[0];
+    var rows = tbody.getElementsByTagName("tr");
+    var sortedRows = Array.from(rows);
 
-  sortedRows.sort(function (a, b) {
-    var aValue = a.getElementsByTagName("td")[columnIndex].textContent;
-    var bValue = b.getElementsByTagName("td")[columnIndex].textContent;
-    return aValue.localeCompare(bValue);
-  });
+    sortedRows.sort(function (a, b) {
+        var aValue = a.getElementsByTagName("td")[columnIndex].textContent;
+        var bValue = b.getElementsByTagName("td")[columnIndex].textContent;
+        if (columnIndex === 7) { // If sorting the "Level" column
+            return parseInt(bValue) - parseInt(aValue); // Compare as numbers
+        } else {
+            return aValue.localeCompare(bValue);
+        }
+    });
 
-  for (var i = 0; i < sortedRows.length; i++) {
-    tbody.appendChild(sortedRows[i]);
-  }
+    for (var i = 0; i < sortedRows.length; i++) {
+        tbody.appendChild(sortedRows[i]);
+    }
 }
 
+
 /**
- * level werden angezeigt
+ * Spiel werden angezeigt
  */
 function showSpiel() {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.addEventListener("load", ajaxShowSpiel);
   xmlhttp.addEventListener("error", ajaxFehler);
 
-  xmlhttp.open("GET", "../php/spielShow.php");
+  xmlhttp.open("GET", "../php/spielShowSortieren.php");
   xmlhttp.send();
 }
 
-//Level anzeigen
+//Spiel anzeigen
 // die Ajaxanfrage wird in eine Json-Liste umgewandelt
 
 function ajaxShowSpiel(event) {
@@ -170,6 +180,11 @@ function ajaxShowSpiel(event) {
         var initiator = getPlayerByID(spielerList, myObj[i]["initiator"]);
 
         td1.appendChild(document.createTextNode(initiator.spielname));
+        tr.appendChild(td1);
+
+        var td1 = document.createElement("td");
+        var level = myObj[i]["level"];
+        td1.appendChild(document.createTextNode(level));
         tr.appendChild(td1);
 
         tbody.appendChild(tr);
