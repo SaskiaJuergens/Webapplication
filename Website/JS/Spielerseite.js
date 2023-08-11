@@ -154,7 +154,7 @@ function ajaxShowSpiel(event) {
         var mitspieler = getPlayerByID(spielerList, myObj[i]["mitspieler"]);
 
         if (mitspieler.spielname == 0) {
-          mitspieler.spielname = "leer";
+          mitspieler.spielname = "-";
         }
         td1.appendChild(document.createTextNode(mitspieler.spielname));
         tr.appendChild(td1);
@@ -178,7 +178,7 @@ function ajaxShowSpiel(event) {
       console.log(verlauf);
       //Vorbereitung des Diagramms Zahlen setzen
       if (verlauf == "gewonnen") gewonnenCounter += 1;
-      if (verlauf == "verlohren") verlohrenCounter += 1;
+      if (verlauf == "verloren") verlohrenCounter += 1;
       if (verlauf == "abgebrochen") abgebrochenCounter += 1;
     }
   }

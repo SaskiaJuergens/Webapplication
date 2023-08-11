@@ -36,7 +36,7 @@ var cardAnzahl; //Anzahl der karten je nach Level
 var einzeln = 1; // Beispielwert für einzeln (1 oder 0)
 var Datetime = "2023-08-04 12:00"; // Beispielwert für Datetime
 var dauer = 60; // Beispielwert für dauer
-var verlauf = "verlohren"; // Beispielwert für verlauf
+var verlauf = "verloren"; // Beispielwert für verlauf
 var mitspieler = "NULL"; // Beispielwert für mitspieler
 var gewinner = "NULL"; // Beispielwert für gewinner
 var initiator = "NULL"; // Beispielwert für initiator
