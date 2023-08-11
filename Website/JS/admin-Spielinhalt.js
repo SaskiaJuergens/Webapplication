@@ -139,7 +139,7 @@ function deleteLevel(rowId) {
       "Content-type",
       "application/x-www-form-urlencoded"
     );
-    xmlhttp.send("id=" + rowId);
+    xmlhttp.send("level=" + rowId);
   }
 }
 

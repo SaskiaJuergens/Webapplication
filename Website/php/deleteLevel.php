@@ -5,13 +5,13 @@ include 'setupDB.php';
 global $conn;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['id'])) {
-        $rowId = $_POST['id'];
+    if (isset($_POST['level'])) {
+        $rowId = $_POST['level'];
 
         // Sicherstellen, dass die übergebene ID gültig ist
         if (is_numeric($rowId)) {
             // SQL-Befehl zum Löschen des Levels mit der angegebenen ID
-            $sql = "DELETE FROM karte WHERE id = $rowId";
+            $sql = "DELETE FROM $Level WHERE $level = $rowId";
 
             if ($conn->query($sql)) {
                 echo "Das Level wurde erfolgreich gelöscht.";
