@@ -9,6 +9,40 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/styles.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // Funktion zum Abrufen der Daten
+        function getData() {
+            // AJAX-Anfrage an die serverseitige Datei senden
+            $.ajax({
+                url: 'profilShow.php',
+                type: 'GET',
+                dataType: 'html',
+                success: function(data) {
+
+                    // Spielerdaten im HTML-Format anzeigen
+                                     var playerHtml = '<h1>Hallo, willkommen auf deinem Profil</h1>';
+                                     playerHtml += '<p><strong>Vorname:</strong> ' + data.vorname + '</p>';
+                                     playerHtml += '<p><strong>Nachname:</strong> ' + data.nachname + '</p>';
+                                     playerHtml += '<p><strong>Email:</strong> ' + data.email + '</p>';
+                                     playerHtml += '<p><strong>Level:</strong> ' + data.level + '</p>';
+
+                                     document.getElementById('data').innerHTML = playerHtml;
+
+                },
+                error: function(xhr, status, error) {
+                    console.error('Fehler beim Abrufen der Daten. Statuscode: ' + xhr.status);
+                }
+            });
+        }
+
+        // Daten abrufen, wenn das Dokument geladen ist
+        $(document).ready(function() {
+            getData();
+        });
+    </script>
+
 </head>
   <body>
     <div class="image-background">
@@ -67,7 +101,7 @@
                 id="playerSpielinhalt"
                 class="dropdown-item"
                 href="playerSpielinhalt.html"
-                
+
                 >Spielinhalt User</a
               >
 
@@ -90,7 +124,7 @@
               >Mein Profil <span class="sr-only">(current)</span></a
             >
           </li>
-       
+
           </li>
           <li class="nav-item active nav-item-custom">
             <a class="nav-link" href="Impressum.html"
@@ -101,14 +135,15 @@
       </div>
     </nav>
 
+
+
+
       <div class="login-background">
-        <h1><b>Hallo ___ Willkommen auf deinem Profil</b></h1>
-        <h3>Vorname:</h3>
-        <h3>Nachname:</h3>
-        <h3>Email:</h3>
-        <h3>Level:</h3>
-        <br />
-        <br />
+
+
+         <div id="data"></div>
+
+
         <a class="nav-link" href="../html/Spielerseite.html?elem=Habul">
           <button id="profil" type="button" class="button-start button-color1">
             Zu meinen Spielen
@@ -128,6 +163,9 @@
       <br />
       <br />
     </div>
+
+
+
       <!-- session sichtbarkeiten check -->
     <script src="../JS/SessionCheck.js"></script>
 
