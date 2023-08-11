@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Sicherstellen, dass die übergebene ID gültig ist
         if (is_numeric($rowId)) {
             // SQL-Befehl zum Löschen des Levels mit der angegebenen ID
-            $sql = "DELETE FROM $Level WHERE $level = $rowId";
+            $sql = "DELETE FROM Level WHERE level = $rowId";
 
             if ($conn->query($sql)) {
                 echo "Das Level wurde erfolgreich gelöscht.";

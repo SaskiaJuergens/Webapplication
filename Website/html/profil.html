@@ -91,7 +91,6 @@
             >
           </li>
        
-          </li>
           <li class="nav-item active nav-item-custom">
             <a class="nav-link" href="Impressum.html"
               >Impressum <span class="sr-only">(current)</span></a
@@ -101,43 +100,48 @@
       </div>
     </nav>
 
-      <div class="login-background">
-       <br> <h1 id="willkommen"></h1></br>
-         <br/>
-         <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
-        <p>Name</p>
-       
-        <h2 id="spielname"></h2>
-        <br/>
-            <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
-        <p>Email:<p>
-          
-        <h2 id="spielerMail"></h2>
-         <br/>
-             <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
-        <p>Level:</p>
-        <h2 id="level"></h2>
-         <br/>
-            <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
-         <p>Passwort:</p>
-        <h2 id="passwort"></h2>
-        <br />
-        <br />
-        <a id="profildetail">
-          <button type="button" class="button-start button-color1">
-            Zu meinen Spielen
-          </button></a
-        >
-        <a class="nav-link" href="../php/logout.php">
-          <button id="profil" type="button" class="button-start button-color1">
-            Ausloggen
-          </button></a>
+       <div class="login-background">
+           <br> <h1 id="willkommen"></h1><br>
+           <br>
+           <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
+           <p>Name</p>
+
+           <h2 id="spielname"></h2>
+           <div>
+           <input type="text" id="neuerName" placeholder="Neuer Name">
+           <button id="nameAendern" class="button-start button-color2">Namen ändern</button>
+           </div>
+           <br />
+           <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
+           <p>Email:<p>
+
+               <h2 id="spielerMail"></h2>
+               <br />
+               <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
+           <p>Level:</p>
+           <h2 id="level"></h2>
+           <br />
+           <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
+           <p>Passwort:</p>
+           <h2 id="passwort"></h2>
+           <br />
+           <br />
+           <a id="profildetail">
+               <button type="button" class="button-start button-color1">
+                   Zu meinen Spielen
+               </button>
+           </a>
+           <a class="nav-link" href="../php/logout.php">
+               <button id="profil" type="button" class="button-start button-color1">
+                   Ausloggen
+               </button>
+           </a>
            <a class="nav-link" href="../html/login.html">
-          <button id="profil" type="button" class="button-start button-color2">
-            Mein Spielkonto löschen
-          </button></a
-        >
-      </div>
+               <button id="profilLoeschen" type="button" class="button-start button-color2" data-id="<?php echo $spielerId; ?>">
+                   Mein Spielkonto löschen
+               </button>
+           </a>
+       </div>
       <br />
       <br />
       <br />

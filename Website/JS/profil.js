@@ -124,3 +124,32 @@ function checkSession() {
   xmlhttp.setRequestHeader("Content-Type", "application/json");
   xmlhttp.send();
 }
+
+// Eventlistener für den Button zum Löschen des Spielkontos
+document.getElementById("profilLoeschen").addEventListener("click", function () {
+    var spielerId = this.getAttribute("id");
+
+    // Daten für die Ajax-Anfrage vorbereiten
+    var data = {
+        id: spielerId
+    };
+
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4) {
+            if (xmlhttp.status === 200) {
+                var response = xmlhttp.responseText;
+                console.log(response); // Oder führen Sie hier weitere Aktionen aus, z.B. eine Bestätigung anzeigen
+            } else {
+                alert("Fehler beim Kommunizieren mit dem Server.");
+            }
+        }
+    };
+
+    xmlhttp.open("POST", "../php/deletePlayer.php", true); // Aktualisieren Sie den Pfad zur PHP-Datei
+    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlhttp.send("id=" + encodeURIComponent(data.id));
+});
+
+

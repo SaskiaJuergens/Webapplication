@@ -1,18 +1,17 @@
 <?php
 // Diese Php-Datei wird über XMLHttpRequest aufgerufen, um eine Karte aus der Datenbank zu löschen.
-// Verbindung zur MySQL-Datenbank herstellen
 
-include 'setupDB.php';
-global $conn;
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Datenbankverbindung herstellen (ersetzen Sie die Platzhalter entsprechend)
+    include 'setupDB.php'; // Stellen Sie sicher, dass Ihre setupDB.php die Verbindung enthält
+    global $conn;
 
-// Überprüfen, ob ein POST-Request gesendet wurde
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Überprüfen, ob die Spieler-ID übergeben wurde
     if (isset($_POST["id"])) {
-        $spieler_id = $_POST["id"];
+        $spielerId = $_POST["id"];
 
         // SQL-Abfrage zum Löschen des Spielerkontos
-        $sql = "DELETE FROM spieler WHERE id = $id";
+        $sql = "DELETE FROM spieler WHERE id = $spielerId";
 
         if ($conn->query($sql) === TRUE) {
             echo "Spielerkonto erfolgreich gelöscht.";
@@ -22,8 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Spieler-ID nicht übergeben.";
     }
-}
 
-// Verbindung zur Datenbank schließen
-$conn->close();
+    // Verbindung zur Datenbank schließen
+    $conn->close();
+}
 ?>
