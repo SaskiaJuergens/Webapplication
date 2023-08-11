@@ -1,5 +1,7 @@
 <?php
+// Diese Php-Datei wird über XMLHttpRequest aufgerufen, um eine Karte aus der Datenbank zu löschen.
 // Verbindung zur MySQL-Datenbank herstellen
+
 include 'setupDB.php';
 global $conn;
 

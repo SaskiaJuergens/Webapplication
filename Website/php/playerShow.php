@@ -1,5 +1,6 @@
 <?php
-
+// Das PHP-Programm, um die vorhandenen Playerinofs aus der Tabelle zu laden. Die Playerinfos werden als eine JSON-Datei an player-Spielerinhalt.js und admin-Spielinhalt.js zurückgescheckt.
+//funktioniert
 
 include "setupDB.php";
 

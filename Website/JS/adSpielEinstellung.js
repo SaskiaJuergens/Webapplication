@@ -1,4 +1,10 @@
-﻿// Beim Laden der Webseite wird die Funktion setup() aufgerufen
+﻿/*JS Datei für die adminSpielEinstellungen.html die nur für den admin sichtbar ist
+*Ajaxanfragen für das hinzufügen von Karten und Level
+*dabei werden die card.php und level.php benutzt
+*/
+
+
+// Beim Laden der Webseite wird die Funktion setup() aufgerufen
 window.addEventListener("load", setup);
 
 function setup() {

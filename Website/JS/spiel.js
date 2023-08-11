@@ -8,7 +8,6 @@
  * Wir wollten zeign, dass man eine erste Anrfage über die Tabelle Messages zu einer anderen Session schicken kann
  */
 
-
 //Alle nötigen Konstanten für die Logik
 const moves = document.getElementById("movesCount");
 const timeValue = document.getElementById("time");
@@ -230,24 +229,26 @@ function SpielStop() {
     checkSession();
     showSpieler();
     showSpiel();
-    clearInterval(timerId);
+      clearInterval(timerId);
+      if (startTime > 0) {
     document.getElementById("gameEnd").innerHTML =
-      "Du hast das Spiel gestoppt. Das Spiel gilt als verloren!";
-    //TO DO Daten einsetzen insert Spiel
-    spielDauer(); // berechnet Spieldauer
-    getCurrentDateTime(); // berechnet aktuelles Datum
-    verlauf = "verloren";
-    initiator = spielerId;
-    insertSpiel(
-      einzeln,
-      Datetime,
-      dauer,
-      verlauf,
-      mitspieler,
-      gewinner,
-      initiator,
-      currentLevel
-    );
+    "Du hast das Spiel gestoppt. Das Spiel gilt als abgebrochen!";
+          //TO DO Daten einsetzen insert Spiel
+          spielDauer(); // berechnet Spieldauer
+          getCurrentDateTime(); // berechnet aktuelles Datum
+          verlauf = "abgebrochen";
+          initiator = spielerId;
+          insertSpiel(
+              einzeln,
+              Datetime,
+              dauer,
+              verlauf,
+              mitspieler,
+              gewinner,
+              initiator,
+              currentLevel
+          );
+      }
   } else {
     document.getElementById("gameEnd").innerHTML =
       "Du musst das Spiel starten, um es zu beenden.";
@@ -324,6 +325,7 @@ function updateCountdown() {
     spielDauer(); // berechnet Spieldauer
     getCurrentDateTime(); // berechnet aktuelles Datum
     dauer = levelStartTime; //Startzeit in Sekunden
+    verlauf = "verloren";
     initiator = spielerId;
     insertSpiel(
       einzeln,

@@ -1,5 +1,6 @@
 <?php
-
+// Das PHP-Programm, um die vorhandenen Spiele aus der Tabelle zu laden. Die Spiele werden als eine JSON-Datei an Spielstand.js und spielerSeiten.js zurückgescheckt.
+//funktioniert
 
 include "setupDB.php";
 

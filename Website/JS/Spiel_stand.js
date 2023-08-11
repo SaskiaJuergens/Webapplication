@@ -1,3 +1,9 @@
+/*JS Datei für die Spielstand.html die immer sichtbar ist
+*Datenbank Daten von Level, Spiele und Karten werden in die html Tabelle hinzugefügt
+*dabei werden die levelShow.php, spielShow.php und die cardShow.php benutzt
+*/
+
+
 var playerName; //konstante für Hover und weiterleiten auf Playerseite
 var spielerList = [];
 
@@ -318,72 +324,3 @@ function ajaxShowSpieler(event) {
 
   console.log(spielerList);
 }
-
-//-------------------------------------- game
-
-/**
- * /**
- * Spiel werden angezeigt
- 
-function showGame() {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.addEventListener("load", ajaxShowGame);
-  xmlhttp.addEventListener("error", ajaxFehler);
-
-  xmlhttp.open("GET", "../php/spielShow.php");
-  xmlhttp.send();
-}
-
-//Spiel anzeigen
-// die Ajaxanfrage wird in eine Json-Liste umgewandelt
-function ajaxShowGame(event) {
-  var myObj = JSON.parse(event.target.responseText);
-
-  // Tabelle-Rumpf
-  var tbody = document.getElementById("resultGame");
-  for (var i = 0; i < myObj.length; i++) {
-    var tr = document.createElement("tr");
-
-    var td1 = document.createElement("td");
-    var Datetime = myObj[i]["Datetime"];
-    td1.appendChild(document.createTextNode(Datetime));
-    tr.appendChild(td1);
-
-    var td2 = document.createElement("td");
-    var level = myObj[i]["level"];
-    td2.appendChild(document.createTextNode(level));
-    tr.appendChild(td2);
-
-    var td3 = document.createElement("td");
-    var dauer = myObj[i]["dauer"];
-    td3.appendChild(document.createTextNode(dauer));
-    tr.appendChild(td3);
-
-    var td4 = document.createElement("td");
-    var einzeln = myObj[i]["einzeln"];
-    td4.appendChild(document.createTextNode(einzeln));
-    tr.appendChild(td4);
-
-    var td5 = document.createElement("td");
-    var mitspieler = getPlayerByID(spielerList, myObj[i]["mitspieler"]);
-    td5.appendChild(document.createTextNode(mitspieler.spielname));
-    tr.appendChild(td5);
-
-    var td6 = document.createElement("td");
-    var gewinner = myObj[i]["gewinner"];
-    td6.appendChild(document.createTextNode(gewinner));
-    tr.appendChild(td6);
-
-    var td7 = document.createElement("td");
-    var initiator = myObj[i]["initiator"];
-    td7.appendChild(document.createTextNode(initiator));
-    tr.appendChild(td7);
-
-    var td8 = document.createElement("td");
-    var verlauf = myObj[i]["verlauf"];
-    td8.appendChild(document.createTextNode(verlauf));
-    tr.appendChild(td8);
-
-    tbody.appendChild(tr);
-  }
-} */

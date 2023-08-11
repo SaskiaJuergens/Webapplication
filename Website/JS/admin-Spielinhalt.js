@@ -1,4 +1,12 @@
-﻿// Beim Laden der Webseite wird die Funktion setup() aufgerufen
+﻿/*JS Datei für die adminSpielinhalt.html die nur für den admin sichtbar ist
+*Ajaxanfragen für Level, Spieler und Karten
++und das einfügen der Daten aus der Datenbank von level, spiel und karten 
+*in die html Tabelle
+*und die Lösch funktion für Level und karten die mit deleteCard und deleteLevel arbeiten
+*/
+
+
+// Beim Laden der Webseite wird die Funktion setup() aufgerufen
 window.addEventListener("load", setup);
 
 var LevelList = [];
@@ -183,12 +191,19 @@ function ajaxShowCard(event) {
     td3.appendChild(img);
     tr.appendChild(td3);
 
-    var td4 = document.createElement("td"); // Spalte für Löschen-Button
+    // Spalte für Löschen-Button
+    var td4 = document.createElement("td");
     var deleteButton = document.createElement("button");
     deleteButton.textContent = "Löschen";
-    deleteButton.addEventListener("click", function () {
-      deleteCard(tr.id);
-    });
+
+    // Hier wird ein Funktionsaufruf mithilfe einer IIFE erstellt, um den aktuellen Wert von 'tr' zu speichern
+    (function (row) {
+      deleteButton.addEventListener("click", function () {
+        deleteCard(row.id);
+        console.log("test");
+      });
+    })(tr);
+
     td4.appendChild(deleteButton);
     tr.appendChild(td4);
 
@@ -198,20 +213,20 @@ function ajaxShowCard(event) {
 
 // JavaScript-Code zum Löschen einer Zeile und der dazugehörigen Daten aus der Datenbank
 function deleteCard(rowId) {
-  var confirmation = confirm("Möchtest du diese Karte wirklich löschen?");
-  if (confirmation) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.addEventListener("load", function () {
-      var row = document.getElementById(rowId);
-      row.parentNode.removeChild(row);
-    });
-    xmlhttp.addEventListener("error", ajaxFehler);
+    var confirmation = confirm("Möchtest du diese Karte wirklich löschen?");
+    if (confirmation) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.addEventListener("load", function () {
+            var row = document.getElementById(rowId);
+            row.parentNode.removeChild(row);
+        });
+        xmlhttp.addEventListener("error", ajaxFehler);
 
-    xmlhttp.open("POST", "../php/deleteCard.php", true);
-    xmlhttp.setRequestHeader(
-      "Content-type",
-      "application/x-www-form-urlencoded"
-    );
-    xmlhttp.send("id=" + rowId);
-  }
+        xmlhttp.open("POST", "../php/deleteCard.php", true);
+        xmlhttp.setRequestHeader(
+            "Content-type",
+            "application/x-www-form-urlencoded"
+        );
+        xmlhttp.send("id=" + rowId);
+    }
 }

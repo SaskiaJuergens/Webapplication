@@ -1,4 +1,5 @@
 <?php
+//diese Php-seite überprüft ob es das Level bereits gibt und beinhaltet den SQL-Befehl zum hinzufügen des Levels
 
 include 'setupDB.php';
 

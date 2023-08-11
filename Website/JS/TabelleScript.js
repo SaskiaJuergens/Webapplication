@@ -136,36 +136,59 @@ function createTableCell(content) {
 
 // Funktion zum Sortieren der Tabelle nach Spieldatum oder Level
 function sortTable(columnIndex) {
-  var table = document.getElementById("game-list");
-  var tbody = table.getElementsByTagName("tbody")[0];
-  var rows = tbody.getElementsByTagName("tr");
-  var sortedRows = Array.from(rows);
+    var table = document.getElementById("game-list");
+    var tbody = table.getElementsByTagName("tbody")[0];
+    var rows = tbody.getElementsByTagName("tr");
+    var sortedRows = Array.from(rows);
 
-  sortedRows.sort(function (a, b) {
-    var aValue = a.getElementsByTagName("td")[columnIndex].textContent;
-    var bValue = b.getElementsByTagName("td")[columnIndex].textContent;
+    var currentDate = new Date();
 
-    if (columnIndex === 0) {
-      // Sort by date (newest first)
-      var aDateParts = aValue.split(".");
-      var bDateParts = bValue.split(".");
+    var year = currentDate.getFullYear();
+    var month = currentDate.getMonth() + 1;
+    var day = currentDate.getDate();
 
-      var aDate = new Date(aDateParts[2], aDateParts[1] - 1, aDateParts[0]);
-      var bDate = new Date(bDateParts[2], bDateParts[1] - 1, bDateParts[0]);
+    console.log("Jahr:", year);
+    console.log("Monat:", month);
+    console.log("Tag:", day);
 
-      return bDate - aDate;
-    } else if (columnIndex === 1) {
-      // Sort by level (highest first)
-      return parseInt(bValue) - parseInt(aValue);
-    } else {
-      return aValue.localeCompare(bValue);
+    sortedRows.sort(function (a, b) {
+        var aValue = a.getElementsByTagName("td")[columnIndex].textContent;
+        var bValue = b.getElementsByTagName("td")[columnIndex].textContent;
+
+        if (columnIndex === 0) {
+            // Sortiere nach datum (newest first)
+            var aDateParts = aValue.split(".");
+            var bDateParts = bValue.split(".");
+
+            var aYear = parseInt(aDateParts[2]);
+            var aMonth = parseInt(aDateParts[1]);
+            var aDay = parseInt(aDateParts[0]);
+
+            var bYear = parseInt(bDateParts[2]);
+            var bMonth = parseInt(bDateParts[1]);
+            var bDay = parseInt(bDateParts[0]);
+
+            // Compare years, then months, then days
+            if (bYear !== aYear) {
+                return bYear - aYear;
+            }
+            if (bMonth !== aMonth) {
+                return bMonth - aMonth;
+            }
+            return bDay - aDay;
+        } else if (columnIndex === 1) {
+            // Sortiere nach level 
+            return parseInt(bValue) - parseInt(aValue);
+        } else {
+            return aValue.localeCompare(bValue);
+        }
+    });
+
+    for (var i = 0; i < sortedRows.length; i++) {
+        tbody.appendChild(sortedRows[i]);
     }
-  });
-
-  for (var i = 0; i < sortedRows.length; i++) {
-    tbody.appendChild(sortedRows[i]);
-  }
 }
+
 
 // Funktion zum Zurückkehren zur Spieler-Tabelle
 function goBackToTable() {

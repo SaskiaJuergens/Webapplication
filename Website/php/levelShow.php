@@ -1,4 +1,6 @@
 <?php
+// Das PHP-Programm, um die vorhandenen level aus der Tabelle zu laden. Die Level werden als eine JSON-Datei an Spielstand.js und admin-Spielinhalt.js zurückgescheckt.
+//funktioniert
 
 
 include "setupDB.php";

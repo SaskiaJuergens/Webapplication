@@ -1,5 +1,5 @@
 <?php
-// Das PHP-Programm, um die vorhandenen Bücher aus der Tabelle zu laden. Die Bücher werden als eine JSON-Datei an allscript.js zurückgescheckt.
+// Das PHP-Programm, um die vorhandenen Karten aus der Tabelle zu laden. Die Karten werden als eine JSON-Datei an Spielstand.js und admin-Spielinhalt.js zurückgescheckt.
 //funktioniert
 
 

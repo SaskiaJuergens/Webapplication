@@ -1,9 +1,9 @@
 <?php
+//diese Php-seite überprüft die größe der Karte und ob es den Namen bereits gibt und beinhaltet den SQL-Befehl zum hinzufügen der Karte
 
-//diese Php-seite funktioniert richtig, wenn man sie über das Formular auf Spieleinstellung.html aufruft
+
 include 'setupDB.php';
 
-//muss testen ob richtiger Aufruf an dieser Stelle, dann kann man mehrere Funktionen in eins!
 uploadCard();
 
 function uploadCard(){
