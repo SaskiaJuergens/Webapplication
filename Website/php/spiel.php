@@ -10,10 +10,10 @@ $verlauf = $_POST['verlauf'];
 $mitspieler = $_POST['mitspieler'];
 $gewinner = $_POST['gewinner'];
 $initiator = $_POST['initiator'];
-
+$level = $_POST['level'];
 
 // SQL query for adding data
-$sql = "INSERT INTO $tname (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator) VALUES ('$einzeln', 'Datetime','$dauer','$verlauf', '$mitspieler', '$gewinner','$initiator')";
+$sql = "INSERT INTO $tname (einzeln, Datetime, dauer, verlauf, mitspieler, gewinner, initiator,level) VALUES ('$einzeln', 'Datetime','$dauer','$verlauf', '$mitspieler', '$gewinner','$initiator','$level')";
 
 if (!mysqli_query($conn, $sql)) {
     die("Insert fehlgeschlagen: " . mysqli_error());

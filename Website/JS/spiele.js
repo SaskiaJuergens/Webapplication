@@ -1,4 +1,14 @@
-//spiel.html
+/**
+ * Hier ist die Logik des Spiels
+ * spiel.html ist die dazugehörige  HTML
+ * Oben befindet sich die Logk für ein single Payer Spiel
+ *
+ * Unten die für ein Double Player Spiel
+ * Double Player befindet sich noch in einem unfertigen Zustand
+ * Wir wollten zeign, dass man eine erste Anrfage über die Tabelle Messages zu einer anderen Session schicken kann
+ */
+
+//Alle nötigen Konstanten für die Logik
 const moves = document.getElementById("movesCount");
 const timeValue = document.getElementById("time");
 const starButton = document.getElementById("start");
@@ -14,13 +24,13 @@ var cardPair = 0;
 var cardList = new Array();
 var card = 0;
 var inGame = false;
-//timer noch nicht eingesetzt
 var timerId;
-var levelStartTime = 180; //    Sekunden
+var levelStartTime = 180; //   Sekunden für Spieldauer
 var startTime = levelStartTime; // startzeit am spielanfang
-
-//angemeldet status
-var statusAngemeldet;
+var spielerId; //spieler der Session
+var statusAngemeldet; //angemeldet status
+var currentLevel; //aktuelles Level wird gesetzt
+var cardAnzahl; //Anzahl der karten je nach Level
 
 //variablen für hochladen eines neuen Spiels
 var einzeln = 1; // Beispielwert für einzeln (1 oder 0)
@@ -31,17 +41,19 @@ var mitspieler = "NULL"; // Beispielwert für mitspieler
 var gewinner = "NULL"; // Beispielwert für gewinner
 var initiator = "NULL"; // Beispielwert für initiator
 
-//spieler der Session
-var spielerId;
-
+//die php Anfragen von Ajax werden in diesen Listen gespeichert
 //Spielkarten keine Paare
 var items = [];
 //Spielkarten mit Paaren (doppelt so lang)
 var MemoryList = [];
 //Spierler für doppelspiel
 var spielerList = [];
+//SpielList
+var spielList = [];
 //Liste der Spieler des selben Levels
 var spielerSameLevel = [];
+//Level Liste
+var levelList = [];
 
 //Eventhandler für HTML
 window.addEventListener("load", setup);
@@ -60,10 +72,12 @@ function setup() {
 
 //leere karten werden gezeichnet
 function drawMemory() {
-  var ULlist = document.getElementById("cards");
+  const currentCards = items.slice(0, cardAnzahl / 2); //An dieser Stelle qird die Kartenanzahl gesetzt je nach Spielerlevel passend
+  MemoryList = currentCards.concat(currentCards);
+  var ULlist = document.getElementById("cards"); // Aus Karten Paare machen
+  displayMemoryList(); // Karten mischen
 
   for (var i = 0; i < MemoryList.length; i++) {
-    console.log("ersterclick");
     var index = i;
     card = document.createElement("IMG");
     card.setAttribute("src", "../images/leerKarte.png");
@@ -87,8 +101,6 @@ function drawMemory() {
 
     cardList.push(card);
     ULlist.appendChild(cardList[i]);
-    //event karte checken
-    console.log("card");
 
     card.addEventListener("click", showCard);
   }
@@ -109,22 +121,18 @@ function showCard() {
     this.setAttribute("src", MemoryList[this.getAttribute("id")].src);
 
     uncoverCards += 1;
-    console.log("uncoveredCardsNumber" + uncoverCards);
     if (uncoverCards == 1) {
-      console.log("firstcardSet" + uncoverCards);
       firstCard = this;
     }
     if (uncoverCards == 2) {
       if (this != firstCard) {
         secondCard = this;
         uncoverCards += 1;
-        console.log("secondcardset" + uncoverCards);
 
         if (firstCard.src == secondCard.src) {
           setTimeout(pairCard, 1000);
         } else {
           setTimeout(returnCard, 1000);
-          console.log("secondcardsetumdrehen" + uncoverCards);
         }
       } else {
         uncoverCards -= 1;
@@ -132,7 +140,10 @@ function showCard() {
     }
   }
 }
-//Karte umdrehen
+
+/**
+ * Karte umdrehen
+ */
 function returnCard() {
   // Code, der erst nach 3 Sekunden ausgeführt wird
   firstCard.setAttribute("src", "../images/leerKarte.png");
@@ -140,6 +151,9 @@ function returnCard() {
   uncoverCards = 0;
 }
 
+/**
+ * Kartenpaar checken
+ */
 function pairCard() {
   cardPair += 1;
   document.getElementById("result").innerHTML =
@@ -150,7 +164,7 @@ function pairCard() {
   if (cardPair == items.length) {
     SpielStop();
     document.getElementById("gameEnd").innerHTML = "Du hast gewonnen!";
-    //TO DO Daten einsetzen insert Spiel
+    calculateNewLevel();
     getCurrentDateTime();
     initiator = spielerId;
     verlauf = "gewonnen";
@@ -162,12 +176,15 @@ function pairCard() {
       verlauf,
       mitspieler,
       gewinner,
-      initiator
+      initiator,
+      currentLevel
     );
   }
 }
 
-//die MemoryList wird gemischt:
+/**
+ * Karten mischen
+ */
 function displayMemoryList() {
   //random sort memoryList
   for (i = MemoryList.length - 1; i > 0; i--) {
@@ -178,32 +195,18 @@ function displayMemoryList() {
   }
 }
 
-//Funktionen werden ausgeführt
-//muss bei jedem Spielstart neu gemischt werden
+/**
+ * Spiel starten
+ * Anzahl der Karten müssen berechnet werden und Spielzeit.. daher wird erst zur Ajaxanfrage umgeleitet
+ */
 function SpielStarten() {
-  if (statusAngemeldet == true) {
-    if (MemoryList.length != 0) {
-      if (inGame == false) {
-        displayMemoryList();
-        drawMemory();
-        startCountdown();
-        document.getElementById("result").innerHTML = " ";
-        document.getElementById("gameEnd").innerHTML = "";
-        document.getElementById("response").innerHTML = " ";
-        inGame = true;
-      }
-    } else {
-      document.getElementById("result").innerHTML =
-        "Warte einen Moment bis die Spielkarten aus der Datenbank";
-    }
-  } else {
-    document.getElementById("gameEnd").innerHTML =
-      "Du musst dich erst Anmelden, damit du Spielen kannst.";
-  }
+  showLevel();
 }
 
-//Spiel wird abgebrochen
-//hier noch ein bug, wenn Spielstop muss man auch wieder Start drücken können
+/**
+ * Spiel wird abgebrochen
+ * hier noch ein bug, wenn Spielstop muss man auch wieder Start drücken können
+ */
 function SpielStop() {
   if (inGame == true) {
     inGame = false;
@@ -241,14 +244,61 @@ function SpielStop() {
       verlauf,
       mitspieler,
       gewinner,
-      initiator
+      initiator,
+      currentLevel
     );
   } else {
     document.getElementById("gameEnd").innerHTML =
       "Du musst das Spiel starten, um es zu beenden.";
   }
 }
+var winNumber = 0;
 
+function calculateNewLevel() {
+  for (let i = 0; i < spielList.length; i++) {
+    console.log("alle levels" + spielList[i].level);
+    if (spielList[i].level == currentLevel) {
+      winNumber += 1;
+    }
+  }
+  if (winNumber > 2) {
+    console.log("Du hast gewonnen und steigst ein Level auf!");
+    document.getElementById("gameEnd").innerHTML =
+      "Du hast gewonnen und steigst ein Level auf!";
+    levelAufsteigen(spielerId);
+    if (currentLevel < levelList.length) {
+      currentLevel += 1;
+    } else {
+      document.getElementById("gameEnd").innerHTML =
+        "Du hast gewonnen und steigst ein Level auf! Allerdings gibt es kein Höheres Level. Duhast das Spiel durchgespielt.";
+    }
+  }
+}
+
+/**
+ * Funktion um ein Level aufzusteigen
+ */
+function levelAufsteigen(playerId) {
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        console.log(xhr.responseText); // Antwort von PHP
+      } else {
+        console.error("Fehler bei der Anfrage: " + xhr.status);
+      }
+    }
+  };
+
+  xhr.open("GET", `../php/increaseLevel.php?playerId=${playerId}`, true);
+  xhr.send();
+}
+
+/**
+ * Countdown wird umgerechnet
+ * @param {} seconds
+ * @returns
+ */
 function formatTime(seconds) {
   var minutes = Math.floor(seconds / 60);
   var remainingSeconds = seconds % 60;
@@ -257,7 +307,9 @@ function formatTime(seconds) {
     .padStart(2, "0")}`;
 }
 
-//Der Countdown wird geupdatet
+/**
+ * der Countown wird abgedatet
+ */
 function updateCountdown() {
   var countdownElement = document.getElementById("countdown");
   countdownElement.textContent = formatTime(startTime);
@@ -279,14 +331,17 @@ function updateCountdown() {
       verlauf,
       mitspieler,
       gewinner,
-      initiator
+      initiator,
+      currentLevel
     );
   }
 
   startTime--;
 }
 
-//aktuell verbliebene Zeit berechnen
+/**
+ * aktuell verbliebene Zeit wird berechnet
+ */
 function spielDauer() {
   console.log(
     "mein Countdown" + document.getElementById("countdown").innerHTML
@@ -299,7 +354,9 @@ function spielDauer() {
   dauer = levelStartTime - totalSeconds;
 }
 
-//Der Countwodn wird gestartet
+/**
+ * Der Countwodn wird gestartet
+ */
 function startCountdown() {
   startTime = levelStartTime;
   clearInterval(timerId);
@@ -307,12 +364,16 @@ function startCountdown() {
   timerId = setInterval(updateCountdown, 1000);
 }
 
-//Countdown wird gestoppt
+/**
+ * Countdown wird gestoppt
+ */
 function stopCountdown() {
   clearInterval(timerId);
 }
 
-//Funktion um akutlles Datum auszugeben
+/**
+ * aktuelles datum wird berechnet
+ */
 function getCurrentDateTime() {
   const now = new Date();
 
@@ -329,21 +390,22 @@ function getCurrentDateTime() {
   Datetime = formattedDateTime;
 }
 
-// Spieler laden für Double Spiel
 /**
- * Karten werden angezeigt
+ * Spiel wird gerladen
  */
 function showSpiel() {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.addEventListener("load", ajaxShowSpiel);
   xmlhttp.addEventListener("error", ajaxFehler);
 
-  xmlhttp.open("GET", "../php/playerShow.php");
+  xmlhttp.open("GET", "../php/spielShow.php");
   xmlhttp.send();
 }
 
-//karten anzeigen
-// die Ajaxanfrage wird in eine Json-Liste umgewandelt
+/**
+ * Spiel wird aus DB ausgegeben und in spielList gespeichert
+ * @param {*} event
+ */
 function ajaxShowSpiel(event) {
   var myObj = JSON.parse(event.target.responseText);
 
@@ -355,6 +417,7 @@ function ajaxShowSpiel(event) {
     var mitspieler = myObj[i]["mitspieler"];
     var gewinner = myObj[i]["gewinner"];
     var initiator = myObj[i]["initiator"];
+    var level = myObj[i]["level"];
 
     // Ein Objekt mit title und src erstellen
     var item = {
@@ -365,19 +428,27 @@ function ajaxShowSpiel(event) {
       mitspieler: mitspieler,
       gewinner: gewinner,
       initiator: initiator,
+      level: level,
     };
 
     // Das erstellte Objekt der Liste hinzufügen
 
     spielList.push(item);
   }
-  console.log(spielList);
 }
 
-var spielList = [];
-
-// Registrierung Ajax-Events für das Hinzufügen eines Buchs
-// und send eine Anfrage
+/**
+ *  Registrierung Ajax-Events für das Hinzufügen eines Buchs
+ * und send eine Anfrage
+ *
+ * @param {*} einzeln
+ * @param {*} Datetime
+ * @param {*} dauer
+ * @param {*} verlauf
+ * @param {*} mitspieler
+ * @param {*} gewinner
+ * @param {*} initiator
+ */
 function insertSpiel(
   einzeln,
   Datetime,
@@ -385,7 +456,8 @@ function insertSpiel(
   verlauf,
   mitspieler,
   gewinner,
-  initiator
+  initiator,
+  level
 ) {
   // var insertButton = document.getElementById("insert");
   // Annahme: Du hast die Spielinformationen in JavaScript-Variablen gespeichert
@@ -398,6 +470,7 @@ function insertSpiel(
   formData.append("mitspieler", mitspieler);
   formData.append("gewinner", gewinner);
   formData.append("initiator", initiator);
+  formData.append("level", level);
 
   var ajaxRequest = new XMLHttpRequest();
   ajaxRequest.addEventListener("load", ajaxInsertSpiel);
@@ -406,12 +479,18 @@ function insertSpiel(
   ajaxRequest.send(formData);
 }
 
-// Falls das Spiel erfolgreicht inzugefügt ist ...
+/**
+ * falls über Ajax Spiel erfolgreich in DB geladen
+ * @param {*} event
+ */
 function ajaxInsertSpiel(event) {
   document.getElementById("response").innerHTML = this.responseText;
 }
 
-// Falls eine Ajax-Anfrage gescheitert ist ...
+/**
+ * Falls eine Ajax-Anfrage gescheitert ist ...
+ * @param {*} event
+ */
 function ajaxFehler(event) {
   alert(event.target.statusText);
 }
@@ -428,8 +507,11 @@ function showResult() {
   xmlhttp.send();
 }
 
-//karten anzeigen
-// die Ajaxanfrage wird in eine Json-Liste umgewandelt
+/**
+ * karten anzeigen
+ * die Ajaxanfrage wird in eine Json-Liste umgewandelt
+ * @param {*} event
+ */
 function ajaxShowCards(event) {
   var myObj = JSON.parse(event.target.responseText);
 
@@ -445,13 +527,14 @@ function ajaxShowCards(event) {
 
     // Das erstellte Objekt der Liste hinzufügen
     items.push(item);
-
-    MemoryList = items.concat(items);
   }
   console.log(MemoryList);
 }
 
-//die aktuelle session checken
+/**
+ * aktuelle Session ausgeben
+ * ID und Level werden hier benannt
+ */
 function checkSession() {
   var xmlhttp = new XMLHttpRequest();
 
@@ -460,18 +543,75 @@ function checkSession() {
       if (xmlhttp.status === 200) {
         var data = JSON.parse(xmlhttp.responseText);
         console.log(xmlhttp.responseText);
+        ///Im folgendem werden Items der Navbar ein und ausgebelndet je nach dem wer angemeldet ist
+        var login = document.getElementById("Login");
         if (data.isLoggedIn) {
           // Der Benutzer ist angemeldet, und Sie können auf die 'spielerId' zugreifen
-          spielerId = data.spielerId;
-          console.log("Benutzer ist angemeldet. Spieler-ID: " + spielerId);
+          spielerId = data.spielerId; // spielerID speichern
+          currentLevel = data.level; //aktuelles Level speichert
+          var spielerMail = data.email;
+
+          console.log(
+            "Benutzer ist angemeldet. Spieler-ID: " +
+              spielerId +
+              ". Das ist das aktuelle Level " +
+              currentLevel
+          );
           statusAngemeldet = true;
           console.log(statusAngemeldet);
+
+          login.style.display = "none";
+          if (spielerMail == "admin@memory.de") {
+            console.log("Der Admin ist angemeldet");
+          }
+
+          //hier wird die navbar gesetzt
+          if (spielerMail != "admin@memory.de") {
+            console.log("admin ist nicht angemeldet"); // Der admin ist nicht angemeldet check
+            //hier alles was speziell für admin raus
+            var spieleinstellung = document.getElementById(
+              "adminSpielEinstellungen"
+            );
+            spieleinstellung.style.display = "none";
+            var adminSpielinhalt = document.getElementById("adminSpielinhalt");
+            adminSpielinhalt.style.display = "none";
+          }
         } else {
           console.log("Benutzer ist nicht angemeldet.");
           statusAngemeldet = false;
+          //hier alles was User sehen raus
+
+          console.log("Fehler beim Abrufen der Session-Daten.");
+          var spieleinstellung = document.getElementById(
+            "adminSpielEinstellungen"
+          );
+          spieleinstellung.style.display = "none";
+
+          var profil = document.getElementById("Profil");
+          profil.style.display = "none";
+
+          var playerSpielinhalt = document.getElementById("playerSpielinhalt");
+          playerSpielinhalt.style.display = "none";
+
+          var adminSpielinhalt = document.getElementById("adminSpielinhalt");
+          adminSpielinhalt.style.display = "none";
         }
       } else {
+        //hier alles was user sehen raus muss aus der Nav
         console.log("Fehler beim Abrufen der Session-Daten.");
+        var spieleinstellung = document.getElementById(
+          "adminSpielEinstellungen"
+        );
+        spieleinstellung.style.display = "none";
+
+        var profil = document.getElementById("Profil");
+        profil.style.display = "none";
+
+        var playerSpielinhalt = document.getElementById("playerSpielinhalt");
+        playerSpielinhalt.style.display = "none";
+
+        var adminSpielinhalt = document.getElementById("adminSpielinhalt");
+        adminSpielinhalt.style.display = "none";
       }
     }
   };
@@ -485,7 +625,7 @@ function checkSession() {
 
 // Spieler laden für Double Spiel
 /**
- * Karten werden angezeigt
+ * Spieler werden angezeigt geladen
  */
 function showSpieler() {
   var xmlhttp = new XMLHttpRequest();
@@ -497,8 +637,10 @@ function showSpieler() {
   xmlhttp.send();
 }
 
-//karten anzeigen
-// die Ajaxanfrage wird in eine Json-Liste umgewandelt
+/**
+ * Spieler werden in SpielerList gespeichert
+ * @param {*} event
+ */
 function ajaxShowSpieler(event) {
   var myObj = JSON.parse(event.target.responseText);
 
@@ -526,7 +668,81 @@ function ajaxShowSpieler(event) {
 }
 
 /**
- *
+ * Level werden angezeigt und spiel wird gestartet
+ * Man braucht Die Leveldaten , um dass spiel zu setzen nach Karten und Timer
+ */
+function showLevel() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.addEventListener("load", ajaxShowLevel);
+  xmlhttp.addEventListener("error", ajaxFehler);
+
+  xmlhttp.open("GET", "../php/levelShow.php");
+
+  xmlhttp.send();
+}
+
+/**
+ * Level wird in LevelList gespeichert
+ * Die Kartenanzahl und die Spielzeit werden berechnet mithilfe der aktuellen SpielerID
+ * @param {*} event
+ */
+function ajaxShowLevel(event) {
+  var myObj = JSON.parse(event.target.responseText);
+
+  for (var i = 0; i < myObj.length; i++) {
+    var level = myObj[i]["level"];
+    var anzahl_karten = myObj[i]["anzahl_karten"];
+    var spielZeit = myObj[i]["spielZeit"];
+    var level = myObj[i]["level"];
+
+    // Ein Objekt mit title und src erstellen
+    var item = {
+      level: level,
+      anzahl_karten: anzahl_karten,
+      spielZeit: spielZeit, //in minuten
+      level: level, //in minuten
+    };
+
+    // Das erstellte Objekt der Liste hinzufügen
+
+    levelList.push(item);
+    if (level == currentLevel) {
+      cardAnzahl = anzahl_karten;
+      spielZeit = spielZeit * 60; // Minuten aus der DB werden in Sekunden umgewandelt
+      levelStartTime = spielZeit;
+      console.log(
+        "meine kartenanzahl" + cardAnzahl + "meine Spielzeit " + levelStartTime
+      );
+    } else {
+      console.log("kein Paar gefunden, da aktuelle ID noch nicht geladen");
+    }
+  }
+  console.log(levelList);
+
+  //Spiel wird gestartet
+  if (statusAngemeldet == true) {
+    if (item.length != 0) {
+      if (inGame == false) {
+        drawMemory();
+
+        startCountdown();
+        document.getElementById("result").innerHTML = " ";
+        document.getElementById("gameEnd").innerHTML = "";
+        document.getElementById("response").innerHTML = " ";
+        inGame = true;
+      }
+    } else {
+      document.getElementById("result").innerHTML =
+        "Warte einen Moment bis die Spielkarten aus der Datenbank";
+    }
+  } else {
+    document.getElementById("gameEnd").innerHTML =
+      "Du musst dich erst Anmelden, damit du Spielen kannst.";
+  }
+}
+
+/**
+ *Spieler laden für Double Spiel
  * Abstatz für Doppelspiel -----------------------------------------------------------------------------------------------
  */
 function startDoubleGame() {
@@ -534,11 +750,12 @@ function startDoubleGame() {
   spielerAntwort();
 }
 
+/**
+ * Spieleranfrage für DoubleGame
+ */
 function SpielerAnfrage() {
   var currentPlayer = getPlayerByID(spielerList, spielerId);
-  //  console.log(currentPlayer.level);
   var currentPlayers = getPlayersByLevel(spielerList, currentPlayer.level);
-  // console.log(currentPlayers);
   createButtonsFromPlayers(currentPlayers);
 }
 

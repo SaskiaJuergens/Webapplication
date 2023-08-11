@@ -13,6 +13,7 @@ function uploadLevel(){
     $level = $_POST['level'];
     $anzahl_karten = $_POST['anzahl_karten'];
     $spielZeit = $_POST['spielZeit'];
+    
 
     // überprüfen, ob das level bereits exestiert
     $checkQuery = "SELECT * FROM $levelTable WHERE level = '$level'";

@@ -13,7 +13,7 @@ $result = $conn->query($sql);
 $rows = array();
 while ($row = $result->fetch_assoc()) {
     
-    $rows[] = array('einzeln'=>$row['einzeln'], 'Datetime'=>$row['Datetime'], 'dauer'=>$row['dauer'],'verlauf'=>$row['verlauf'],'mitspieler'=>$row['mitspieler'],'gewinner'=>$row['gewinner'],'initiator'=>$row['initiator']);
+    $rows[] = array('einzeln'=>$row['einzeln'], 'Datetime'=>$row['Datetime'], 'dauer'=>$row['dauer'],'verlauf'=>$row['verlauf'],'mitspieler'=>$row['mitspieler'],'gewinner'=>$row['gewinner'],'initiator'=>$row['initiator'],'level'=>$row['level']);
 } 
 
 $ps = json_encode($rows);
