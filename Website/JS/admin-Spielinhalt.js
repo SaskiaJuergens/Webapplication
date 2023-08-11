@@ -73,75 +73,96 @@ function ajaxShowPlayer(event) {
  * Level werden angezeigt
  */
 function showLevel() {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.addEventListener("load", ajaxShowLevel);
-  xmlhttp.addEventListener("error", ajaxFehler);
-
-  xmlhttp.open("GET", "../php/levelShow.php");
-  xmlhttp.send();
-}
-
-function ajaxShowLevel(event) {
-  var myObj = JSON.parse(event.target.responseText);
-
-  var tbody = document.getElementById("resultLevel");
-  for (var i = 0; i < myObj.length; i++) {
-    var tr = document.createElement("tr");
-    tr.id = "levelRow_" + i;
-
-    var td1 = document.createElement("td");
-    var level = myObj[i]["level"];
-    td1.appendChild(document.createTextNode(level));
-    tr.appendChild(td1);
-
-    var td2 = document.createElement("td");
-    var anzahl_karten = myObj[i]["anzahl_karten"];
-    td2.appendChild(document.createTextNode(anzahl_karten));
-    tr.appendChild(td2);
-
-    var td3 = document.createElement("td");
-    var spielZeit = myObj[i]["spielZeit"];
-    td3.appendChild(document.createTextNode(spielZeit));
-    tr.appendChild(td3);
-
-    var td4 = document.createElement("td");
-    var deleteButton = document.createElement("button");
-    deleteButton.textContent = "Löschen";
-
-    // Hier wird ein Funktionsaufruf mithilfe einer IIFE erstellt, um den aktuellen Wert von 'tr' zu speichern
-    (function (row) {
-      deleteButton.addEventListener("click", function () {
-        deleteLevel(row.id);
-        console.log("test");
-      });
-    })(tr);
-
-    td4.appendChild(deleteButton);
-    tr.appendChild(td4);
-
-    tbody.appendChild(tr);
-  }
-}
-
-// JavaScript-Code zum Löschen einer Zeile und der dazugehörigen Daten aus der Datenbank
-function deleteLevel(rowId) {
-  var confirmation = confirm("Möchtest du diese Karte wirklich löschen?");
-  if (confirmation) {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.addEventListener("load", function () {
-      var row = document.getElementById(rowId);
-      row.parentNode.removeChild(row);
+    xmlhttp.addEventListener("load", function (event) {
+        ajaxShowLevel(event); // Übergabe des Ereignisses an die Funktion
     });
     xmlhttp.addEventListener("error", ajaxFehler);
 
-    xmlhttp.open("POST", "../php/deleteLevel.php", true);
-    xmlhttp.setRequestHeader(
-      "Content-type",
-      "application/x-www-form-urlencoded"
-    );
-    xmlhttp.send("level=" + rowId);
-  }
+    xmlhttp.open("GET", "../php/levelShow.php");
+    xmlhttp.send();
 }
+
+
+function ajaxShowLevel(event) {
+    var myObj = JSON.parse(event.target.responseText);
+
+    console.log("Empfangene Daten:", myObj); // Konsolenausgabe hinzufügen
+    //console.log("myObj[i]['level']:", myObj[i]["level"]);
+
+    var tbody = document.getElementById("resultLevel");
+    for (var i = 0; i < myObj.length; i++) {
+        var tr = document.createElement("tr");
+        tr.id = "levelRow_" + i;
+        tr.setAttribute("data-row-id", myObj[i]["level"]); // Speichern Sie die entsprechende ID aus den Daten
+
+      var td1 = document.createElement("td");
+      var level = myObj[i]["level"];
+      td1.appendChild(document.createTextNode(level));
+      tr.appendChild(td1);
+
+      var td2 = document.createElement("td");
+      var anzahl_karten = myObj[i]["anzahl_karten"];
+      td2.appendChild(document.createTextNode(anzahl_karten));
+      tr.appendChild(td2);
+
+      var td3 = document.createElement("td");
+      var spielZeit = myObj[i]["spielZeit"];
+      td3.appendChild(document.createTextNode(spielZeit));
+      tr.appendChild(td3);
+
+      var td4 = document.createElement("td");
+      var deleteButton = document.createElement("button");
+      deleteButton.textContent = "Löschen";
+
+      // Hier wird ein Funktionsaufruf mithilfe einer IIFE erstellt, um den aktuellen Wert von 'tr' zu speichern
+      (function (row) {
+          deleteButton.addEventListener("click", function () {
+              var rowId = row.getAttribute("data-row-id");
+              console.log("rowId:", rowId);
+              deleteLevel(rowId);
+          });
+      })(tr);
+
+        td4.appendChild(deleteButton);
+        tr.appendChild(td4);
+
+        tbody.appendChild(tr);
+
+        console.log("myObj[i]['level']:", myObj[i]["level"]);
+    }
+}
+
+
+// JavaScript-Code zum Löschen einer Zeile und der dazugehörigen Daten aus der Datenbank
+function deleteLevel(rowId) {
+    var confirmation = confirm("Möchtest du dieses Level wirklich löschen?");
+    if (confirmation) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.addEventListener("load", function () {
+            if (xmlhttp.status === 200) {
+                var row = document.querySelector('[data-row-id="' + rowId + '"]');
+                if (row) {
+                    row.parentNode.removeChild(row);
+                } else {
+                    console.log("Fehler: Zeile nicht gefunden.");
+                }
+            } else {
+                console.log("Fehler: " + xmlhttp.statusText);
+            }
+        });
+        xmlhttp.addEventListener("error", function () {
+            console.log("Ajax-Fehler.");
+        });
+
+        xmlhttp.open("POST", "../php/deleteLevel.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("level=" + encodeURIComponent(rowId));
+    }
+}
+
+
+
 
 // Falls eine Ajax-Anfrage gescheitert ist ...
 function ajaxFehler(event) {

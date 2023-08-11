@@ -1,19 +1,21 @@
 <?php
     include setupDB.php; 
-    global $conn;
 
-if ($_GET['action'] === 'check') {
-    // Hier bleibt Ihr vorhandener Code zum Überprüfen der Sitzung
-} elseif ($_POST['action'] === 'updateName') {
-    // Hier Code zum Aktualisieren des Namens in der Datenbank
-    $neuerName = $_POST['neuerName'];
-    $spielerId = $_POST['spielerId'];
+    edit();
 
-    // Führen Sie die Aktualisierung in der Datenbank durch (z.B. mit SQL-UPDATE)
+function edit(){
+  global $conn;
+  // Hier Code zum Aktualisieren des Namens in der Datenbank
+  $name = $_POST["name"];
 
-    $response = array("success" => true); // oder false, abhängig vom Erfolg der Aktualisierung
-    echo json_encode($response);
+  // Führen Sie die Aktualisierung in der Datenbank durch
+  $query = "UPDATE spieler SET name = '$name';
+  mysqli_query($conn, $query);
+  echo "Updated Successfully";
 }
 
+
+// Verbindung zur Datenbank schließen
+$conn->close();
 }
 ?>

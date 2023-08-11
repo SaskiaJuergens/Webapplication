@@ -15,6 +15,11 @@ function uploadLevel(){
     $anzahl_karten = $_POST['anzahl_karten'];
     $spielZeit = $_POST['spielZeit'];
     
+        // Überprüfen, ob die Anzahl der Karten im zulässigen Bereich liegt
+    if ($anzahl_karten < 8 || $anzahl_karten > 16) {
+        echo '<h2 style="color: red; font-size: 20px;">Die Anzahl der Karten muss zwischen 8 und 16 liegen.</h2>';
+        return; // Beende die Funktion, wenn die Anzahl der Karten nicht im zulässigen Bereich liegt
+    }
 
     // überprüfen, ob das level bereits exestiert
     $checkQuery = "SELECT * FROM $levelTable WHERE level = '$level'";
@@ -29,7 +34,7 @@ function uploadLevel(){
         if (!$conn->query($sql)) {
             echo '<h2 style="color: red; font-size: 20px;"> Einfügen fehlgeschlagen: ' . $conn->error . '</h2>';
         } else {
-            echo '<h2 style="color: green; font-size: 20px;">Das Spiellevel mit der Spielzeit ' . $spielZeit . ' wurde hinzugefügt</h2>';
+            echo '<h2 style="color: green; font-size: 20px;">Das Spiellevel ' . $level . ' mit der Spielzeit ' . $spielZeit . ' wurde hinzugefügt</h2>';
         }
     }
 }

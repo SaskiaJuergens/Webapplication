@@ -4,12 +4,11 @@
 include 'setupDB.php';
 global $conn;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['id'])) {
-        $rowId = $_POST['id'];
 
-        // Sicherstellen, dass die übergebene ID gültig ist
-        if (is_numeric($rowId)) {
+ $rowId = $_POST["rowid"];
+
+ // Sicherstellen, dass die übergebene ID gültig ist
+ if (is_numeric($rowId)) {
             // SQL-Befehl zum Löschen der Karte mit der angegebenen ID
             $sql = "DELETE FROM karte WHERE id = $rowId";
 
@@ -21,12 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Ungültige Zeilen-ID.";
         }
-    } else {
-        echo "Zeilen-ID nicht erhalten.";
-    }
-} else {
-    echo "Ungültige Anfrage.";
-}
+
+
 
 // Verbindung zur Datenbank schließen
 $conn->close();
