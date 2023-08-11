@@ -35,14 +35,9 @@ function ajaxShowLevel(event) {
         tr.appendChild(td1);
 
         var td2 = document.createElement("td");
-        var vorname = myObj[i]["Vorname"];
-        td2.appendChild(document.createTextNode(vorname));
-        tr.appendChild(td2);
-
-        var td3 = document.createElement("td");
         var level = myObj[i]["level"];
-        td3.appendChild(document.createTextNode(level));
-        tr.appendChild(td3);
+        td2.appendChild(document.createTextNode(level));
+        tr.appendChild(td2);
 
         tbody.appendChild(tr);
     }
