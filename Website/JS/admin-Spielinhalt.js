@@ -30,31 +30,34 @@ function ajaxShowPlayer(event) {
   // Tabelle-Rumpf
   var tbody = document.getElementById("resultSpieler");
   for (var i = 0; i < myObj.length; i++) {
-    var tr = document.createElement("tr");
+    if (myObj[i]["spielname"] != 0) {
+      var tr = document.createElement("tr");
 
-    var id = myObj[i]["id"];
+      var id = myObj[i]["id"];
 
-    var td1 = document.createElement("td");
-    var spielname = myObj[i]["spielname"];
+      var td1 = document.createElement("td");
+      var spielname = myObj[i]["spielname"];
 
-    var link = document.createElement("a");
-    link.href = "../html/Spielerseite.html" + "?elem=" + encodeURIComponent(id); // Hier musst du den Pfad zu deinen Links anpassen
-    link.textContent = spielname;
+      var link = document.createElement("a");
+      link.href =
+        "../html/Spielerseite.html" + "?elem=" + encodeURIComponent(id); // Hier musst du den Pfad zu deinen Links anpassen
+      link.textContent = spielname;
 
-    td1.appendChild(link);
-    tr.appendChild(td1);
+      td1.appendChild(link);
+      tr.appendChild(td1);
 
-    var td2 = document.createElement("td");
-    var email = myObj[i]["email"];
-    td2.appendChild(document.createTextNode(email));
-    tr.appendChild(td2);
+      var td2 = document.createElement("td");
+      var email = myObj[i]["email"];
+      td2.appendChild(document.createTextNode(email));
+      tr.appendChild(td2);
 
-    var td3 = document.createElement("td");
-    var level = myObj[i]["level"];
-    td3.appendChild(document.createTextNode(level));
-    tr.appendChild(td3);
+      var td3 = document.createElement("td");
+      var level = myObj[i]["level"];
+      td3.appendChild(document.createTextNode(level));
+      tr.appendChild(td3);
 
-    tbody.appendChild(tr);
+      tbody.appendChild(tr);
+    }
   }
 }
 
