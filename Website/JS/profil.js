@@ -1,17 +1,14 @@
 /**
- * Die Anzeige verändert sich was sichtbar ist, je nach Anmeldestauts
- *
- * der Admin sieht am meisten
- *
- * Der User sieht seinen eigenen Account und playerSpielstand
- *
- * Nicht angemeldete sehen nur Spielstand
+ * hier wird das Profil angezeigt
  */
 
 var spielerList = [];
 //spieler der Session
 var spielerId;
 var spielerMail;
+var spielname;
+var passwort;
+var level;
 
 //Eventhandler für HTML
 window.addEventListener("load", setup);
@@ -34,11 +31,36 @@ function checkSession() {
         var data = JSON.parse(xmlhttp.responseText);
         console.log(xmlhttp.responseText);
         if (data.isLoggedIn) {
+          //hier werden die spielerinfos aus php in die Variablen geschrieben
           spielerId = data.spielerId;
           spielerMail = data.email;
+          spielname = data.spielname;
+          passwort = data.passwort;
+          level = data.level;
+
+          //hier wird der Code in HTML gesetzt
+          document.getElementById("spielerMail").textContent = spielerMail;
+          document.getElementById("spielname").textContent = spielname;
+          document.getElementById("passwort").textContent = passwort;
+          document.getElementById("level").textContent = level;
+          document.getElementById("willkommen").textContent =
+            "Hallo " + spielname + ". Willkommen auf deinem Profil";
+
+          // Annahme: spielerID ist eine Variable mit der gewünschten Spieler-ID
+
+          // Den Button setzen mit dem Link zur Unterseite
+          var buttonElement = document.getElementById("profildetail");
+
+          // Den Link um "?elem=spielerID" ergänzen
+          var neuerLink = "../html/Spielerseite.html" + "?elem=" + spielerId;
+
+          // Den aktualisierten Link dem Button zuweisen
+          buttonElement.setAttribute(
+            "onclick",
+            `window.location.href='${neuerLink}'`
+          );
+
           console.log("Benutzer ist angemeldet"); //angemeldet
-          statusAngemeldet = true;
-          console.log(statusAngemeldet);
 
           ///Im folgendem werden Items der Navbar ein und ausgebelndet je nach dem wer angemeldet ist
           var login = document.getElementById("Login");

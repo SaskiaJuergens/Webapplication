@@ -102,22 +102,36 @@
     </nav>
 
       <div class="login-background">
-        <h1><b>Hallo ___ Willkommen auf deinem Profil</b></h1>
-        <h3>Vorname:</h3>
-        <h3>Nachname:</h3>
-        <h3>Email:</h3>
-        <h3>Level:</h3>
+       <br> <h1 id="willkommen"></h1></br>
+         <br/>
+         <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
+        <p>Name</p>
+       
+        <h2 id="spielname"></h2>
+        <br/>
+            <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
+        <p>Email:<p>
+          
+        <h2 id="spielerMail"></h2>
+         <br/>
+             <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
+        <p>Level:</p>
+        <h2 id="level"></h2>
+         <br/>
+            <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
+         <p>Passwort:</p>
+        <h2 id="passwort"></h2>
         <br />
         <br />
-        <a class="nav-link" href="../html/Spielerseite.html?elem=Habul">
-          <button id="profil" type="button" class="button-start button-color1">
+        <a id="profildetail">
+          <button type="button" class="button-start button-color1">
             Zu meinen Spielen
           </button></a
         >
         <a class="nav-link" href="../php/logout.php">
           <button id="profil" type="button" class="button-start button-color1">
             Ausloggen
-          </button></a
+          </button></a>
            <a class="nav-link" href="../html/login.html">
           <button id="profil" type="button" class="button-start button-color2">
             Mein Spielkonto löschen
@@ -129,7 +143,7 @@
       <br />
     </div>
       <!-- session sichtbarkeiten check -->
-    <script src="../JS/SessionCheck.js"></script>
+    <script src="../JS/profil.js"></script>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
