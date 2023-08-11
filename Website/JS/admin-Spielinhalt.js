@@ -73,16 +73,13 @@ function showLevel() {
   xmlhttp.send();
 }
 
-//Level anzeigen
-// die Ajaxanfrage wird in eine Json-Liste umgewandelt
 function ajaxShowLevel(event) {
   var myObj = JSON.parse(event.target.responseText);
 
-  // Tabelle-Rumpf
   var tbody = document.getElementById("resultLevel");
   for (var i = 0; i < myObj.length; i++) {
     var tr = document.createElement("tr");
-    tr.id = "levelRow_" + i; // Füge eine eindeutige ID für jede Zeile hinzu
+    tr.id = "levelRow_" + i;
 
     var td1 = document.createElement("td");
     var level = myObj[i]["level"];
@@ -99,12 +96,18 @@ function ajaxShowLevel(event) {
     td3.appendChild(document.createTextNode(spielZeit));
     tr.appendChild(td3);
 
-    var td4 = document.createElement("td"); // Spalte für Löschen-Button
+    var td4 = document.createElement("td");
     var deleteButton = document.createElement("button");
     deleteButton.textContent = "Löschen";
-    deleteButton.addEventListener("click", function () {
-      deleteLevel(tr.id);
-    });
+
+    // Hier wird ein Funktionsaufruf mithilfe einer IIFE erstellt, um den aktuellen Wert von 'tr' zu speichern
+    (function (row) {
+      deleteButton.addEventListener("click", function () {
+        deleteLevel(row.id);
+        console.log("test");
+      });
+    })(tr);
+
     td4.appendChild(deleteButton);
     tr.appendChild(td4);
 
