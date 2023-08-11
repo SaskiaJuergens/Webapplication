@@ -208,10 +208,11 @@ function ajaxShowSpiel(event) {
     for (var i = 0; i < myObj.length; i++) {
       var tr = document.createElement("tr");
 
-      var td1 = document.createElement("td");
-      var level = myObj[i]["level"];
-      td1.appendChild(document.createTextNode(level));
-      tr.appendChild(td1);
+        var td1 = document.createElement("td");
+        var einzeln = myObj[i]["einzeln"];
+        if (einzeln == 1) einzeln = "ja";
+        td1.appendChild(document.createTextNode(einzeln));
+        tr.appendChild(td1);
 
       var td1 = document.createElement("td");
       var Datetime = myObj[i]["Datetime"];
@@ -249,10 +250,9 @@ function ajaxShowSpiel(event) {
       tr.appendChild(td1);
 
         var td1 = document.createElement("td");
-        var einzeln = myObj[i]["einzeln"];
-        if (einzeln == 1) einzeln = "ja";
-        td1.appendChild(document.createTextNode(einzeln));
-        tr.appendChild(td1);
+        var level = myObj[i]["level"];
+        td1.appendChild(document.createTextNode(level));
+        tr.appendChild(td1);;
 
       tbody.appendChild(tr);
     }

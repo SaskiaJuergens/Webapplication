@@ -125,7 +125,7 @@ function checkSession() {
   xmlhttp.send();
 }
 
-// Eventlistener für den Button zum Löschen des Spielkontos
+/*// Eventlistener für den Button zum Löschen des Spielkontos
 document.getElementById("profilLoeschen").addEventListener("click", function () {
     var spielerId = this.getAttribute("id");
 
@@ -150,6 +150,6 @@ document.getElementById("profilLoeschen").addEventListener("click", function () 
     xmlhttp.open("POST", "../php/deletePlayer.php", true); // Aktualisieren Sie den Pfad zur PHP-Datei
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlhttp.send("id=" + encodeURIComponent(data.id));
-});
+});*/
 
 
