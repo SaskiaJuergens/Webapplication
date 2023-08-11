@@ -33,7 +33,7 @@ if ($imageSize1 <= 100 * 1024 && $imageSize2 <= 100 * 1024) {
         if (!$conn->query($sql)) {
             echo '<h2 style="color: red; font-size: 20px;"> Einfügen fehlgeschlagen: ' . $conn->error . '</h2>';
         } else {
-            echo '<h2 style="olor: green; font-size: 20px;">Die Karte ' . $name . ' wurde erfolgreich hinzugefügt!</h2>';
+            echo '<h2 style="color: green; font-size: 20px;">Die Karte ' . $name . ' wurde erfolgreich hinzugefügt!</h2>';
         }
     }
 } else {
