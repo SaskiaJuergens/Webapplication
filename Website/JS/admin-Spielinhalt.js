@@ -34,8 +34,8 @@ function ajaxShowPlayer(event) {
         var tr = document.createElement("tr");
 
         var td1 = document.createElement("td");
-        var name = myObj[i]["name"];
-        td1.appendChild(document.createTextNode(name));
+        var spielname = myObj[i]["spielname"];
+        td1.appendChild(document.createTextNode(spielname));
         tr.appendChild(td1);
 
         var td2 = document.createElement("td");
