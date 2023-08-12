@@ -258,23 +258,28 @@ function SpielStop() {
 var winNumber = 0;
 
 function calculateNewLevel() {
+  let winNumber = 0; // Initialisierung der Gewinnanzahl
   for (let i = 0; i < spielList.length; i++) {
     console.log("alle levels" + spielList[i].level);
     if (spielList[i].level == currentLevel) {
       winNumber += 1;
     }
   }
+  
   if (winNumber > 2) {
     console.log("Du hast gewonnen und steigst ein Level auf!");
     document.getElementById("gameEnd").innerHTML =
       "Du hast gewonnen und steigst ein Level auf!";
+      
+    // AJAX-Aufruf, um das Spieler-Level in der Datenbank zu erhöhen
     levelAufsteigen(spielerId);
-    if (currentLevel < levelList.length) {
-      currentLevel += 1;
-    } else {
-      document.getElementById("gameEnd").innerHTML =
-        "Du hast gewonnen und steigst ein Level auf! Allerdings gibt es kein Höheres Level. Duhast das Spiel durchgespielt.";
-    }
+  }
+  
+  if (currentLevel < levelList.length) {
+    currentLevel += 1;
+  } else {
+    document.getElementById("gameEnd").innerHTML =
+      "Du hast gewonnen und steigst ein Level auf! Allerdings gibt es kein höheres Level. Du hast das Spiel durchgespielt.";
   }
 }
 
@@ -296,6 +301,7 @@ function levelAufsteigen(playerId) {
   xhr.open("GET", `../php/increaseLevel.php?playerId=${playerId}`, true);
   xhr.send();
 }
+
 
 /**
  * Countdown wird umgerechnet

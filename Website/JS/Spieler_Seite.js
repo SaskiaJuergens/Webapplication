@@ -9,7 +9,7 @@ var ctx = document.getElementById("myChart").getContext("2d");
 //Counter für Diagramm
 
 var gewonnenCounter = 0;
-var verlohrenCounter = 0;
+var verlorenCounter = 0;
 var abgebrochenCounter = 0;
 
 window.addEventListener("load", setup);
@@ -193,13 +193,13 @@ function ajaxShowSpiel(event) {
       console.log(verlauf);
       //Vorbereitung des Diagramms Zahlen setzen
       if (verlauf == "gewonnen") gewonnenCounter += 1;
-      if (verlauf == "verloren") verlohrenCounter += 1;
+      if (verlauf == "verloren") verlorenCounter += 1;
       if (verlauf == "abgebrochen") abgebrochenCounter += 1;
     }
   }
 
-  var labels = ["Gewonnen", "Verlohren", "abgebrochen"];
-  var data = [gewonnenCounter, verlohrenCounter, abgebrochenCounter];
+  var labels = ["Gewonnen", "Verloren", "abgebrochen"];
+  var data = [gewonnenCounter, verlorenCounter, abgebrochenCounter];
 
   // Diagramm wird erstellen
   var myChart = new Chart(ctx, {
