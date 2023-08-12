@@ -136,6 +136,8 @@ function ajaxShowLevel(event) {
 
 // JavaScript-Code zum Löschen einer Zeile und der dazugehörigen Daten aus der Datenbank
 function deleteLevel(rowId) {
+    console.log("Übergebene rowId:", rowId); // Ausgabe der übergebenen rowId
+
     var confirmation = confirm("Möchtest du dieses Level wirklich löschen?");
     if (confirmation) {
         var xmlhttp = new XMLHttpRequest();
@@ -143,6 +145,7 @@ function deleteLevel(rowId) {
             if (xmlhttp.status === 200) {
                 var row = document.querySelector('[data-row-id="' + rowId + '"]');
                 if (row) {
+                    console.log("Element to be deleted:", row);
                     row.parentNode.removeChild(row);
                 } else {
                     console.log("Fehler: Zeile nicht gefunden.");
@@ -161,33 +164,29 @@ function deleteLevel(rowId) {
     }
 }
 
-
-
-
-// Falls eine Ajax-Anfrage gescheitert ist ...
-function ajaxFehler(event) {
-  alert(event.target.statusText);
-}
-
 // Registrierung Ajax-Events f�r das Anzeigen aller Karte und sende eine Anfrage
 function showCard() {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.addEventListener("load", ajaxShowCard);
-  xmlhttp.addEventListener("error", ajaxFehler);
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.addEventListener("load", function (event) {
+        ajaxShowCard(event); // Übergabe des Ereignisses an die Funktion
+    });
+    xmlhttp.addEventListener("error", ajaxFehler);
 
-  xmlhttp.open("GET", "../php/cardShow.php");
-  xmlhttp.send();
+    xmlhttp.open("GET", "../php/cardShow.php");
+    xmlhttp.send();
 }
 
 // Falls die Karten erfolgreicht aus der Datenbank geholt sind ...
 function ajaxShowCard(event) {
-  var myObj = JSON.parse(event.target.responseText);
+    var myObj = JSON.parse(event.target.responseText);
+    console.log("Empfangene Daten:", myObj); // Konsolenausgabe hinzufügen
 
   // Tabelle-Rumpf
-  var tbody = document.getElementById("resultCard");
-  for (var i = 0; i < myObj.length; i++) {
-    var tr = document.createElement("tr");
-    tr.id = "cardRow_" + i; // Füge eine eindeutige ID für jede Zeile hinzu
+    var tbody = document.getElementById("resultCard");
+    for (var i = 0; i < myObj.length; i++) {
+        var tr = document.createElement("tr");
+        tr.id = "cardRow_" + i;
+        tr.setAttribute("data-row-id", myObj[i]["name"]); // Speichern Sie die entsprechende ID aus den Daten
 
     var td1 = document.createElement("td");
     var name = myObj[i]["name"];
@@ -213,41 +212,60 @@ function ajaxShowCard(event) {
     tr.appendChild(td3);
 
     // Spalte für Löschen-Button
-    var td4 = document.createElement("td");
-    var deleteButton = document.createElement("button");
-    deleteButton.textContent = "Löschen";
+      var td4 = document.createElement("td");
+      var deleteButton = document.createElement("button");
+      deleteButton.textContent = "Löschen";
 
-    // Hier wird ein Funktionsaufruf mithilfe einer IIFE erstellt, um den aktuellen Wert von 'tr' zu speichern
-    (function (row) {
-      deleteButton.addEventListener("click", function () {
-        deleteCard(row.id);
-        console.log("test");
-      });
-    })(tr);
+      // Hier wird ein Funktionsaufruf mithilfe einer IIFE erstellt, um den aktuellen Wert von 'tr' zu speichern
+      (function (row) {
+          deleteButton.addEventListener("click", function () {
+              var rowId = row.getAttribute("data-row-id");
+              console.log("rowId:", rowId);
+              deleteCard(rowId);
+          });
+      })(tr);
 
-    td4.appendChild(deleteButton);
-    tr.appendChild(td4);
+      td4.appendChild(deleteButton);
+      tr.appendChild(td4);
 
-    tbody.appendChild(tr);
+        tbody.appendChild(tr);
+
+        console.log("myObj[i]['name']:", myObj[i]["name"]);
   }
 }
 
 // JavaScript-Code zum Löschen einer Zeile und der dazugehörigen Daten aus der Datenbank
 function deleteCard(rowId) {
+    console.log("Übergebene rowId:", rowId); // Ausgabe der übergebenen rowId
+
     var confirmation = confirm("Möchtest du diese Karte wirklich löschen?");
     if (confirmation) {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.addEventListener("load", function () {
-            var row = document.getElementById(rowId);
-            row.parentNode.removeChild(row);
+            if (xmlhttp.status === 200) {
+                var row = document.querySelector('[data-row-id="' + rowId + '"]');
+                if (row) {
+                    console.log("Element to be deleted:", row);
+                    row.parentNode.removeChild(row);
+                } else {
+                    console.log("Fehler: Zeile nicht gefunden.");
+                }
+            } else {
+                console.log("Fehler: " + xmlhttp.statusText);
+            }
         });
-        xmlhttp.addEventListener("error", ajaxFehler);
+        xmlhttp.addEventListener("error", function () {
+            console.log("Ajax-Fehler.");
+        });
 
         xmlhttp.open("POST", "../php/deleteCard.php", true);
-        xmlhttp.setRequestHeader(
-            "Content-type",
-            "application/x-www-form-urlencoded"
-        );
-        xmlhttp.send("id=" + rowId);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("name=" + encodeURIComponent(rowId)); // Änderung: Übergeben von "name" anstelle von "level"
     }
+}
+
+
+// Falls eine Ajax-Anfrage gescheitert ist ...
+function ajaxFehler(event) {
+    alert(event.target.statusText);
 }

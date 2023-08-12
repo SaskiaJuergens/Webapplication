@@ -1,4 +1,6 @@
 <?php
+//zum löschen des Levels in einer bestimmen Zeile der html Tabelle in adminSpielinhalt.html
+
 include 'setupDB.php';
 global $conn;
 

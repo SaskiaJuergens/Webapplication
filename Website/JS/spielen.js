@@ -8,6 +8,7 @@
  * Wir wollten zeign, dass man eine erste Anrfage über die Tabelle Messages zu einer anderen Session schicken kann
  */
 
+
 //Alle nötigen Konstanten für die Logik
 const moves = document.getElementById("movesCount");
 const timeValue = document.getElementById("time");
@@ -161,13 +162,13 @@ function pairCard() {
   firstCard.setAttribute("src", "../images/keineKarte.png");
   secondCard.setAttribute("src", "../images/keineKarte.png");
   uncoverCards = 0;
-  if (cardPair == items.length) {
+    if (cardPair == items.length) {
+    verlauf = "gewonnen";
     SpielStop();
     document.getElementById("gameEnd").innerHTML = "Du hast gewonnen!";
     calculateNewLevel();
     getCurrentDateTime();
     initiator = spielerId;
-    verlauf = "gewonnen";
     var gewinner = spielerId;
     insertSpiel(
       einzeln,
@@ -230,7 +231,7 @@ function SpielStop() {
     showSpieler();
     showSpiel();
       clearInterval(timerId);
-      if (startTime > 0) {
+      if (startTime > 0 && verlauf !== "gewonnen") {
     document.getElementById("gameEnd").innerHTML =
     "Du hast das Spiel gestoppt. Das Spiel gilt als abgebrochen!";
           //TO DO Daten einsetzen insert Spiel
