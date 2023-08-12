@@ -1,28 +1,27 @@
 <?php
-// Diese Php-Datei wird über XMLHttpRequest aufgerufen, um eine Karte aus der Datenbank zu löschen.
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Datenbankverbindung herstellen (ersetzen Sie die Platzhalter entsprechend)
-    include 'setupDB.php'; // Stellen Sie sicher, dass Ihre setupDB.php die Verbindung enthält
-    global $conn;
 
-    // Überprüfen, ob die Spieler-ID übergeben wurde
-    if (isset($_POST["id"])) {
-        $spielerId = $_POST["id"];
+function deleteDataFromDatabase($id) {
 
-        // SQL-Abfrage zum Löschen des Spielerkontos
-        $sql = "DELETE FROM spieler WHERE id = $spielerId";
 
-        if ($conn->query($sql) === TRUE) {
-            echo "Spielerkonto erfolgreich gelöscht.";
-        } else {
-            echo "Fehler beim Löschen des Spielerkontos: " . $conn->error;
-        }
+  include 'setupDB.php'; 
+  global $conn;
+
+    // SQL-Abfrage zum Löschen der Daten
+    $sql = "DELETE FROM spieler WHERE id = $id";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Spieler wurde erfolgreich gelöscht.";
     } else {
-        echo "Spieler-ID nicht übergeben.";
+        echo "Fehler beim Löschen des Spielers: " . $conn->error;
     }
 
     // Verbindung zur Datenbank schließen
     $conn->close();
 }
+
+// Beispielaufruf der Funktion
+$idToDelete = 1; // ID des Datensatzes, den du löschen möchtest
+deleteDataFromDatabase($idToDelete);
+
 ?>
