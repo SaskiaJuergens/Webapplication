@@ -4,7 +4,7 @@
 function deleteDataFromDatabase($id) {
 
 
-  include 'setupDB.php'; 
+  include 'setupDB.php';
   global $conn;
 
     // SQL-Abfrage zum Löschen der Daten
@@ -20,8 +20,5 @@ function deleteDataFromDatabase($id) {
     $conn->close();
 }
 
-// Beispielaufruf der Funktion
-$idToDelete = 1; // ID des Datensatzes, den du löschen möchtest
-deleteDataFromDatabase($idToDelete);
 
 ?>
