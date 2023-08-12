@@ -101,76 +101,73 @@
     </nav>
 
        <div class="login-background">
-           <br> <h1 id="willkommen"></h1><br>
-           <br>
-           <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
-           <p>Name</p>
 
-           <h2 id="spielname"></h2>
+           <h1>Profil bearbeiten</h1>
 
-           <br />
-           <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
-           <p>Email:<p>
+           <form action="editPlayer.php" method="POST">
 
-               <h2 id="spielerMail"></h2>
-               <br />
+             <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
+             <p>Name</p>
+
+             <h2 id="spielname"></h2>
+
+               <label for="spielname"></label>
+               <input type="text" id="spielname" name="spielname" ><br><br>
+
+
                <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
-           <p>Level:</p>
-           <h2 id="level"></h2>
-           <br />
-           <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
-           <p>Passwort:</p>
-           <h2 id="passwort"></h2>
-           <br />
-           <br />
-           <a id="profildetail">
-               <button type="button" class="button-start button-color1">
-                   Zu meinen Spielen
-               </button>
-           </a>
-           <a class="nav-link" href="../php/logout.php">
-               <button id="profil" type="button" class="button-start button-color1">
-                   Ausloggen
-               </button>
-           </a>
 
-           <div>
-           <a class="nav-link" href="../html/profilBearbeiten.html">
-           <button id="profilEdit" class="button-start button-color2">Bearbeiten</button>
-           </a>
-           </div>
 
-           
+               <p>Email:<p>
 
-           <a class="nav-link" href="../html/login.html">
-               <button id="profilLoeschen" type="button" class="button-start button-color2" data-id="<?php echo $spielerId; ?>" onclick= "myfunction()">
-                   Mein Spielkonto löschen
+                   <h2 id="spielerMail"></h2>
+
+
+               <label for="email"></label>
+               <input type="email" id="email" name="email" ><br><br>
+
+               <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
+
+               <p>Level:</p>
+               <h2 id="level"></h2>
+
+
+
+
+               <label for="level"></label><br>
+               <input type="text" id="level" name="level" ><br><br>
+
+                  <div style="width: 100%; height: 1px; background-color: rgb(157, 183, 228);"></div>
+
+
+               <p>Passwort:</p>
+               <h2 id="passwort"></h2>
+
+               <label for="passwort"></label><br>
+               <input type="text" id="passwort" name="passwort" ><br><br>
+
+
+                <div>
+                <a class="nav-link" href="../html/profil.html">
+               <button
+                 type="button"
+                 id="submitButton"
+                 class="button-start button-color2"
+
+                  >
+                 Speichern
                </button>
-           </a>
+              </a>
+              </div>
+
+           </form>
+
+
        </div>
       <br />
       <br />
       <br />
     </div>
-
-
-    <script>
-    function myFunction() {
-        // Hier kannst du AJAX verwenden, um eine PHP-Funktion aufzurufen
-        // oder du kannst das Formular an eine PHP-Datei senden
-        // und die Funktion dort aufrufen
-        // Beispiel für AJAX:
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
-            }
-        };
-        xhttp.open("GET", "deletePlayer.php", true);
-        xhttp.send();
-    }
-</script>
-
 
       <!-- session sichtbarkeiten check -->
     <script src="../JS/profilSeite.js"></script>
