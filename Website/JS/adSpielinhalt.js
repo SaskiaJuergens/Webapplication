@@ -236,7 +236,8 @@ function ajaxShowCard(event) {
 
 // JavaScript-Code zum Löschen einer Zeile und der dazugehörigen Daten aus der Datenbank
 function deleteCard(rowId) {
-    console.log("Übergebene rowId:", rowId); // Ausgabe der übergebenen rowId
+    console.log("Übergebene Zeilen-ID:", rowId);
+
 
     var confirmation = confirm("Möchtest du diese Karte wirklich löschen?");
     if (confirmation) {
@@ -244,6 +245,9 @@ function deleteCard(rowId) {
         xmlhttp.addEventListener("load", function () {
             if (xmlhttp.status === 200) {
                 var row = document.querySelector('[data-row-id="' + rowId + '"]');
+                console.log("Übergebene Zeilen-ID:", rowId);
+                console.log("Serverantwort:", xmlhttp.responseText);
+
                 if (row) {
                     console.log("Element to be deleted:", row);
                     row.parentNode.removeChild(row);

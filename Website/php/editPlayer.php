@@ -5,8 +5,14 @@ include 'setupDB.php';
 
 global $conn;
 
+$spielname = $_POST['vorname'] .  ' ' . $_POST['nachname'];
+$nachname = $_POST['nachname'];
+$email = $_POST['email'];
+$passwort = $_POST['password'];
+$level = $_POST['level'];
 
-// IF
+$show = '';
+
 if (isset($_POST["action"])) {
   if ($_POST["action"] == "register") {
     register();
@@ -39,14 +45,6 @@ function register(){
     return false;
 }
 
-$spielname = $_POST['vorname'] .  ' ' . $_POST['nachname'];
-$nachname = $_POST['nachname'];
-$email = $_POST['email'];
-$passwort = $_POST['password'];
-$level = $_POST['level'];
-
-$show = '';
-
 if (isEmailRegistered($conn, $email)) {
     $show = '<h2>Der Spieler mit dieser E-Mail ist bereits registriert. Bitte verwende eine andere E-Mail.</h2>';
 } else {
@@ -65,6 +63,7 @@ echo $show;
 
 // hier hole ich die daten des angemldeten spielers, oder finde raus, dass niemand angemeldet ist
 function checkSession() {
+      global $conn;
     session_start();
     $response = array();
 

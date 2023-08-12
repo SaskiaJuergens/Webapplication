@@ -1,7 +1,7 @@
 <?php
 //zum löschen der Karte in einer bestimmen Zeile der html Tabelle in adminSpielinhalt.html
 
-<?php
+
 include 'setupDB.php';
 global $conn;
 
@@ -10,20 +10,18 @@ $rowId = $_POST["name"];
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-if (is_numeric($rowId)) {
-    $stmt = $conn->prepare("DELETE FROM karte WHERE name = ?");
-    $stmt->bind_param("s", $rowId);
+file_put_contents('debug.log', print_r($_POST, true), FILE_APPEND);
 
-    if ($stmt->execute()) {
-        echo "Die karte wurde erfolgreich gelöscht.";
-    } else {
-        echo "Fehler beim Löschen der karte: " . $stmt->error;
-    }
-    $stmt->close();
+
+$stmt = $conn->prepare("DELETE FROM karte WHERE name = ?");
+$stmt->bind_param("s", $rowId);
+
+if ($stmt->execute()) {
+    echo "Die Karte wurde erfolgreich gelöscht.";
 } else {
-    echo "Ungültige Zeilen-ID.";
+    echo "Fehler beim Löschen der Karte: " . $stmt->error;
 }
+$stmt->close();
 
 $conn->close();
 ?>
-
