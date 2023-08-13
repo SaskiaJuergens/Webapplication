@@ -265,18 +265,23 @@ function calculateNewLevel() {
     }
   }
 
+  console.log("aktuelles level" + currentLevel);
+  console.log(" Levellist Länge " + levelList.length);
+
+  console.log("winnumber" + winNumber);
   if (winNumber > 2) {
     console.log("Du hast gewonnen und steigst ein Level auf!");
     document.getElementById("gameEnd").innerHTML =
       "Du hast gewonnen und steigst ein Level auf!";
 
     // AJAX-Aufruf, um das Spieler-Level in der Datenbank zu erhöhen
+    currentLevel = parseInt(currentLevel, 10) + 1;
+    console.log("du steigst auf level " + typeof currentLevel + " auf.");
+
     levelAufsteigen(spielerId);
   }
-
-  if (currentLevel < levelList.length) {
-    currentLevel += 1;
-  } else {
+  //checken ob es noch ein höheres Level gibt
+  if (currentLevel > levelList.length) {
     document.getElementById("gameEnd").innerHTML =
       "Du hast gewonnen und steigst ein Level auf! Allerdings gibt es kein höheres Level. Du hast das Spiel durchgespielt.";
   }
@@ -297,7 +302,11 @@ function levelAufsteigen(playerId) {
     }
   };
 
-  xhr.open("GET", `../php/increaseLevel.php?playerId=${playerId}`, true);
+  xhr.open(
+    "GET",
+    `../php/increaseLevel.php?playerId=${playerId}&currentLevel=${currentLevel}`,
+    true
+  );
   xhr.send();
 }
 

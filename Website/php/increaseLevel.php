@@ -10,10 +10,12 @@ if ($conn->connect_error) {
 
 if (isset($_GET['playerId'])) {
     $playerId = $_GET['playerId'];
+       $currentLevel = $_GET['currentLevel'];
+    
     global $conn;
 
     // Den Level des Spielers um eins erhöhen
-    $sql = "UPDATE spieler SET level = level + 1 WHERE id = " . mysqli_real_escape_string($conn, $playerId);
+    $sql = "UPDATE spieler SET level = $currentLevel WHERE id = " . mysqli_real_escape_string($conn, $playerId);
 
     // Den Level des Spielers um eins erhöhen
     //$sql = "UPDATE spieler SET level = level + 1 WHERE id = $playerId";
