@@ -21,8 +21,10 @@ function setup() {
   const product = urlParams.get("elem");
   currentID = product;
 
-    document.querySelector("#theadGame th:nth-child(8)").addEventListener("click", function () {
-        sortTable(7); // Assuming "Level" is the 8th column (0-based index)
+  document
+    .querySelector("#theadGame th:nth-child(8)")
+    .addEventListener("click", function () {
+      sortTable(7); // Assuming "Level" is the 8th column (0-based index)
     });
   showSpieler();
 
@@ -32,8 +34,6 @@ function setup() {
   // Canvas-Element auswählen
   // showPlayerPage(product);
 }
-
-
 
 // Funktion zum Anzeigen der Spielerseite und Aktualisierung der Spielerinformationen
 function showPlayerPage(playerName) {
@@ -82,26 +82,26 @@ function createTableCell(content) {
 
 // Funktion zum Sortieren der Tabelle nach Spieldatum oder Level
 function sortTable(columnIndex) {
-    var table = document.getElementById("spieler-tabelle");
-    var tbody = table.getElementsByTagName("tbody")[0];
-    var rows = tbody.getElementsByTagName("tr");
-    var sortedRows = Array.from(rows);
+  var table = document.getElementById("spieler-tabelle");
+  var tbody = table.getElementsByTagName("tbody")[0];
+  var rows = tbody.getElementsByTagName("tr");
+  var sortedRows = Array.from(rows);
 
-    sortedRows.sort(function (a, b) {
-        var aValue = a.getElementsByTagName("td")[columnIndex].textContent;
-        var bValue = b.getElementsByTagName("td")[columnIndex].textContent;
-        if (columnIndex === 7) { // If sorting the "Level" column
-            return parseInt(bValue) - parseInt(aValue); // Compare as numbers
-        } else {
-            return aValue.localeCompare(bValue);
-        }
-    });
-
-    for (var i = 0; i < sortedRows.length; i++) {
-        tbody.appendChild(sortedRows[i]);
+  sortedRows.sort(function (a, b) {
+    var aValue = a.getElementsByTagName("td")[columnIndex].textContent;
+    var bValue = b.getElementsByTagName("td")[columnIndex].textContent;
+    if (columnIndex === 7) {
+      // If sorting the "Level" column
+      return parseInt(bValue) - parseInt(aValue); // Compare as numbers
+    } else {
+      return aValue.localeCompare(bValue);
     }
-}
+  });
 
+  for (var i = 0; i < sortedRows.length; i++) {
+    tbody.appendChild(sortedRows[i]);
+  }
+}
 
 /**
  * Spiel werden angezeigt
@@ -196,37 +196,38 @@ function ajaxShowSpiel(event) {
       if (verlauf == "verloren") verlorenCounter += 1;
       if (verlauf == "abgebrochen") abgebrochenCounter += 1;
     }
-  }
 
-  var labels = ["Gewonnen", "Verloren", "abgebrochen"];
-  var data = [gewonnenCounter, verlorenCounter, abgebrochenCounter];
+    var labels = ["Gewonnen", "Verloren", "abgebrochen"];
+    var data = [gewonnenCounter, verlorenCounter, abgebrochenCounter];
+    console.log(labels + data);
 
-  // Diagramm wird erstellen
-  var myChart = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: labels,
-      datasets: [
-        {
-          label: "Meine Spiele",
-          data: data,
-          backgroundColor: "rgba(75, 190, 190, 0.8)",
-          borderColor: "rgba(75, 192, 192, 1)",
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: {
-            stepSize: 1, // Ganzzahlige Schrittweite
+    // Diagramm wird erstellen
+    var myChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Meine Spiele",
+            data: data,
+            backgroundColor: "rgba(75, 190, 190, 0.8)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 1, // Ganzzahlige Schrittweite
+            },
           },
         },
       },
-    },
-  });
+    });
+  }
 }
 
 /**

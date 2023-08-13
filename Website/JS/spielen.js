@@ -8,7 +8,6 @@
  * Wir wollten zeign, dass man eine erste Anrfage über die Tabelle Messages zu einer anderen Session schicken kann
  */
 
-
 //Alle nötigen Konstanten für die Logik
 const moves = document.getElementById("movesCount");
 const timeValue = document.getElementById("time");
@@ -73,7 +72,7 @@ function setup() {
 
 //leere karten werden gezeichnet
 function drawMemory() {
-  const currentCards = items.slice(0, cardAnzahl / 2); //An dieser Stelle qird die Kartenanzahl gesetzt je nach Spielerlevel passend
+  const currentCards = items.slice(0, cardAnzahl); //An dieser Stelle qird die Kartenanzahl gesetzt je nach Spielerlevel passend
   MemoryList = currentCards.concat(currentCards);
   var ULlist = document.getElementById("cards"); // Aus Karten Paare machen
   displayMemoryList(); // Karten mischen
@@ -162,7 +161,7 @@ function pairCard() {
   firstCard.setAttribute("src", "../images/keineKarte.png");
   secondCard.setAttribute("src", "../images/keineKarte.png");
   uncoverCards = 0;
-    if (cardPair == items.length) {
+  if (cardPair == MemoryList.length / 2) {
     verlauf = "gewonnen";
     SpielStop();
     document.getElementById("gameEnd").innerHTML = "Du hast gewonnen!";
@@ -180,6 +179,7 @@ function pairCard() {
       initiator,
       currentLevel
     );
+    setup();
   }
 }
 
@@ -230,26 +230,25 @@ function SpielStop() {
     checkSession();
     showSpieler();
     showSpiel();
-      clearInterval(timerId);
-      if (startTime > 0 && verlauf !== "gewonnen") {
-    document.getElementById("gameEnd").innerHTML =
-    "Du hast das Spiel gestoppt. Das Spiel gilt als abgebrochen!";
-          //TO DO Daten einsetzen insert Spiel
-          spielDauer(); // berechnet Spieldauer
-          getCurrentDateTime(); // berechnet aktuelles Datum
-          verlauf = "abgebrochen";
-          initiator = spielerId;
-          insertSpiel(
-              einzeln,
-              Datetime,
-              dauer,
-              verlauf,
-              mitspieler,
-              gewinner,
-              initiator,
-              currentLevel
-          );
-      }
+    clearInterval(timerId);
+    if (startTime > 0 && verlauf !== "gewonnen") {
+      document.getElementById("gameEnd").innerHTML =
+        "Du hast das Spiel gestoppt. Das Spiel gilt als abgebrochen!";
+      spielDauer(); // berechnet Spieldauer
+      getCurrentDateTime(); // berechnet aktuelles Datum
+      verlauf = "abgebrochen";
+      initiator = spielerId;
+      insertSpiel(
+        einzeln,
+        Datetime,
+        dauer,
+        verlauf,
+        mitspieler,
+        gewinner,
+        initiator,
+        currentLevel
+      );
+    }
   } else {
     document.getElementById("gameEnd").innerHTML =
       "Du musst das Spiel starten, um es zu beenden.";
@@ -265,16 +264,16 @@ function calculateNewLevel() {
       winNumber += 1;
     }
   }
-  
+
   if (winNumber > 2) {
     console.log("Du hast gewonnen und steigst ein Level auf!");
     document.getElementById("gameEnd").innerHTML =
       "Du hast gewonnen und steigst ein Level auf!";
-      
+
     // AJAX-Aufruf, um das Spieler-Level in der Datenbank zu erhöhen
     levelAufsteigen(spielerId);
   }
-  
+
   if (currentLevel < levelList.length) {
     currentLevel += 1;
   } else {
@@ -301,7 +300,6 @@ function levelAufsteigen(playerId) {
   xhr.open("GET", `../php/increaseLevel.php?playerId=${playerId}`, true);
   xhr.send();
 }
-
 
 /**
  * Countdown wird umgerechnet
