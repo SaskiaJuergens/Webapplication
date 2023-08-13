@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Falls das erfolgreich angemeldet erfolgreicht inzugefügt ist ...
     function ajaxInsertLogin(event) {
-      console.log("das ist die Antwort");
       document.getElementById("response").innerHTML = this.responseText;
       // Wechsele zur Profilseite
       if (this.responseText == "Login Successful");
