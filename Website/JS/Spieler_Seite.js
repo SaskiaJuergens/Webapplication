@@ -1,3 +1,7 @@
+/**
+ * Hier werden die Spielerdertails angezeigt
+ */
+
 var playerName; //konstante für Hover und weiterleiten auf Playerseite
 var spielerList = [];
 

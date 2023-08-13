@@ -1,4 +1,8 @@
-﻿// Beim Laden der Webseite wird die Funktion setup() aufgerufen
+﻿/**
+ *hier wird der Spielinhaltangezeigt
+ */
+
+// Beim Laden der Webseite wird die Funktion setup() aufgerufen
 window.addEventListener("load", setup);
 
 var LevelList = [];

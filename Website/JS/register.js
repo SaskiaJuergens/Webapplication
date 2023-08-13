@@ -1,3 +1,7 @@
+/**
+ * hier ist die Logik zum registrieren
+ */
+
 //Liste der Levels
 var LevelList = [];
 

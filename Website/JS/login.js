@@ -1,3 +1,7 @@
+/**
+ * hier ist die Logik für das Login
+ */
+
 document.addEventListener("DOMContentLoaded", function () {
   const submitButton = document.getElementById("submitButton");
 

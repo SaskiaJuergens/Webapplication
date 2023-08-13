@@ -1,5 +1,5 @@
 /**
- * hier wird das Profil angezeigt
+ * hier kann das Profil bearbeitet werden
  */
 
 var spielerList = [];
