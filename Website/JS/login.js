@@ -47,8 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function ajaxInsertLogin(event) {
       document.getElementById("response").innerHTML = this.responseText;
       // Wechsele zur Profilseite
-      if (this.responseText == "Login Successful");
-      {
+      if (this.responseText == "Login Successful") {
         window.location.replace("profil.html");
         console.log(window.location.href);
       }
