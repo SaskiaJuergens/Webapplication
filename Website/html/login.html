@@ -13,93 +13,89 @@
   </head>
   <body>
     <div class="image-background">
-       <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-      <a href="startscreen.html" Link class="logo">
-        <img src="../images/slacklogo.png" alt="Logo" />
-      </a>
+      <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <a href="startscreen.html" Link class="logo">
+          <img src="../images/slacklogo.png" alt="Logo" />
+        </a>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active nav-item-custom">
-            <a class="nav-link" href="Spiel.html"
-              >Spielen <span class="sr-only">(current)</span></a
-            >
-          </li>
-
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Spieleinstellungen
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a
-                id="adminSpielEinstellungen"
-                class="dropdown-item"
-                href="adminSpielEinstellungen.html"
-                >Spieleinstellung</a
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active nav-item-custom">
+              <a class="nav-link" href="Spiel.html"
+                >Spielen <span class="sr-only">(current)</span></a
               >
-              <a
-                id="adminSpielinhalt"
-                class="dropdown-item"
-                href="adminSpielinhalt.html"
-                >Spielinhalt verwalten</a
-              >
+            </li>
 
+            <li class="nav-item dropdown">
               <a
-                id="playerSpielinhalt"
-                class="dropdown-item"
-                href="playerSpielinhalt.html"
-                
-                >Spielinhalt User</a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
               >
+                Spieleinstellungen
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a
+                  id="adminSpielEinstellungen"
+                  class="dropdown-item"
+                  href="adminSpielEinstellungen.html"
+                  >Spieleinstellung</a
+                >
+                <a
+                  id="adminSpielinhalt"
+                  class="dropdown-item"
+                  href="adminSpielinhalt.html"
+                  >Spielinhalt verwalten</a
+                >
 
-              <a
-                id="Spielstand"
-                class="dropdown-item"
-                href="Spielstand.html"
-                >Spielstand</a
+                <a
+                  id="playerSpielinhalt"
+                  class="dropdown-item"
+                  href="playerSpielinhalt.html"
+                  >Spielinhalt User</a
+                >
+
+                <a id="Spielstand" class="dropdown-item" href="Spielstand.html"
+                  >Spielstand</a
+                >
+              </div>
+            </li>
+            <li class="nav-item active nav-item-custom">
+              <a class="nav-link" href="log_in.html" id="Login"
+                >Login <span class="sr-only">(current)</span></a
               >
-            </div>
-          </li>
-          <li class="nav-item active nav-item-custom">
-            <a class="nav-link" href="login.html" id="Login"
-              >Login <span class="sr-only">(current)</span></a
-            >
-          </li>
+            </li>
 
-           <li class="nav-item active nav-item-custom">
-            <a class="nav-link" href="profil.html" id="Profil"
-              >Mein Profil <span class="sr-only">(current)</span></a
-            >
-          </li>
-       
-          <li class="nav-item active nav-item-custom">
-            <a class="nav-link" href="Impressum.html"
-              >Impressum <span class="sr-only">(current)</span></a
-            >
-          </li>
-        </ul>
-      </div>
-    </nav>
+            <li class="nav-item active nav-item-custom">
+              <a class="nav-link" href="profil.html" id="Profil"
+                >Mein Profil <span class="sr-only">(current)</span></a
+              >
+            </li>
+
+            <li class="nav-item active nav-item-custom">
+              <a class="nav-link" href="Impressum.html"
+                >Impressum <span class="sr-only">(current)</span></a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
 
       <div class="login-background">
         <h1><b>Einloggen</b></h1>
@@ -109,15 +105,14 @@
           <label for="Email" class="eingabeLabel">Email:</label>
           <input type="email" id="email" name="email" required />
           <label for="password" class="eingabeLabel">Passwort:</label>
-          <input type="password" id="password" name="password" required/>
+          <input type="password" id="password" name="password" required />
           <button
-              type="button"
-              id="submitButton"
-              class="button-start button-color2"
-            >
-              Einloggen
-            </button>
-
+            type="button"
+            id="submitButton"
+            class="button-start button-color2"
+          >
+            Einloggen
+          </button>
 
           <div id="response"></div>
         </form>
@@ -135,12 +130,12 @@
       <br />
       <br />
     </div>
-      <!-- session sichtbarkeiten check -->
+    <!-- session sichtbarkeiten check -->
     <script src="../JS/SessionCheck.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script src="../JS/login.js"></script>
+    <script src="../JS/anmelden.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
       integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

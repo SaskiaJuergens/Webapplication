@@ -41,7 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Falls das erfolgreich angemeldet erfolgreicht inzugefügt ist ...
     function ajaxInsertLogin(event) {
+      console.log("das ist die Antwort");
       document.getElementById("response").innerHTML = this.responseText;
+      // Wechsele zur Profilseite
+      window.location.replace("profil.html");
+      console.log(window.location.href);
     }
 
     // Falls eine Ajax-Anfrage gescheitert ist ...
