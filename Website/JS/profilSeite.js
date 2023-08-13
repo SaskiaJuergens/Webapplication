@@ -133,7 +133,7 @@ function checkSession() {
  */
 function löschenButtonClick() {
   console.log("löschen wird vorbereitet");
-  spielerlöschen();
+
   showSpiel();
 }
 
@@ -189,19 +189,17 @@ function ajaxShowSpiel(event) {
       initiator == initiator ||
       mitspieler == mitspieler
     )
-      spielöschen(level);
+      spielöschen(id);
   }
   console.log(spielList);
-
-  // hier wird nun anschließend der Spieler gelöscht
-  window.location.replace("../php/logout.php");
+  spielerlöschen();
 }
 
 /**
  * Spiel löschen
  * @param {*} level
  */
-function spielöschen(level) {
+function spielöschen(id) {
   var xmlhttp = new XMLHttpRequest(); // Initialisieren Sie xmlhttp
 
   xmlhttp.addEventListener("load", function () {
@@ -218,7 +216,7 @@ function spielöschen(level) {
 
   xmlhttp.open("POST", "../php/deleteGame.php", true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xmlhttp.send("id=" + encodeURIComponent(level));
+  xmlhttp.send("id=" + encodeURIComponent(id));
 }
 
 /**
@@ -230,7 +228,8 @@ function spielerlöschen() {
   xmlhttp.addEventListener("load", function () {
     if (xmlhttp.status === 200) {
       console.log("Spieler erfolgreich gelöscht:", xmlhttp.responseText);
-
+      // hier wird nun anschließend der Spieler gelöscht
+      // window.location.replace("../php/logout.php");
       console.log(window.location.href);
     } else {
       console.error(

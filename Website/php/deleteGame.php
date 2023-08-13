@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = $_POST['id'];
 
         // Sicherstellen, dass die �bergebene ID g�ltig ist
-        if (is_numeric($rowId)) {
+        if (is_numeric($id)) {
             // SQL-Befehl zum L�schen des Levels mit der angegebenen ID
             $sql = "DELETE FROM spiel WHERE id = $id";
 
