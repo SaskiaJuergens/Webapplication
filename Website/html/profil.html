@@ -150,41 +150,18 @@
             </button>
           </a>
         </div>
-
-        <a class="nav-link" href="../html/login.html">
-          <button
-            id="profilLoeschen"
-            type="button"
-            class="button-start button-color2"
-            data-id="<?php echo $spielerId; ?>"
-            onclick="myfunction()"
-          >
+        <a id="löschen">
+          <button type="button" class="button-start button-color2">
             Mein Spielkonto löschen
           </button>
         </a>
+
         <div id="response"></div>
       </div>
       <br />
       <br />
       <br />
     </div>
-
-    <script>
-      function myFunction() {
-        // Hier kannst du AJAX verwenden, um eine PHP-Funktion aufzurufen
-        // oder du kannst das Formular an eine PHP-Datei senden
-        // und die Funktion dort aufrufen
-        // Beispiel für AJAX:
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
-          }
-        };
-        xhttp.open("GET", "deletePlayer.php", true);
-        xhttp.send();
-      }
-    </script>
 
     <!-- session sichtbarkeiten check -->
     <script src="../JS/profilSeite.js"></script>

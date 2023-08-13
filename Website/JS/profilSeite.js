@@ -2,7 +2,7 @@
  * hier wird das Profil angezeigt
  */
 
-var spielerList = [];
+var spielList = [];
 //spieler der Session
 var spielerId;
 var spielerMail;
@@ -14,6 +14,9 @@ var level;
 window.addEventListener("load", setup);
 function setup() {
   checkSession();
+  // Den Button setzen mit dem Link zur Unterseite
+  var löschenButton = document.getElementById("löschen");
+  löschenButton.addEventListener("click", löschenButtonClick);
 }
 
 // Falls eine Ajax-Anfrage gescheitert ist ...
@@ -125,31 +128,122 @@ function checkSession() {
   xmlhttp.send();
 }
 
-/*// Eventlistener für den Button zum Löschen des Spielkontos
-document.getElementById("profilLoeschen").addEventListener("click", function () {
-    var spielerId = this.getAttribute("id");
+/**
+ * die Spiele muss zunächst gelöscht werden, dann der User
+ */
+function löschenButtonClick() {
+  console.log("löschen wird vorbereitet");
+  showSpiel();
+}
 
-    // Daten für die Ajax-Anfrage vorbereiten
-    var data = {
-        id: spielerId
+/**
+ * Spiel wird gerladen
+ */
+function showSpiel() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.addEventListener("load", ajaxShowSpiel);
+  xmlhttp.addEventListener("error", ajaxFehler);
+
+  xmlhttp.open("GET", "../php/spielShow.php");
+  xmlhttp.send();
+}
+
+/**
+ * Spiel wird aus DB ausgegeben und in spielList gespeichert
+ * @param {*} event
+ */
+function ajaxShowSpiel(event) {
+  var myObj = JSON.parse(event.target.responseText);
+
+  for (var i = 0; i < myObj.length; i++) {
+    var einzeln = myObj[i]["einzeln"];
+    var Datetime = myObj[i]["Datetime"];
+    var dauer = myObj[i]["dauer"];
+    var verlauf = myObj[i]["verlauf"];
+    var mitspieler = myObj[i]["mitspieler"];
+    var gewinner = myObj[i]["gewinner"];
+    var initiator = myObj[i]["initiator"];
+    var level = myObj[i]["level"];
+    var id = myObj[i]["id"];
+
+    // Ein Objekt mit title und src erstellen
+    var item = {
+      einzeln: einzeln,
+      Datetime: Datetime,
+      dauer: dauer,
+      verlauf: verlauf,
+      mitspieler: mitspieler,
+      gewinner: gewinner,
+      initiator: initiator,
+      level: level,
+      id: id,
     };
 
-    var xmlhttp = new XMLHttpRequest();
+    // Das erstellte Objekt der Liste hinzufügen
+    spielList.push(item);
 
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState === 4) {
-            if (xmlhttp.status === 200) {
-                var response = xmlhttp.responseText;
-                console.log(response); // Oder führen Sie hier weitere Aktionen aus, z.B. eine Bestätigung anzeigen
-            } else {
-                alert("Fehler beim Kommunizieren mit dem Server.");
-            }
-        }
-    };
+    //Spiele löschen die den Spieler enthalten
+    if (
+      gewinner == spielerId ||
+      initiator == initiator ||
+      mitspieler == mitspieler
+    )
+      spielöschen(level);
+  }
+  console.log(spielList);
+  // hier wird nun anschließend der Spieler gelöscht
+  spielerlöschen();
+}
 
-    xmlhttp.open("POST", "../php/deletePlayer.php", true); // Aktualisieren Sie den Pfad zur PHP-Datei
-    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xmlhttp.send("id=" + encodeURIComponent(data.id));
-});*/
+/**
+ * Spiel löschen
+ * @param {*} level
+ */
+function spielöschen(level) {
+  var xmlhttp = new XMLHttpRequest(); // Initialisieren Sie xmlhttp
 
+  xmlhttp.addEventListener("load", function () {
+    if (xmlhttp.status === 200) {
+      console.log("Spiel erfolgreich gelöscht:", xmlhttp.responseText);
+    } else {
+      console.error("Fehler beim Löschen des Spiels. Status:", xmlhttp.status);
+    }
+  });
 
+  xmlhttp.addEventListener("error", function () {
+    console.log("Ajax-Fehler.");
+  });
+
+  xmlhttp.open("POST", "../php/deleteGame.php", true);
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlhttp.send("id=" + encodeURIComponent(level));
+}
+
+/**
+ * Spieler wird gelöscht
+ */
+function spielerlöschen() {
+  var xmlhttp = new XMLHttpRequest(); // Initialisieren Sie xmlhttp
+
+  xmlhttp.addEventListener("load", function () {
+    if (xmlhttp.status === 200) {
+      console.log("Spieler erfolgreich gelöscht:", xmlhttp.responseText);
+      // hier wird nun anschließend der Spieler gelöscht
+      window.location.replace("../php/logout.php");
+      console.log(window.location.href);
+    } else {
+      console.error(
+        "Fehler beim Löschen des Spielers. Status:",
+        xmlhttp.status
+      );
+    }
+  });
+
+  xmlhttp.addEventListener("error", function () {
+    console.log("Ajax-Fehler.");
+  });
+
+  xmlhttp.open("POST", "../php/deletePlayer.php", true);
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlhttp.send("id=" + encodeURIComponent(spielerId));
+}

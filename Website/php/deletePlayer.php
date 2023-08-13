@@ -1,24 +1,27 @@
 <?php
+// Verbindung zur MySQL-Datenbank herstellen
+include 'setupDB.php';
+global $conn;
 
+// Überprüfen, ob ein POST-Request gesendet wurde
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Überprüfen, ob die Spieler-ID übergeben wurde
+    if (isset($_POST["id"])) {
+        $id = $_POST["id"];
 
-function deleteDataFromDatabase($id) {
+        // SQL-Abfrage zum Löschen des Spielerkontos
+        $sql = "DELETE FROM spieler WHERE id = $id";
 
-
-  include 'setupDB.php';
-  global $conn;
-
-    // SQL-Abfrage zum Löschen der Daten
-    $sql = "DELETE FROM spieler WHERE id = $id";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Spieler wurde erfolgreich gelöscht.";
+        if ($conn->query($sql) === TRUE) {
+            echo "Spielerkonto erfolgreich gelöscht.";
+        } else {
+            echo "Fehler beim Löschen des Spielerkontos: " . $conn->error;
+        }
     } else {
-        echo "Fehler beim Löschen des Spielers: " . $conn->error;
+        echo "Spieler-ID nicht übergeben.";
     }
-
-    // Verbindung zur Datenbank schließen
-    $conn->close();
 }
 
-
+// Verbindung zur Datenbank schließen
+$conn->close();
 ?>
