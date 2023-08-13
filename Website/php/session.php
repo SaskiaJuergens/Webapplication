@@ -1,4 +1,10 @@
 <?php
+
+//PHP für sessions :
+// Registrieren
+// Login in
+// checkSession
+
 include 'setupDB.php';
 
 global $conn;
@@ -84,7 +90,7 @@ function login() {
            
            
         } else {
-               echo "Debug: Eingegebenes Passwort: $passwort  Gespeichertes Passwort: {$row['passwort']}";
+               echo "Eingegebenes Passwort: $passwort  ist falsch";
             echo " Wrong Password";
         }
     } else {
