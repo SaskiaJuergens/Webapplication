@@ -1,27 +1,33 @@
 <?php
-//zum löschen der Karte in einer bestimmen Zeile der html Tabelle in adminSpielinhalt.html
-
+// Diese Php-Datei wird ï¿½ber XMLHttpRequest aufgerufen, um eine Karte aus der Datenbank zu lï¿½schen.
 
 include 'setupDB.php';
 global $conn;
 
-$rowId = $_POST["name"];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['id'])) {
+        $rowId = $_POST['id'];
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+        // Sicherstellen, dass die ï¿½bergebene ID gï¿½ltig ist
+        if (is_numeric($rowId)) {
+            // SQL-Befehl zum Lï¿½schen der Karte mit der angegebenen ID
+            $sql = "DELETE FROM karte WHERE id = $rowId";
 
-file_put_contents('debug.log', print_r($_POST, true), FILE_APPEND);
-
-
-$stmt = $conn->prepare("DELETE FROM karte WHERE name = ?");
-$stmt->bind_param("s", $rowId);
-
-if ($stmt->execute()) {
-    echo "Die Karte wurde erfolgreich gelöscht.";
+            if ($conn->query($sql)) {
+                echo "Die Karte wurde erfolgreich gelï¿½scht.";
+            } else {
+                echo "Fehler beim Lï¿½schen der Karte: " . $conn->error;
+            }
+        } else {
+            echo "Ungï¿½ltige Zeilen-ID.";
+        }
+    } else {
+        echo "Zeilen-ID nicht erhalten.";
+    }
 } else {
-    echo "Fehler beim Löschen der Karte: " . $stmt->error;
+    echo "Ungï¿½ltige Anfrage.";
 }
-$stmt->close();
 
+// Verbindung zur Datenbank schlieï¿½en
 $conn->close();
 ?>

@@ -14,7 +14,7 @@ function insetSpiel(){
     $mitspieler = $_POST['mitspieler'];
     $gewinner = $_POST['gewinner'];
     $initiator = $_POST['initiator'];
-        $level = $_POST['level'];
+    $level = $_POST['level'];
 
 // der SQL-Befehl für das Hinzufügen
 //Fuktion zum hochladen von Werten in die Tabelle spiel

@@ -1,28 +1,33 @@
 <?php
-//zum löschen des Levels in einer bestimmen Zeile der html Tabelle in adminSpielinhalt.html
+// Diese Php-Datei wird ï¿½ber XMLHttpRequest aufgerufen, um eine Karte aus der Datenbank zu lï¿½schen.
 
 include 'setupDB.php';
 global $conn;
 
-$rowId = $_POST["level"];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['id'])) {
+        $rowId = $_POST['id'];
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+        // Sicherstellen, dass die ï¿½bergebene ID gï¿½ltig ist
+        if (is_numeric($rowId)) {
+            // SQL-Befehl zum Lï¿½schen des Levels mit der angegebenen ID
+            $sql = "DELETE FROM level WHERE level = $rowId";
 
-if (is_numeric($rowId)) {
-    $stmt = $conn->prepare("DELETE FROM Level WHERE level = ?");
-    $stmt->bind_param("i", $rowId);
-
-    if ($stmt->execute()) {
-        echo "Das Level wurde erfolgreich gelöscht.";
+            if ($conn->query($sql)) {
+                echo "Das Level wurde erfolgreich gelï¿½scht.";
+            } else {
+                echo "Fehler beim Lï¿½schen des Levels: " . $conn->error;
+            }
+        } else {
+            echo "Ungï¿½ltige Zeilen-ID.";
+        }
     } else {
-        echo "Fehler beim Löschen des Levels: " . $stmt->error;
+        echo "Zeilen-ID nicht erhalten.";
     }
-    $stmt->close();
 } else {
-    echo "Ungültige Zeilen-ID.";
+    echo "Ungï¿½ltige Anfrage.";
 }
 
+// Verbindung zur Datenbank schlieï¿½en
 $conn->close();
 ?>
-
