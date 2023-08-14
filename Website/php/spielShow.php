@@ -1,5 +1,5 @@
 <?php
-// Das PHP-Programm, um die vorhandenen Spiele aus der Tabelle zu laden. Die Spiele werden als eine JSON-Datei an Spielstand.js und spielerSeiten.js zurückgescheckt.
+// Das PHP-Programm, um die vorhandenen Spiele aus der Tabelle zu laden. Die Spiele werden als eine JSON-Datei an Spielstand.js und spielerSeiten.js zurï¿½ckgescheckt.
 //funktioniert
 
 include "setupDB.php";
@@ -14,7 +14,7 @@ $result = $conn->query($sql);
 $rows = array();
 while ($row = $result->fetch_assoc()) {
     
-    $rows[] = array('einzeln'=>$row['einzeln'], 'Datetime'=>$row['Datetime'], 'dauer'=>$row['dauer'],'verlauf'=>$row['verlauf'],'mitspieler'=>$row['mitspieler'],'gewinner'=>$row['gewinner'],'initiator'=>$row['initiator'],'level'=>$row['level']);
+    $rows[] = array('einzeln'=>$row['einzeln'], 'Datetime'=>$row['Datetime'], 'dauer'=>$row['dauer'],'verlauf'=>$row['verlauf'],'mitspieler'=>$row['mitspieler'],'gewinner'=>$row['gewinner'],'initiator'=>$row['initiator'],'level'=>$row['level'],'id'=>$row['id']);
 } 
 
 $ps = json_encode($rows);

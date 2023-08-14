@@ -180,16 +180,19 @@ function ajaxShowSpiel(event) {
       id: id,
     };
 
+    console.log("das ist die id" + id);
     // Das erstellte Objekt der Liste hinzufügen
     spielList.push(item);
 
     //Spiele löschen die den Spieler enthalten
     if (
       gewinner == spielerId ||
-      initiator == initiator ||
-      mitspieler == mitspieler
-    )
+      initiator == spielerId ||
+      mitspieler == spielerId
+    ) {
+      console.log("the id" + id);
       spielöschen(id);
+    }
   }
   console.log(spielList);
   spielerlöschen();
@@ -229,7 +232,7 @@ function spielerlöschen() {
     if (xmlhttp.status === 200) {
       console.log("Spieler erfolgreich gelöscht:", xmlhttp.responseText);
       // hier wird nun anschließend der Spieler gelöscht
-      // window.location.replace("../php/logout.php");
+      window.location.replace("../php/logout.php");
       console.log(window.location.href);
     } else {
       console.error(

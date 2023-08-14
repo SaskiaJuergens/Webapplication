@@ -195,6 +195,7 @@ function ajaxShowSpiel(event) {
       }
 
       console.log(verlauf);
+
       //Vorbereitung des Diagramms Zahlen setzen
       if (verlauf == "gewonnen") gewonnenCounter += 1;
       if (verlauf == "verloren") verlorenCounter += 1;
