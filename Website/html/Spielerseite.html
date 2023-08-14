@@ -19,7 +19,7 @@
     />
   </head>
   <body>
-     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
       <a href="startscreen.html" Link class="logo">
         <img src="../images/slacklogo.png" alt="Logo" />
       </a>
@@ -74,14 +74,10 @@
                 id="playerSpielinhalt"
                 class="dropdown-item"
                 href="playerSpielinhalt.html"
-                
                 >Spielinhalt User</a
               >
 
-              <a
-                id="Spielstand"
-                class="dropdown-item"
-                href="Spielstand.html"
+              <a id="Spielstand" class="dropdown-item" href="Spielstand.html"
                 >Spielstand</a
               >
             </div>
@@ -92,12 +88,12 @@
             >
           </li>
 
-           <li class="nav-item active nav-item-custom">
+          <li class="nav-item active nav-item-custom">
             <a class="nav-link" href="profil.html" id="Profil"
               >Mein Profil <span class="sr-only">(current)</span></a
             >
           </li>
-       
+
           <li class="nav-item active nav-item-custom">
             <a class="nav-link" href="Impressum.html"
               >Impressum <span class="sr-only">(current)</span></a
@@ -108,26 +104,25 @@
     </nav>
     <div class="table-background">
       <!-- Spielerdetails -->
-      <div class="hoverEffekt" id="player-page" >
+      <div class="hoverEffekt" id="player-page">
         <h1 id="player-name"></h1>
         <div id="player-details"></div>
-    
-          <h2><b>Spielverläufe:</b></h2>
+
+        <h2><b>Spielverläufe:</b></h2>
         <p>Alle im Spiele des Spielers</p>
-       <div style="overflow-x: auto">
+        <div style="overflow-x: auto">
           <table id="spieler-tabelle" style="width: 100%">
             <thead id="theadGame">
               <tr>
                 <!--<th>Künstler*innen</th>-->
-                  <th>Einzeln</th>
+                <th>Einzeln</th>
                 <th>Datum</th>
-                 <th>Dauer</th>
+                <th>Dauer</th>
                 <th>Verlauf</th>
-                 <th>Mitspieler</th>
-                  <th>Gewinner</th>
-                    <th>Initiator</th>
-                  <th>Level</th>
-                  
+                <th>Mitspieler</th>
+                <th>Gewinner</th>
+                <th>Initiator</th>
+                <th>Level</th>
               </tr>
             </thead>
             <tbody id="resultCard">
@@ -135,27 +130,25 @@
             </tbody>
           </table>
         </div>
-        <br/> <br/>
+        <br />
+        <br />
         <!-- Hier wird das Säulendiagramm eingefügt -->
         <h2><b>Spielverläufe Übersicht</b></h2>
         <p>Hier siehst du deine Spielverläufe als Diagramm</p>
-          <div class="chart-container">
-            <canvas id="myChart"></canvas>
-          </div>
-  <br /><br />
-  
-          
-     </div>
-
-     <!-- #region -->
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
+        <div class="chart-container">
+          <canvas id="myChart"></canvas>
+        </div>
+        <br /><br />
       </div>
-<br /><br />
-  <br /><br />
 
-    <script src="../JS/Spieler_Seite.js"></script>
-        <!-- session sichtbarkeiten check -->
+      <!-- #region -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </div>
+    <br /><br />
+    <br /><br />
+
+    <script src="../JS/spielerinnenseite.js"></script>
+    <!-- session sichtbarkeiten check -->
     <script src="../JS/SessionCheck.js"></script>
 
     <script

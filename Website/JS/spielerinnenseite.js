@@ -192,14 +192,14 @@ function ajaxShowSpiel(event) {
         tr.appendChild(td1);
 
         tbody.appendChild(tr);
+
+        console.log(verlauf);
+
+        //Vorbereitung des Diagramms Zahlen setzen
+        if (verlauf == "gewonnen") gewonnenCounter += 1;
+        if (verlauf == "verloren") verlorenCounter += 1;
+        if (verlauf == "abgebrochen") abgebrochenCounter += 1;
       }
-
-      console.log(verlauf);
-
-      //Vorbereitung des Diagramms Zahlen setzen
-      if (verlauf == "gewonnen") gewonnenCounter += 1;
-      if (verlauf == "verloren") verlorenCounter += 1;
-      if (verlauf == "abgebrochen") abgebrochenCounter += 1;
     }
 
     var labels = ["Gewonnen", "Verloren", "abgebrochen"];

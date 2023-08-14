@@ -91,7 +91,7 @@ function login() {
            
         } else {
                echo "Eingegebenes Passwort: $passwort  ist falsch";
-            echo " Wrong Password";
+           
         }
     } else {
         echo "User Not Registered";
